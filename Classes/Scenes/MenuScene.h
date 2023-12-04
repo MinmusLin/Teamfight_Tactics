@@ -14,10 +14,9 @@
 
 /*
  * Class Name:     MenuScene
- * Class Function: 菜单场景
+ * Class Function: 菜单场景类
  */
-class MenuScene : public cocos2d::Scene
-{
+class MenuScene : public cocos2d::Scene {
 public:
     // 创建场景
     static cocos2d::Scene* createScene();

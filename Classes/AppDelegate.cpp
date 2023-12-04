@@ -7,16 +7,18 @@
  ****************************************************************/
 
 #include "AppDelegate.h"
-#include "Scenes\InitialScene.h"
-#include "..\proj.win32\Constant.h"
+#include "Scenes/InitialScene.h"
+#include "proj.win32/Constant.h"
 
+// 音频引擎选择
 #define USE_AUDIO_ENGINE 0
 #define USE_SIMPLE_AUDIO_ENGINE 1
-
 #if USE_AUDIO_ENGINE && USE_SIMPLE_AUDIO_ENGINE
 #error "Don't use AudioEngine and SimpleAudioEngine at the same time."
 #endif
 
+// 命名空间
+USING_NS_CC;
 #if USE_AUDIO_ENGINE
 #include "audio/include/AudioEngine.h"
 using namespace cocos2d::experimental;
@@ -25,8 +27,7 @@ using namespace cocos2d::experimental;
 using namespace CocosDenshion;
 #endif
 
-USING_NS_CC;
-
+// 分辨率设置
 static cocos2d::Size s_designResolutionSize = cocos2d::Size(DESIGN_RESOLUTION_WIDTH, DESIGN_RESOLUTION_HEIGHT);
 static cocos2d::Size s_smallResolutionSize = cocos2d::Size(SMALL_RESOLUTION_WIDTH, SMALL_RESOLUTION_HEIGHT);
 static cocos2d::Size s_mediumResolutionSize = cocos2d::Size(MEDIUM_RESOLUTION_WIDTH, MEDIUM_RESOLUTION_HEIGHT);

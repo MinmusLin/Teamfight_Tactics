@@ -26,6 +26,4 @@ constexpr int MEDIUM_RESOLUTION_HEIGHT = 720;
 constexpr int LARGE_RESOLUTION_WIDTH = 1920;
 constexpr int LARGE_RESOLUTION_HEIGHT = 1080;
 
-const cocos2d::Color3B COLOR_WHITE = cocos2d::Color3B(255, 255, 255);
-
 #endif !_CONSTANT_H_

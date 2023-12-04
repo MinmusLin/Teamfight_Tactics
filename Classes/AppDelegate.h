@@ -14,7 +14,7 @@
 
 /*
  * Class Name:     AppDelegate
- * Class Function: Cocos2d 应用程序
+ * Class Function: Cocos2d 应用程序类
  */
 class AppDelegate : private cocos2d::Application {
 public:

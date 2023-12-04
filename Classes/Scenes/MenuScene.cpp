@@ -7,8 +7,11 @@
  ****************************************************************/
 
 #include "MenuScene.h"
+#include "Buttons/HoverButton.h"
 
 USING_NS_CC;
+using ui::Button;
+using ui::Widget;
 
 // 创建场景
 Scene* MenuScene::createScene()
@@ -22,15 +25,54 @@ Scene* MenuScene::createScene()
 // 初始化场景
 bool MenuScene::init()
 {
+    // 创建场景
     if (!Scene::init()) {
         return false;
     }
     
     // 加载背景
-    auto screenSize = Director::getInstance()->getVisibleSize();
-    auto background = Sprite::create("../Resources/Scenes/MenuScene.png");
+    const auto screenSize = Director::getInstance()->getVisibleSize();
+    const auto background = Sprite::create("../Resources/Scenes/MenuScene.png");
     background->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
     this->addChild(background);
+
+    // 创建按钮
+    auto offlineModeButton = HoverButton::create("../Resources/Buttons/OfflineModeDefaultButton.png",
+        "../Resources/Buttons/OfflineModeHoverButton.png",
+        "../Resources/Buttons/OfflineModeActiveButton.png");
+    auto onlineModeButton = HoverButton::create("../Resources/Buttons/OnlineModeDefaultButton.png",
+        "../Resources/Buttons/OnlineModeHoverButton.png",
+        "../Resources/Buttons/OnlineModeActiveButton.png");
+    auto settingsButton = HoverButton::create("../Resources/Buttons/SettingsDefaultButton.png",
+        "../Resources/Buttons/SettingsHoverButton.png",
+        "../Resources/Buttons/SettingsActiveButton.png");
+
+    // 设置按钮位置
+    offlineModeButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + 200));
+    onlineModeButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
+    settingsButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 - 200));
+
+    // 为按钮添加事件处理器
+    offlineModeButton->addTouchEventListener([](Ref* sender, Widget::TouchEventType type) {
+        if (type == Widget::TouchEventType::BEGAN) {
+            CCLOG("Button 1 Pressed");
+        }
+        });
+    onlineModeButton->addTouchEventListener([](Ref* sender, Widget::TouchEventType type) {
+        if (type == Widget::TouchEventType::BEGAN) {
+            CCLOG("Button 2 Pressed");
+        }
+        });
+    settingsButton->addTouchEventListener([](Ref* sender, Widget::TouchEventType type) {
+        if (type == Widget::TouchEventType::BEGAN) {
+            CCLOG("Button 3 Pressed");
+        }
+        });
+
+    // 将按钮添加到场景中
+    this->addChild(offlineModeButton);
+    this->addChild(onlineModeButton);
+    this->addChild(settingsButton);
 
     return true;
 }
