@@ -3,7 +3,7 @@
  * File Name:     HoverButton.h
  * File Function: HoverButton类的定义
  * Author:        林继申
- * Update Date:   2023/12/4
+ * Update Date:   2023/12/5
  ****************************************************************/
 
 #pragma once
@@ -25,6 +25,7 @@ public:
 
     // 初始化 HoverButton 实例
     bool init(const std::string& defaultButtonImage, const std::string& hoverButtonImage, const std::string& activeButtonImage);
+
 private:
     // 图片路径
     std::string defaultButtonImage;

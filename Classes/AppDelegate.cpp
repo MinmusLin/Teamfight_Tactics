@@ -3,7 +3,7 @@
  * File Name:     AppDelegate.cpp
  * File Function: AppDelegate类的实现
  * Author:        林继申
- * Update Date:   2023/12/4
+ * Update Date:   2023/12/5
  ****************************************************************/
 
 #include "AppDelegate.h"

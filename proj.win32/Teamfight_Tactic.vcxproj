@@ -153,6 +153,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Buttons\HoverButton.cpp" />
+    <ClCompile Include="..\Classes\GBKToUTF8.cpp" />
     <ClCompile Include="..\Classes\Scenes\InitialScene.cpp" />
     <ClCompile Include="..\Classes\Scenes\MenuScene.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -160,6 +161,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Buttons\HoverButton.h" />
+    <ClInclude Include="..\Classes\GBKToUTF8.h" />
     <ClInclude Include="..\Classes\Scenes\InitialScene.h" />
     <ClInclude Include="..\Classes\Scenes\MenuScene.h" />
     <ClInclude Include="Constant.h" />

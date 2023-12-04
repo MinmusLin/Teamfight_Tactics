@@ -3,7 +3,7 @@
  * File Name:     MenuScene.cpp
  * File Function: MenuScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/4
+ * Update Date:   2023/12/5
  ****************************************************************/
 
 #include "MenuScene.h"
@@ -48,24 +48,24 @@ bool MenuScene::init()
         "../Resources/Buttons/SettingsActiveButton.png");
 
     // 设置按钮位置
-    offlineModeButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + 200));
-    onlineModeButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
-    settingsButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 - 200));
+    offlineModeButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + 200)); // TODO: 这里的位置通过常变量替代
+    onlineModeButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2)); // TODO: 这里的位置通过常变量替代
+    settingsButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 - 200)); // TODO: 这里的位置通过常变量替代
 
     // 为按钮添加事件处理器
     offlineModeButton->addTouchEventListener([](Ref* sender, Widget::TouchEventType type) {
         if (type == Widget::TouchEventType::BEGAN) {
-            CCLOG("Button 1 Pressed");
+            // TODO: 练习模式场景接口
         }
         });
     onlineModeButton->addTouchEventListener([](Ref* sender, Widget::TouchEventType type) {
         if (type == Widget::TouchEventType::BEGAN) {
-            CCLOG("Button 2 Pressed");
+            // TODO: 联机模式场景接口
         }
         });
     settingsButton->addTouchEventListener([](Ref* sender, Widget::TouchEventType type) {
         if (type == Widget::TouchEventType::BEGAN) {
-            CCLOG("Button 3 Pressed");
+            // TODO: 设置场景接口
         }
         });
 
