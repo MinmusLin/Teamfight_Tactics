@@ -14,7 +14,7 @@
 
 /*
  * Class Name:     InitialScene
- * Class Function: 初始场景
+ * Class Function: 初始场景类
  */
 class InitialScene : public cocos2d::Scene {
 public:
