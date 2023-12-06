@@ -16,6 +16,9 @@
     <Filter Include="Classes\Server">
       <UniqueIdentifier>{d70a75e3-b0f9-4e63-84a5-3670b2e222b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{43097f4d-374b-41b3-9b00-d875e4ca1457}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -56,5 +59,10 @@
     <ClInclude Include="..\Classes\GBKToUTF8.h">
       <Filter>Classes</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Icon.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
