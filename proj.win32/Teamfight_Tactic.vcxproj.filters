@@ -10,14 +10,11 @@
     <Filter Include="Classes\Scenes">
       <UniqueIdentifier>{8fd7c5a9-02c0-4c5f-8b3d-6fe005b80279}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Buttons">
-      <UniqueIdentifier>{605e9c10-8862-47bb-88d9-e0196b847c01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\Server">
-      <UniqueIdentifier>{d70a75e3-b0f9-4e63-84a5-3670b2e222b6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{43097f4d-374b-41b3-9b00-d875e4ca1457}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Buttons">
+      <UniqueIdentifier>{ed8394a6-a6cd-4030-bd0a-5d73c3af8378}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,11 +30,14 @@
     <ClCompile Include="..\Classes\Scenes\MenuScene.cpp">
       <Filter>Classes\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Buttons\HoverButton.cpp">
-      <Filter>Classes\Buttons</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\GBKToUTF8.cpp">
       <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scenes\OnlineModeMenuScene.cpp">
+      <Filter>Classes\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Buttons\HoverButton.cpp">
+      <Filter>Classes\Buttons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -53,11 +53,14 @@
     <ClInclude Include="..\Classes\Scenes\MenuScene.h">
       <Filter>Classes\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Buttons\HoverButton.h">
-      <Filter>Classes\Buttons</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\GBKToUTF8.h">
       <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scenes\OnlineModeMenuScene.h">
+      <Filter>Classes\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Buttons\HoverButton.h">
+      <Filter>Classes\Buttons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

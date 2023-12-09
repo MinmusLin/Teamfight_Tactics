@@ -3,7 +3,7 @@
  * File Name:     InitialScene.cpp
  * File Function: InitialScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/5
+ * Update Date:   2023/12/6
  ****************************************************************/
 
 #include "InitialScene.h"
@@ -82,6 +82,8 @@ bool InitialScene::init()
         if (type == Widget::TouchEventType::ENDED) {
             std::string nickname = textField->getString();
             if (!nickname.empty()) {
+                UserDefault::getInstance()->setStringForKey("PlayerName", nickname);
+                UserDefault::getInstance()->flush();
                 Director::getInstance()->replaceScene(TransitionFade::create(0.5, MenuScene::createScene(), Color3B::WHITE));
             }
             else {

@@ -3,11 +3,12 @@
  * File Name:     MenuScene.cpp
  * File Function: MenuScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/5
+ * Update Date:   2023/12/6
  ****************************************************************/
 
 #include "MenuScene.h"
 #include "Buttons/HoverButton.h"
+#include "OnlineModeMenuScene.h"
 
 USING_NS_CC;
 using ui::Button;
@@ -60,7 +61,7 @@ bool MenuScene::init()
         });
     onlineModeButton->addTouchEventListener([](Ref* sender, Widget::TouchEventType type) {
         if (type == Widget::TouchEventType::BEGAN) {
-            // TODO: 联机模式场景接口
+            Director::getInstance()->pushScene(TransitionFade::create(0.5, OnlineModeMenuScene::createScene(), Color3B::WHITE));
         }
         });
     settingsButton->addTouchEventListener([](Ref* sender, Widget::TouchEventType type) {
