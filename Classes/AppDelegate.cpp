@@ -3,7 +3,7 @@
  * File Name:     AppDelegate.cpp
  * File Function: AppDelegate类的实现
  * Author:        林继申
- * Update Date:   2023/12/5
+ * Update Date:   2023/12/11
  ****************************************************************/
 
 #include "AppDelegate.h"
@@ -53,20 +53,28 @@ void AppDelegate::initGLContextAttrs()
 // 当应用程序完成启动并准备进入主循环时调用此函数
 bool AppDelegate::applicationDidFinishLaunching()
 {
-    auto director = Director::getInstance();
-    auto glview = director->getOpenGLView();
+    auto director = Director::getInstance(); // 获取游戏引擎的导演实例
+    auto glview = director->getOpenGLView(); // 获取 OpenGL 视图
+
+    // 如果 OpenGL 视图不存在，根据平台创建
     if (!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+        // 在 Windows、Mac、Linux 平台上创建 OpenGL 视图
         glview = GLViewImpl::createWithRect(APPLICATION_TITLE, cocos2d::Rect(0, 0, s_designResolutionSize.width, s_designResolutionSize.height));
 #else
+        // 在其他平台上创建 OpenGL 视图
         glview = GLViewImpl::create(APPLICATION_TITLE);
 #endif
+        // 设置 OpenGL 视图
         director->setOpenGLView(glview);
     }
-    director->setDisplayStats(false);
-    director->setAnimationInterval(1.0f / ANIMATION_INTERVAL);
-    glview->setDesignResolutionSize(s_designResolutionSize.width, s_designResolutionSize.height, ResolutionPolicy::NO_BORDER);
-    auto frameSize = glview->getFrameSize();
+
+    director->setDisplayStats(false); // 关闭显示性能统计信息
+    director->setAnimationInterval(1 / FRAME_RATE); // 设置游戏循环的帧率
+    glview->setDesignResolutionSize(s_designResolutionSize.width, s_designResolutionSize.height, ResolutionPolicy::NO_BORDER); // 设置设计分辨率
+    auto frameSize = glview->getFrameSize(); // 获取窗口的帧大小
+
+    // 根据窗口大小设置内容缩放因子
     if (frameSize.height > s_mediumResolutionSize.height) {
         director->setContentScaleFactor(MIN(s_largeResolutionSize.height / s_designResolutionSize.height, s_largeResolutionSize.width / s_designResolutionSize.width));
     }
@@ -76,7 +84,8 @@ bool AppDelegate::applicationDidFinishLaunching()
     else {
         director->setContentScaleFactor(MIN(s_smallResolutionSize.height / s_designResolutionSize.height, s_smallResolutionSize.width / s_designResolutionSize.width));
     }
-    director->runWithScene(InitialScene::createScene());
+
+    director->runWithScene(InitialScene::createScene()); // 运行初始场景
     return true;
 }
 
