@@ -22,16 +22,16 @@ constexpr int MEDIUM_RESOLUTION_HEIGHT = 720;
 constexpr int LARGE_RESOLUTION_WIDTH = 1920;
 constexpr int LARGE_RESOLUTION_HEIGHT = 1080;
 constexpr float FRAME_RATE = 60.0f;
-const char APPLICATION_TITLE[] = "Teamfight Tactic";
+constexpr char APPLICATION_TITLE[] = "Teamfight Tactic";
 
 // Õ¯¬Á…Ë÷√
 constexpr int HOSTNAME_LENGHT = 256;
 constexpr int MIN_PORT_ADDRESS = 49152;
 constexpr int MAX_PORT_ADDRESS = 65535;
-constexpr int MAX_CONNECTIONS = 7;
+constexpr int MAX_CONNECTIONS = 8;
 constexpr int BUFFER_SIZE = 1024;
-const char CONNECTION_REFUSED_MSG[] = "Connection refused.";
-const char CONNECTION_ACCEPTED_MSG[] = "Connection accepted.";
+constexpr char CONNECTION_REFUSED_MSG[] = "Connection refused.";
+constexpr char CONNECTION_ACCEPTED_MSG[] = "Connection accepted.";
 
 constexpr int FONT_SIZE = 24;
 
