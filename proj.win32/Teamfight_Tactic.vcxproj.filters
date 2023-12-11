@@ -16,6 +16,9 @@
     <Filter Include="Classes\Buttons">
       <UniqueIdentifier>{ed8394a6-a6cd-4030-bd0a-5d73c3af8378}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Heroes">
+      <UniqueIdentifier>{3bb0e5fc-ff2b-4987-a407-1e953d18f020}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameMain.cpp">
@@ -39,6 +42,12 @@
     <ClCompile Include="..\Classes\Buttons\HoverButton.cpp">
       <Filter>Classes\Buttons</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Heroes\Hero.cpp">
+      <Filter>Classes\Heroes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Heroes\HeroA.cpp">
+      <Filter>Classes\Heroes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -61,6 +70,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Buttons\HoverButton.h">
       <Filter>Classes\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Heroes\Hero.h">
+      <Filter>Classes\Heroes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Heroes\HeroA.h">
+      <Filter>Classes\Heroes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

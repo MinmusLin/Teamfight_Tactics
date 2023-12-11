@@ -3,7 +3,7 @@
  * File Name:     Constant.h
  * File Function: 常变量的定义
  * Author:        林继申、刘淑仪、杨兆镇、杨宇琨
- * Update Date:   2023/12/11
+ * Update Date:   2023/12/12
  ****************************************************************/
 
 #pragma once
@@ -49,6 +49,19 @@ constexpr float PROMPT_MESSAGE_DURATION = 1.5f;
 
 /* 杨宇琨维护常变量 */
 
-// TODO: 这里添加由杨宇琨维护的常变量
+typedef struct {
+    int healthPoints;          // 生命值
+    int experiencePoints;      // 经验值
+    int attackDamage;          // 攻击伤害
+    int skillDamage;           // 技能伤害
+    int skillTriggerThreshold; // 技能触发阈值
+    float attackSpeed;         // 攻击速度
+    float movementSpeed;       // 移动速度
+    float defenseCoefficient;  // 防御系数
+} HeroAttributes;
+
+const HeroAttributes HERO_A_ATTR = {
+    0, 0, 0, 0, 0, 0, 0, 0
+};
 
 #endif // !_CONSTANT_H_
