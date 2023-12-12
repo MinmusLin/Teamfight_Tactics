@@ -8,4 +8,7 @@
 
 #include "Control.h"
 
+// 构造函数
+Control::Control(int maxPlayersNum) : maxPlayers(maxPlayersNum) {}
+
 // TODO: 取消制表符，选择空格和 CRLF

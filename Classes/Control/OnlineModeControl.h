@@ -10,6 +10,7 @@
 #ifndef _ONLINE_MODE_CONTROL_H_
 #define _ONLINE_MODE_CONTROL_H_
 
+#include <iostream>
 #include "Control.h"
 #include "../Player/HumanPlayer.h"
 
@@ -20,7 +21,10 @@
 class OnlineModeControl : public Control {
 public:
     // 构造函数
-    OnlineModeControl(int maxPlayersNum) : Control(maxPlayersNum) {}
+    OnlineModeControl(int playersNum);
+
+    // 析构函数
+    ~OnlineModeControl();
 
 private:
     HumanPlayer** players; // 玩家列表

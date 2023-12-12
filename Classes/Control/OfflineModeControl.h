@@ -23,17 +23,10 @@
 class OfflineModeControl : public Control {
 public:
     // 构造函数
-    OfflineModeControl() : Control(2)
-    {
-        try {
-            humanPlayer = new HumanPlayer(cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName"));
-            enemyPlayer = new AIPlayer("AI玩家");
-        }
-        catch (const std::bad_alloc& e) {
-            std::cerr << "Memory allocation failed: " << e.what() << std::endl;
-            throw;
-        }
-    }
+    OfflineModeControl();
+
+    // 析构函数
+    ~OfflineModeControl();
 
 private:
     HumanPlayer* humanPlayer; // 人类玩家

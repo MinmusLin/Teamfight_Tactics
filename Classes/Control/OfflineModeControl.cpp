@@ -8,4 +8,28 @@
 
 #include "OfflineModeControl.h"
 
-// TODO: 取消制表符，选择空格和 CRLF
+// 构造函数
+OfflineModeControl::OfflineModeControl() : Control(2)
+{
+    try {
+        humanPlayer = new HumanPlayer(cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName"));
+        enemyPlayer = new AIPlayer("AI玩家");
+    }
+    catch (const std::bad_alloc& e) {
+        std::cerr << "Memory allocation failed: " << e.what() << std::endl;
+        if (humanPlayer) {
+            delete humanPlayer;
+        }
+        if (enemyPlayer) {
+            delete enemyPlayer;
+        }
+        throw;
+    }
+}
+
+// 析构函数
+OfflineModeControl::~OfflineModeControl()
+{
+    delete humanPlayer;
+    delete enemyPlayer;
+}

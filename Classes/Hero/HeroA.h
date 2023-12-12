@@ -2,7 +2,7 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     HeroA.h
  * File Function: HeroA类的定义
- * Author:        杨宇琨
+ * Author:        林继申
  * Update Date:   2023/12/12
  ****************************************************************/
 
@@ -20,7 +20,7 @@
 class HeroA : public Hero {
 public:
     // 构造函数
-    HeroA() : Hero(HERO_A_ATTR) {}
+    HeroA();
 };
 
 #endif // !_HERO_A_H_

@@ -8,4 +8,7 @@
 
 #include "Player.h"
 
+// 构造函数
+Player::Player(std::string nickname) : name(nickname) {}
+
 // TODO: 取消制表符，选择空格和 CRLF

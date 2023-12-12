@@ -2,7 +2,7 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     Hero.h
  * File Function: Hero类的定义
- * Author:        林继申、杨宇琨
+ * Author:        林继申
  * Update Date:   2023/12/12
  ****************************************************************/
 
@@ -20,17 +20,7 @@
 class Hero {
 public:
     // 构造函数
-    Hero(const HeroAttributes& attrs) :
-        heroName(attrs.heroName),
-        heroImage(attrs.heroImage),
-        healthPoints(attrs.healthPoints),
-        experiencePoints(attrs.experiencePoints),
-        attackDamage(attrs.attackDamage),
-        skillDamage(attrs.skillDamage),
-        skillTriggerThreshold(attrs.skillTriggerThreshold),
-        attackSpeed(attrs.attackSpeed),
-        movementSpeed(attrs.movementSpeed),
-        defenseCoefficient(attrs.defenseCoefficient) {}
+    Hero(const HeroAttributes& attrs);
 
 private:
     std::string heroName;      // 战斗英雄名称

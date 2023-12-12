@@ -16,9 +16,11 @@
  */
 class Control {
 public:
-    Control(int maxPlayersNum) : maxPlayers(maxPlayersNum) {}
-private:
-    int maxPlayers;
+    // 构造函数
+    Control(int maxPlayersNum);
+
+protected:
+    int maxPlayers; // 最大玩家数量
 };
 
 #endif // !_CONTROL_H_

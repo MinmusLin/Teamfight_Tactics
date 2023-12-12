@@ -20,11 +20,11 @@
 class Player {
 public:
     // 构造函数
-    Player(std::string nickname) : name(nickname) {}
+    Player(std::string nickname);
 
 private:
-    std::string name; // 玩家昵称
-    HeroCategory chessboardMap[HALF_CHESSBOARD_ROWS][CHESSBOARD_COLUMNS] = { NoHero };
+    std::string name;                                                                  // 玩家昵称
+    HeroCategory chessboardMap[HALF_CHESSBOARD_ROWS][CHESSBOARD_COLUMNS] = { NoHero }; // 置棋地图
 };
 
 #endif // !_PLAYER_H_
