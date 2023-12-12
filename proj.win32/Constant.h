@@ -49,7 +49,18 @@ constexpr float PROMPT_MESSAGE_DURATION = 1.5f;
 
 /* 杨宇琨维护常变量 */
 
+constexpr int CHESSBOARD_ROWS = 8;
+constexpr int CHESSBOARD_COLUMNS = 7;
+constexpr int HALF_CHESSBOARD_ROWS = CHESSBOARD_ROWS / 2;
+
+enum HeroCategory {
+    NoHero = 0, // 无英雄
+    HeroA       // HeroA
+};
+
 typedef struct {
+    std::string heroName;      // 战斗英雄名称
+    std::string heroImage;     // 战斗英雄图片路径
     int healthPoints;          // 生命值
     int experiencePoints;      // 经验值
     int attackDamage;          // 攻击伤害
@@ -61,7 +72,7 @@ typedef struct {
 } HeroAttributes;
 
 const HeroAttributes HERO_A_ATTR = {
-    0, 0, 0, 0, 0, 0, 0, 0
+    "战斗英雄名称(中文)", "战斗英雄图片路径", 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
 
 #endif // !_CONSTANT_H_

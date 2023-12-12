@@ -19,8 +19,10 @@
  */
 class Hero {
 public:
-    // 析构函数
+    // 构造函数
     Hero(const HeroAttributes& attrs) :
+        heroName(attrs.heroName),
+        heroImage(attrs.heroImage),
         healthPoints(attrs.healthPoints),
         experiencePoints(attrs.experiencePoints),
         attackDamage(attrs.attackDamage),
@@ -30,7 +32,8 @@ public:
         movementSpeed(attrs.movementSpeed),
         defenseCoefficient(attrs.defenseCoefficient) {}
 
-protected:
+private:
+    std::string heroName;      // 战斗英雄名称
     std::string heroImage;     // 战斗英雄图片路径
     int healthPoints;          // 生命值
     int experiencePoints;      // 经验值

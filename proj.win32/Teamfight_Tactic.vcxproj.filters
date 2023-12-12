@@ -19,6 +19,9 @@
     <Filter Include="Classes\Heroes">
       <UniqueIdentifier>{3bb0e5fc-ff2b-4987-a407-1e953d18f020}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Players">
+      <UniqueIdentifier>{3cd46c7f-bd2e-42c5-9e31-532a99346b22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameMain.cpp">
@@ -48,6 +51,15 @@
     <ClCompile Include="..\Classes\Heroes\HeroA.cpp">
       <Filter>Classes\Heroes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Players\Player.cpp">
+      <Filter>Classes\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Players\HumanPlayer.cpp">
+      <Filter>Classes\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Players\AIPlayer.cpp">
+      <Filter>Classes\Players</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -76,6 +88,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Heroes\HeroA.h">
       <Filter>Classes\Heroes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Players\Player.h">
+      <Filter>Classes\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Players\HumanPlayer.h">
+      <Filter>Classes\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Players\AIPlayer.h">
+      <Filter>Classes\Players</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -156,6 +156,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\GBKToUTF8.cpp" />
     <ClCompile Include="..\Classes\Heroes\Hero.cpp" />
     <ClCompile Include="..\Classes\Heroes\HeroA.cpp" />
+    <ClCompile Include="..\Classes\Players\AIPlayer.cpp" />
+    <ClCompile Include="..\Classes\Players\HumanPlayer.cpp" />
+    <ClCompile Include="..\Classes\Players\Player.cpp" />
     <ClCompile Include="..\Classes\Scenes\InitialScene.cpp" />
     <ClCompile Include="..\Classes\Scenes\MenuScene.cpp" />
     <ClCompile Include="..\Classes\Scenes\OnlineModeMenuScene.cpp" />
@@ -167,6 +170,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\GBKToUTF8.h" />
     <ClInclude Include="..\Classes\Heroes\Hero.h" />
     <ClInclude Include="..\Classes\Heroes\HeroA.h" />
+    <ClInclude Include="..\Classes\Players\AIPlayer.h" />
+    <ClInclude Include="..\Classes\Players\HumanPlayer.h" />
+    <ClInclude Include="..\Classes\Players\Player.h" />
     <ClInclude Include="..\Classes\Scenes\InitialScene.h" />
     <ClInclude Include="..\Classes\Scenes\MenuScene.h" />
     <ClInclude Include="..\Classes\Scenes\OnlineModeMenuScene.h" />

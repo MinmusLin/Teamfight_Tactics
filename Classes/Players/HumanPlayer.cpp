@@ -1,11 +1,11 @@
 /****************************************************************
  * Project Name:  Teamfight_Tactic
- * File Name:     Hero.cpp
- * File Function: Hero类的实现
- * Author:        林继申、杨宇琨
+ * File Name:     HumanPlayer.cpp
+ * File Function: HumanPlayer类的实现
+ * Author:        林继申
  * Update Date:   2023/12/12
  ****************************************************************/
 
-#include "Hero.h"
+#include "HumanPlayer.h"
 
 // TODO: 取消制表符，选择空格和 CRLF
