@@ -7,20 +7,26 @@
     <Filter Include="Win32">
       <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Scenes">
-      <UniqueIdentifier>{8fd7c5a9-02c0-4c5f-8b3d-6fe005b80279}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{43097f4d-374b-41b3-9b00-d875e4ca1457}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Buttons">
+    <Filter Include="Classes\Button">
       <UniqueIdentifier>{ed8394a6-a6cd-4030-bd0a-5d73c3af8378}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Heroes">
+    <Filter Include="Classes\Hero">
       <UniqueIdentifier>{3bb0e5fc-ff2b-4987-a407-1e953d18f020}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Players">
+    <Filter Include="Classes\Player">
       <UniqueIdentifier>{3cd46c7f-bd2e-42c5-9e31-532a99346b22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Scene">
+      <UniqueIdentifier>{8fd7c5a9-02c0-4c5f-8b3d-6fe005b80279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Battle">
+      <UniqueIdentifier>{3cfb6ca9-728f-4d6c-9300-d642e96e4486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Control">
+      <UniqueIdentifier>{323bda54-684c-4ee1-b8d9-0ba7377a3568}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -30,35 +36,47 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Scenes\InitialScene.cpp">
-      <Filter>Classes\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Scenes\MenuScene.cpp">
-      <Filter>Classes\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\GBKToUTF8.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Scenes\OnlineModeMenuScene.cpp">
-      <Filter>Classes\Scenes</Filter>
+    <ClCompile Include="..\Classes\Button\HoverButton.cpp">
+      <Filter>Classes\Button</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Buttons\HoverButton.cpp">
-      <Filter>Classes\Buttons</Filter>
+    <ClCompile Include="..\Classes\Hero\Hero.cpp">
+      <Filter>Classes\Hero</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Heroes\Hero.cpp">
-      <Filter>Classes\Heroes</Filter>
+    <ClCompile Include="..\Classes\Hero\HeroA.cpp">
+      <Filter>Classes\Hero</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Heroes\HeroA.cpp">
-      <Filter>Classes\Heroes</Filter>
+    <ClCompile Include="..\Classes\Player\AIPlayer.cpp">
+      <Filter>Classes\Player</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Players\Player.cpp">
-      <Filter>Classes\Players</Filter>
+    <ClCompile Include="..\Classes\Player\HumanPlayer.cpp">
+      <Filter>Classes\Player</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Players\HumanPlayer.cpp">
-      <Filter>Classes\Players</Filter>
+    <ClCompile Include="..\Classes\Player\Player.cpp">
+      <Filter>Classes\Player</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Players\AIPlayer.cpp">
-      <Filter>Classes\Players</Filter>
+    <ClCompile Include="..\Classes\Scene\InitialScene.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\MenuScene.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\OnlineModeMenuScene.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Battle\Battle.cpp">
+      <Filter>Classes\Battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Control\Control.cpp">
+      <Filter>Classes\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Control\OfflineModeControl.cpp">
+      <Filter>Classes\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Control\OnlineModeControl.cpp">
+      <Filter>Classes\Control</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -68,35 +86,47 @@
     <ClInclude Include="Constant.h">
       <Filter>Win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Scenes\InitialScene.h">
-      <Filter>Classes\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Scenes\MenuScene.h">
-      <Filter>Classes\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\GBKToUTF8.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Scenes\OnlineModeMenuScene.h">
-      <Filter>Classes\Scenes</Filter>
+    <ClInclude Include="..\Classes\Button\HoverButton.h">
+      <Filter>Classes\Button</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Buttons\HoverButton.h">
-      <Filter>Classes\Buttons</Filter>
+    <ClInclude Include="..\Classes\Hero\Hero.h">
+      <Filter>Classes\Hero</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Heroes\Hero.h">
-      <Filter>Classes\Heroes</Filter>
+    <ClInclude Include="..\Classes\Hero\HeroA.h">
+      <Filter>Classes\Hero</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Heroes\HeroA.h">
-      <Filter>Classes\Heroes</Filter>
+    <ClInclude Include="..\Classes\Player\AIPlayer.h">
+      <Filter>Classes\Player</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Players\Player.h">
-      <Filter>Classes\Players</Filter>
+    <ClInclude Include="..\Classes\Player\HumanPlayer.h">
+      <Filter>Classes\Player</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Players\HumanPlayer.h">
-      <Filter>Classes\Players</Filter>
+    <ClInclude Include="..\Classes\Player\Player.h">
+      <Filter>Classes\Player</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Players\AIPlayer.h">
-      <Filter>Classes\Players</Filter>
+    <ClInclude Include="..\Classes\Scene\InitialScene.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\MenuScene.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\OnlineModeMenuScene.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Battle\Battle.h">
+      <Filter>Classes\Battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Control\Control.h">
+      <Filter>Classes\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Control\OfflineModeControl.h">
+      <Filter>Classes\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Control\OnlineModeControl.h">
+      <Filter>Classes\Control</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

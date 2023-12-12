@@ -3,11 +3,11 @@
  * File Name:     AppDelegate.cpp
  * File Function: AppDelegate类的实现
  * Author:        林继申
- * Update Date:   2023/12/11
+ * Update Date:   2023/12/12
  ****************************************************************/
 
 #include "AppDelegate.h"
-#include "Scenes/InitialScene.h"
+#include "Scene/InitialScene.h"
 #include "proj.win32/Constant.h"
 
 // 音频引擎选择

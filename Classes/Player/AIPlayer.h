@@ -18,6 +18,7 @@
  */
 class AIPlayer : public Player {
 public:
+    using Player::Player;
     // TODO: 这里添加 AIPlayer 类的公有方法
 };
 

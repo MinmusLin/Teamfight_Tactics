@@ -3,12 +3,12 @@
  * File Name:     InitialScene.cpp
  * File Function: InitialScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/6
+ * Update Date:   2023/12/12
  ****************************************************************/
 
 #include "InitialScene.h"
 #include "MenuScene.h"
-#include "Buttons/HoverButton.h"
+#include "Button/HoverButton.h"
 #include "ui/CocosGUI.h"
 #include "proj.win32/Constant.h"
 #include "GBKToUTF8.h"

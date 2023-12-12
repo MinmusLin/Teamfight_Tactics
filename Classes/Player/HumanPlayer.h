@@ -18,6 +18,7 @@
  */
 class HumanPlayer : public Player {
 public:
+    using Player::Player;
     // TODO: 这里添加 HumanPlayer 类的公有方法
 };
 
