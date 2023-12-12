@@ -2,7 +2,7 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     Battle.h
  * File Function: Battle类的定义
- * Author:        林继申
+ * Author:        杨宇琨、林继申
  * Update Date:   2023/12/12
  ****************************************************************/
 

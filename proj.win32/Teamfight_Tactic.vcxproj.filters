@@ -13,9 +13,6 @@
     <Filter Include="Classes\Button">
       <UniqueIdentifier>{ed8394a6-a6cd-4030-bd0a-5d73c3af8378}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Hero">
-      <UniqueIdentifier>{3bb0e5fc-ff2b-4987-a407-1e953d18f020}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Player">
       <UniqueIdentifier>{3cd46c7f-bd2e-42c5-9e31-532a99346b22}</UniqueIdentifier>
     </Filter>
@@ -27,6 +24,9 @@
     </Filter>
     <Filter Include="Classes\Control">
       <UniqueIdentifier>{323bda54-684c-4ee1-b8d9-0ba7377a3568}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Champion">
+      <UniqueIdentifier>{ed5d1db5-2436-453f-a891-6047ac0c74b0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,12 +41,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Button\HoverButton.cpp">
       <Filter>Classes\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Hero\Hero.cpp">
-      <Filter>Classes\Hero</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Hero\HeroA.cpp">
-      <Filter>Classes\Hero</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Player\AIPlayer.cpp">
       <Filter>Classes\Player</Filter>
@@ -78,6 +72,12 @@
     <ClCompile Include="..\Classes\Control\OnlineModeControl.cpp">
       <Filter>Classes\Control</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Champion\Champion.cpp">
+      <Filter>Classes\Champion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Champion\ChampionA.cpp">
+      <Filter>Classes\Champion</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -91,12 +91,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Button\HoverButton.h">
       <Filter>Classes\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Hero\Hero.h">
-      <Filter>Classes\Hero</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Hero\HeroA.h">
-      <Filter>Classes\Hero</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Player\AIPlayer.h">
       <Filter>Classes\Player</Filter>
@@ -127,6 +121,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Control\OnlineModeControl.h">
       <Filter>Classes\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Champion\Champion.h">
+      <Filter>Classes\Champion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Champion\ChampionA.h">
+      <Filter>Classes\Champion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

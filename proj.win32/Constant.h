@@ -45,7 +45,10 @@ constexpr float PROMPT_MESSAGE_DURATION = 1.5f;
 
 /* 杨兆镇维护常变量 */
 
-// TODO: 这里添加由杨兆镇维护的常变量
+enum Difficulty {
+    Easy, // 简单模式
+    Hard  // 困难模式
+};
 
 /* 杨宇琨维护常变量 */
 
@@ -59,8 +62,8 @@ enum HeroCategory {
 };
 
 typedef struct {
-    std::string heroName;      // 战斗英雄名称
-    std::string heroImage;     // 战斗英雄图片路径
+    std::string championName;  // 战斗英雄名称
+    std::string championImage; // 战斗英雄图片路径
     int healthPoints;          // 生命值
     int experiencePoints;      // 经验值
     int attackDamage;          // 攻击伤害
@@ -69,9 +72,9 @@ typedef struct {
     float attackSpeed;         // 攻击速度
     float movementSpeed;       // 移动速度
     float defenseCoefficient;  // 防御系数
-} HeroAttributes;
+} ChampionAttributes;
 
-const HeroAttributes HERO_A_ATTR = {
+const ChampionAttributes CHAMPION_A_ATTR = {
     "战斗英雄名称(中文)", "战斗英雄图片路径", 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
 

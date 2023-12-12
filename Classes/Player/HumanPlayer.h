@@ -2,7 +2,7 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     HumanPlayer.h
  * File Function: HumanPlayer类的定义
- * Author:        林继申
+ * Author:        刘淑仪、林继申
  * Update Date:   2023/12/12
  ****************************************************************/
 
@@ -18,8 +18,8 @@
  */
 class HumanPlayer : public Player {
 public:
-    using Player::Player;
-    // TODO: 这里添加 HumanPlayer 类的公有方法
+    // 构造函数
+    HumanPlayer(std::string nickname);
 };
 
 #endif // !_HUMAN_PLAYER_H_

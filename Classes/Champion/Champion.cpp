@@ -1,11 +1,12 @@
 /****************************************************************
  * Project Name:  Teamfight_Tactic
- * File Name:     Battle.cpp
- * File Function: Battle类的实现
+ * File Name:     Champion.cpp
+ * File Function: Champion类的实现
  * Author:        杨宇琨、林继申
  * Update Date:   2023/12/12
  ****************************************************************/
 
-#include "Battle.h"
+#include "Champion.h"
 
-// TODO: 取消制表符，选择空格和 CRLF
+// 构造函数
+Champion::Champion(const ChampionAttributes& attributes) : attrs(attributes) {}
