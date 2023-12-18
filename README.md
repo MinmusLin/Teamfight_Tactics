@@ -27,8 +27,14 @@ A project of Teamfight Tactics.
 * Python 2.7.10 环境配置
 * CMake 3.28.0 环境配置
 * Cocos2d-x 4.0 环境配置
+
+### 2023/11/23
+
 * 明确项目代码规范
 * Markdown 语言掌握
+
+### 2023/11/24
+
 * 学习 Cocos2d-x
 
 ### 2023/11/29
@@ -48,10 +54,18 @@ A project of Teamfight Tactics.
 * 明确项目仓库组成
 * Boost 网络环境配置
 
+### 2023/12/8
+
+* 初步确定团队成员分工
+
 ### 2023/12/9
 
 * 放弃 Boost 网络环境，配置 socket 网络环境
-* 项目框架的明确与搭建
+* 初步搭建项目框架
+
+### 2023/12/10
+
+* 初步搭建 socket 网络环境
 
 ### 2023/12/11
 
@@ -59,7 +73,26 @@ A project of Teamfight Tactics.
 
 ### 2023/12/12
 
-* 明确团队成员分工
+* 基本确定团队成员分工
+* 基本搭建项目框架
+* 实现 `HoverButton` 类
+
+### 2023/12/17
+
+* 初步实现商店功能
+
+### 2023/12/18
+
+* 完善初始场景背景图与细节
+* 实现 `Champion` 类的鼠标事件监听
+
+### 2023/12/19
+
+* 完善项目框架
+  * 初步实现 `Champion` 类
+  * 初步实现 `OfflineModeControl` 类
+  * 初步实现 `Player` 类
+  * 初步实现 `HumanPlayer` 类
 
 ## 集成开发环境
 
@@ -79,4 +112,4 @@ A project of Teamfight Tactics.
 
 ## 文档更新日期
 
-2023年12月12日
+2023年12月19日
