@@ -63,9 +63,6 @@
     <ClCompile Include="..\Classes\Battle\Battle.cpp">
       <Filter>Classes\Battle</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Control\Control.cpp">
-      <Filter>Classes\Control</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Control\OfflineModeControl.cpp">
       <Filter>Classes\Control</Filter>
     </ClCompile>
@@ -80,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\LocationMap.cpp">
       <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Control\Control.cpp">
+      <Filter>Classes\Control</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
