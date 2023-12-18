@@ -2,15 +2,14 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     Player.h
  * File Function: Player类的定义
- * Author:        杨兆镇、刘淑仪、林继申
- * Update Date:   2023/12/12
+ * Author:        林继申
+ * Update Date:   2023/12/19
  ****************************************************************/
 
 #pragma once
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
-#include <string>
 #include "proj.win32/Constant.h"
 
 /*
@@ -19,10 +18,13 @@
  */
 class Player {
 public:
+    // 构造函数
     Player(std::string nickname);
+
 protected:
-    std::string name;                                                                  // 玩家昵称
-    HeroCategory chessboardMap[HALF_CHESSBOARD_ROWS][CHESSBOARD_COLUMNS] = { NoHero }; // 置棋地图
+    std::string name;                                                // 玩家昵称
+    ChampionCategory battleMap[BATTLE_MAP_ROWS][BATTLE_MAP_COLUMNS]; // 战斗区地图
+    ChampionCategory waitingMap[WAITING_MAP_COUNT];                  // 候战区地图
 };
 
 #endif // !_PLAYER_H_

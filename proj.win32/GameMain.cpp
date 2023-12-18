@@ -3,12 +3,12 @@
  * File Name:     GameMain.cpp
  * File Function: 游戏程序入口点
  * Author:        林继申
- * Update Date:   2023/12/11
+ * Update Date:   2023/12/19
  ****************************************************************/
 
 #define WIN32_LEAN_AND_MEAN // 排除 Windows 头文件中不常用的部分
 
-#include <windows.h>
+#include <Windows.h>
 #include <tchar.h>
 #include "platform/CCStdC.h"
 #include "AppDelegate.h"

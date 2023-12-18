@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     AIPlayer.h
  * File Function: AIPlayer类的定义
- * Author:        杨兆镇、林继申
- * Update Date:   2023/12/12
+ * Author:        林继申
+ * Update Date:   2023/12/19
  ****************************************************************/
 
 #pragma once

@@ -3,16 +3,16 @@
  * File Name:     MenuScene.cpp
  * File Function: MenuScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/12
+ * Update Date:   2023/12/19
  ****************************************************************/
 
 #include "MenuScene.h"
 #include "Button/HoverButton.h"
 #include "OnlineModeMenuScene.h"
+#include "OfflineModeBattleScene.h"
+#include "proj.win32/Constant.h"
 
 USING_NS_CC;
-using ui::Button;
-using ui::Widget;
 
 // 创建场景
 Scene* MenuScene::createScene()
@@ -49,23 +49,23 @@ bool MenuScene::init()
         "../Resources/Buttons/SettingsActiveButton.png");
 
     // 设置按钮位置
-    offlineModeButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + 200)); // TODO: 这里的位置通过常变量替代
-    onlineModeButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2)); // TODO: 这里的位置通过常变量替代
-    settingsButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 - 200)); // TODO: 这里的位置通过常变量替代
+    offlineModeButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + 200)); // TODO: 按钮位置通过常变量替代
+    onlineModeButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2)); // TODO: 按钮位置通过常变量替代
+    settingsButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 - 200)); // TODO: 按钮位置通过常变量替代
 
     // 为按钮添加事件处理器
-    offlineModeButton->addTouchEventListener([](Ref* sender, Widget::TouchEventType type) {
-        if (type == Widget::TouchEventType::BEGAN) {
-            // TODO: 练习模式场景接口
+    offlineModeButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::BEGAN) {
+            Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, OfflineModeBattleScene::createScene(), Color3B::WHITE));
         }
         });
-    onlineModeButton->addTouchEventListener([](Ref* sender, Widget::TouchEventType type) {
-        if (type == Widget::TouchEventType::BEGAN) {
-            Director::getInstance()->pushScene(TransitionFade::create(0.5, OnlineModeMenuScene::createScene(), Color3B::WHITE));
+    onlineModeButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::BEGAN) {
+            Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, OnlineModeMenuScene::createScene(), Color3B::WHITE));
         }
         });
-    settingsButton->addTouchEventListener([](Ref* sender, Widget::TouchEventType type) {
-        if (type == Widget::TouchEventType::BEGAN) {
+    settingsButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::BEGAN) {
             // TODO: 设置场景接口
         }
         });

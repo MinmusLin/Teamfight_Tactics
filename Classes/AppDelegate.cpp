@@ -3,7 +3,7 @@
  * File Name:     AppDelegate.cpp
  * File Function: AppDelegate类的实现
  * Author:        林继申
- * Update Date:   2023/12/12
+ * Update Date:   2023/12/19
  ****************************************************************/
 
 #include "AppDelegate.h"
@@ -72,7 +72,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     director->setDisplayStats(false); // 关闭显示性能统计信息
     director->setAnimationInterval(1 / FRAME_RATE); // 设置游戏循环的帧率
     glview->setDesignResolutionSize(s_designResolutionSize.width, s_designResolutionSize.height, ResolutionPolicy::NO_BORDER); // 设置设计分辨率
-    auto frameSize = glview->getFrameSize(); // 获取窗口的帧大小
+    const auto frameSize = glview->getFrameSize(); // 获取窗口的帧大小
 
     // 根据窗口大小设置内容缩放因子
     if (frameSize.height > s_mediumResolutionSize.height) {
@@ -85,7 +85,9 @@ bool AppDelegate::applicationDidFinishLaunching()
         director->setContentScaleFactor(MIN(s_smallResolutionSize.height / s_designResolutionSize.height, s_smallResolutionSize.width / s_designResolutionSize.width));
     }
 
-    director->runWithScene(InitialScene::createScene()); // 运行初始场景
+    // 运行初始场景
+    director->runWithScene(InitialScene::createScene());
+
     return true;
 }
 

@@ -3,20 +3,16 @@
  * File Name:     InitialScene.cpp
  * File Function: InitialScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/12
+ * Update Date:   2023/12/19
  ****************************************************************/
 
 #include "InitialScene.h"
 #include "MenuScene.h"
 #include "Button/HoverButton.h"
-#include "ui/CocosGUI.h"
-#include "proj.win32/Constant.h"
 #include "GBKToUTF8.h"
+#include "proj.win32/Constant.h"
 
 USING_NS_CC;
-using ui::Button;
-using ui::Widget;
-using ui::TextField;
 
 // 创建场景
 Scene* InitialScene::createScene()
@@ -42,23 +38,25 @@ bool InitialScene::init()
     this->addChild(background);
 
     // 创建文本框
-    auto textField = TextField::create(GBKToUTF8::getString("请在这里输入您的昵称"), "../Resources/Fonts/FZZGY_J_EB.ttf", FONT_SIZE);
-    textField->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + 100)); // TODO: 这里的位置通过常变量替代
+    auto textField = ui::TextField::create(GBKToUTF8::getString("请输入您的游戏昵称"), "../Resources/Fonts/FZZGY_J_EB.ttf", INITIAL_SCENE_FONT_SIZE);
+    textField->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + INITIAL_SCENE_TEXTFIELD_OFFSET_Y));
     textField->setMaxLength(NICKNAME_MAX_LENGTH);
     textField->setMaxLengthEnabled(true);
+    textField->setTextColor(Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(textField);
 
     // 创建标签
-    auto promptLabel = Label::createWithTTF("", "../Resources/Fonts/FZZGY_J_EB.ttf", FONT_SIZE);
-    promptLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + 200)); // TODO: 这里的位置通过常变量替代
+    auto promptLabel = Label::createWithTTF("", "../Resources/Fonts/FZZGY_J_EB.ttf", INITIAL_SCENE_FONT_SIZE);
+    promptLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + INITIAL_SCENE_PROMPT_LABLE_OFFSET_Y));
+    promptLabel->setTextColor(Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(promptLabel);
 
     // 为文本框添加事件监听器
-    textField->addEventListener([promptLabel](Ref* sender, TextField::EventType type) {
-        if (type == TextField::EventType::INSERT_TEXT || type == TextField::EventType::DELETE_BACKWARD) {
-            auto textField = dynamic_cast<TextField*>(sender);
+    textField->addEventListener([promptLabel](Ref* sender, ui::TextField::EventType type) {
+        if (type == ui::TextField::EventType::INSERT_TEXT || type == ui::TextField::EventType::DELETE_BACKWARD) {
+            auto textField = dynamic_cast<ui::TextField*>(sender);
             std::string nickname = textField->getString();
-            std::string text = GBKToUTF8::getString("你好！") + nickname;
+            std::string text = GBKToUTF8::getString("欢迎你！") + nickname;
             promptLabel->setString(text);
         }
         });
@@ -69,26 +67,27 @@ bool InitialScene::init()
         "../Resources/Buttons/StartActiveButton.png");
 
     // 设置按钮位置
-    startButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 - 300)); // TODO: 这里的位置通过常变量替代
+    startButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + INITIAL_SCENE_BUTTON_OFFSET_Y));
 
     // 创建一个提示
-    auto nameLabel = Label::createWithTTF(GBKToUTF8::getString("请输入昵称"), "../Resources/Fonts/FZZGY_J_EB.ttf", FONT_SIZE);
-    nameLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + 300)); // TODO: 这里的位置通过常变量替代
+    auto nameLabel = Label::createWithTTF(GBKToUTF8::getString("游戏昵称不能为空"), "../Resources/Fonts/FZZGY_J_EB.ttf", INITIAL_SCENE_FONT_SIZE);
+    nameLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + INITIAL_SCENE_NAME_LABLE_OFFSET_Y));
     nameLabel->setVisible(false);
+    nameLabel->setTextColor(Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(nameLabel);
 
     // 为按钮添加事件处理器
-    startButton->addTouchEventListener([this, textField, nameLabel](Ref* sender, Widget::TouchEventType type) {
-        if (type == Widget::TouchEventType::ENDED) {
+    startButton->addTouchEventListener([this, textField, nameLabel](Ref* sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::ENDED) {
             std::string nickname = textField->getString();
             if (!nickname.empty()) {
                 UserDefault::getInstance()->setStringForKey("PlayerName", nickname);
                 UserDefault::getInstance()->flush();
-                Director::getInstance()->replaceScene(TransitionFade::create(0.5, MenuScene::createScene(), Color3B::WHITE));
+                Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), Color3B::WHITE));
             }
             else {
                 nameLabel->setVisible(true);
-                this->scheduleOnce([nameLabel](float dt) {nameLabel->setVisible(false); }, PROMPT_MESSAGE_DURATION, "hidePromptLabel");
+                this->scheduleOnce([nameLabel](float dt) {nameLabel->setVisible(false); }, PROMPT_MESSAGE_DURATION, "HidePromptLabel");
             }
         }
         });

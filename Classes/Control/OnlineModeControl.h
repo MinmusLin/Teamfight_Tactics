@@ -3,14 +3,13 @@
  * File Name:     OnlineModeControl.h
  * File Function: OnlineModeControl类的定义
  * Author:        林继申
- * Update Date:   2023/12/12
+ * Update Date:   2023/12/19
  ****************************************************************/
 
 #pragma once
 #ifndef _ONLINE_MODE_CONTROL_H_
 #define _ONLINE_MODE_CONTROL_H_
 
-#include <iostream>
 #include "Control.h"
 #include "../Player/HumanPlayer.h"
 

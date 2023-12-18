@@ -75,8 +75,11 @@
     <ClCompile Include="..\Classes\Champion\Champion.cpp">
       <Filter>Classes\Champion</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Champion\ChampionA.cpp">
-      <Filter>Classes\Champion</Filter>
+    <ClCompile Include="..\Classes\Scene\OfflineModeBattleScene.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LocationMap.cpp">
+      <Filter>Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -125,8 +128,11 @@
     <ClInclude Include="..\Classes\Champion\Champion.h">
       <Filter>Classes\Champion</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Champion\ChampionA.h">
-      <Filter>Classes\Champion</Filter>
+    <ClInclude Include="..\Classes\Scene\OfflineModeBattleScene.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LocationMap.h">
+      <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

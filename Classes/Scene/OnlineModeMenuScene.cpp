@@ -3,16 +3,15 @@
  * File Name:     OnlineModeMenuScene.cpp
  * File Function: OnlineModeMenuScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/12
+ * Update Date:   2023/12/19
  ****************************************************************/
 
 #include "OnlineModeMenuScene.h"
 #include "Button/HoverButton.h"
 #include "MenuScene.h"
+#include "proj.win32/Constant.h"
 
 USING_NS_CC;
-using ui::Button;
-using ui::Widget;
 
 // 创建场景
 Scene* OnlineModeMenuScene::createScene()
@@ -49,24 +48,24 @@ bool OnlineModeMenuScene::init()
         "../Resources/Buttons/ReturnMenuActiveButton.png");
 
     // 设置按钮位置
-    createRoomButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + 200)); // TODO: 这里的位置通过常变量替代
-    joinRoomButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2)); // TODO: 这里的位置通过常变量替代
-    returnMenuButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 - 200)); // TODO: 这里的位置通过常变量替代
+    createRoomButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + 200)); // TODO: 按钮位置通过常变量替代
+    joinRoomButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2)); // TODO: 按钮位置通过常变量替代
+    returnMenuButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 - 200)); // TODO: 按钮位置通过常变量替代
 
     // 为按钮添加事件处理器
-    createRoomButton->addTouchEventListener([](Ref* sender, Widget::TouchEventType type) {
-        if (type == Widget::TouchEventType::BEGAN) {
-            // TODO: 创建服务器
+    createRoomButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::BEGAN) {
+            // TODO: 创建服务器场景接口
         }
         });
-    joinRoomButton->addTouchEventListener([](Ref* sender, Widget::TouchEventType type) {
-        if (type == Widget::TouchEventType::BEGAN) {
-            // TODO: 创建客户端
+    joinRoomButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::BEGAN) {
+            // TODO: 创建客户端场景接口
         }
         });
-    returnMenuButton->addTouchEventListener([](Ref* sender, Widget::TouchEventType type) {
-        if (type == Widget::TouchEventType::BEGAN) {
-            Director::getInstance()->replaceScene(TransitionFade::create(0.5, MenuScene::createScene(), Color3B::WHITE));
+    returnMenuButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::BEGAN) {
+            Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), Color3B::WHITE));
         }
         });
 

@@ -3,13 +3,15 @@
  * File Name:     OnlineModeControl.cpp
  * File Function: OnlineModeControl类的实现
  * Author:        林继申
- * Update Date:   2023/12/12
+ * Update Date:   2023/12/19
  ****************************************************************/
 
+#include <iostream>
 #include "OnlineModeControl.h"
 
 // 构造函数
-OnlineModeControl::OnlineModeControl(int playersNum) : Control(playersNum)
+OnlineModeControl::OnlineModeControl(int playersNum) :
+    Control(playersNum)
 {
     try {
         players = new HumanPlayer * [playersNum];

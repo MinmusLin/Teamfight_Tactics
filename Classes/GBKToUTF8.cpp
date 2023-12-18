@@ -3,12 +3,12 @@
  * File Name:     GBKToUTF8.cpp
  * File Function: GBKToUTF8类的实现
  * Author:        林继申
- * Update Date:   2023/12/11
+ * Update Date:   2023/12/19
  ****************************************************************/
 
-#include "GBKToUTF8.h"
 #include <vector>
 #include <stdexcept>
+#include "GBKToUTF8.h"
 
 // GBK 编码转换 UTF8 编码
 std::string GBKToUTF8::getString(const std::string& gbkStr)

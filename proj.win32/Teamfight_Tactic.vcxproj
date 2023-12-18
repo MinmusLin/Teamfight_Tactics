@@ -155,16 +155,17 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Battle\Battle.cpp" />
     <ClCompile Include="..\Classes\Button\HoverButton.cpp" />
     <ClCompile Include="..\Classes\Champion\Champion.cpp" />
-    <ClCompile Include="..\Classes\Champion\ChampionA.cpp" />
     <ClCompile Include="..\Classes\Control\Control.cpp" />
     <ClCompile Include="..\Classes\Control\OfflineModeControl.cpp" />
     <ClCompile Include="..\Classes\Control\OnlineModeControl.cpp" />
     <ClCompile Include="..\Classes\GBKToUTF8.cpp" />
+    <ClCompile Include="..\Classes\LocationMap.cpp" />
     <ClCompile Include="..\Classes\Player\AIPlayer.cpp" />
     <ClCompile Include="..\Classes\Player\HumanPlayer.cpp" />
     <ClCompile Include="..\Classes\Player\Player.cpp" />
     <ClCompile Include="..\Classes\Scene\InitialScene.cpp" />
     <ClCompile Include="..\Classes\Scene\MenuScene.cpp" />
+    <ClCompile Include="..\Classes\Scene\OfflineModeBattleScene.cpp" />
     <ClCompile Include="..\Classes\Scene\OnlineModeMenuScene.cpp" />
     <ClCompile Include="GameMain.cpp" />
   </ItemGroup>
@@ -173,16 +174,17 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Battle\Battle.h" />
     <ClInclude Include="..\Classes\Button\HoverButton.h" />
     <ClInclude Include="..\Classes\Champion\Champion.h" />
-    <ClInclude Include="..\Classes\Champion\ChampionA.h" />
     <ClInclude Include="..\Classes\Control\Control.h" />
     <ClInclude Include="..\Classes\Control\OfflineModeControl.h" />
     <ClInclude Include="..\Classes\Control\OnlineModeControl.h" />
     <ClInclude Include="..\Classes\GBKToUTF8.h" />
+    <ClInclude Include="..\Classes\LocationMap.h" />
     <ClInclude Include="..\Classes\Player\AIPlayer.h" />
     <ClInclude Include="..\Classes\Player\HumanPlayer.h" />
     <ClInclude Include="..\Classes\Player\Player.h" />
     <ClInclude Include="..\Classes\Scene\InitialScene.h" />
     <ClInclude Include="..\Classes\Scene\MenuScene.h" />
+    <ClInclude Include="..\Classes\Scene\OfflineModeBattleScene.h" />
     <ClInclude Include="..\Classes\Scene\OnlineModeMenuScene.h" />
     <ClInclude Include="Constant.h" />
   </ItemGroup>

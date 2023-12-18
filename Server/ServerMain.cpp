@@ -3,20 +3,20 @@
  * File Name:     ServerMain.cpp
  * File Function: 服务器程序入口点
  * Author:        林继申
- * Update Date:   2023/12/11
+ * Update Date:   2023/12/19
  ****************************************************************/
 
 #include <iostream>
 #include <stdlib.h>
 #include "Server.h"
 
- /*
-  * Function Name:    main
-  * Function:         服务器程序入口点
-  * Input Parameters: int argc
-  *                   char* argv[]
-  * Return Value:     程序退出状态
-  */
+/*
+ * Function Name:    main
+ * Function:         服务器程序入口点
+ * Input Parameters: int argc: 参数个数
+ *                   char* argv[]: 参数向量
+ * Return Value:     程序退出状态
+ */
 int main(int argc, char* argv[])
 {
     try {

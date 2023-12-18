@@ -3,12 +3,14 @@
  * File Name:     Control.h
  * File Function: Control类的定义
  * Author:        林继申
- * Update Date:   2023/12/12
+ * Update Date:   2023/12/19
  ****************************************************************/
 
 #pragma once
 #ifndef _CONTROL_H_
 #define _CONTROL_H_
+
+#include "cocos2d.h"
 
 /*
  * Class Name:     Control

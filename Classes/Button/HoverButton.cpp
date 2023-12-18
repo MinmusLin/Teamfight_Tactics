@@ -3,12 +3,10 @@
  * File Name:     HoverButton.cpp
  * File Function: HoverButton类的实现
  * Author:        林继申
- * Update Date:   2023/12/11
+ * Update Date:   2023/12/19
  ****************************************************************/
 
 #include "HoverButton.h"
-
-USING_NS_CC;
 
 // 创建一个新的 HoverButton 实例
 HoverButton* HoverButton::create(const std::string& defaultButtonImage, const std::string& hoverButtonImage, const std::string& activeButtonImage)
@@ -25,6 +23,7 @@ HoverButton* HoverButton::create(const std::string& defaultButtonImage, const st
 // 初始化 HoverButton 实例
 bool HoverButton::init(const std::string& defaultButtonImage, const std::string& hoverButtonImage, const std::string& activeButtonImage)
 {
+    // 初始化
     if (!Button::init(defaultButtonImage, activeButtonImage, "")) {
         return false;
     }
@@ -44,7 +43,7 @@ bool HoverButton::init(const std::string& defaultButtonImage, const std::string&
 // 鼠标移动事件的处理函数
 void HoverButton::onMouseMove(cocos2d::Event* event)
 {
-    auto mouseEvent = dynamic_cast<cocos2d::EventMouse*>(event);
+    const auto mouseEvent = dynamic_cast<cocos2d::EventMouse*>(event);
     if (mouseEvent && this->getBoundingBox().containsPoint(this->getParent()->convertToNodeSpace(mouseEvent->getLocationInView()))) {
         this->loadTextureNormal(hoverButtonImage);
     }
@@ -56,7 +55,7 @@ void HoverButton::onMouseMove(cocos2d::Event* event)
 // 鼠标释放事件的处理函数
 void HoverButton::onMouseUp(cocos2d::Event* event)
 {
-    auto mouseEvent = dynamic_cast<cocos2d::EventMouse*>(event);
+    const auto mouseEvent = dynamic_cast<cocos2d::EventMouse*>(event);
     if (mouseEvent && this->getBoundingBox().containsPoint(this->getParent()->convertToNodeSpace(mouseEvent->getLocationInView()))) {
         this->loadTextureNormal(activeButtonImage);
     }
