@@ -3,12 +3,12 @@
  * File Name:     AppDelegate.cpp
  * File Function: AppDelegate类的实现
  * Author:        林继申
- * Update Date:   2023/12/19
+ * Update Date:   2023/12/20
  ****************************************************************/
 
 #include "AppDelegate.h"
-#include "Scene/InitialScene.h"
-#include "GBKToUTF8.h"
+#include "Scene/StartupScene.h"
+#include "GBKToUTF8/GBKToUTF8.h"
 #include "proj.win32/Constant.h"
 
 // 音频引擎选择
@@ -86,8 +86,8 @@ bool AppDelegate::applicationDidFinishLaunching()
         director->setContentScaleFactor(MIN(s_smallResolutionSize.height / s_designResolutionSize.height, s_smallResolutionSize.width / s_designResolutionSize.width));
     }
 
-    // 运行初始场景
-    director->runWithScene(InitialScene::createScene());
+    // 运行启动场景
+    director->runWithScene(StartupScene::createScene());
 
     return true;
 }

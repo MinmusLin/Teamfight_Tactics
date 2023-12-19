@@ -28,15 +28,18 @@
     <Filter Include="Classes\Champion">
       <UniqueIdentifier>{ed5d1db5-2436-453f-a891-6047ac0c74b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GBKToUTF8">
+      <UniqueIdentifier>{c4acd934-8caa-4fdb-ab6d-dec6f6f6f2ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\LocationMap">
+      <UniqueIdentifier>{85cff736-ddc5-45ca-a7b0-fda94795b4a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameMain.cpp">
       <Filter>Win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GBKToUTF8.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Button\HoverButton.cpp">
@@ -75,11 +78,17 @@
     <ClCompile Include="..\Classes\Scene\OfflineModeBattleScene.cpp">
       <Filter>Classes\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\LocationMap.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Control\Control.cpp">
       <Filter>Classes\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\StartupScene.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GBKToUTF8\GBKToUTF8.cpp">
+      <Filter>Classes\GBKToUTF8</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LocationMap\LocationMap.cpp">
+      <Filter>Classes\LocationMap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,9 +97,6 @@
     </ClInclude>
     <ClInclude Include="Constant.h">
       <Filter>Win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GBKToUTF8.h">
-      <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Button\HoverButton.h">
       <Filter>Classes\Button</Filter>
@@ -131,8 +137,14 @@
     <ClInclude Include="..\Classes\Scene\OfflineModeBattleScene.h">
       <Filter>Classes\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\LocationMap.h">
-      <Filter>Classes</Filter>
+    <ClInclude Include="..\Classes\Scene\StartupScene.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GBKToUTF8\GBKToUTF8.h">
+      <Filter>Classes\GBKToUTF8</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LocationMap\LocationMap.h">
+      <Filter>Classes\LocationMap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

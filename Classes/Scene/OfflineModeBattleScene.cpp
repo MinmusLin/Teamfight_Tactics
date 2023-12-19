@@ -3,7 +3,7 @@
  * File Name:     OfflineModeBattleScene.cpp
  * File Function: OfflineModeBattleScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/19
+ * Update Date:   2023/12/20
  ****************************************************************/
 
 #include <iostream>
@@ -41,9 +41,9 @@ bool OfflineModeBattleScene::init()
     this->addChild(background);
 
     // 创建按钮
-    auto returnMenuButton = HoverButton::create("../Resources/Buttons/ReturnMenuDefaultButton.png",
-        "../Resources/Buttons/ReturnMenuHoverButton.png",
-        "../Resources/Buttons/ReturnMenuActiveButton.png");
+    auto returnMenuButton = HoverButton::create("../Resources/Buttons/OfflineModeBattleSceneButtons/ReturnMenuDefaultButton.png",
+        "../Resources/Buttons/OfflineModeBattleSceneButtons/ReturnMenuHoverButton.png",
+        "../Resources/Buttons/OfflineModeBattleSceneButtons/ReturnMenuActiveButton.png");
 
     // 设置按钮位置
     returnMenuButton->setPosition(Vec2(screenSize.width / 2 + 450, screenSize.height / 2 - 100)); // TODO: 按钮位置通过常变量替代

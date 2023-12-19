@@ -3,7 +3,7 @@
  * File Name:     OnlineModeMenuScene.cpp
  * File Function: OnlineModeMenuScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/19
+ * Update Date:   2023/12/20
  ****************************************************************/
 
 #include "OnlineModeMenuScene.h"
@@ -37,15 +37,15 @@ bool OnlineModeMenuScene::init()
     this->addChild(background);
 
     // 创建按钮
-    auto createRoomButton = HoverButton::create("../Resources/Buttons/CreateRoomDefaultButton.png",
-        "../Resources/Buttons/CreateRoomHoverButton.png",
-        "../Resources/Buttons/CreateRoomActiveButton.png");
-    auto joinRoomButton = HoverButton::create("../Resources/Buttons/JoinRoomDefaultButton.png",
-        "../Resources/Buttons/JoinRoomHoverButton.png",
-        "../Resources/Buttons/JoinRoomActiveButton.png");
-    auto returnMenuButton = HoverButton::create("../Resources/Buttons/ReturnMenuDefaultButton.png",
-        "../Resources/Buttons/ReturnMenuHoverButton.png",
-        "../Resources/Buttons/ReturnMenuActiveButton.png");
+    auto createRoomButton = HoverButton::create("../Resources/Buttons/OnlineModeMenuSceneButtons/CreateRoomDefaultButton.png",
+        "../Resources/Buttons/OnlineModeMenuSceneButtons/CreateRoomHoverButton.png",
+        "../Resources/Buttons/OnlineModeMenuSceneButtons/CreateRoomActiveButton.png");
+    auto joinRoomButton = HoverButton::create("../Resources/Buttons/OnlineModeMenuSceneButtons/JoinRoomDefaultButton.png",
+        "../Resources/Buttons/OnlineModeMenuSceneButtons/JoinRoomHoverButton.png",
+        "../Resources/Buttons/OnlineModeMenuSceneButtons/JoinRoomActiveButton.png");
+    auto returnMenuButton = HoverButton::create("../Resources/Buttons/OnlineModeMenuSceneButtons/ReturnMenuDefaultButton.png",
+        "../Resources/Buttons/OnlineModeMenuSceneButtons/ReturnMenuHoverButton.png",
+        "../Resources/Buttons/OnlineModeMenuSceneButtons/ReturnMenuActiveButton.png");
 
     // 设置按钮位置
     createRoomButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + 200)); // TODO: 按钮位置通过常变量替代

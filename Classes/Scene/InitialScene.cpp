@@ -3,13 +3,13 @@
  * File Name:     InitialScene.cpp
  * File Function: InitialScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/19
+ * Update Date:   2023/12/20
  ****************************************************************/
 
 #include "InitialScene.h"
 #include "MenuScene.h"
 #include "Button/HoverButton.h"
-#include "GBKToUTF8.h"
+#include "GBKToUTF8/GBKToUTF8.h"
 #include "proj.win32/Constant.h"
 
 USING_NS_CC;
@@ -62,9 +62,9 @@ bool InitialScene::init()
         });
 
     // 创建按钮
-    auto startButton = HoverButton::create("../Resources/Buttons/StartDefaultButton.png",
-        "../Resources/Buttons/StartHoverButton.png",
-        "../Resources/Buttons/StartActiveButton.png");
+    auto startButton = HoverButton::create("../Resources/Buttons/InitialSceneButtons/StartDefaultButton.png",
+        "../Resources/Buttons/InitialSceneButtons/StartHoverButton.png",
+        "../Resources/Buttons/InitialSceneButtons/StartActiveButton.png");
 
     // 设置按钮位置
     startButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + INITIAL_SCENE_BUTTON_OFFSET_Y));

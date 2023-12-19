@@ -3,13 +3,13 @@
  * File Name:     HumanPlayer.cpp
  * File Function: HumanPlayer类的实现
  * Author:        林继申
- * Update Date:   2023/12/19
+ * Update Date:   2023/12/20
  ****************************************************************/
 
 #include <iostream>
 #include <algorithm>
 #include "HumanPlayer.h"
-#include "LocationMap.h"
+#include "LocationMap/LocationMap.h"
 
 USING_NS_CC;
 
@@ -55,9 +55,9 @@ void HumanPlayer::refreshShop(Scene* currentScene)
     // 更新商店战斗英雄按钮
     for (int i = 0; i < MAX_SELECTABLE_CHAMPION_COUNT; i++) {
         // 创建按钮
-        shopChampionButton[i] = HoverButton::create(static_cast<std::string>("../Resources/Shop/Champion") + static_cast<char>('A' + shopChampionCategory[i] - 1) + static_cast<std::string>("DefaultButton.png"),
-            static_cast<std::string>("../Resources/Shop/Champion") + static_cast<char>('A' + shopChampionCategory[i] - 1) + static_cast<std::string>("HoverButton.png"),
-            static_cast<std::string>("../Resources/Shop/Champion") + static_cast<char>('A' + shopChampionCategory[i] - 1) + static_cast<std::string>("ActiveButton.png"));
+        shopChampionButton[i] = HoverButton::create(static_cast<std::string>("../Resources/Buttons/ShopButtons/Champion") + static_cast<char>('A' + shopChampionCategory[i] - 1) + static_cast<std::string>("DefaultButton.png"),
+            static_cast<std::string>("../Resources/Buttons/ShopButtons/Champion") + static_cast<char>('A' + shopChampionCategory[i] - 1) + static_cast<std::string>("HoverButton.png"),
+            static_cast<std::string>("../Resources/Buttons/ShopButtons/Champion") + static_cast<char>('A' + shopChampionCategory[i] - 1) + static_cast<std::string>("ActiveButton.png"));
 
         // 设置按钮位置
         shopChampionButton[i]->setPosition(Vec2(SHOP_CHAMPION_START_X + i * (SHOP_CHAMPION_INTERVAL + SHOP_CHAMPION_WIDTH), SHOP_CHAMPION_START_Y));
