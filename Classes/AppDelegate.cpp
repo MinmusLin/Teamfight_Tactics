@@ -8,6 +8,7 @@
 
 #include "AppDelegate.h"
 #include "Scene/InitialScene.h"
+#include "GBKToUTF8.h"
 #include "proj.win32/Constant.h"
 
 // 音频引擎选择
@@ -60,10 +61,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     if (!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
         // 在 Windows、Mac、Linux 平台上创建 OpenGL 视图
-        glview = GLViewImpl::createWithRect(APPLICATION_TITLE, cocos2d::Rect(0, 0, s_designResolutionSize.width, s_designResolutionSize.height));
+        glview = GLViewImpl::createWithRect(GBKToUTF8::getString(APPLICATION_TITLE), cocos2d::Rect(0, 0, s_designResolutionSize.width, s_designResolutionSize.height));
 #else
         // 在其他平台上创建 OpenGL 视图
-        glview = GLViewImpl::create(APPLICATION_TITLE);
+        glview = GLViewImpl::create(GBKToUTF8::getString(APPLICATION_TITLE));
 #endif
         // 设置 OpenGL 视图
         director->setOpenGLView(glview);

@@ -39,7 +39,7 @@ bool InitialScene::init()
 
     // 创建文本框
     auto textField = ui::TextField::create(GBKToUTF8::getString("请输入您的游戏昵称"), "../Resources/Fonts/FZZGY_J_EB.ttf", INITIAL_SCENE_FONT_SIZE);
-    textField->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + INITIAL_SCENE_TEXTFIELD_OFFSET_Y));
+    textField->setPosition(Vec2(screenSize.width / 2 + INITIAL_SCENE_LABLES_OFFSET_X, screenSize.height / 2 + INITIAL_SCENE_TEXTFIELD_OFFSET_Y));
     textField->setMaxLength(NICKNAME_MAX_LENGTH);
     textField->setMaxLengthEnabled(true);
     textField->setTextColor(Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
@@ -47,7 +47,7 @@ bool InitialScene::init()
 
     // 创建标签
     auto promptLabel = Label::createWithTTF("", "../Resources/Fonts/FZZGY_J_EB.ttf", INITIAL_SCENE_FONT_SIZE);
-    promptLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + INITIAL_SCENE_PROMPT_LABLE_OFFSET_Y));
+    promptLabel->setPosition(Vec2(screenSize.width / 2 + INITIAL_SCENE_LABLES_OFFSET_X, screenSize.height / 2 + INITIAL_SCENE_PROMPT_LABLE_OFFSET_Y));
     promptLabel->setTextColor(Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(promptLabel);
 
@@ -71,7 +71,7 @@ bool InitialScene::init()
 
     // 创建一个提示
     auto nameLabel = Label::createWithTTF(GBKToUTF8::getString("游戏昵称不能为空"), "../Resources/Fonts/FZZGY_J_EB.ttf", INITIAL_SCENE_FONT_SIZE);
-    nameLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + INITIAL_SCENE_NAME_LABLE_OFFSET_Y));
+    nameLabel->setPosition(Vec2(screenSize.width / 2 + INITIAL_SCENE_LABLES_OFFSET_X, screenSize.height / 2 + INITIAL_SCENE_NAME_LABLE_OFFSET_Y));
     nameLabel->setVisible(false);
     nameLabel->setTextColor(Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(nameLabel);

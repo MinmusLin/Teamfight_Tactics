@@ -14,16 +14,16 @@
 #include <string>
 
 // 应用程序设置
-constexpr int DESIGN_RESOLUTION_WIDTH = 1280;            // 设计分辨率宽度
-constexpr int DESIGN_RESOLUTION_HEIGHT = 720;            // 设计分辨率高度
-constexpr int SMALL_RESOLUTION_WIDTH = 960;              // 小分辨率宽度
-constexpr int SMALL_RESOLUTION_HEIGHT = 540;             // 小分辨率高度
-constexpr int MEDIUM_RESOLUTION_WIDTH = 1280;            // 中分辨率宽度
-constexpr int MEDIUM_RESOLUTION_HEIGHT = 720;            // 中分辨率高度
-constexpr int LARGE_RESOLUTION_WIDTH = 1920;             // 大分辨率宽度
-constexpr int LARGE_RESOLUTION_HEIGHT = 1080;            // 大分辨率高度
-constexpr float FRAME_RATE = 60.0f;                      // 帧率
-constexpr char APPLICATION_TITLE[] = "Teamfight Tactic"; // 应用程序标题
+constexpr int DESIGN_RESOLUTION_WIDTH = 1280;      // 设计分辨率宽度
+constexpr int DESIGN_RESOLUTION_HEIGHT = 720;      // 设计分辨率高度
+constexpr int SMALL_RESOLUTION_WIDTH = 960;        // 小分辨率宽度
+constexpr int SMALL_RESOLUTION_HEIGHT = 540;       // 小分辨率高度
+constexpr int MEDIUM_RESOLUTION_WIDTH = 1280;      // 中分辨率宽度
+constexpr int MEDIUM_RESOLUTION_HEIGHT = 720;      // 中分辨率高度
+constexpr int LARGE_RESOLUTION_WIDTH = 1920;       // 大分辨率宽度
+constexpr int LARGE_RESOLUTION_HEIGHT = 1080;      // 大分辨率高度
+constexpr float FRAME_RATE = 60.0f;                // 帧率
+const std::string APPLICATION_TITLE = "金铲铲之战"; // 应用程序标题
 
 // 网络环境设置
 constexpr int HOSTNAME_LENGHT = 128;                               // 主机名长度
@@ -42,10 +42,11 @@ constexpr int DARK_BLUE_B = 96; // 深蓝色 B 通道
 // 场景界面设置
 constexpr int NICKNAME_MAX_LENGTH = 6;                       // 游戏昵称最大长度
 constexpr int INITIAL_SCENE_FONT_SIZE = 30;                  // 初始场景字体大小
-constexpr int INITIAL_SCENE_TEXTFIELD_OFFSET_Y = 40;         // 初始场景文本框位置 Y 偏移量
-constexpr int INITIAL_SCENE_PROMPT_LABLE_OFFSET_Y = 150;     // 初始场景提示标签位置 Y 偏移量
+constexpr int INITIAL_SCENE_LABLES_OFFSET_X = 349;           // 初始场景标签位置 X 偏移量
+constexpr int INITIAL_SCENE_TEXTFIELD_OFFSET_Y = 111;        // 初始场景文本框位置 Y 偏移量
+constexpr int INITIAL_SCENE_PROMPT_LABLE_OFFSET_Y = 180;     // 初始场景提示标签位置 Y 偏移量
 constexpr int INITIAL_SCENE_NAME_LABLE_OFFSET_Y = 280;       // 初始场景欢迎标签位置 Y 偏移量
-constexpr int INITIAL_SCENE_BUTTON_OFFSET_Y = -160;          // 初始场景按钮位置 Y 偏移量
+constexpr int INITIAL_SCENE_BUTTON_OFFSET_Y = -310;          // 初始场景按钮位置 Y 偏移量
 constexpr int MENU_SCENE_BUTTONS_OFFSET_X = -296;            // 菜单场景按钮位置 X 偏移量
 constexpr int MENU_SCENE_OFFLINE_MODE_BUTTON_OFFSET_Y = -30; // 菜单场景练习模式按钮位置 Y 偏移量
 constexpr int MENU_SCENE_ONLINE_MODE_BUTTON_OFFSET_Y = -150; // 菜单场景联机模式按钮位置 Y 偏移量
