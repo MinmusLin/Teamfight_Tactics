@@ -81,7 +81,7 @@ bool InitialScene::init()
         if (type == ui::Widget::TouchEventType::ENDED) {
             std::string nickname = textField->getString();
             if (!nickname.empty()) {
-                UserDefault::getInstance()->setStringForKey("PlayerName", nickname);
+                UserDefault::getInstance()->setStringForKey("PlayerName", nickname); // PlayerName 内部存储编码为 UTF-8，无需调用 GBKToUTF8 单例方法
                 UserDefault::getInstance()->flush();
                 Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), Color3B::WHITE));
             }

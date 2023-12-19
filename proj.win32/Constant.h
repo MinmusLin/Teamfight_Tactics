@@ -22,7 +22,7 @@ constexpr int MEDIUM_RESOLUTION_WIDTH = 1280;      // 中分辨率宽度
 constexpr int MEDIUM_RESOLUTION_HEIGHT = 720;      // 中分辨率高度
 constexpr int LARGE_RESOLUTION_WIDTH = 1920;       // 大分辨率宽度
 constexpr int LARGE_RESOLUTION_HEIGHT = 1080;      // 大分辨率高度
-constexpr float FRAME_RATE = 60.0f;                // 帧率
+constexpr float FRAME_RATE = 60.0f;                // 应用程序帧率
 const std::string APPLICATION_TITLE = "金铲铲之战"; // 应用程序标题
 
 // 网络环境设置
@@ -47,10 +47,12 @@ constexpr int INITIAL_SCENE_TEXTFIELD_OFFSET_Y = 111;        // 初始场景文本框位
 constexpr int INITIAL_SCENE_PROMPT_LABLE_OFFSET_Y = 180;     // 初始场景提示标签位置 Y 偏移量
 constexpr int INITIAL_SCENE_NAME_LABLE_OFFSET_Y = 280;       // 初始场景欢迎标签位置 Y 偏移量
 constexpr int INITIAL_SCENE_BUTTON_OFFSET_Y = -310;          // 初始场景按钮位置 Y 偏移量
-constexpr int MENU_SCENE_BUTTONS_OFFSET_X = -296;            // 菜单场景按钮位置 X 偏移量
+constexpr int MENU_SCENE_FONT_SIZE = 28;                     // 菜单场景字体大小
+constexpr int MENU_SCENE_BUTTONS_OFFSET_X = -296;            // 菜单场景按钮与标签位置 X 偏移量
 constexpr int MENU_SCENE_OFFLINE_MODE_BUTTON_OFFSET_Y = -30; // 菜单场景练习模式按钮位置 Y 偏移量
 constexpr int MENU_SCENE_ONLINE_MODE_BUTTON_OFFSET_Y = -150; // 菜单场景联机模式按钮位置 Y 偏移量
 constexpr int MENU_SCENE_SETTINGS_BUTTON_OFFSET_Y = -270;    // 菜单场景设置按钮位置 Y 偏移量
+constexpr int MENU_SCENE_WELCOME_LABLE_OFFSET_Y = 240;       // 菜单场景欢迎标签位置 Y 偏移量
 constexpr float SCENE_TRANSITION_DURATION = 0.3f;            // 场景切换时间
 constexpr float PROMPT_MESSAGE_DURATION = 1.5f;              // 提示信息停留时间
 
