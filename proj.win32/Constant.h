@@ -40,14 +40,18 @@ constexpr int DARK_BLUE_G = 32; // 深蓝色 G 通道
 constexpr int DARK_BLUE_B = 96; // 深蓝色 B 通道
 
 // 场景界面设置
-constexpr int NICKNAME_MAX_LENGTH = 6;                   // 游戏昵称最大长度
-constexpr int INITIAL_SCENE_FONT_SIZE = 30;              // 初始场景字体大小
-constexpr int INITIAL_SCENE_TEXTFIELD_OFFSET_Y = 40;     // 初始场景文本框位置 Y 偏移量
-constexpr int INITIAL_SCENE_PROMPT_LABLE_OFFSET_Y = 150; // 初始场景提示标签位置 Y 偏移量
-constexpr int INITIAL_SCENE_NAME_LABLE_OFFSET_Y = 280;   // 初始场景欢迎标签位置 Y 偏移量
-constexpr int INITIAL_SCENE_BUTTON_OFFSET_Y = -180;      // 初始场景按钮位置 Y 偏移量
-constexpr float SCENE_TRANSITION_DURATION = 0.3f;        // 场景切换时间
-constexpr float PROMPT_MESSAGE_DURATION = 1.5f;          // 提示信息停留时间
+constexpr int NICKNAME_MAX_LENGTH = 6;                       // 游戏昵称最大长度
+constexpr int INITIAL_SCENE_FONT_SIZE = 30;                  // 初始场景字体大小
+constexpr int INITIAL_SCENE_TEXTFIELD_OFFSET_Y = 40;         // 初始场景文本框位置 Y 偏移量
+constexpr int INITIAL_SCENE_PROMPT_LABLE_OFFSET_Y = 150;     // 初始场景提示标签位置 Y 偏移量
+constexpr int INITIAL_SCENE_NAME_LABLE_OFFSET_Y = 280;       // 初始场景欢迎标签位置 Y 偏移量
+constexpr int INITIAL_SCENE_BUTTON_OFFSET_Y = -180;          // 初始场景按钮位置 Y 偏移量
+constexpr int MENU_SCENE_BUTTONS_OFFSET_X = -296;            // 菜单场景按钮位置 X 偏移量
+constexpr int MENU_SCENE_OFFLINE_MODE_BUTTON_OFFSET_Y = -30; // 菜单场景练习模式按钮位置 Y 偏移量
+constexpr int MENU_SCENE_ONLINE_MODE_BUTTON_OFFSET_Y = -150; // 菜单场景联机模式按钮位置 Y 偏移量
+constexpr int MENU_SCENE_SETTINGS_BUTTON_OFFSET_Y = -270;    // 菜单场景设置按钮位置 Y 偏移量
+constexpr float SCENE_TRANSITION_DURATION = 0.3f;            // 场景切换时间
+constexpr float PROMPT_MESSAGE_DURATION = 1.5f;              // 提示信息停留时间
 
 // 对战界面设置
 constexpr int WAITING_MAP_COUNT = 9;                // 候战区地图大小

@@ -49,9 +49,9 @@ bool MenuScene::init()
         "../Resources/Buttons/SettingsActiveButton.png");
 
     // 设置按钮位置
-    offlineModeButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + 200)); // TODO: 按钮位置通过常变量替代
-    onlineModeButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2)); // TODO: 按钮位置通过常变量替代
-    settingsButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 - 200)); // TODO: 按钮位置通过常变量替代
+    offlineModeButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_BUTTONS_OFFSET_X, screenSize.height / 2 + MENU_SCENE_OFFLINE_MODE_BUTTON_OFFSET_Y));
+    onlineModeButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_BUTTONS_OFFSET_X, screenSize.height / 2 + MENU_SCENE_ONLINE_MODE_BUTTON_OFFSET_Y));
+    settingsButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_BUTTONS_OFFSET_X, screenSize.height / 2 + MENU_SCENE_SETTINGS_BUTTON_OFFSET_Y));
 
     // 为按钮添加事件处理器
     offlineModeButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
