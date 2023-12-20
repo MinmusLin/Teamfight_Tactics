@@ -30,7 +30,7 @@ bool OfflineModeBattleScene::init()
     if (!Scene::init()) {
         return false;
     }
-    
+
     // ¼ÓÔØ±³¾°
     const auto screenSize = Director::getInstance()->getVisibleSize();
     const auto background = Sprite::create("../Resources/Scenes/OfflineModeBattleScene.png");

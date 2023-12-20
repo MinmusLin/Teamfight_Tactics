@@ -80,6 +80,34 @@ bool OfflineModePreparationScene::init()
     // 设置进度条更新逻辑与计时器
     setScheduleOnce(progressBar, progressLabel);
 
+    // 创建按钮
+    auto uplevelButton = HoverButton::create("../Resources/Buttons/ShopButtons/UplevelDefaultButton.png",
+        "../Resources/Buttons/ShopButtons/UplevelHoverButton.png",
+        "../Resources/Buttons/ShopButtons/UplevelActiveButton.png");
+    auto refreshButton = HoverButton::create("../Resources/Buttons/ShopButtons/RefreshDefaultButton.png",
+        "../Resources/Buttons/ShopButtons/RefreshHoverButton.png",
+        "../Resources/Buttons/ShopButtons/RefreshActiveButton.png");
+
+    // 设置按钮位置
+    uplevelButton->setPosition(Vec2(screenSize.width / 2 + SHOP_UPLEVEL_BUTTON_OFFSET_X, screenSize.height / 2 + SHOP_UPLEVEL_BUTTON_OFFSET_Y));
+    refreshButton->setPosition(Vec2(screenSize.width / 2 + SHOP_REFRESH_BUTTON_OFFSET_X, screenSize.height / 2 + SHOP_REFRESH_BUTTON_OFFSET_Y));
+
+    // 为按钮添加事件处理器
+    uplevelButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::ENDED) {
+            // TODO
+        }
+        });
+    refreshButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::ENDED) {
+            // TODO
+        }
+        });
+
+    // 将按钮添加到场景中
+    this->addChild(uplevelButton);
+    this->addChild(refreshButton);
+
     return true;
 }
 

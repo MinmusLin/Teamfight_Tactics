@@ -85,6 +85,10 @@ constexpr int SHOP_CHAMPION_WIDTH = 120;                             // 商店战斗
 constexpr int SHOP_CHAMPION_HEIGHT = 100;                            // 商店战斗英雄按钮高度
 constexpr int SHOP_CHAMPION_START_X = 370 + SHOP_CHAMPION_WIDTH / 2; // 商店战斗英雄起始按钮位置 X 坐标
 constexpr int SHOP_CHAMPION_START_Y = 10 + SHOP_CHAMPION_HEIGHT / 2; // 商店战斗英雄起始按钮位置 Y 坐标
+constexpr int SHOP_UPLEVEL_BUTTON_OFFSET_X = -340;                   // 商店升级按钮位置 X 偏移量
+constexpr int SHOP_UPLEVEL_BUTTON_OFFSET_Y = -273;                   // 商店升级按钮位置 Y 偏移量
+constexpr int SHOP_REFRESH_BUTTON_OFFSET_X = -340;                   // 商店刷新按钮位置 X 偏移量
+constexpr int SHOP_REFRESH_BUTTON_OFFSET_Y = -328;                   // 商店刷新按钮位置 Y 偏移量
 
 // 位置属性与屏幕坐标设置
 constexpr int WAITING_AREA_START_X = 415;        // 候战区起始屏幕坐标位置 X 坐标
