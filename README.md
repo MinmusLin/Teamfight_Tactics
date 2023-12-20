@@ -7,6 +7,7 @@ Teamfight_Tactics
 ## 项目简介
 
 A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.com/cocos2d-x/manual).
+
 基于 [Cocos2d-x 3.17.2](https://docs.cocos.com/cocos2d-x/manual) 开发的金铲铲之战游戏项目。
 
 > Relevant course
