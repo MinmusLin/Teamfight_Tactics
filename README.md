@@ -105,6 +105,8 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 * 实现 `StartupScene` 类与交互细节
 * 实现 `MenuScene` 类与交互细节
 * 初步实现 `OfflineModePreparationScene` 类与交互细节
+* 确定战斗英雄属性参数
+* 完成战斗英雄绘制
 
 ## 集成开发环境
 
