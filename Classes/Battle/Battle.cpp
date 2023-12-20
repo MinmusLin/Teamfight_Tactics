@@ -12,7 +12,12 @@
 // 构造函数
 Battle::Battle(ChampionCategory myFlagMap[][BATTLE_MAP_COLUMNS], ChampionCategory enemyFlagMap[][BATTLE_MAP_COLUMNS])
 {
-    // TODO: 数组传递，注意镜像
+    for (int i = 0; i < PLACE_MAP_ROWS; i++) {
+        for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+            championCategoryMap[i][j] = myFlagMap[i][j];
+            championCategoryMap[PLACE_MAP_ROWS - 1 - i][BATTLE_MAP_COLUMNS - 1 - j] = enemyFlagMap[i][j];
+        }
+    }
     for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
         for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
             if (championCategoryMap[i][j] != NoChampion) {

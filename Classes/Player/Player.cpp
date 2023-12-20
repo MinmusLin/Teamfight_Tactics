@@ -20,7 +20,7 @@ Player::Player(std::string nickname) :
 }
 
 // 获取战斗区地图
-ChampionCategory(*p)[9] Player::getBattleMap() const
+void Player::getBattleMap(ChampionCategory(*battleMap)[BATTLE_MAP_COLUMNS])
 {
-    return battleMap;
+    battleMap = this->battleMap;
 }

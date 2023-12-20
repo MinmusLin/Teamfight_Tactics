@@ -61,8 +61,12 @@ Battle* OfflineModeControl::getBattle() const
 // 初始化对战类
 void OfflineModeControl::initializeBattle()
 {
+    ChampionCategory(*myFlagMap)[BATTLE_MAP_COLUMNS];
+    ChampionCategory(*enemyFlagMap)[BATTLE_MAP_COLUMNS];
+    humanPlayer->getBattleMap(myFlagMap);
+    enemyPlayer->getBattleMap(enemyFlagMap);
     try {
-        battle = new Battle();
+        battle = new Battle(myFlagMap, enemyFlagMap);
     }
     catch (const std::bad_alloc& e) {
         std::cerr << "Memory allocation failed: " << e.what() << std::endl;
@@ -73,5 +77,6 @@ void OfflineModeControl::initializeBattle()
 // 释放对战类
 void OfflineModeControl::releaseBattle()
 {
-
+    delete battle;
+    battle = nullptr;
 }

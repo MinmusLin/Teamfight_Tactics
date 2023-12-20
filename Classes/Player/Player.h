@@ -22,7 +22,7 @@ public:
     Player(std::string nickname);
 
     // 获取战斗区地图
-    ChampionCategory** getBattleMap() const;
+    void getBattleMap(ChampionCategory(*battleMap)[BATTLE_MAP_COLUMNS]);
 
 protected:
     std::string name;                                                // 玩家昵称
