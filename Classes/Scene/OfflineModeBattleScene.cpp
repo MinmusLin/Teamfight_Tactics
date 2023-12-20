@@ -3,7 +3,7 @@
  * File Name:     OfflineModeBattleScene.cpp
  * File Function: OfflineModeBattleScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/21
  ****************************************************************/
 
 #include "Control/OfflineModeControl.h"

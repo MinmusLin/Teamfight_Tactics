@@ -3,7 +3,7 @@
  * File Name:     OfflineModeControl.cpp
  * File Function: OfflineModeControl类的实现
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/21
  ****************************************************************/
 
 #include <iostream>
@@ -38,6 +38,9 @@ OfflineModeControl::~OfflineModeControl()
 {
     delete humanPlayer;
     delete enemyPlayer;
+    if (battle) {
+        delete battle;
+    }
 }
 
 // 获取人类玩家指针

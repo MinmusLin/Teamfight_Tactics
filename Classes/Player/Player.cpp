@@ -3,7 +3,7 @@
  * File Name:     Player.cpp
  * File Function: Player类的实现
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/21
  ****************************************************************/
 
 #include <algorithm>
@@ -20,7 +20,7 @@ Player::Player(std::string nickname) :
 }
 
 // 获取战斗区地图
-void Player::getBattleMap(ChampionCategory(*battleMap)[BATTLE_MAP_COLUMNS])
+void Player::getBattleMap(ChampionCategory(*&battleMap)[BATTLE_MAP_COLUMNS])
 {
     battleMap = this->battleMap;
 }
