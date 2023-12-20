@@ -6,8 +6,8 @@ Teamfight_Tactics
 
 ## 项目简介
 
-A project of Teamfight Tactics.
-金铲铲之战游戏项目。
+A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.com/cocos2d-x/manual).
+基于 [Cocos2d-x 3.17.2](https://docs.cocos.com/cocos2d-x/manual) 开发的金铲铲之战游戏项目。
 
 > Relevant course
 > * Programing Paradigm (同济大学程序设计范式)
@@ -98,7 +98,7 @@ A project of Teamfight Tactics.
 
 ### 2023/12/20
 
-* 调整项目仓库组成
+* 调整 `Resources 文件夹`
 * 调整 `GBKToUTF8` 单例
 * 调整 `LocationMap` 单例
 * 实现 `StartupScene` 类与交互细节
@@ -112,14 +112,6 @@ A project of Teamfight Tactics.
 ## 编译运行环境
 
 * 本项目仅适用于x86架构
-
-## 库依赖
-
-* `Cocos2d-x 3.17.2`
-
-## 相关资料
-
-* [Cocos2d-x 3.x Documentation](https://docs.cocos.com/cocos2d-x/manual)
 
 ## 文档更新日期
 
