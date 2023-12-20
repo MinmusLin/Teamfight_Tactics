@@ -37,7 +37,7 @@ bool StartupScene::init()
     this->addChild(background);
 
     // 创建进度条
-    auto progressBar = ui::LoadingBar::create("../Resources/LoadingBars/StartupSceneLoadingBar.png");
+    auto progressBar = ui::LoadingBar::create("../Resources/LoadingBars/StartupLoadingBar.png");
     progressBar->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + STARTUP_SCENE_LOADINGBAR_OFFSET_Y));
     progressBar->setPercent(0);
     this->addChild(progressBar);
@@ -58,7 +58,7 @@ bool StartupScene::init()
             float percentage = progressBar->getPercent() / 100.0f;
             float xPosition = progressBar->getPosition().x - progressBar->getContentSize().width / 2 + progressBar->getContentSize().width * percentage + STARTUP_SCENE_LOADING_LABLE_OFFSET_X;
             progressLabel->setPosition(Vec2(xPosition, progressBar->getPosition().y));
-            }, interval * i, "UpdateProgressBar" + std::to_string(i) + "%");
+            }, interval * i, "UpdateStartupLoadingBar" + std::to_string(i));
     }
 
     // 设置计时器

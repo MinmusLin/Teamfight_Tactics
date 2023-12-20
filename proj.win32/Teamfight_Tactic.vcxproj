@@ -166,6 +166,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Scene\InitialScene.cpp" />
     <ClCompile Include="..\Classes\Scene\MenuScene.cpp" />
     <ClCompile Include="..\Classes\Scene\OfflineModeBattleScene.cpp" />
+    <ClCompile Include="..\Classes\Scene\OfflineModePreparationScene.cpp" />
     <ClCompile Include="..\Classes\Scene\OnlineModeMenuScene.cpp" />
     <ClCompile Include="..\Classes\Scene\StartupScene.cpp" />
     <ClCompile Include="GameMain.cpp" />
@@ -186,6 +187,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Scene\InitialScene.h" />
     <ClInclude Include="..\Classes\Scene\MenuScene.h" />
     <ClInclude Include="..\Classes\Scene\OfflineModeBattleScene.h" />
+    <ClInclude Include="..\Classes\Scene\OfflineModePreparationScene.h" />
     <ClInclude Include="..\Classes\Scene\OnlineModeMenuScene.h" />
     <ClInclude Include="..\Classes\Scene\StartupScene.h" />
     <ClInclude Include="Constant.h" />

@@ -46,8 +46,8 @@ constexpr float SCENE_TRANSITION_DURATION = 0.3f; // 场景切换时间
 
 // 启动场景界面设置
 constexpr int STARTUP_SCENE_FONT_SIZE = 20;               // 启动场景字体大小
-constexpr int STARTUP_SCENE_LOADINGBAR_OFFSET_Y = -241;   // 启动场景进度条位置 Y 偏移量
-constexpr int STARTUP_SCENE_LOADING_LABLE_OFFSET_X = -30; // 启动场景进度标签位置 X 偏移量
+constexpr int STARTUP_SCENE_LOADINGBAR_OFFSET_Y = -241;   // 启动场景加载进度条位置 Y 偏移量
+constexpr int STARTUP_SCENE_LOADING_LABLE_OFFSET_X = -30; // 启动场景加载进度条标签位置 X 偏移量
 constexpr float STARTUP_SCENE_DURATION = 2.0f;            // 启动场景加载时间
 
 // 初始场景界面设置
@@ -66,27 +66,33 @@ constexpr int MENU_SCENE_ONLINE_MODE_BUTTON_OFFSET_Y = -150; // 菜单场景联机模式
 constexpr int MENU_SCENE_SETTINGS_BUTTON_OFFSET_Y = -270;    // 菜单场景设置按钮位置 Y 偏移量
 constexpr int MENU_SCENE_WELCOME_LABLE_OFFSET_Y = 240;       // 菜单场景欢迎标签位置 Y 偏移量
 
-// 对战界面设置
-constexpr int WAITING_MAP_COUNT = 9;                // 候战区地图大小
-constexpr int BATTLE_MAP_ROWS = 8;                  // 战斗区地图行数
-constexpr int BATTLE_MAP_COLUMNS = 9;               // 战斗区地图列数
-constexpr int PLACE_MAP_ROWS = BATTLE_MAP_ROWS / 2; // 放置区地图行数
+// 对战场景界面设置
+constexpr int WAITING_MAP_COUNT = 9;                        // 候战区地图大小
+constexpr int BATTLE_MAP_ROWS = 8;                          // 战斗区地图行数
+constexpr int BATTLE_MAP_COLUMNS = 9;                       // 战斗区地图列数
+constexpr int PLACE_MAP_ROWS = BATTLE_MAP_ROWS / 2;         // 放置区地图行数
+constexpr int BATTLE_SCENE_LOADINGBAR_X = 213;              // 对战场景准备进度条位置 X 坐标
+constexpr int BATTLE_SCENE_LOADINGBAR_Y = 675;              // 对战场景准备进度条位置 Y 坐标
+constexpr int BATTLE_SCENE_LOADINGBAR_LABLE_FONT_SIZE = 20; // 对战场景准备进度条标签字体大小
+constexpr int BATTLE_SCENE_LOADINGBAR_LABLE_OFFSET_X = -18; // 对战场景准备进度条标签位置 X 偏移量
+constexpr int BATTLE_SCENE_LOADINGBAR_LABLE_THRESHOLD = 10; // 对战场景准备时间显示阈值
+constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 15.0f;   // 对战场景准备时间
 
 // 商店界面设置
 constexpr int MAX_SELECTABLE_CHAMPION_COUNT = 5;                     // 最大可选择战斗英雄数量
 constexpr int SHOP_CHAMPION_INTERVAL = 10;                           // 商店战斗英雄按钮间距
 constexpr int SHOP_CHAMPION_WIDTH = 120;                             // 商店战斗英雄按钮宽度
 constexpr int SHOP_CHAMPION_HEIGHT = 100;                            // 商店战斗英雄按钮高度
-constexpr int SHOP_CHAMPION_START_X = 370 + SHOP_CHAMPION_WIDTH / 2; // 商店战斗英雄起始按钮 X 坐标
-constexpr int SHOP_CHAMPION_START_Y = 10 + SHOP_CHAMPION_HEIGHT / 2; // 商店战斗英雄起始按钮 Y 坐标
+constexpr int SHOP_CHAMPION_START_X = 370 + SHOP_CHAMPION_WIDTH / 2; // 商店战斗英雄起始按钮位置 X 坐标
+constexpr int SHOP_CHAMPION_START_Y = 10 + SHOP_CHAMPION_HEIGHT / 2; // 商店战斗英雄起始按钮位置 Y 坐标
 
 // 位置属性与屏幕坐标设置
-constexpr int WAITING_AREA_START_X = 415;
-constexpr int WAITING_AREA_START_Y = 195;
-constexpr int BATTLE_AREA_START_X = 415;
-constexpr int BATTLE_AREA_START_Y = 275;
-constexpr int CHAMPION_HORIZONTAL_INTERVAL = 60;
-constexpr int CHAMPION_VERTICAL_INTERVAL = 45;
+constexpr int WAITING_AREA_START_X = 415;        // 候战区起始屏幕坐标位置 X 坐标
+constexpr int WAITING_AREA_START_Y = 195;        // 候战区起始屏幕坐标位置 Y 坐标
+constexpr int BATTLE_AREA_START_X = 415;         // 战斗区起始屏幕坐标位置 X 坐标
+constexpr int BATTLE_AREA_START_Y = 275;         // 战斗区起始屏幕坐标位置 Y 坐标
+constexpr int CHAMPION_HORIZONTAL_INTERVAL = 60; // 战斗英雄水平间距
+constexpr int CHAMPION_VERTICAL_INTERVAL = 45;   // 战斗英雄垂直间距
 
 // 练习模式难度定义
 enum Difficulty {
@@ -96,12 +102,22 @@ enum Difficulty {
 
 // 战斗英雄种类定义
 enum ChampionCategory {
-    NoChampion = 0, // 无战斗英雄
-    ChampionA,      // ChampionA
-    ChampionB,      // ChampionB
-    ChampionC,      // ChampionC
-    ChampionD,      // ChampionD
-    ChampionE       // ChampionE
+    NoChampion, // 无战斗英雄
+    ChampionA,  // ChampionA
+    ChampionB,  // ChampionB
+    ChampionC,  // ChampionC
+    ChampionD,  // ChampionD
+    ChampionE,  // ChampionE
+    ChampionF,  // ChampionF
+    ChampionG,  // ChampionG
+    ChampionH,  // ChampionH
+    ChampionI,  // ChampionI
+    ChampionJ,  // ChampionJ
+    ChampionK,  // ChampionK
+    ChampionL,  // ChampionL
+    ChampionM,  // ChampionM
+    ChampionN,  // ChampionN
+    ChampionO   // ChampionO
 };
 
 // 位置状态定义
@@ -154,6 +170,36 @@ const ChampionAttributes CHAMPION_D_ATTR = { // ChampionD
 const ChampionAttributes CHAMPION_E_ATTR = { // ChampionE
     ChampionE, "战斗英雄E", "../Resources/Champions/ChampionE.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
+const ChampionAttributes CHAMPION_F_ATTR = { // ChampionF
+    ChampionF, "战斗英雄F", "../Resources/Champions/ChampionF.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_G_ATTR = { // ChampionG
+    ChampionG, "战斗英雄G", "../Resources/Champions/ChampionG.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_H_ATTR = { // ChampionH
+    ChampionH, "战斗英雄H", "../Resources/Champions/ChampionH.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_I_ATTR = { // ChampionI
+    ChampionI, "战斗英雄I", "../Resources/Champions/ChampionI.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_J_ATTR = { // ChampionJ
+    ChampionJ, "战斗英雄J", "../Resources/Champions/ChampionJ.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_K_ATTR = { // ChampionK
+    ChampionK, "战斗英雄K", "../Resources/Champions/ChampionK.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_L_ATTR = { // ChampionL
+    ChampionL, "战斗英雄L", "../Resources/Champions/ChampionL.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_M_ATTR = { // ChampionM
+    ChampionM, "战斗英雄M", "../Resources/Champions/ChampionM.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_N_ATTR = { // ChampionN
+    ChampionN, "战斗英雄N", "../Resources/Champions/ChampionN.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_O_ATTR = { // ChampionO
+    ChampionO, "战斗英雄E", "../Resources/Champions/ChampionO.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
 
 // 战斗英雄种类与属性键值对
 const std::map<ChampionCategory, ChampionAttributes> CHAMPION_ATTR_MAP = {
@@ -161,7 +207,17 @@ const std::map<ChampionCategory, ChampionAttributes> CHAMPION_ATTR_MAP = {
     {ChampionB, CHAMPION_B_ATTR}, // ChampionB
     {ChampionC, CHAMPION_C_ATTR}, // ChampionC
     {ChampionD, CHAMPION_D_ATTR}, // ChampionD
-    {ChampionE, CHAMPION_E_ATTR}  // ChampionE
+    {ChampionE, CHAMPION_E_ATTR}, // ChampionE
+    {ChampionF, CHAMPION_F_ATTR}, // ChampionF
+    {ChampionG, CHAMPION_G_ATTR}, // ChampionG
+    {ChampionH, CHAMPION_H_ATTR}, // ChampionH
+    {ChampionI, CHAMPION_I_ATTR}, // ChampionI
+    {ChampionJ, CHAMPION_J_ATTR}, // ChampionJ
+    {ChampionK, CHAMPION_K_ATTR}, // ChampionK
+    {ChampionL, CHAMPION_L_ATTR}, // ChampionL
+    {ChampionM, CHAMPION_M_ATTR}, // ChampionM
+    {ChampionN, CHAMPION_N_ATTR}, // ChampionN
+    {ChampionO, CHAMPION_O_ATTR}  // ChampionO
 };
 
 // 小时数与欢迎提示语键值对

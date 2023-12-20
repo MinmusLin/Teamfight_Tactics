@@ -45,12 +45,15 @@ HumanPlayer::~HumanPlayer()
 // 刷新商店
 void HumanPlayer::refreshShop(Scene* currentScene)
 {
-    // 更新商店战斗英雄列表
-    shopChampionCategory[0] = CHAMPION_ATTR_MAP.at(ChampionA).championCategory;
-    shopChampionCategory[1] = CHAMPION_ATTR_MAP.at(ChampionB).championCategory;
-    shopChampionCategory[2] = CHAMPION_ATTR_MAP.at(ChampionC).championCategory;
-    shopChampionCategory[3] = CHAMPION_ATTR_MAP.at(ChampionD).championCategory;
-    shopChampionCategory[4] = CHAMPION_ATTR_MAP.at(ChampionE).championCategory;
+    // 销毁已存在按钮
+    for (int i = 0; i < MAX_SELECTABLE_CHAMPION_COUNT; ++i) {
+        if (shopChampionButton[i] != nullptr) {
+            removeChampionFromShop(i, currentScene);
+        }
+    }
+
+    // 刷新商店战斗英雄种类
+    refreshShopChampionCategory();
 
     // 更新商店战斗英雄按钮
     for (int i = 0; i < MAX_SELECTABLE_CHAMPION_COUNT; i++) {
@@ -75,10 +78,13 @@ void HumanPlayer::refreshShop(Scene* currentScene)
 }
 
 // 添加战斗英雄
-void HumanPlayer::addChampion(int index, Scene* currentScene)
+void HumanPlayer::addChampion(const int index, Scene* currentScene)
 {
     for (int pos = 0; pos < WAITING_MAP_COUNT; pos++) {
         if (waitingMap[pos] == NoChampion) {
+            // 从商店中移除战斗英雄
+            removeChampionFromShop(index, currentScene);
+
             // 修改候战区棋盘信息
             waitingMap[pos] = shopChampionCategory[index];
             try {
@@ -209,4 +215,22 @@ void HumanPlayer::onMouseUp(Event* event, Sprite* championSprite)
         // 移动战斗英雄
         championSprite->setPosition(nearestPoint);
     }
+}
+
+// 从商店中移除战斗英雄
+void HumanPlayer::removeChampionFromShop(const int index, cocos2d::Scene* currentScene)
+{
+    shopChampionButton[index]->setEnabled(false);
+    currentScene->removeChild(shopChampionButton[index]);
+    shopChampionButton[index] = nullptr;
+}
+
+// 刷新商店战斗英雄种类
+void HumanPlayer::refreshShopChampionCategory()
+{
+    shopChampionCategory[0] = CHAMPION_ATTR_MAP.at(ChampionA).championCategory;
+    shopChampionCategory[1] = CHAMPION_ATTR_MAP.at(ChampionB).championCategory;
+    shopChampionCategory[2] = CHAMPION_ATTR_MAP.at(ChampionC).championCategory;
+    shopChampionCategory[3] = CHAMPION_ATTR_MAP.at(ChampionD).championCategory;
+    shopChampionCategory[4] = CHAMPION_ATTR_MAP.at(ChampionE).championCategory;
 }

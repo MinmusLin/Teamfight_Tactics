@@ -3,11 +3,12 @@
  * File Name:     OfflineModeControl.cpp
  * File Function: OfflineModeControl类的实现
  * Author:        林继申
- * Update Date:   2023/12/19
+ * Update Date:   2023/12/20
  ****************************************************************/
 
 #include <iostream>
 #include "OfflineModeControl.h"
+#include "Scene/OfflineModeBattleScene.h"
 
 USING_NS_CC;
 
@@ -38,8 +39,14 @@ OfflineModeControl::~OfflineModeControl()
     delete enemyPlayer;
 }
 
+// 获取人类玩家指针
+HumanPlayer* OfflineModeControl::getHumanPlayer() const
+{
+    return humanPlayer;
+}
+
 // 运行练习模式游戏控制类
 void OfflineModeControl::run(cocos2d::Scene* currentScene)
 {
-    humanPlayer->refreshShop(currentScene);
+    // TODO: 练习模式游戏控制类运行逻辑
 }

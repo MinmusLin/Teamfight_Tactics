@@ -75,7 +75,7 @@
     <ClCompile Include="..\Classes\Champion\Champion.cpp">
       <Filter>Classes\Champion</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Scene\OfflineModeBattleScene.cpp">
+    <ClCompile Include="..\Classes\Scene\OfflineModePreparationScene.cpp">
       <Filter>Classes\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Control\Control.cpp">
@@ -89,6 +89,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\LocationMap\LocationMap.cpp">
       <Filter>Classes\LocationMap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scene\OfflineModeBattleScene.cpp">
+      <Filter>Classes\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,7 +137,7 @@
     <ClInclude Include="..\Classes\Champion\Champion.h">
       <Filter>Classes\Champion</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Scene\OfflineModeBattleScene.h">
+    <ClInclude Include="..\Classes\Scene\OfflineModePreparationScene.h">
       <Filter>Classes\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\StartupScene.h">
@@ -145,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\LocationMap\LocationMap.h">
       <Filter>Classes\LocationMap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\OfflineModeBattleScene.h">
+      <Filter>Classes\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

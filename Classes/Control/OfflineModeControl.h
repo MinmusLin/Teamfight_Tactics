@@ -26,13 +26,15 @@ public:
     // 析构函数
     ~OfflineModeControl();
 
+    // 获取人类玩家指针
+    HumanPlayer* getHumanPlayer() const;
+
     // 运行练习模式游戏控制类
     void run(cocos2d::Scene* currentScene);
 
-public:
+private:
     HumanPlayer* humanPlayer; // 人类玩家
     AIPlayer* enemyPlayer;    // AI 玩家
-
 };
 
 #endif // !_OFFLINE_MODE_CONTROL_H_

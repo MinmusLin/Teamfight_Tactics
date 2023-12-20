@@ -6,15 +6,20 @@
  * Update Date:   2023/12/20
  ****************************************************************/
 
+#include <iostream>
 #include <chrono>
 #include "MenuScene.h"
 #include "Button/HoverButton.h"
 #include "OnlineModeMenuScene.h"
-#include "OfflineModeBattleScene.h"
+#include "OfflineModePreparationScene.h"
+#include "Control/OfflineModeControl.h"
 #include "GBKToUTF8/GBKToUTF8.h"
 #include "proj.win32/Constant.h"
 
 USING_NS_CC;
+
+// 练习模式游戏控制类
+OfflineModeControl* g_offlineModeControl;
 
 // 创建场景
 Scene* MenuScene::createScene()
@@ -58,7 +63,14 @@ bool MenuScene::init()
     // 为按钮添加事件处理器
     offlineModeButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::BEGAN) {
-            Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, OfflineModeBattleScene::createScene(), Color3B::WHITE));
+            try {
+                g_offlineModeControl = new OfflineModeControl;
+            }
+            catch (const std::bad_alloc& e) {
+                std::cerr << "Memory allocation failed: " << e.what() << std::endl;
+                throw;
+            }
+            Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, OfflineModePreparationScene::createScene(), Color3B::WHITE));
         }
         });
     onlineModeButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {

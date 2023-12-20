@@ -3,7 +3,7 @@
  * File Name:     HumanPlayer.h
  * File Function: HumanPlayer类的定义
  * Author:        林继申
- * Update Date:   2023/12/19
+ * Update Date:   2023/12/20
  ****************************************************************/
 
 #pragma once
@@ -37,7 +37,7 @@ private:
     Location startLocation;                                               // 战斗英雄移动起始位置属性
 
     // 添加战斗英雄
-    void addChampion(int index, cocos2d::Scene* currentScene);
+    void addChampion(const int index, cocos2d::Scene* currentScene);
 
     // 按下鼠标事件触发函数
     void onMouseDown(cocos2d::Event* event, cocos2d::Sprite* championSprite);
@@ -47,6 +47,12 @@ private:
 
     // 释放鼠标事件触发函数
     void onMouseUp(cocos2d::Event* event, cocos2d::Sprite* championSprite);
+
+    // 从商店中移除战斗英雄
+    void removeChampionFromShop(const int index, cocos2d::Scene* currentScene);
+
+    // 刷新商店战斗英雄种类
+    void refreshShopChampionCategory();
 };
 
 #endif // !_HUMAN_PLAYER_H_
