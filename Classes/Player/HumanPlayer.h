@@ -29,8 +29,14 @@ public:
     // 刷新商店
     void refreshShop(cocos2d::Scene* currentScene);
 
+    // 获取战斗区最大英雄数量
+    int getMaxBattleChampionCount() const;
+
+    // 获取战斗区当前英雄数量
+    int getCurrentBattleChampionCount() const;
+
     // 增加战斗区英雄数量
-    void addBattleChampionCount(const int num = 1);
+    void addBattleChampionCount(cocos2d::Scene* currentScene, const int num = 1);
 
 private:
     ChampionCategory shopChampionCategory[MAX_SELECTABLE_CHAMPION_COUNT]; // 商店战斗英雄种类
@@ -38,10 +44,7 @@ private:
     Champion* battleChampion[BATTLE_MAP_ROWS][BATTLE_MAP_COLUMNS];        // 战斗区战斗英雄指针
     Champion* waitingChampion[WAITING_MAP_COUNT];                         // 候战区战斗英雄指针
     Location startLocation;                                               // 战斗英雄移动起始位置属性
-    int maxBattleChampionCount = 2;                                       // 战斗区最大英雄数量（TODO）
-
-    // 获取战斗区英雄数量
-    int getBattleChampionCount() const;
+    int maxBattleChampionCount;                                           // 战斗区最大英雄数量
 
     // 添加战斗英雄
     void addChampion(const int index, cocos2d::Scene* currentScene);

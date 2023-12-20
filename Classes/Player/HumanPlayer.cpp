@@ -10,12 +10,14 @@
 #include <algorithm>
 #include "HumanPlayer.h"
 #include "LocationMap/LocationMap.h"
+#include "GBKToUTF8/GBKToUTF8.h"
 
 USING_NS_CC;
 
 // 构造函数
 HumanPlayer::HumanPlayer(std::string nickname) :
-    Player(nickname)
+    Player(nickname),
+    maxBattleChampionCount(BATTLE_AREA_MIN_CHAMPION_COUNT)
 {
     std::fill_n(shopChampionCategory, MAX_SELECTABLE_CHAMPION_COUNT, NoChampion);
     std::fill_n(shopChampionButton, MAX_SELECTABLE_CHAMPION_COUNT, nullptr);
@@ -77,14 +79,14 @@ void HumanPlayer::refreshShop(Scene* currentScene)
     }
 }
 
-// 增加战斗区英雄数量
-void HumanPlayer::addBattleChampionCount(const int num)
+// 获取战斗区最大英雄数量
+int HumanPlayer::getMaxBattleChampionCount() const
 {
-    maxBattleChampionCount += num;
+    return maxBattleChampionCount;
 }
 
-// 获取战斗区英雄数量
-int HumanPlayer::getBattleChampionCount() const
+// 获取战斗区当前英雄数量
+int HumanPlayer::getCurrentBattleChampionCount() const
 {
     int count = 0;
     for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
@@ -95,6 +97,21 @@ int HumanPlayer::getBattleChampionCount() const
         }
     }
     return count;
+}
+
+// 增加战斗区英雄数量
+void HumanPlayer::addBattleChampionCount(Scene* currentScene, const int num)
+{
+    if (maxBattleChampionCount < BATTLE_AREA_MAX_CHAMPION_COUNT) {
+        maxBattleChampionCount += num;
+        auto levelLabel = dynamic_cast<Label*>(currentScene->getChildByName("LevelLabel"));
+        if (maxBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT) {
+            levelLabel->setString(GBKToUTF8::getString("最高等级"));
+        }
+        else {
+            levelLabel->setString(GBKToUTF8::getString("等级：") + std::to_string(maxBattleChampionCount - BATTLE_AREA_MIN_CHAMPION_COUNT + 1));
+        }
+    }
 }
 
 // 添加战斗英雄
@@ -180,7 +197,7 @@ void HumanPlayer::onMouseUp(Event* event, Sprite* championSprite)
         // 遍历所有可放置放置
         float minDistance = FLT_MAX;
         Vec2 nearestPoint;
-        if (getBattleChampionCount() < maxBattleChampionCount) { // 未达到战斗区最大英雄数量
+        if (getCurrentBattleChampionCount() < maxBattleChampionCount) { // 未达到战斗区最大英雄数量
             Vec2 currentPos = championSprite->getPosition();
             for (const auto& entry : LocationMap::getInstance().getLocationMap()) {
                 Location currentLocation = entry.first;

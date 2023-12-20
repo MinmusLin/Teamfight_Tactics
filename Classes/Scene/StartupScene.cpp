@@ -43,8 +43,8 @@ bool StartupScene::init()
     this->addChild(progressBar);
 
     // 创建标签以显示进度
-    auto progressLabel = Label::createWithTTF("0%", "../Resources/Fonts/FZZGY_J_EB.ttf", STARTUP_SCENE_FONT_SIZE);
-    progressLabel->setPosition(Vec2(progressBar->getPosition().x - progressBar->getContentSize().width / 2 + STARTUP_SCENE_LOADING_LABLE_OFFSET_X, progressBar->getPosition().y));
+    auto progressLabel = Label::createWithTTF("0%", "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", STARTUP_SCENE_FONT_SIZE);
+    progressLabel->setPosition(Vec2(progressBar->getPosition().x - progressBar->getContentSize().width / 2 + STARTUP_SCENE_LOADING_LABEL_OFFSET_X, progressBar->getPosition().y));
     progressLabel->setVisible(false);
     this->addChild(progressLabel);
 
@@ -56,7 +56,7 @@ bool StartupScene::init()
             progressBar->setPercent(i);
             progressLabel->setString(std::to_string(i) + "%");
             float percentage = progressBar->getPercent() / 100.0f;
-            float xPosition = progressBar->getPosition().x - progressBar->getContentSize().width / 2 + progressBar->getContentSize().width * percentage + STARTUP_SCENE_LOADING_LABLE_OFFSET_X;
+            float xPosition = progressBar->getPosition().x - progressBar->getContentSize().width / 2 + progressBar->getContentSize().width * percentage + STARTUP_SCENE_LOADING_LABEL_OFFSET_X;
             progressLabel->setPosition(Vec2(xPosition, progressBar->getPosition().y));
             }, interval * i, "UpdateStartupLoadingBar" + std::to_string(i));
     }

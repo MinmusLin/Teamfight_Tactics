@@ -10,6 +10,7 @@
 #include "OfflineModeBattleScene.h"
 #include "Control/OfflineModeControl.h"
 #include "Button/HoverButton.h"
+#include "GBKToUTF8/GBKToUTF8.h"
 #include "MenuScene.h"
 
 USING_NS_CC;
@@ -71,8 +72,8 @@ bool OfflineModePreparationScene::init()
     this->addChild(progressBar);
 
     // 创建标签以显示进度
-    auto progressLabel = Label::createWithTTF("", "../Resources/Fonts/FZZGY_J_EB.ttf", BATTLE_SCENE_LOADINGBAR_LABLE_FONT_SIZE);
-    progressLabel->setPosition(Vec2(progressBar->getPosition().x - progressBar->getContentSize().width / 2 + BATTLE_SCENE_LOADINGBAR_LABLE_OFFSET_X, progressBar->getPosition().y));
+    auto progressLabel = Label::createWithTTF("", "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", BATTLE_SCENE_LOADINGBAR_LABEL_FONT_SIZE);
+    progressLabel->setPosition(Vec2(progressBar->getPosition().x - progressBar->getContentSize().width / 2 + BATTLE_SCENE_LOADINGBAR_LABEL_OFFSET_X, progressBar->getPosition().y));
     progressLabel->setVisible(false);
     progressLabel->setName("CountdownLoadingBarLabel");
     this->addChild(progressLabel);
@@ -93,9 +94,9 @@ bool OfflineModePreparationScene::init()
     refreshButton->setPosition(Vec2(screenSize.width / 2 + SHOP_REFRESH_BUTTON_OFFSET_X, screenSize.height / 2 + SHOP_REFRESH_BUTTON_OFFSET_Y));
 
     // 为按钮添加事件处理器
-    uplevelButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
+    uplevelButton->addTouchEventListener([this](Ref* sender, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED) {
-            g_offlineModeControl->getHumanPlayer()->addBattleChampionCount();
+            g_offlineModeControl->getHumanPlayer()->addBattleChampionCount(this);
         }
         });
     refreshButton->addTouchEventListener([this](Ref* sender, ui::Widget::TouchEventType type) {
@@ -107,6 +108,20 @@ bool OfflineModePreparationScene::init()
     // 将按钮添加到场景中
     this->addChild(uplevelButton);
     this->addChild(refreshButton);
+
+    // 创建等级标签
+    Label* levelLabel;
+    const int currentBattleChampionCount = g_offlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
+    if (currentBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT) {
+        levelLabel = Label::createWithTTF(GBKToUTF8::getString("最高等级"), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_LEVEL_LABEL_FONT_SIZE);
+    }
+    else {
+        levelLabel = Label::createWithTTF(GBKToUTF8::getString("等级：") + std::to_string(currentBattleChampionCount - BATTLE_AREA_MIN_CHAMPION_COUNT + 1), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_LEVEL_LABEL_FONT_SIZE);
+    }
+    levelLabel->setAnchorPoint(Vec2(0, 0.5));
+    levelLabel->setPosition(Vec2(screenSize.width / 2 + SHOP_LEVEL_LABEL_OFFSET_X, screenSize.height / 2 + SHOP_LEVEL_LABEL_OFFSET_Y));
+    levelLabel->setName("LevelLabel");
+    this->addChild(levelLabel);
 
     return true;
 }
@@ -143,11 +158,11 @@ void OfflineModePreparationScene::setScheduleOnce(ui::LoadingBar* progressBar, L
     for (int i = 0; i <= 1000; i++) {
         this->scheduleOnce([progressBar, progressLabel, i](float dt) {
             int sceond = static_cast<int>(BATTLE_SCENE_LOADINGBAR_DURATION - i * BATTLE_SCENE_LOADINGBAR_DURATION / 1000 + 0.999);
-            progressLabel->setVisible(sceond <= BATTLE_SCENE_LOADINGBAR_LABLE_THRESHOLD);
+            progressLabel->setVisible(sceond <= BATTLE_SCENE_LOADINGBAR_LABEL_THRESHOLD);
             progressBar->setPercent(i / 10.0);
             progressLabel->setString((sceond >= 10 ? "" : " ") + std::to_string(sceond) + "s");
             float percentage = progressBar->getPercent() / 100.0f;
-            float xPosition = progressBar->getPosition().x - progressBar->getContentSize().width / 2 + progressBar->getContentSize().width * percentage + BATTLE_SCENE_LOADINGBAR_LABLE_OFFSET_X;
+            float xPosition = progressBar->getPosition().x - progressBar->getContentSize().width / 2 + progressBar->getContentSize().width * percentage + BATTLE_SCENE_LOADINGBAR_LABEL_OFFSET_X;
             progressLabel->setPosition(Vec2(xPosition, progressBar->getPosition().y));
             }, interval * i, "CountdownLoadingBar" + std::to_string(i));
     }
