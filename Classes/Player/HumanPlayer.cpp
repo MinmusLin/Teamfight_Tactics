@@ -58,9 +58,9 @@ void HumanPlayer::refreshShop(Scene* currentScene)
     // 更新商店战斗英雄按钮
     for (int i = 0; i < MAX_SELECTABLE_CHAMPION_COUNT; i++) {
         // 创建按钮
-        shopChampionButton[i] = HoverButton::create(static_cast<std::string>("../Resources/Buttons/ShopButtons/Champion") + static_cast<char>('A' + shopChampionCategory[i] - 1) + static_cast<std::string>("DefaultButton.png"),
-            static_cast<std::string>("../Resources/Buttons/ShopButtons/Champion") + static_cast<char>('A' + shopChampionCategory[i] - 1) + static_cast<std::string>("HoverButton.png"),
-            static_cast<std::string>("../Resources/Buttons/ShopButtons/Champion") + static_cast<char>('A' + shopChampionCategory[i] - 1) + static_cast<std::string>("ActiveButton.png"));
+        shopChampionButton[i] = HoverButton::create(static_cast<std::string>("../Resources/Buttons/ShopButtons/Champion") + std::to_string(shopChampionCategory[i]) + static_cast<std::string>("DefaultButton.png"),
+            static_cast<std::string>("../Resources/Buttons/ShopButtons/Champion") + std::to_string(shopChampionCategory[i]) + static_cast<std::string>("HoverButton.png"),
+            static_cast<std::string>("../Resources/Buttons/ShopButtons/Champion") + std::to_string(shopChampionCategory[i]) + static_cast<std::string>("ActiveButton.png"));
 
         // 设置按钮位置
         shopChampionButton[i]->setPosition(Vec2(SHOP_CHAMPION_START_X + i * (SHOP_CHAMPION_INTERVAL + SHOP_CHAMPION_WIDTH), SHOP_CHAMPION_START_Y));
@@ -228,9 +228,9 @@ void HumanPlayer::removeChampionFromShop(const int index, cocos2d::Scene* curren
 // 刷新商店战斗英雄种类
 void HumanPlayer::refreshShopChampionCategory()
 {
-    shopChampionCategory[0] = CHAMPION_ATTR_MAP.at(ChampionA).championCategory;
-    shopChampionCategory[1] = CHAMPION_ATTR_MAP.at(ChampionB).championCategory;
-    shopChampionCategory[2] = CHAMPION_ATTR_MAP.at(ChampionC).championCategory;
-    shopChampionCategory[3] = CHAMPION_ATTR_MAP.at(ChampionD).championCategory;
-    shopChampionCategory[4] = CHAMPION_ATTR_MAP.at(ChampionE).championCategory;
+    shopChampionCategory[0] = CHAMPION_ATTR_MAP.at(Champion1).championCategory;
+    shopChampionCategory[1] = CHAMPION_ATTR_MAP.at(Champion2).championCategory;
+    shopChampionCategory[2] = CHAMPION_ATTR_MAP.at(Champion3).championCategory;
+    shopChampionCategory[3] = CHAMPION_ATTR_MAP.at(Champion4).championCategory;
+    shopChampionCategory[4] = CHAMPION_ATTR_MAP.at(Champion5).championCategory;
 }

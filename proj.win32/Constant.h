@@ -103,21 +103,36 @@ enum Difficulty {
 // ’Ω∂∑”¢–€÷÷¿‡∂®“Â
 enum ChampionCategory {
     NoChampion, // Œﬁ’Ω∂∑”¢–€
-    ChampionA,  // ChampionA
-    ChampionB,  // ChampionB
-    ChampionC,  // ChampionC
-    ChampionD,  // ChampionD
-    ChampionE,  // ChampionE
-    ChampionF,  // ChampionF
-    ChampionG,  // ChampionG
-    ChampionH,  // ChampionH
-    ChampionI,  // ChampionI
-    ChampionJ,  // ChampionJ
-    ChampionK,  // ChampionK
-    ChampionL,  // ChampionL
-    ChampionM,  // ChampionM
-    ChampionN,  // ChampionN
-    ChampionO   // ChampionO
+    Champion1,  // Champion1
+    Champion2,  // Champion2
+    Champion3,  // Champion3
+    Champion4,  // Champion4
+    Champion5,  // Champion5
+    Champion6,  // Champion6
+    Champion7,  // Champion7
+    Champion8,  // Champion8
+    Champion9,  // Champion9
+    Champion10, // Champion10
+    Champion11, // Champion11
+    Champion12, // Champion12
+    Champion13, // Champion13
+    Champion14, // Champion14
+    Champion15, // Champion15
+    Champion16, // Champion16
+    Champion17, // Champion17
+    Champion18, // Champion18
+    Champion19, // Champion19
+    Champion20, // Champion20
+    Champion21, // Champion21
+    Champion22, // Champion22
+    Champion23, // Champion23
+    Champion24, // Champion24
+    Champion25, // Champion25
+    Champion26, // Champion26
+    Champion27, // Champion27
+    Champion28, // Champion28
+    Champion29, // Champion29
+    Champion30  // Champion30
 };
 
 // Œª÷√◊¥Ã¨∂®“Â
@@ -143,6 +158,7 @@ typedef struct {
     std::string championName;          // ’Ω∂∑”¢–€√˚≥∆
     std::string championImagePath;     // ’Ω∂∑”¢–€Õº∆¨¬∑æ∂
     int price;                         // ’Ω∂∑”¢–€º€∏Ò
+    int level;                         // ’Ω∂∑”¢–€µ»º∂
     int healthPoints;                  // …˙√¸÷µ
     int experiencePoints;              // æ≠—È÷µ
     int attackDamage;                  // π•ª˜…À∫¶
@@ -155,69 +171,129 @@ typedef struct {
 } ChampionAttributes;
 
 // ’Ω∂∑”¢–€ Ù–‘≤Œ ˝
-const ChampionAttributes CHAMPION_A_ATTR = { // ChampionA
-    ChampionA, "’Ω∂∑”¢–€A", "../Resources/Champions/ChampionA.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_01_ATTR = { // Champion1
+    Champion1, "’Ω∂∑”¢–€1", "../Resources/Champions/Champion1.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
-const ChampionAttributes CHAMPION_B_ATTR = { // ChampionB
-    ChampionB, "’Ω∂∑”¢–€B", "../Resources/Champions/ChampionB.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_02_ATTR = { // Champion2
+    Champion2, "’Ω∂∑”¢–€1", "../Resources/Champions/Champion2.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
-const ChampionAttributes CHAMPION_C_ATTR = { // ChampionC
-    ChampionC, "’Ω∂∑”¢–€C", "../Resources/Champions/ChampionC.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_03_ATTR = { // Champion3
+    Champion3, "’Ω∂∑”¢–€1", "../Resources/Champions/Champion3.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
-const ChampionAttributes CHAMPION_D_ATTR = { // ChampionD
-    ChampionD, "’Ω∂∑”¢–€D", "../Resources/Champions/ChampionD.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_04_ATTR = { // Champion4
+    Champion4, "’Ω∂∑”¢–€2", "../Resources/Champions/Champion4.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
-const ChampionAttributes CHAMPION_E_ATTR = { // ChampionE
-    ChampionE, "’Ω∂∑”¢–€E", "../Resources/Champions/ChampionE.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_05_ATTR = { // Champion5
+    Champion5, "’Ω∂∑”¢–€2", "../Resources/Champions/Champion5.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
-const ChampionAttributes CHAMPION_F_ATTR = { // ChampionF
-    ChampionF, "’Ω∂∑”¢–€F", "../Resources/Champions/ChampionF.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_06_ATTR = { // Champion6
+    Champion6, "’Ω∂∑”¢–€2", "../Resources/Champions/Champion6.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
-const ChampionAttributes CHAMPION_G_ATTR = { // ChampionG
-    ChampionG, "’Ω∂∑”¢–€G", "../Resources/Champions/ChampionG.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_07_ATTR = { // Champion7
+    Champion7, "’Ω∂∑”¢–€G", "../Resources/Champions/Champion7.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
-const ChampionAttributes CHAMPION_H_ATTR = { // ChampionH
-    ChampionH, "’Ω∂∑”¢–€H", "../Resources/Champions/ChampionH.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_08_ATTR = { // Champion8
+    Champion8, "’Ω∂∑”¢–€H", "../Resources/Champions/Champion8.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
-const ChampionAttributes CHAMPION_I_ATTR = { // ChampionI
-    ChampionI, "’Ω∂∑”¢–€I", "../Resources/Champions/ChampionI.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_09_ATTR = { // Champion9
+    Champion9, "’Ω∂∑”¢–€I", "../Resources/Champions/Champion9.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
-const ChampionAttributes CHAMPION_J_ATTR = { // ChampionJ
-    ChampionJ, "’Ω∂∑”¢–€J", "../Resources/Champions/ChampionJ.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_10_ATTR = { // Champion10
+    Champion10, "’Ω∂∑”¢–€J", "../Resources/Champions/Champion10.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
-const ChampionAttributes CHAMPION_K_ATTR = { // ChampionK
-    ChampionK, "’Ω∂∑”¢–€K", "../Resources/Champions/ChampionK.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_11_ATTR = { // Champion11
+    Champion11, "’Ω∂∑”¢–€K", "../Resources/Champions/Champion11.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
-const ChampionAttributes CHAMPION_L_ATTR = { // ChampionL
-    ChampionL, "’Ω∂∑”¢–€L", "../Resources/Champions/ChampionL.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_12_ATTR = { // Champion12
+    Champion12, "’Ω∂∑”¢–€L", "../Resources/Champions/Champion12.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
-const ChampionAttributes CHAMPION_M_ATTR = { // ChampionM
-    ChampionM, "’Ω∂∑”¢–€M", "../Resources/Champions/ChampionM.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_13_ATTR = { // Champion13
+    Champion13, "’Ω∂∑”¢–€M", "../Resources/Champions/Champion13.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
-const ChampionAttributes CHAMPION_N_ATTR = { // ChampionN
-    ChampionN, "’Ω∂∑”¢–€N", "../Resources/Champions/ChampionN.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_14_ATTR = { // Champion14
+    Champion14, "’Ω∂∑”¢–€N", "../Resources/Champions/Champion14.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
-const ChampionAttributes CHAMPION_O_ATTR = { // ChampionO
-    ChampionO, "’Ω∂∑”¢–€E", "../Resources/Champions/ChampionO.png", 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+const ChampionAttributes CHAMPION_15_ATTR = { // Champion15
+    Champion15, "’Ω∂∑”¢–€E", "../Resources/Champions/Champion15.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_16_ATTR = { // Champion16
+    Champion16, "’Ω∂∑”¢–€1", "../Resources/Champions/Champion16.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_17_ATTR = { // Champion17
+    Champion17, "’Ω∂∑”¢–€1", "../Resources/Champions/Champion17.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_18_ATTR = { // Champion18
+    Champion18, "’Ω∂∑”¢–€1", "../Resources/Champions/Champion18.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_19_ATTR = { // Champion19
+    Champion19, "’Ω∂∑”¢–€2", "../Resources/Champions/Champion19.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_20_ATTR = { // Champion20
+    Champion20, "’Ω∂∑”¢–€2", "../Resources/Champions/Champion20.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_21_ATTR = { // Champion21
+    Champion21, "’Ω∂∑”¢–€2", "../Resources/Champions/Champion21.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_22_ATTR = { // Champion22
+    Champion22, "’Ω∂∑”¢–€G", "../Resources/Champions/Champion22.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_23_ATTR = { // Champion23
+    Champion23, "’Ω∂∑”¢–€H", "../Resources/Champions/Champion23.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_24_ATTR = { // Champion24
+    Champion24, "’Ω∂∑”¢–€J", "../Resources/Champions/Champion24.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_25_ATTR = { // Champion25
+    Champion25, "’Ω∂∑”¢–€K", "../Resources/Champions/Champion25.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_26_ATTR = { // Champion26
+    Champion26, "’Ω∂∑”¢–€L", "../Resources/Champions/Champion26.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_27_ATTR = { // Champion27
+    Champion27, "’Ω∂∑”¢–€M", "../Resources/Champions/Champion27.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_28_ATTR = { // Champion28
+    Champion28, "’Ω∂∑”¢–€N", "../Resources/Champions/Champion28.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_29_ATTR = { // Champion29
+    Champion29, "’Ω∂∑”¢–€E", "../Resources/Champions/Champion29.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
+};
+const ChampionAttributes CHAMPION_30_ATTR = { // Champion30
+    Champion30, "’Ω∂∑”¢–€I", "../Resources/Champions/Champion30.png", 0, 0, 0, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f
 };
 
 // ’Ω∂∑”¢–€÷÷¿‡”Î Ù–‘º¸÷µ∂‘
 const std::map<ChampionCategory, ChampionAttributes> CHAMPION_ATTR_MAP = {
-    {ChampionA, CHAMPION_A_ATTR}, // ChampionA
-    {ChampionB, CHAMPION_B_ATTR}, // ChampionB
-    {ChampionC, CHAMPION_C_ATTR}, // ChampionC
-    {ChampionD, CHAMPION_D_ATTR}, // ChampionD
-    {ChampionE, CHAMPION_E_ATTR}, // ChampionE
-    {ChampionF, CHAMPION_F_ATTR}, // ChampionF
-    {ChampionG, CHAMPION_G_ATTR}, // ChampionG
-    {ChampionH, CHAMPION_H_ATTR}, // ChampionH
-    {ChampionI, CHAMPION_I_ATTR}, // ChampionI
-    {ChampionJ, CHAMPION_J_ATTR}, // ChampionJ
-    {ChampionK, CHAMPION_K_ATTR}, // ChampionK
-    {ChampionL, CHAMPION_L_ATTR}, // ChampionL
-    {ChampionM, CHAMPION_M_ATTR}, // ChampionM
-    {ChampionN, CHAMPION_N_ATTR}, // ChampionN
-    {ChampionO, CHAMPION_O_ATTR}  // ChampionO
+    {Champion1, CHAMPION_01_ATTR},  // Champion1
+    {Champion2, CHAMPION_02_ATTR},  // Champion2
+    {Champion3, CHAMPION_03_ATTR},  // Champion3
+    {Champion4, CHAMPION_04_ATTR},  // Champion4
+    {Champion5, CHAMPION_05_ATTR},  // Champion5
+    {Champion6, CHAMPION_06_ATTR},  // Champion6
+    {Champion7, CHAMPION_07_ATTR},  // Champion7
+    {Champion8, CHAMPION_08_ATTR},  // Champion8
+    {Champion9, CHAMPION_09_ATTR},  // Champion9
+    {Champion10, CHAMPION_10_ATTR}, // Champion10
+    {Champion11, CHAMPION_11_ATTR}, // Champion11
+    {Champion12, CHAMPION_12_ATTR}, // Champion12
+    {Champion13, CHAMPION_13_ATTR}, // Champion13
+    {Champion14, CHAMPION_14_ATTR}, // Champion14
+    {Champion15, CHAMPION_15_ATTR}, // Champion15
+    {Champion16, CHAMPION_16_ATTR}, // Champion16
+    {Champion17, CHAMPION_17_ATTR}, // Champion17
+    {Champion18, CHAMPION_18_ATTR}, // Champion18
+    {Champion19, CHAMPION_19_ATTR}, // Champion19
+    {Champion20, CHAMPION_20_ATTR}, // Champion20
+    {Champion21, CHAMPION_21_ATTR}, // Champion21
+    {Champion22, CHAMPION_22_ATTR}, // Champion22
+    {Champion23, CHAMPION_23_ATTR}, // Champion23
+    {Champion24, CHAMPION_24_ATTR}, // Champion24
+    {Champion25, CHAMPION_25_ATTR}, // Champion25
+    {Champion26, CHAMPION_26_ATTR}, // Champion26
+    {Champion27, CHAMPION_27_ATTR}, // Champion27
+    {Champion28, CHAMPION_28_ATTR}, // Champion28
+    {Champion29, CHAMPION_29_ATTR}, // Champion29
+    {Champion30, CHAMPION_30_ATTR}  // Champion30
 };
 
 // –° ± ˝”Îª∂”≠Ã· æ”Ôº¸÷µ∂‘
