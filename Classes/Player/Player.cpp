@@ -18,3 +18,9 @@ Player::Player(std::string nickname) :
     }
     std::fill_n(waitingMap, WAITING_MAP_COUNT, NoChampion);
 }
+
+// 获取战斗区地图
+ChampionCategory(*p)[9] Player::getBattleMap() const
+{
+    return battleMap;
+}

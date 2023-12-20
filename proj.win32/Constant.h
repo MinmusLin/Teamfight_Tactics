@@ -39,26 +39,24 @@ constexpr int DARK_BLUE_R = 0;                                       // 深蓝色 R
 constexpr int DARK_BLUE_G = 32;                                      // 深蓝色 G 通道
 constexpr int DARK_BLUE_B = 96;                                      // 深蓝色 B 通道
 
-// 总场景界面设置
-constexpr int NICKNAME_MAX_LENGTH = 6;                               // 游戏昵称最大长度
-constexpr float PROMPT_MESSAGE_DURATION = 1.5f;                      // 提示信息停留时间
-constexpr float SCENE_TRANSITION_DURATION = 0.3f;                    // 场景切换时间
-
-// 启动场景界面设置
+// 启动场景设置
 constexpr int STARTUP_SCENE_FONT_SIZE = 20;                          // 启动场景字体大小
 constexpr int STARTUP_SCENE_LOADINGBAR_OFFSET_Y = -241;              // 启动场景加载进度条位置 Y 偏移量
 constexpr int STARTUP_SCENE_LOADING_LABEL_OFFSET_X = -30;            // 启动场景加载进度条标签位置 X 偏移量
 constexpr float STARTUP_SCENE_DURATION = 2.0f;                       // 启动场景加载时间
+constexpr float SCENE_TRANSITION_DURATION = 0.3f;                    // 场景切换时间
 
-// 初始场景界面设置
+// 初始场景设置
+constexpr int NICKNAME_MAX_LENGTH = 6;                               // 游戏昵称最大长度
 constexpr int INITIAL_SCENE_FONT_SIZE = 30;                          // 初始场景字体大小
 constexpr int INITIAL_SCENE_LABELS_OFFSET_X = 349;                   // 初始场景标签位置 X 偏移量
 constexpr int INITIAL_SCENE_TEXTFIELD_OFFSET_Y = 111;                // 初始场景文本框位置 Y 偏移量
 constexpr int INITIAL_SCENE_PROMPT_LABEL_OFFSET_Y = 180;             // 初始场景提示标签位置 Y 偏移量
 constexpr int INITIAL_SCENE_NAME_LABEL_OFFSET_Y = 280;               // 初始场景欢迎标签位置 Y 偏移量
 constexpr int INITIAL_SCENE_BUTTON_OFFSET_Y = -310;                  // 初始场景按钮位置 Y 偏移量
+constexpr float PROMPT_MESSAGE_DURATION = 1.5f;                      // 提示信息停留时间
 
-// 菜单场景界面设置
+// 菜单场景设置
 constexpr int MENU_SCENE_FONT_SIZE = 24;                             // 菜单场景字体大小
 constexpr int MENU_SCENE_BUTTONS_OFFSET_X = -296;                    // 菜单场景按钮与标签位置 X 偏移量
 constexpr int MENU_SCENE_OFFLINE_MODE_BUTTON_OFFSET_Y = -30;         // 菜单场景练习模式按钮位置 Y 偏移量
@@ -66,7 +64,7 @@ constexpr int MENU_SCENE_ONLINE_MODE_BUTTON_OFFSET_Y = -150;         // 菜单场景
 constexpr int MENU_SCENE_SETTINGS_BUTTON_OFFSET_Y = -270;            // 菜单场景设置按钮位置 Y 偏移量
 constexpr int MENU_SCENE_WELCOME_LABEL_OFFSET_Y = 240;               // 菜单场景欢迎标签位置 Y 偏移量
 
-// 对战场景界面设置
+// 对战场景设置
 constexpr int WAITING_MAP_COUNT = 9;                                 // 候战区地图大小
 constexpr int BATTLE_MAP_ROWS = 8;                                   // 战斗区地图行数
 constexpr int BATTLE_MAP_COLUMNS = 9;                                // 战斗区地图列数
@@ -80,7 +78,7 @@ constexpr int BATTLE_SCENE_LOADINGBAR_LABEL_OFFSET_X = -18;          // 对战场景
 constexpr int BATTLE_SCENE_LOADINGBAR_LABEL_THRESHOLD = 10;          // 对战场景准备时间显示阈值
 constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 15.0f;            // 对战场景准备时间
 
-// 商店界面设置
+// 商店设置
 constexpr int MAX_SELECTABLE_CHAMPION_COUNT = 5;                     // 最大可选择战斗英雄数量
 constexpr int SHOP_CHAMPION_INTERVAL = 10;                           // 商店战斗英雄按钮间距
 constexpr int SHOP_CHAMPION_WIDTH = 120;                             // 商店战斗英雄按钮宽度
@@ -94,6 +92,18 @@ constexpr int SHOP_REFRESH_BUTTON_OFFSET_Y = -328;                   // 商店刷新
 constexpr int SHOP_LEVEL_LABEL_OFFSET_X = -411;                      // 商店等级标签位置 X 偏移量
 constexpr int SHOP_LEVEL_LABEL_OFFSET_Y = -228;                      // 商店等级标签位置 Y 偏移量
 constexpr int SHOP_LEVEL_LABEL_FONT_SIZE = 20;                       // 商店等级标签字体大小
+constexpr int SHOP_COIN_LABEL_FONT_SIZE = 20;                        // 商店金币数量标签字体大小
+constexpr int SHOP_COIN_LABEL_OFFSET_X = 342;                        // 商店金币数量标签位置 X 偏移量
+constexpr int SHOP_COIN_LABEL_OFFSET_Y = -228;                       // 商店金币数量标签位置 Y 偏移量
+constexpr int INITIAL_GOLD_COIN = 12;                                // 初始金币数量
+constexpr int REFRESH_SHOP_PRICE = 2;                                // 刷新商店所需金币数量
+const std::map<int, int> UPLEVEL_PRICE = {                           // 升级所需金币数量
+    {BATTLE_AREA_MIN_CHAMPION_COUNT, 12},                            // 等级 1 升级至等级 2 所需金币数量
+    {BATTLE_AREA_MIN_CHAMPION_COUNT + 1, 16},                        // 等级 2 升级至等级 3 所需金币数量
+    {BATTLE_AREA_MIN_CHAMPION_COUNT + 2, 20},                        // 等级 3 升级至等级 4 所需金币数量
+    {BATTLE_AREA_MIN_CHAMPION_COUNT + 3, 28},                        // 等级 4 升级至等级 5 所需金币数量
+    {BATTLE_AREA_MIN_CHAMPION_COUNT + 4, 36}                         // 等级 5 升级至等级 MAX 所需金币数量
+};
 
 // 位置属性与屏幕坐标设置
 constexpr int WAITING_AREA_START_X = 415;                            // 候战区起始屏幕坐标位置 X 坐标

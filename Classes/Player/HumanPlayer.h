@@ -38,6 +38,9 @@ public:
     // 增加战斗区英雄数量
     void addBattleChampionCount(cocos2d::Scene* currentScene, const int num = 1);
 
+    // 获取金币数量
+    int getGoldCoin() const;
+
 private:
     ChampionCategory shopChampionCategory[MAX_SELECTABLE_CHAMPION_COUNT]; // 商店战斗英雄种类
     HoverButton* shopChampionButton[MAX_SELECTABLE_CHAMPION_COUNT];       // 商店战斗英雄按钮
@@ -45,6 +48,7 @@ private:
     Champion* waitingChampion[WAITING_MAP_COUNT];                         // 候战区战斗英雄指针
     Location startLocation;                                               // 战斗英雄移动起始位置属性
     int maxBattleChampionCount;                                           // 战斗区最大英雄数量
+    int goldCoin;                                                         // 金币数量
 
     // 添加战斗英雄
     void addChampion(const int index, cocos2d::Scene* currentScene);

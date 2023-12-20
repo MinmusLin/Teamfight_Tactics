@@ -21,6 +21,9 @@ public:
     // 构造函数
     Player(std::string nickname);
 
+    // 获取战斗区地图
+    ChampionCategory** getBattleMap() const;
+
 protected:
     std::string name;                                                // 玩家昵称
     ChampionCategory battleMap[BATTLE_MAP_ROWS][BATTLE_MAP_COLUMNS]; // 战斗区地图

@@ -17,7 +17,8 @@ USING_NS_CC;
 // 构造函数
 HumanPlayer::HumanPlayer(std::string nickname) :
     Player(nickname),
-    maxBattleChampionCount(BATTLE_AREA_MIN_CHAMPION_COUNT)
+    maxBattleChampionCount(BATTLE_AREA_MIN_CHAMPION_COUNT),
+    goldCoin(INITIAL_GOLD_COIN)
 {
     std::fill_n(shopChampionCategory, MAX_SELECTABLE_CHAMPION_COUNT, NoChampion);
     std::fill_n(shopChampionButton, MAX_SELECTABLE_CHAMPION_COUNT, nullptr);
@@ -56,6 +57,11 @@ void HumanPlayer::refreshShop(Scene* currentScene)
 
     // 刷新商店战斗英雄种类
     refreshShopChampionCategory();
+
+    // 更新金币数量
+    goldCoin -= REFRESH_SHOP_PRICE;
+    auto coinLabel = dynamic_cast<Label*>(currentScene->getChildByName("CoinLabel"));
+    coinLabel->setString(std::to_string(goldCoin));
 
     // 更新商店战斗英雄按钮
     for (int i = 0; i < MAX_SELECTABLE_CHAMPION_COUNT; i++) {
@@ -103,6 +109,9 @@ int HumanPlayer::getCurrentBattleChampionCount() const
 void HumanPlayer::addBattleChampionCount(Scene* currentScene, const int num)
 {
     if (maxBattleChampionCount < BATTLE_AREA_MAX_CHAMPION_COUNT) {
+        goldCoin -= UPLEVEL_PRICE.at(maxBattleChampionCount);
+        auto coinLabel = dynamic_cast<Label*>(currentScene->getChildByName("CoinLabel"));
+        coinLabel->setString(std::to_string(goldCoin));
         maxBattleChampionCount += num;
         auto levelLabel = dynamic_cast<Label*>(currentScene->getChildByName("LevelLabel"));
         if (maxBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT) {
@@ -112,6 +121,12 @@ void HumanPlayer::addBattleChampionCount(Scene* currentScene, const int num)
             levelLabel->setString(GBKToUTF8::getString("等级：") + std::to_string(maxBattleChampionCount - BATTLE_AREA_MIN_CHAMPION_COUNT + 1));
         }
     }
+}
+
+// 获取金币数量
+int HumanPlayer::getGoldCoin() const
+{
+    return goldCoin;
 }
 
 // 添加战斗英雄
@@ -285,6 +300,7 @@ void HumanPlayer::removeChampionFromShop(const int index, cocos2d::Scene* curren
 // 刷新商店战斗英雄种类
 void HumanPlayer::refreshShopChampionCategory()
 {
+    // TODO: 杨兆镇：商店推荐算法
     shopChampionCategory[0] = CHAMPION_ATTR_MAP.at(Champion1).championCategory;
     shopChampionCategory[1] = CHAMPION_ATTR_MAP.at(Champion2).championCategory;
     shopChampionCategory[2] = CHAMPION_ATTR_MAP.at(Champion3).championCategory;

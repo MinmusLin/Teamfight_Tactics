@@ -41,6 +41,27 @@ bool OfflineModePreparationScene::init()
     background->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
     this->addChild(background);
 
+    // 创建等级标签
+    Label* levelLabel;
+    const int currentBattleChampionCount = g_offlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
+    if (currentBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT) {
+        levelLabel = Label::createWithTTF(GBKToUTF8::getString("最高等级"), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_LEVEL_LABEL_FONT_SIZE);
+    }
+    else {
+        levelLabel = Label::createWithTTF(GBKToUTF8::getString("等级：") + std::to_string(currentBattleChampionCount - BATTLE_AREA_MIN_CHAMPION_COUNT + 1), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_LEVEL_LABEL_FONT_SIZE);
+    }
+    levelLabel->setAnchorPoint(Vec2(0, 0.5));
+    levelLabel->setPosition(Vec2(screenSize.width / 2 + SHOP_LEVEL_LABEL_OFFSET_X, screenSize.height / 2 + SHOP_LEVEL_LABEL_OFFSET_Y));
+    levelLabel->setName("LevelLabel");
+    this->addChild(levelLabel);
+
+    // 创建金币数量标签
+    Label* coinLabel = Label::createWithTTF(std::to_string(g_offlineModeControl->getHumanPlayer()->getGoldCoin()), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_COIN_LABEL_FONT_SIZE);
+    coinLabel->setAnchorPoint(Vec2(1, 0.5));
+    coinLabel->setPosition(Vec2(screenSize.width / 2 + SHOP_COIN_LABEL_OFFSET_X, screenSize.height / 2 + SHOP_COIN_LABEL_OFFSET_Y));
+    coinLabel->setName("CoinLabel");
+    this->addChild(coinLabel);
+
     // 创建按钮
     auto returnMenuButton = HoverButton::create("../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuDefaultButton.png",
         "../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuHoverButton.png",
@@ -60,9 +81,6 @@ bool OfflineModePreparationScene::init()
 
     // 将按钮添加到场景中
     this->addChild(returnMenuButton);
-
-    // 运行练习模式游戏控制类
-    g_offlineModeControl->run(this);
 
     // 创建进度条
     auto progressBar = ui::LoadingBar::create("../Resources/LoadingBars/CountdownLoadingBar.png");
@@ -108,20 +126,6 @@ bool OfflineModePreparationScene::init()
     // 将按钮添加到场景中
     this->addChild(uplevelButton);
     this->addChild(refreshButton);
-
-    // 创建等级标签
-    Label* levelLabel;
-    const int currentBattleChampionCount = g_offlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
-    if (currentBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT) {
-        levelLabel = Label::createWithTTF(GBKToUTF8::getString("最高等级"), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_LEVEL_LABEL_FONT_SIZE);
-    }
-    else {
-        levelLabel = Label::createWithTTF(GBKToUTF8::getString("等级：") + std::to_string(currentBattleChampionCount - BATTLE_AREA_MIN_CHAMPION_COUNT + 1), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_LEVEL_LABEL_FONT_SIZE);
-    }
-    levelLabel->setAnchorPoint(Vec2(0, 0.5));
-    levelLabel->setPosition(Vec2(screenSize.width / 2 + SHOP_LEVEL_LABEL_OFFSET_X, screenSize.height / 2 + SHOP_LEVEL_LABEL_OFFSET_Y));
-    levelLabel->setName("LevelLabel");
-    this->addChild(levelLabel);
 
     return true;
 }
@@ -169,7 +173,7 @@ void OfflineModePreparationScene::setScheduleOnce(ui::LoadingBar* progressBar, L
 
     // 设置计时器
     this->scheduleOnce([this](float dt) {
-        // 创建和分派一个鼠标左键点击事件（强制放下当前战斗英雄）
+        // 创建和分派一个鼠标左键释放事件（强制放下当前战斗英雄）
         EventMouse event(EventMouse::MouseEventType::MOUSE_UP);
         event.setMouseButton(EventMouse::MouseButton::BUTTON_LEFT);
         _eventDispatcher->dispatchEvent(&event);

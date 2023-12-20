@@ -19,7 +19,7 @@
 USING_NS_CC;
 
 // 练习模式游戏控制类
-OfflineModeControl* g_offlineModeControl;
+OfflineModeControl* g_offlineModeControl = nullptr;
 
 // 创建场景
 Scene* MenuScene::createScene()

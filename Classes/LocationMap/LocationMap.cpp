@@ -28,7 +28,7 @@ LocationMap::LocationMap()
         const Location location = { WaitingArea, i };
         locationMap[location] = cocos2d::Vec2(WAITING_AREA_START_X + i * CHAMPION_HORIZONTAL_INTERVAL, WAITING_AREA_START_Y);
     }
-    for (int i = 0; i < PLACE_MAP_ROWS; i++) {
+    for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
         for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
             const Location location = { BattleArea, i * BATTLE_MAP_COLUMNS + j };
             locationMap[location] = cocos2d::Vec2(BATTLE_AREA_START_X + j * CHAMPION_HORIZONTAL_INTERVAL - ((i % 2 == 0) ? 0 : CHAMPION_HORIZONTAL_INTERVAL / 2), BATTLE_AREA_START_Y + i * CHAMPION_VERTICAL_INTERVAL);

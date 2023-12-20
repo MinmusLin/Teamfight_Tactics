@@ -14,7 +14,8 @@ USING_NS_CC;
 
 // 构造函数
 OfflineModeControl::OfflineModeControl() :
-    Control(2)
+    Control(2),
+    battle(nullptr)
 {
     try {
         humanPlayer = new HumanPlayer(cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName"));
@@ -45,8 +46,32 @@ HumanPlayer* OfflineModeControl::getHumanPlayer() const
     return humanPlayer;
 }
 
-// 运行练习模式游戏控制类
-void OfflineModeControl::run(cocos2d::Scene* currentScene)
+// 获取 AI 玩家指针
+AIPlayer* OfflineModeControl::getAIPlayer() const
 {
-    // TODO: 练习模式游戏控制类运行逻辑
+    return enemyPlayer;
+}
+
+// 获取对战类指针
+Battle* OfflineModeControl::getBattle() const
+{
+    return battle;
+}
+
+// 初始化对战类
+void OfflineModeControl::initializeBattle()
+{
+    try {
+        battle = new Battle();
+    }
+    catch (const std::bad_alloc& e) {
+        std::cerr << "Memory allocation failed: " << e.what() << std::endl;
+        throw;
+    }
+}
+
+// 释放对战类
+void OfflineModeControl::releaseBattle()
+{
+
 }

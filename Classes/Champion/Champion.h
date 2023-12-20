@@ -3,7 +3,7 @@
  * File Name:     Champion.h
  * File Function: Champion类的定义
  * Author:        林继申
- * Update Date:   2023/12/19
+ * Update Date:   2023/12/20
  ****************************************************************/
 
 #pragma once
@@ -29,8 +29,8 @@ public:
     ChampionAttributes getAttributes() const;
 
 private:
-    Sprite* sprite;           // 精灵类指针
-    ChampionAttributes attrs; // 战斗英雄属性
+    Sprite* sprite;                // 精灵类指针
+    ChampionAttributes attributes; // 战斗英雄属性
 };
 
 #endif // !_CHAMPION_H_

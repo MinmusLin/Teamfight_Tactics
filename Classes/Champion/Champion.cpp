@@ -10,9 +10,9 @@
 
 // 构造函数
 Champion::Champion(ChampionCategory championCategory) :
-    attrs(CHAMPION_ATTR_MAP.at(championCategory))
+    attributes(CHAMPION_ATTR_MAP.at(championCategory))
 {
-    sprite = Sprite::create(attrs.championImagePath);
+    sprite = Sprite::create(attributes.championImagePath);
 }
 
 // 获取精灵类指针
@@ -24,5 +24,5 @@ cocos2d::Sprite* Champion::getSprite() const
 // 获取战斗英雄属性
 ChampionAttributes Champion::getAttributes() const
 {
-    return attrs;
+    return attributes;
 }
