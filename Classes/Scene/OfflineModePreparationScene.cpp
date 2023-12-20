@@ -95,12 +95,12 @@ bool OfflineModePreparationScene::init()
     // 为按钮添加事件处理器
     uplevelButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED) {
-            // TODO
+            g_offlineModeControl->getHumanPlayer()->addBattleChampionCount();
         }
         });
-    refreshButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
+    refreshButton->addTouchEventListener([this](Ref* sender, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED) {
-            // TODO
+            g_offlineModeControl->getHumanPlayer()->refreshShop(this);
         }
         });
 

@@ -77,6 +77,26 @@ void HumanPlayer::refreshShop(Scene* currentScene)
     }
 }
 
+// 增加战斗区英雄数量
+void HumanPlayer::addBattleChampionCount(const int num)
+{
+    maxBattleChampionCount += num;
+}
+
+// 获取战斗区英雄数量
+int HumanPlayer::getBattleChampionCount() const
+{
+    int count = 0;
+    for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
+        for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+            if (battleMap[i][j] != NoChampion) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
 // 添加战斗英雄
 void HumanPlayer::addChampion(const int index, Scene* currentScene)
 {
@@ -160,26 +180,46 @@ void HumanPlayer::onMouseUp(Event* event, Sprite* championSprite)
         // 遍历所有可放置放置
         float minDistance = FLT_MAX;
         Vec2 nearestPoint;
-        Vec2 currentPos = championSprite->getPosition();
-        for (const auto& entry : LocationMap::getInstance().getLocationMap()) {
-            Location currentLocation = entry.first;
-            bool isEmpty = true;
-            if (currentLocation.status == WaitingArea) {
-                if (waitingMap[currentLocation.position] != NoChampion) {
-                    isEmpty = false;
+        if (getBattleChampionCount() < maxBattleChampionCount) { // 未达到战斗区最大英雄数量
+            Vec2 currentPos = championSprite->getPosition();
+            for (const auto& entry : LocationMap::getInstance().getLocationMap()) {
+                Location currentLocation = entry.first;
+                bool isEmpty = true;
+                if (currentLocation.status == WaitingArea) {
+                    if (waitingMap[currentLocation.position] != NoChampion) {
+                        isEmpty = false;
+                    }
+                }
+                else {
+                    if (battleMap[currentLocation.position / BATTLE_MAP_COLUMNS][currentLocation.position % BATTLE_MAP_COLUMNS] != NoChampion) {
+                        isEmpty = false;
+                    }
+                }
+                if (isEmpty) {
+                    const cocos2d::Vec2& point = entry.second;
+                    float distance = currentPos.distance(point);
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        nearestPoint = point;
+                    }
                 }
             }
-            else {
-                if (battleMap[currentLocation.position / BATTLE_MAP_COLUMNS][currentLocation.position % BATTLE_MAP_COLUMNS] != NoChampion) {
-                    isEmpty = false;
+        }
+        else { // 已达到战斗区最大英雄数量
+            Vec2 currentPos = championSprite->getPosition();
+            for (const auto& entry : LocationMap::getInstance().getLocationMap()) {
+                Location currentLocation = entry.first;
+                bool isEmpty = false;
+                if (currentLocation.status == WaitingArea && waitingMap[currentLocation.position] == NoChampion) {
+                    isEmpty = true;
                 }
-            }
-            if (isEmpty) {
-                const cocos2d::Vec2& point = entry.second;
-                float distance = currentPos.distance(point);
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    nearestPoint = point;
+                if (isEmpty) {
+                    const cocos2d::Vec2& point = entry.second;
+                    float distance = currentPos.distance(point);
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        nearestPoint = point;
+                    }
                 }
             }
         }
