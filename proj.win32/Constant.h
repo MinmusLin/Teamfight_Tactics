@@ -341,4 +341,14 @@ const std::map<int, std::string> WELCOME_PROMPT = {
     {23, "，晚上好！夜深了，伴随月光，开始你的游戏之旅."}
 };
 
+// 属性标签位置设置
+const int baseXUpMode = 180;            // 姓名、等级、金钱的基础X坐标
+const int baseYUpMode = 555;            // 姓名、等级、金钱的基础Y坐标
+const int baseXDownMode = 80;          // 其余属性基础X坐标
+const int baseYDownMode = 425;          // 其余属性基础Y坐标
+const int deltaYUpMode1 = 30;            // 姓名、等级、金钱的Y坐标之间的间距
+const int deltaYUpMode2 = 35; 
+const int deltaYDownMode = 55;          // 其余属性Y坐标之间的间距
+const int deltaX = 130;                 // 其余属性X坐标之间的间距
+
 #endif // !_CONSTANT_H_

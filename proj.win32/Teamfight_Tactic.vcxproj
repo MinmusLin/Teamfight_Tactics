@@ -159,6 +159,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Control\OfflineModeControl.cpp" />
     <ClCompile Include="..\Classes\Control\OnlineModeControl.cpp" />
     <ClCompile Include="..\Classes\GBKToUTF8\GBKToUTF8.cpp" />
+    <ClCompile Include="..\Classes\Layer\ChampionAttributesLayer.cpp" />
     <ClCompile Include="..\Classes\LocationMap\LocationMap.cpp" />
     <ClCompile Include="..\Classes\Player\AIPlayer.cpp" />
     <ClCompile Include="..\Classes\Player\HumanPlayer.cpp" />
@@ -180,6 +181,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Control\OfflineModeControl.h" />
     <ClInclude Include="..\Classes\Control\OnlineModeControl.h" />
     <ClInclude Include="..\Classes\GBKToUTF8\GBKToUTF8.h" />
+    <ClInclude Include="..\Classes\Layer\ChampionAttributesLayer.h" />
     <ClInclude Include="..\Classes\LocationMap\LocationMap.h" />
     <ClInclude Include="..\Classes\Player\AIPlayer.h" />
     <ClInclude Include="..\Classes\Player\HumanPlayer.h" />
