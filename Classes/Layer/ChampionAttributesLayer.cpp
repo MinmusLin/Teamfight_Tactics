@@ -17,8 +17,8 @@ USING_NS_CC;
 
 // 构造函数
 ChampionAttributesLayer::ChampionAttributesLayer()
-    : nameLabel(nullptr), categoryLabel(nullptr), priceLabel(nullptr),
-    levelLabel(nullptr), healthLabel(nullptr), attackLabel(nullptr),
+    : nameLabel(nullptr),  priceLabel(nullptr),
+    levelLabel(nullptr), healthLabel(nullptr), attackDamageLabel(nullptr),
     skillThresholdLabel(nullptr), attackRangeLabel(nullptr),
     attackSpeedLabel(nullptr), movementSpeedLabel(nullptr),
     defenseCoefficientLabel(nullptr), backgroundSprite(nullptr) 
@@ -49,11 +49,10 @@ void ChampionAttributesLayer::showAttributes(const Champion& champion)
 
     // 更新每个标签的文本以反映战斗英雄的属性
     nameLabel->setString(GBKToUTF8::getString(attributes.championName));
-    categoryLabel->setString(std::to_string(attributes.championCategory));
     priceLabel->setString(std::to_string(attributes.price));
     levelLabel->setString(std::to_string(attributes.level));
     healthLabel->setString(std::to_string(attributes.healthPoints));
-    attackLabel->setString( std::to_string(attributes.attackDamage));
+    attackDamageLabel->setString( std::to_string(attributes.attackDamage));
     skillThresholdLabel->setString(std::to_string(attributes.skillTriggerThreshold));
     attackRangeLabel->setString(std::to_string(attributes.attackRange));
     attackSpeedLabel->setString(formatFloat(attributes.attackSpeed));
@@ -61,11 +60,10 @@ void ChampionAttributesLayer::showAttributes(const Champion& champion)
     defenseCoefficientLabel->setString(formatFloat(attributes.defenseCoefficient));
 
     nameLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
-    categoryLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
     priceLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
     levelLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
     healthLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
-    attackLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
+    attackDamageLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
     skillThresholdLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
     attackRangeLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
     attackSpeedLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
@@ -93,10 +91,10 @@ bool ChampionAttributesLayer::init()
     }
 
     // 设置背景精灵的位置
-    backgroundSprite->setPosition(140, 400);
+    backgroundSprite->setPosition(LayerX, LayerY);
 
     // 设置背景精灵的透明度（0-255，0为完全透明，255为完全不透明）
-    backgroundSprite->setOpacity(192);
+    // backgroundSprite->setOpacity(200);
     this->addChild(backgroundSprite);
 
     if (!createAttributeLabels())
@@ -133,34 +131,34 @@ bool ChampionAttributesLayer::createAttributeLabels()
     // 创建所有标签并设置位置
     // 上三个标签
     nameLabel = createLabel("Name: ", baseXUpMode,baseYUpMode);
-    categoryLabel = createLabel("Category: ", baseXUpMode,baseYUpMode - deltaYUpMode1);
-    priceLabel = createLabel("Price: ", baseXUpMode,baseYUpMode - 2 * deltaYUpMode2);
+    levelLabel = createLabel("Level: ", baseXUpMode + deltaXUpMode, baseYUpMode - deltaYUpMode);
 
     // 下四个标签
-    levelLabel = createLabel("Level: ", baseXDownMode, baseYDownMode);
-    healthLabel = createLabel("Health: ", baseXDownMode, baseYDownMode - deltaYDownMode);
-    attackLabel = createLabel("Attack: ", baseXDownMode, baseYDownMode - 2 * deltaYDownMode);
-    skillThresholdLabel = createLabel("Skill Threshold: ", baseXDownMode, baseYDownMode - 3 * deltaYDownMode);
-    attackRangeLabel = createLabel("Attack Range: ", baseXDownMode + deltaX, baseYDownMode);
-    attackSpeedLabel = createLabel("Attack Speed: ", baseXDownMode + deltaX, baseYDownMode - deltaYDownMode);
-    movementSpeedLabel = createLabel("Movement Speed: ", baseXDownMode + deltaX, baseYDownMode - 2*deltaYDownMode);
-    defenseCoefficientLabel = createLabel("Defense Coefficient: ", baseXDownMode + deltaX, baseYDownMode - 3 * deltaYDownMode);
+    healthLabel = createLabel("Health: ", baseXDownMode, baseYDownMode);
+    attackDamageLabel = createLabel("Attack Damage: ", baseXDownMode, baseYDownMode - deltaYDownMode);
+    skillThresholdLabel = createLabel("Skill Threshold: ", baseXDownMode, baseYDownMode - 2 * deltaYDownMode);
+    attackRangeLabel = createLabel("Attack Range: ", baseXDownMode, baseYDownMode - 3 * deltaYDownMode);
 
-    if (!nameLabel || !categoryLabel || !priceLabel || !levelLabel || !healthLabel || !attackLabel
+    priceLabel = createLabel("Price: ", baseXDownMode + deltaXDownMode, baseYDownMode);
+    attackSpeedLabel = createLabel("Attack Speed: ", baseXDownMode + deltaXDownMode, baseYDownMode - deltaYDownMode);
+    movementSpeedLabel = createLabel("Movement Speed: ", baseXDownMode + deltaXDownMode, baseYDownMode - 2 * deltaYDownMode);
+    defenseCoefficientLabel = createLabel("Defense Coefficient: ", baseXDownMode + deltaXDownMode, baseYDownMode - 3 * deltaYDownMode);
+
+    if (!nameLabel || !priceLabel || !levelLabel || !healthLabel || !attackDamageLabel
         || !skillThresholdLabel || !attackRangeLabel || !attackSpeedLabel || !movementSpeedLabel || !defenseCoefficientLabel) {
         return false; // 如果任何标签创建失败，返回 false
     }
     // 将标签添加到 Layer
     this->addChild(nameLabel);
-    this->addChild(categoryLabel);
     this->addChild(priceLabel);
     this->addChild(levelLabel);
     this->addChild(healthLabel);
-    this->addChild(attackLabel);
+    this->addChild(attackDamageLabel);
     this->addChild(skillThresholdLabel);
     this->addChild(attackRangeLabel);
     this->addChild(attackSpeedLabel);
     this->addChild(movementSpeedLabel);
     this->addChild(defenseCoefficientLabel);
+
     return true;
 }

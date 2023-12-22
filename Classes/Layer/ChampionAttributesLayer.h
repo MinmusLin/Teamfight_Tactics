@@ -25,7 +25,6 @@ public:
     // 显示属性的方法
     void showAttributes(const Champion& champion);
 
-
     // 隐藏属性图层
     void hide();
 
@@ -44,11 +43,10 @@ public:
 private:
     cocos2d::Sprite* backgroundSprite;         // 属性底图精灵
     cocos2d::Label* nameLabel;                 // 名称标签
-    cocos2d::Label* categoryLabel;             // 种类标签
     cocos2d::Label* priceLabel;                // 价格标签
     cocos2d::Label* levelLabel;                // 等级标签
     cocos2d::Label* healthLabel;               // 生命值标签
-    cocos2d::Label* attackLabel;               // 攻击伤害标签
+    cocos2d::Label* attackDamageLabel;         // 攻击伤害标签
     cocos2d::Label* skillThresholdLabel;       // 技能触发阈值标签
     cocos2d::Label* attackRangeLabel;          // 攻击范围标签
     cocos2d::Label* attackSpeedLabel;          // 攻击速度标签

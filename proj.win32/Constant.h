@@ -342,13 +342,15 @@ const std::map<int, std::string> WELCOME_PROMPT = {
 };
 
 // 属性标签位置设置
-const int baseXUpMode = 180;            // 姓名、等级、金钱的基础X坐标
-const int baseYUpMode = 555;            // 姓名、等级、金钱的基础Y坐标
-const int baseXDownMode = 80;          // 其余属性基础X坐标
-const int baseYDownMode = 425;          // 其余属性基础Y坐标
-const int deltaYUpMode1 = 30;            // 姓名、等级、金钱的Y坐标之间的间距
-const int deltaYUpMode2 = 35; 
+const int baseXUpMode = 180;            // 姓名、等级的基础X坐标
+const int baseYUpMode = 545;            // 姓名、等级的基础Y坐标
+const int baseXDownMode = 90;           // 其余属性基础X坐标
+const int baseYDownMode = 420;          // 其余属性基础Y坐标
+const int deltaYUpMode = 40;            // 姓名、等级的Y坐标之间的间距
 const int deltaYDownMode = 55;          // 其余属性Y坐标之间的间距
-const int deltaX = 130;                 // 其余属性X坐标之间的间距
+const int deltaXUpMode = 50;            // 姓名、等级的X坐标之间的间距
+const int deltaXDownMode = 130;         // 其余属性的X坐标之间的间距
+const int LayerX = 145;                 // 属性底图X坐标
+const int LayerY = 400;                 // 属性底图Y坐标
 
 #endif // !_CONSTANT_H_
