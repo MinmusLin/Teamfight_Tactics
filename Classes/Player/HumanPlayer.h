@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "Button/HoverButton.h"
 #include "Champion/Champion.h"
+#include "Layer/ChampionAttributesLayer.h"
 
 /*
  * Class Name:     HumanPlayer
@@ -49,6 +50,8 @@ private:
     Location startLocation;                                               // 战斗英雄移动起始位置属性
     int maxBattleChampionCount;                                           // 战斗区最大英雄数量
     int goldCoin;                                                         // 金币数量
+    cocos2d::Sprite* currentAttributeSprite = nullptr;                    // 当前显示的属性精灵
+    ChampionAttributesLayer* attributesLayer;                             // 属性显示层
 
     // 添加战斗英雄
     void addChampion(const int index, cocos2d::Scene* currentScene);
@@ -67,6 +70,15 @@ private:
 
     // 刷新商店战斗英雄种类
     void refreshShopChampionCategory();
+
+    // 获取对应英雄指针
+    Champion* getChampionByLocation(const Location& location);
+
+    // 显示属性图层
+    void showAttributesLayer(const Champion& champion);
+
+    // 隐藏属性图层
+    void hideAttributesLayer();
 };
 
 #endif // !_HUMAN_PLAYER_H_
