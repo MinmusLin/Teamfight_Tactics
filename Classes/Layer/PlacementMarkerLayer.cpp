@@ -3,13 +3,15 @@
  * File Name:     PlacementMarkerLayer.cpp
  * File Function: PlacementMarkerLayer类的实现
  * Author:        林继申
- * Update Date:   2023/12/23
+ * Update Date:   2023/12/24
  ****************************************************************/
 
 #include "PlacementMarkerLayer.h"
 #include "LocationMap/LocationMap.h"
 
-USING_NS_CC;
+// 命名空间
+using cocos2d::Sprite;
+using cocos2d::Vec2;
 
 // 初始化放置标记层
 bool PlacementMarkerLayer::init()

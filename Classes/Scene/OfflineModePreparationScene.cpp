@@ -13,7 +13,11 @@
 #include "GBKToUTF8/GBKToUTF8.h"
 #include "MenuScene.h"
 
-USING_NS_CC;
+// 命名空间
+using cocos2d::Scene;
+using cocos2d::Sprite;
+using cocos2d::Label;
+using cocos2d::Vec2;
 
 // 练习模式游戏控制类
 extern OfflineModeControl* g_offlineModeControl;
@@ -39,7 +43,7 @@ bool OfflineModePreparationScene::init()
     g_offlineModeControl->getHumanPlayer()->setCurrentScene(this);
 
     // 加载背景
-    const auto screenSize = Director::getInstance()->getVisibleSize();
+    const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
     const auto background = Sprite::create("../Resources/Scenes/OfflineModePreparationScene.png");
     background->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
     this->addChild(background);
@@ -66,7 +70,7 @@ bool OfflineModePreparationScene::init()
     this->addChild(coinLabel);
 
     // 创建进度条
-    auto progressBar = ui::LoadingBar::create("../Resources/LoadingBars/CountdownLoadingBar.png");
+    auto progressBar = cocos2d::ui::LoadingBar::create("../Resources/LoadingBars/CountdownLoadingBar.png");
     progressBar->setPosition(Vec2(BATTLE_SCENE_LOADINGBAR_X, BATTLE_SCENE_LOADINGBAR_Y));
     progressBar->setPercent(0);
     progressBar->setName("CountdownLoadingBar");
@@ -99,21 +103,21 @@ bool OfflineModePreparationScene::init()
     returnMenuButton->setPosition(Vec2(screenSize.width / 2 + BATTLE_SCENE_RETURN_MENU_BUTTON_OFFSET_X, screenSize.height / 2 + BATTLE_SCENE_RETURN_MENU_BUTTON_OFFSET_Y));
 
     // 为按钮添加事件处理器
-    uplevelButton->addTouchEventListener([this](Ref* sender, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::ENDED) {
+    uplevelButton->addTouchEventListener([this](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
             g_offlineModeControl->getHumanPlayer()->addBattleChampionCount();
         }
         });
-    refreshButton->addTouchEventListener([this](Ref* sender, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::ENDED) {
+    refreshButton->addTouchEventListener([this](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
             g_offlineModeControl->getHumanPlayer()->refreshShop();
         }
         });
-    returnMenuButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::BEGAN) {
+    returnMenuButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             delete g_offlineModeControl;
             g_offlineModeControl = nullptr;
-            Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), Color3B::WHITE));
+            cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });
 
@@ -135,7 +139,7 @@ void OfflineModePreparationScene::onEnter()
     Scene::onEnter();
 
     // 重置进度条和标签
-    auto progressBar = dynamic_cast<ui::LoadingBar*>(this->getChildByName("CountdownLoadingBar"));
+    auto progressBar = dynamic_cast<cocos2d::ui::LoadingBar*>(this->getChildByName("CountdownLoadingBar"));
     auto progressLabel = dynamic_cast<Label*>(this->getChildByName("CountdownLoadingBarLabel"));
     if (progressBar && progressLabel) {
         progressBar->setPercent(0);
@@ -150,7 +154,7 @@ void OfflineModePreparationScene::onEnter()
 }
 
 // 设置进度条更新逻辑与计时器
-void OfflineModePreparationScene::setScheduleOnce(ui::LoadingBar* progressBar, Label* progressLabel)
+void OfflineModePreparationScene::setScheduleOnce(cocos2d::ui::LoadingBar* progressBar, Label* progressLabel)
 {
     // 刷新商店
     g_offlineModeControl->getHumanPlayer()->refreshShop();
@@ -172,11 +176,11 @@ void OfflineModePreparationScene::setScheduleOnce(ui::LoadingBar* progressBar, L
     // 设置计时器
     this->scheduleOnce([this](float dt) {
         // 创建和分派一个鼠标左键释放事件（强制放下当前战斗英雄）
-        EventMouse event(EventMouse::MouseEventType::MOUSE_UP);
-        event.setMouseButton(EventMouse::MouseButton::BUTTON_LEFT);
+        cocos2d::EventMouse event(cocos2d::EventMouse::MouseEventType::MOUSE_UP);
+        event.setMouseButton(cocos2d::EventMouse::MouseButton::BUTTON_LEFT);
         _eventDispatcher->dispatchEvent(&event);
 
         // 运行练习模式对战场景
-        Director::getInstance()->pushScene(OfflineModeBattleScene::create());
+        cocos2d::Director::getInstance()->pushScene(OfflineModeBattleScene::create());
         }, BATTLE_SCENE_LOADINGBAR_DURATION + SCENE_TRANSITION_DURATION, "IsAlreadyPrepared");
 }

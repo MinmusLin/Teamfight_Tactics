@@ -128,6 +128,12 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 * 基本实现 `HumanPlayer` 类
 * 基本实现 `OfflineModePreparationScene` 类与交互细节
 
+### 2023/12/24
+
+* 实现金币系统
+* 调整命名空间
+* 实现 `OfflineModePreparationScene` 类与交互细节
+
 ## 集成开发环境
 
 * Microsoft Visual Studio 2022

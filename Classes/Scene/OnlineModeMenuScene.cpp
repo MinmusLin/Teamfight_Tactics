@@ -3,7 +3,7 @@
  * File Name:     OnlineModeMenuScene.cpp
  * File Function: OnlineModeMenuScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/24
  ****************************************************************/
 
 #include "OnlineModeMenuScene.h"
@@ -11,7 +11,10 @@
 #include "MenuScene.h"
 #include "proj.win32/Constant.h"
 
-USING_NS_CC;
+// 命名空间
+using cocos2d::Scene;
+using cocos2d::Sprite;
+using cocos2d::Vec2;
 
 // 创建场景
 Scene* OnlineModeMenuScene::createScene()
@@ -31,7 +34,7 @@ bool OnlineModeMenuScene::init()
     }
     
     // 加载背景
-    const auto screenSize = Director::getInstance()->getVisibleSize();
+    const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
     const auto background = Sprite::create("../Resources/Scenes/OnlineModeMenuScene.png");
     background->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
     this->addChild(background);
@@ -53,19 +56,19 @@ bool OnlineModeMenuScene::init()
     returnMenuButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 - 200)); // TODO: 按钮位置通过常变量替代
 
     // 为按钮添加事件处理器
-    createRoomButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::BEGAN) {
+    createRoomButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             // TODO: 创建服务器场景接口
         }
         });
-    joinRoomButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::BEGAN) {
+    joinRoomButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             // TODO: 创建客户端场景接口
         }
         });
-    returnMenuButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::BEGAN) {
-            Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), Color3B::WHITE));
+    returnMenuButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+            cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });
 

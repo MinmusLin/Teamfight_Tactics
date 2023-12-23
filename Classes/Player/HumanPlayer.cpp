@@ -12,7 +12,13 @@
 #include "LocationMap/LocationMap.h"
 #include "GBKToUTF8/GBKToUTF8.h"
 
-USING_NS_CC;
+// 命名空间
+using cocos2d::Scene;
+using cocos2d::Sprite;
+using cocos2d::Label;
+using cocos2d::Event;
+using cocos2d::EventMouse;
+using cocos2d::Vec2;
 
 // 构造函数
 HumanPlayer::HumanPlayer(const std::string nickname) :
@@ -85,8 +91,8 @@ void HumanPlayer::refreshShop()
         shopChampionButton[i]->setPosition(Vec2(SHOP_CHAMPION_START_X + i * (SHOP_CHAMPION_INTERVAL + SHOP_CHAMPION_WIDTH), SHOP_CHAMPION_START_Y));
 
         // 为按钮添加事件处理器
-        shopChampionButton[i]->addTouchEventListener([this, i](Ref* sender, ui::Widget::TouchEventType type) {
-            if (type == ui::Widget::TouchEventType::BEGAN) {
+        shopChampionButton[i]->addTouchEventListener([this, i](cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+            if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
                 addChampion(i);
             }
             });
@@ -179,7 +185,7 @@ void HumanPlayer::addChampion(const int index)
             currentScene->addChild(championSprite);
 
             // 鼠标事件监听器
-            auto mouseListener = EventListenerMouse::create();
+            auto mouseListener = cocos2d::EventListenerMouse::create();
             mouseListener->onMouseDown = CC_CALLBACK_1(HumanPlayer::onMouseDown, this, championSprite);
             mouseListener->onMouseMove = CC_CALLBACK_1(HumanPlayer::onMouseMove, this, championSprite);
             mouseListener->onMouseUp = CC_CALLBACK_1(HumanPlayer::onMouseUp, this, championSprite);
@@ -350,7 +356,7 @@ void HumanPlayer::showChampionAttributesLayerAndPlacementMarkerLayer(const Champ
 {
     if (championAttributesLayer == nullptr) {
         // 获取当前正在运行场景
-        auto currentScene = Director::getInstance()->getRunningScene();
+        auto currentScene = cocos2d::Director::getInstance()->getRunningScene();
 
         // 创建战斗英雄属性层
         championAttributesLayer = ChampionAttributesLayer::create();
@@ -371,7 +377,7 @@ void HumanPlayer::showChampionAttributesLayerAndPlacementMarkerLayer(const Champ
 // 关闭显示战斗英雄属性层和放置标记层
 void HumanPlayer::hideChampionAttributesLayerAndPlacementMarkerLayer()
 {
-    auto currentScene = Director::getInstance()->getRunningScene();
+    auto currentScene = cocos2d::Director::getInstance()->getRunningScene();
     currentScene->removeChild(championAttributesLayer);
     championAttributesLayer = nullptr;
     currentScene->removeChild(placementMarkerLayer);

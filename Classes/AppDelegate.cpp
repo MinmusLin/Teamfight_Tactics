@@ -3,7 +3,7 @@
  * File Name:     AppDelegate.cpp
  * File Function: AppDelegate类的实现
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/24
  ****************************************************************/
 
 #include "AppDelegate.h"
@@ -19,7 +19,6 @@
 #endif
 
 // 命名空间
-USING_NS_CC;
 #if USE_AUDIO_ENGINE
 #include "audio/include/AudioEngine.h"
 using namespace cocos2d::experimental;
@@ -48,23 +47,23 @@ AppDelegate::~AppDelegate()
 void AppDelegate::initGLContextAttrs()
 {
     GLContextAttrs glContextAttrs = { 8, 8, 8, 8, 24, 8, 0 };
-    GLView::setGLContextAttrs(glContextAttrs);
+    cocos2d::GLView::setGLContextAttrs(glContextAttrs);
 }
 
 // 当应用程序完成启动并准备进入主循环时调用此函数
 bool AppDelegate::applicationDidFinishLaunching()
 {
-    auto director = Director::getInstance(); // 获取游戏引擎的导演实例
+    auto director = cocos2d::Director::getInstance(); // 获取游戏引擎的导演实例
     auto glview = director->getOpenGLView(); // 获取 OpenGL 视图
 
     // 如果 OpenGL 视图不存在，根据平台创建
     if (!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
         // 在 Windows、Mac、Linux 平台上创建 OpenGL 视图
-        glview = GLViewImpl::createWithRect(GBKToUTF8::getString(APPLICATION_TITLE), cocos2d::Rect(0, 0, s_designResolutionSize.width, s_designResolutionSize.height));
+        glview = cocos2d::GLViewImpl::createWithRect(GBKToUTF8::getString(APPLICATION_TITLE), cocos2d::Rect(0, 0, s_designResolutionSize.width, s_designResolutionSize.height));
 #else
         // 在其他平台上创建 OpenGL 视图
-        glview = GLViewImpl::create(GBKToUTF8::getString(APPLICATION_TITLE));
+        glview = cocos2d::GLViewImpl::create(GBKToUTF8::getString(APPLICATION_TITLE));
 #endif
         // 设置 OpenGL 视图
         director->setOpenGLView(glview);
@@ -95,7 +94,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 // 当应用程序进入后台时调用此函数
 void AppDelegate::applicationDidEnterBackground()
 {
-    Director::getInstance()->stopAnimation();
+    cocos2d::Director::getInstance()->stopAnimation();
 #if USE_AUDIO_ENGINE
     AudioEngine::pauseAll();
 #elif USE_SIMPLE_AUDIO_ENGINE
@@ -107,7 +106,7 @@ void AppDelegate::applicationDidEnterBackground()
 // 当应用程序从后台返回到前台时调用此函数
 void AppDelegate::applicationWillEnterForeground()
 {
-    Director::getInstance()->startAnimation();
+    cocos2d::Director::getInstance()->startAnimation();
 #if USE_AUDIO_ENGINE
     AudioEngine::resumeAll();
 #elif USE_SIMPLE_AUDIO_ENGINE

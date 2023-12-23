@@ -3,13 +3,16 @@
  * File Name:     OfflineModeBattleScene.cpp
  * File Function: OfflineModeBattleScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/21
+ * Update Date:   2023/12/24
  ****************************************************************/
 
 #include "Control/OfflineModeControl.h"
 #include "OfflineModeBattleScene.h"
 
-USING_NS_CC;
+// 命名空间
+using cocos2d::Scene;
+using cocos2d::Sprite;
+using cocos2d::Vec2;
 
 // 练习模式游戏控制类
 extern OfflineModeControl* g_offlineModeControl;
@@ -32,14 +35,14 @@ bool OfflineModeBattleScene::init()
     }
 
     // 加载背景
-    const auto screenSize = Director::getInstance()->getVisibleSize();
+    const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
     const auto background = Sprite::create("../Resources/Scenes/OfflineModeBattleScene.png");
     background->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
     this->addChild(background);
 
     // 设置计时器
     this->scheduleOnce([](float dt) {
-        Director::getInstance()->popScene();
+        cocos2d::Director::getInstance()->popScene();
         }, 2, "PopOfflineModeBattleScene");
 
     return true;

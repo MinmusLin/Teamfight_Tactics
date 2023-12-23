@@ -3,14 +3,12 @@
  * File Name:     OfflineModeControl.cpp
  * File Function: OfflineModeControl类的实现
  * Author:        林继申
- * Update Date:   2023/12/21
+ * Update Date:   2023/12/24
  ****************************************************************/
 
 #include <iostream>
 #include "OfflineModeControl.h"
 #include "Scene/OfflineModeBattleScene.h"
-
-USING_NS_CC;
 
 // 构造函数
 OfflineModeControl::OfflineModeControl() :

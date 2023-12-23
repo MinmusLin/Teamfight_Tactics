@@ -3,7 +3,7 @@
  * File Name:     ChampionAttributesLayer.cpp
  * File Function: ChampionAttributesLayer类的实现
  * Author:        刘淑仪、林继申
- * Update Date:   2023/12/23
+ * Update Date:   2023/12/24
  ****************************************************************/
 
 #include <sstream>
@@ -11,7 +11,10 @@
 #include "ChampionAttributesLayer.h"
 #include "GBKToUTF8/GBKToUTF8.h"
 
-USING_NS_CC;
+// 命名空间
+using cocos2d::Sprite;
+using cocos2d::Label;
+using cocos2d::Vec2;
 
 // 初始化战斗英雄属性层
 bool ChampionAttributesLayer::init()
@@ -44,7 +47,7 @@ void ChampionAttributesLayer::showAttributes(const ChampionCategory championCate
     this->addChild(championImage);
 
     // 创建战斗英雄标签
-    createLabel(GBKToUTF8::getString(championAttributes.championName), CHAMPION_NAME_LABEL_START_X, CHAMPION_NAME_LABEL_START_Y, CHAMPION_NAME_LABEL_FONT_SIZE, championAttributes.championCategory % 2 == 1 ? Color4B::WHITE : Color4B({ GOLDEN_R, GOLDEN_G, GOLDEN_B }));
+    createLabel(GBKToUTF8::getString(championAttributes.championName), CHAMPION_NAME_LABEL_START_X, CHAMPION_NAME_LABEL_START_Y, CHAMPION_NAME_LABEL_FONT_SIZE, championAttributes.championCategory % 2 == 1 ? cocos2d::Color4B::WHITE : cocos2d::Color4B({ GOLDEN_R, GOLDEN_G, GOLDEN_B }));
     createLabel(std::to_string(championAttributes.level), LEVEL_LABEL_START_X, LEVEL_LABEL_START_Y);
     createLabel(std::to_string(championAttributes.healthPoints), FIRST_COLUMN_START_X, HEALTH_POINTS_LEBEL_START_Y);
     createLabel(std::to_string(championAttributes.attackDamage), FIRST_COLUMN_START_X, ATTACK_DAMAGE_LABEL_START_Y);
@@ -57,7 +60,7 @@ void ChampionAttributesLayer::showAttributes(const ChampionCategory championCate
 }
 
 // 创建属性标签
-void ChampionAttributesLayer::createLabel(const std::string& text, const float x, const float y, const int fontSize, const Color4B color)
+void ChampionAttributesLayer::createLabel(const std::string& text, const float x, const float y, const int fontSize, const cocos2d::Color4B color)
 {
     auto label = Label::createWithTTF(text, "../Resources/Fonts/DingDingJinBuTi.ttf", fontSize);
     label->setAnchorPoint(Vec2(0, 0.5));

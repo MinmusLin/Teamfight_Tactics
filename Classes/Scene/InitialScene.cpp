@@ -3,7 +3,7 @@
  * File Name:     InitialScene.cpp
  * File Function: InitialScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/24
  ****************************************************************/
 
 #include "InitialScene.h"
@@ -12,7 +12,11 @@
 #include "GBKToUTF8/GBKToUTF8.h"
 #include "proj.win32/Constant.h"
 
-USING_NS_CC;
+// 命名空间
+using cocos2d::Scene;
+using cocos2d::Sprite;
+using cocos2d::Label;
+using cocos2d::Vec2;
 
 // 创建场景
 Scene* InitialScene::createScene()
@@ -32,29 +36,29 @@ bool InitialScene::init()
     }
 
     // 加载背景
-    const auto screenSize = Director::getInstance()->getVisibleSize();
+    const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
     const auto background = Sprite::create("../Resources/Scenes/InitialScene.png");
     background->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
     this->addChild(background);
 
     // 创建文本框
-    auto textField = ui::TextField::create(GBKToUTF8::getString("请输入您的游戏昵称"), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", INITIAL_SCENE_FONT_SIZE);
+    auto textField = cocos2d::ui::TextField::create(GBKToUTF8::getString("请输入您的游戏昵称"), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", INITIAL_SCENE_FONT_SIZE);
     textField->setPosition(Vec2(screenSize.width / 2 + INITIAL_SCENE_LABELS_OFFSET_X, screenSize.height / 2 + INITIAL_SCENE_TEXTFIELD_OFFSET_Y));
     textField->setMaxLength(NICKNAME_MAX_LENGTH);
     textField->setMaxLengthEnabled(true);
-    textField->setTextColor(Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
+    textField->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(textField);
 
     // 创建标签
     auto promptLabel = Label::createWithTTF("", "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", INITIAL_SCENE_FONT_SIZE);
     promptLabel->setPosition(Vec2(screenSize.width / 2 + INITIAL_SCENE_LABELS_OFFSET_X, screenSize.height / 2 + INITIAL_SCENE_PROMPT_LABEL_OFFSET_Y));
-    promptLabel->setTextColor(Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
+    promptLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(promptLabel);
 
     // 为文本框添加事件监听器
-    textField->addEventListener([promptLabel](Ref* sender, ui::TextField::EventType type) {
-        if (type == ui::TextField::EventType::INSERT_TEXT || type == ui::TextField::EventType::DELETE_BACKWARD) {
-            auto textField = dynamic_cast<ui::TextField*>(sender);
+    textField->addEventListener([promptLabel](Ref* sender, cocos2d::ui::TextField::EventType type) {
+        if (type == cocos2d::ui::TextField::EventType::INSERT_TEXT || type == cocos2d::ui::TextField::EventType::DELETE_BACKWARD) {
+            auto textField = dynamic_cast<cocos2d::ui::TextField*>(sender);
             std::string nickname = textField->getString();
             std::string text = GBKToUTF8::getString("欢迎你！") + nickname;
             promptLabel->setString(text);
@@ -73,17 +77,17 @@ bool InitialScene::init()
     auto nameLabel = Label::createWithTTF(GBKToUTF8::getString("游戏昵称不能为空"), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", INITIAL_SCENE_FONT_SIZE);
     nameLabel->setPosition(Vec2(screenSize.width / 2 + INITIAL_SCENE_LABELS_OFFSET_X, screenSize.height / 2 + INITIAL_SCENE_NAME_LABEL_OFFSET_Y));
     nameLabel->setVisible(false);
-    nameLabel->setTextColor(Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
+    nameLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(nameLabel);
 
     // 为按钮添加事件处理器
-    startButton->addTouchEventListener([this, textField, nameLabel](Ref* sender, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::ENDED) {
+    startButton->addTouchEventListener([this, textField, nameLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
             std::string nickname = textField->getString();
             if (!nickname.empty()) {
-                UserDefault::getInstance()->setStringForKey("PlayerName", nickname); // PlayerName 内部存储编码为 UTF-8，无需调用 GBKToUTF8 单例方法
-                UserDefault::getInstance()->flush();
-                Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), Color3B::WHITE));
+                cocos2d::UserDefault::getInstance()->setStringForKey("PlayerName", nickname); // PlayerName 内部存储编码为 UTF-8，无需调用 GBKToUTF8 单例方法
+                cocos2d::UserDefault::getInstance()->flush();
+                cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
             }
             else {
                 nameLabel->setVisible(true);

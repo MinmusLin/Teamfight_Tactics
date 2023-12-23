@@ -3,7 +3,7 @@
  * File Name:     StartupScene.cpp
  * File Function: StartupScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/24
  ****************************************************************/
 
 #include "StartupScene.h"
@@ -11,7 +11,11 @@
 #include "ui/CocosGUI.h"
 #include "proj.win32/Constant.h"
 
-USING_NS_CC;
+// 命名空间
+using cocos2d::Scene;
+using cocos2d::Sprite;
+using cocos2d::Label;
+using cocos2d::Vec2;
 
 // 创建场景
 Scene* StartupScene::createScene()
@@ -31,13 +35,13 @@ bool StartupScene::init()
     }
 
     // 加载背景
-    const auto screenSize = Director::getInstance()->getVisibleSize();
+    const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
     const auto background = Sprite::create("../Resources/Scenes/StartupScene.png");
     background->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
     this->addChild(background);
 
     // 创建进度条
-    auto progressBar = ui::LoadingBar::create("../Resources/LoadingBars/StartupLoadingBar.png");
+    auto progressBar = cocos2d::ui::LoadingBar::create("../Resources/LoadingBars/StartupLoadingBar.png");
     progressBar->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + STARTUP_SCENE_LOADINGBAR_OFFSET_Y));
     progressBar->setPercent(0);
     this->addChild(progressBar);
@@ -63,8 +67,8 @@ bool StartupScene::init()
 
     // 设置计时器
     this->scheduleOnce([](float dt) {
-        auto transition = TransitionFade::create(SCENE_TRANSITION_DURATION, InitialScene::createScene(), Color3B::WHITE);
-        Director::getInstance()->replaceScene(transition);
+        auto transition = cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, InitialScene::createScene(), cocos2d::Color3B::WHITE);
+        cocos2d::Director::getInstance()->replaceScene(transition);
         }, STARTUP_SCENE_DURATION + SCENE_TRANSITION_DURATION, "StartupSceneToInitialScene");
 
     return true;

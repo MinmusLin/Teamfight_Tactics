@@ -3,7 +3,7 @@
  * File Name:     MenuScene.cpp
  * File Function: MenuScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/24
  ****************************************************************/
 
 #include <iostream>
@@ -16,7 +16,11 @@
 #include "GBKToUTF8/GBKToUTF8.h"
 #include "proj.win32/Constant.h"
 
-USING_NS_CC;
+// 命名空间
+using cocos2d::Scene;
+using cocos2d::Sprite;
+using cocos2d::Label;
+using cocos2d::Vec2;
 
 // 练习模式游戏控制类
 OfflineModeControl* g_offlineModeControl = nullptr;
@@ -39,7 +43,7 @@ bool MenuScene::init()
     }
     
     // 加载背景
-    const auto screenSize = Director::getInstance()->getVisibleSize();
+    const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
     const auto background = Sprite::create("../Resources/Scenes/MenuScene.png");
     background->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
     this->addChild(background);
@@ -61,8 +65,8 @@ bool MenuScene::init()
     settingsButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_BUTTONS_OFFSET_X, screenSize.height / 2 + MENU_SCENE_SETTINGS_BUTTON_OFFSET_Y));
 
     // 为按钮添加事件处理器
-    offlineModeButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::BEGAN) {
+    offlineModeButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             try {
                 g_offlineModeControl = new OfflineModeControl;
             }
@@ -70,16 +74,16 @@ bool MenuScene::init()
                 std::cerr << "Memory allocation failed: " << e.what() << std::endl;
                 throw;
             }
-            Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, OfflineModePreparationScene::createScene(), Color3B::WHITE));
+            cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, OfflineModePreparationScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });
-    onlineModeButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::BEGAN) {
-            Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, OnlineModeMenuScene::createScene(), Color3B::WHITE));
+    onlineModeButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+            cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, OnlineModeMenuScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });
-    settingsButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::BEGAN) {
+    settingsButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             // TODO: 设置场景接口
         }
         });
@@ -94,9 +98,9 @@ bool MenuScene::init()
     const int hour = std::localtime(&now)->tm_hour;
 
     // 创建一个欢迎提示
-    auto welcomeLabel = Label::createWithTTF(UserDefault::getInstance()->getStringForKey("PlayerName") + GBKToUTF8::getString(WELCOME_PROMPT.at(hour)), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", MENU_SCENE_FONT_SIZE);
+    auto welcomeLabel = Label::createWithTTF(cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName") + GBKToUTF8::getString(WELCOME_PROMPT.at(hour)), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", MENU_SCENE_FONT_SIZE);
     welcomeLabel->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_BUTTONS_OFFSET_X, screenSize.height / 2 + MENU_SCENE_WELCOME_LABEL_OFFSET_Y));
-    welcomeLabel->setTextColor(Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
+    welcomeLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(welcomeLabel);
 
     return true;
