@@ -3,7 +3,7 @@
  * File Name:     OnlineModeControl.h
  * File Function: OnlineModeControl类的定义
  * Author:        林继申
- * Update Date:   2023/12/19
+ * Update Date:   2023/12/23
  ****************************************************************/
 
 #pragma once
@@ -20,7 +20,7 @@
 class OnlineModeControl : public Control {
 public:
     // 构造函数
-    OnlineModeControl(int playersNum);
+    OnlineModeControl(const int playersNum);
 
     // 析构函数
     ~OnlineModeControl();

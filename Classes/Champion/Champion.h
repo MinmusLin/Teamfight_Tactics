@@ -3,7 +3,7 @@
  * File Name:     Champion.h
  * File Function: Champion类的定义
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/23
  ****************************************************************/
 
 #pragma once
@@ -20,7 +20,7 @@
 class Champion : public cocos2d::Sprite {
 public:
     // 构造函数
-    Champion(ChampionCategory championCategory);
+    Champion(const ChampionCategory championCategory);
 
     // 获取精灵类指针
     cocos2d::Sprite* getSprite() const;

@@ -3,13 +3,13 @@
  * File Name:     AIPlayer.cpp
  * File Function: AIPlayer类的实现
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/23
  ****************************************************************/
 
 #include "AIPlayer.h"
 
 // 构造函数
-AIPlayer::AIPlayer(std::string nickname, Difficulty difficulty_) :
+AIPlayer::AIPlayer(const std::string nickname, const Difficulty difficulty_) :
     Player(nickname),
     difficulty(difficulty_) {}
 
