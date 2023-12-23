@@ -62,26 +62,6 @@ bool OfflineModePreparationScene::init()
     coinLabel->setName("CoinLabel");
     this->addChild(coinLabel);
 
-    // 创建按钮
-    auto returnMenuButton = HoverButton::create("../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuDefaultButton.png",
-        "../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuHoverButton.png",
-        "../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuActiveButton.png");
-
-    // 设置按钮位置
-    returnMenuButton->setPosition(Vec2(screenSize.width / 2 + BATTLE_SCENE_RETURN_MENU_OFFSET_X, screenSize.height / 2 + BATTLE_SCENE_RETURN_MENU_OFFSET_Y));
-
-    // 为按钮添加事件处理器
-    returnMenuButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
-        if (type == ui::Widget::TouchEventType::BEGAN) {
-            delete g_offlineModeControl;
-            g_offlineModeControl = nullptr;
-            Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), Color3B::WHITE));
-        }
-        });
-
-    // 将按钮添加到场景中
-    this->addChild(returnMenuButton);
-
     // 创建进度条
     auto progressBar = ui::LoadingBar::create("../Resources/LoadingBars/CountdownLoadingBar.png");
     progressBar->setPosition(Vec2(BATTLE_SCENE_LOADINGBAR_X, BATTLE_SCENE_LOADINGBAR_Y));
@@ -106,10 +86,14 @@ bool OfflineModePreparationScene::init()
     auto refreshButton = HoverButton::create("../Resources/Buttons/ShopButtons/RefreshDefaultButton.png",
         "../Resources/Buttons/ShopButtons/RefreshHoverButton.png",
         "../Resources/Buttons/ShopButtons/RefreshActiveButton.png");
+    auto returnMenuButton = HoverButton::create("../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuDefaultButton.png",
+        "../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuHoverButton.png",
+        "../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuActiveButton.png");
 
     // 设置按钮位置
     uplevelButton->setPosition(Vec2(screenSize.width / 2 + SHOP_UPLEVEL_BUTTON_OFFSET_X, screenSize.height / 2 + SHOP_UPLEVEL_BUTTON_OFFSET_Y));
     refreshButton->setPosition(Vec2(screenSize.width / 2 + SHOP_REFRESH_BUTTON_OFFSET_X, screenSize.height / 2 + SHOP_REFRESH_BUTTON_OFFSET_Y));
+    returnMenuButton->setPosition(Vec2(screenSize.width / 2 + BATTLE_SCENE_RETURN_MENU_BUTTON_OFFSET_X, screenSize.height / 2 + BATTLE_SCENE_RETURN_MENU_BUTTON_OFFSET_Y));
 
     // 为按钮添加事件处理器
     uplevelButton->addTouchEventListener([this](Ref* sender, ui::Widget::TouchEventType type) {
@@ -122,10 +106,21 @@ bool OfflineModePreparationScene::init()
             g_offlineModeControl->getHumanPlayer()->refreshShop(this);
         }
         });
+    returnMenuButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::BEGAN) {
+            delete g_offlineModeControl;
+            g_offlineModeControl = nullptr;
+            Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), Color3B::WHITE));
+        }
+        });
 
     // 将按钮添加到场景中
     this->addChild(uplevelButton);
     this->addChild(refreshButton);
+    this->addChild(returnMenuButton);
+
+    // 初始化战斗英雄删除按钮
+    g_offlineModeControl->getHumanPlayer()->initializeDeleteChampionButton(this);
 
     return true;
 }

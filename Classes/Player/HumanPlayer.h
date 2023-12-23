@@ -43,14 +43,18 @@ public:
     // 获取金币数量
     int getGoldCoin() const;
 
+    // 初始化战斗英雄删除按钮
+    void initializeDeleteChampionButton(cocos2d::Scene* currentScene);
+
 private:
     ChampionCategory shopChampionCategory[MAX_SELECTABLE_CHAMPION_COUNT]; // 商店战斗英雄种类
-    HoverButton* shopChampionButton[MAX_SELECTABLE_CHAMPION_COUNT];       // 商店战斗英雄按钮
+    HoverButton* shopChampionButton[MAX_SELECTABLE_CHAMPION_COUNT];       // 商店战斗英雄按钮指针
+    HoverButton* deleteChampionButton;                                    // 战斗英雄删除按钮指针
     Champion* battleChampion[BATTLE_MAP_ROWS][BATTLE_MAP_COLUMNS];        // 战斗区战斗英雄指针
     Champion* waitingChampion[WAITING_MAP_COUNT];                         // 候战区战斗英雄指针
-    Location startLocation;                                               // 战斗英雄移动起始位置属性
     ChampionAttributesLayer* championAttributesLayer;                     // 战斗英雄属性层类指针
-    PlacementMarkerLayer* placementMarkerLayer;                                // 放置标记层类指针
+    PlacementMarkerLayer* placementMarkerLayer;                           // 放置标记层类指针
+    Location startLocation;                                               // 战斗英雄移动起始位置属性
     int maxBattleChampionCount;                                           // 战斗区最大英雄数量
     int goldCoin;                                                         // 金币数量
 
@@ -74,6 +78,9 @@ private:
 
     // 关闭显示战斗英雄属性层和放置标记层
     void hideChampionAttributesLayerAndPlacementMarkerLayer();
+
+    // 删除当前战斗英雄
+    void deleteCurrentChampion();
 
     // 刷新商店战斗英雄种类
     void refreshShopChampionCategory();

@@ -40,7 +40,7 @@ void PlacementMarkerLayer::showPlacementMarker(const ChampionCategory battleMap[
 // 创建放置标记
 void PlacementMarkerLayer::createPlacementMarker(const Location& location)
 {
-    Sprite* placementMarker = Sprite::create("../Resources/Layers/PlacementMarker.png");
+    Sprite* placementMarker = Sprite::create("../Resources/Layers/PlacementMarkerLayer/PlacementMarker.png");
     Vec2 coordinate = LocationMap::getInstance().getLocationMap().at(location);
     placementMarker->setPosition(coordinate);
     this->addChild(placementMarker);

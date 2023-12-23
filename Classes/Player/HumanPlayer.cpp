@@ -17,6 +17,7 @@ USING_NS_CC;
 // 构造函数
 HumanPlayer::HumanPlayer(const std::string nickname) :
     Player(nickname),
+    deleteChampionButton(nullptr),
     championAttributesLayer(nullptr),
     placementMarkerLayer(nullptr),
     maxBattleChampionCount(BATTLE_AREA_MIN_CHAMPION_COUNT),
@@ -131,6 +132,18 @@ int HumanPlayer::getGoldCoin() const
     return goldCoin;
 }
 
+// 初始化战斗英雄删除按钮
+void HumanPlayer::initializeDeleteChampionButton(Scene* currentScene)
+{
+    deleteChampionButton = HoverButton::create("../Resources/Buttons/OfflineModePreparationSceneButtons/DeleteChampionDefaultButton.png",
+        "../Resources/Buttons/OfflineModePreparationSceneButtons/DeleteChampionHoverButton.png",
+        "../Resources/Buttons/OfflineModePreparationSceneButtons/DeleteChampionActiveButton.png");
+    deleteChampionButton->setPosition(Vec2(BATTLE_SCENE_DELETE_CHAMPION_BUTTON_START_X, BATTLE_SCENE_DELETE_CHAMPION_BUTTON_START_Y));
+    deleteChampionButton->setVisible(false);
+    deleteChampionButton->setEnabled(false);
+    currentScene->addChild(deleteChampionButton);
+}
+
 // 添加战斗英雄
 void HumanPlayer::addChampion(const int index, Scene* currentScene)
 {
@@ -215,89 +228,102 @@ void HumanPlayer::onMouseUp(Event* event, Sprite* championSprite)
         // 取消选中状态
         championSprite->setUserData(nullptr);
 
-        // 遍历所有可放置放置
-        float minDistance = FLT_MAX;
-        Vec2 nearestPoint;
-        if (getCurrentBattleChampionCount() < maxBattleChampionCount) { // 未达到战斗区最大英雄数量
-            Vec2 currentPos = championSprite->getPosition();
-            for (const auto& entry : LocationMap::getInstance().getLocationMap()) {
-                Location currentLocation = entry.first;
-                bool isEmpty = true;
-                if (currentLocation.status == WaitingArea) {
-                    if (waitingMap[currentLocation.position] != NoChampion) {
-                        isEmpty = false;
+        // 删除当前战斗英雄
+        bool isDelete = false;
+        const Vec2 currentPos = championSprite->getPosition();
+        if (currentPos.x >= BATTLE_SCENE_DELETE_CHAMPION_BUTTON_LEFT_BOUNDARY
+            && currentPos.x <= BATTLE_SCENE_DELETE_CHAMPION_BUTTON_RIGHT_BOUNDARY
+            && currentPos.y >= BATTLE_SCENE_DELETE_CHAMPION_BUTTON_LOWER_BOUNDARY
+            && currentPos.y <= BATTLE_SCENE_DELETE_CHAMPION_BUTTON_UPPER_BOUNDARY) {
+            isDelete = true;
+            deleteCurrentChampion();
+        }
+
+        if (!isDelete) {
+            // 遍历所有可放置放置
+            float minDistance = FLT_MAX;
+            Vec2 nearestPoint;
+            if (getCurrentBattleChampionCount() < maxBattleChampionCount) { // 未达到战斗区最大英雄数量
+                const Vec2 currentPos = championSprite->getPosition();
+                for (const auto& entry : LocationMap::getInstance().getLocationMap()) {
+                    const Location currentLocation = entry.first;
+                    bool isEmpty = true;
+                    if (currentLocation.status == WaitingArea) {
+                        if (waitingMap[currentLocation.position] != NoChampion) {
+                            isEmpty = false;
+                        }
                     }
-                }
-                else {
-                    if (currentLocation.position / BATTLE_MAP_COLUMNS >= PLACE_MAP_ROWS) {
-                        isEmpty = false;
+                    else {
+                        if (currentLocation.position / BATTLE_MAP_COLUMNS >= PLACE_MAP_ROWS) {
+                            isEmpty = false;
+                        }
+                        if (battleMap[currentLocation.position / BATTLE_MAP_COLUMNS][currentLocation.position % BATTLE_MAP_COLUMNS] != NoChampion) {
+                            isEmpty = false;
+                        }
                     }
-                    if (battleMap[currentLocation.position / BATTLE_MAP_COLUMNS][currentLocation.position % BATTLE_MAP_COLUMNS] != NoChampion) {
-                        isEmpty = false;
-                    }
-                }
-                if (isEmpty) {
-                    const cocos2d::Vec2& point = entry.second;
-                    float distance = currentPos.distance(point);
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        nearestPoint = point;
+                    if (isEmpty) {
+                        const cocos2d::Vec2& point = entry.second;
+                        float distance = currentPos.distance(point);
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            nearestPoint = point;
+                        }
                     }
                 }
             }
-        }
-        else { // 已达到战斗区最大英雄数量
-            Vec2 currentPos = championSprite->getPosition();
-            for (const auto& entry : LocationMap::getInstance().getLocationMap()) {
-                Location currentLocation = entry.first;
-                bool isEmpty = false;
-                if (currentLocation.status == WaitingArea && waitingMap[currentLocation.position] == NoChampion) {
-                    isEmpty = true;
-                }
-                if (isEmpty) {
-                    const cocos2d::Vec2& point = entry.second;
-                    float distance = currentPos.distance(point);
-                    if (distance < minDistance) {
-                        minDistance = distance;
-                        nearestPoint = point;
+            else { // 已达到战斗区最大英雄数量
+                Vec2 currentPos = championSprite->getPosition();
+                for (const auto& entry : LocationMap::getInstance().getLocationMap()) {
+                    Location currentLocation = entry.first;
+                    bool isEmpty = false;
+                    if (currentLocation.status == WaitingArea && waitingMap[currentLocation.position] == NoChampion) {
+                        isEmpty = true;
+                    }
+                    if (isEmpty) {
+                        const cocos2d::Vec2& point = entry.second;
+                        float distance = currentPos.distance(point);
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            nearestPoint = point;
+                        }
                     }
                 }
             }
-        }
 
-        // 确定战斗英雄移动目标位置属性
-        Location targetLocation;
-        for (const auto& pair : LocationMap::getInstance().getLocationMap()) {
-            if (pair.second.equals(nearestPoint)) {
-                targetLocation = pair.first;
-                break;
+            // 确定战斗英雄移动目标位置属性
+            Location targetLocation;
+            for (const auto& pair : LocationMap::getInstance().getLocationMap()) {
+                if (pair.second.equals(nearestPoint)) {
+                    targetLocation = pair.first;
+                    break;
+                }
             }
-        }
 
-        // 更新地图信息
-        Champion* currentChampion;
-        if (startLocation.status == WaitingArea) {
-            currentChampion = waitingChampion[startLocation.position];
-            waitingChampion[startLocation.position] = nullptr;
-        }
-        else {
-            currentChampion = battleChampion[startLocation.position / BATTLE_MAP_COLUMNS][startLocation.position % BATTLE_MAP_COLUMNS];
-            battleChampion[startLocation.position / BATTLE_MAP_COLUMNS][startLocation.position % BATTLE_MAP_COLUMNS] = nullptr;
-        }
-        if (targetLocation.status == WaitingArea) {
-            waitingChampion[targetLocation.position] = currentChampion;
-            waitingMap[targetLocation.position] = currentChampion->getAttributes().championCategory;
-        }
-        else {
-            battleChampion[targetLocation.position / BATTLE_MAP_COLUMNS][targetLocation.position % BATTLE_MAP_COLUMNS] = currentChampion;
-            battleMap[targetLocation.position / BATTLE_MAP_COLUMNS][targetLocation.position % BATTLE_MAP_COLUMNS] = currentChampion->getAttributes().championCategory;
-        }
+            // 更新地图信息
+            Champion* currentChampion;
+            if (startLocation.status == WaitingArea) {
+                currentChampion = waitingChampion[startLocation.position];
+                waitingChampion[startLocation.position] = nullptr;
+            }
+            else {
+                currentChampion = battleChampion[startLocation.position / BATTLE_MAP_COLUMNS][startLocation.position % BATTLE_MAP_COLUMNS];
+                battleChampion[startLocation.position / BATTLE_MAP_COLUMNS][startLocation.position % BATTLE_MAP_COLUMNS] = nullptr;
+            }
+            if (targetLocation.status == WaitingArea) {
+                waitingChampion[targetLocation.position] = currentChampion;
+                waitingMap[targetLocation.position] = currentChampion->getAttributes().championCategory;
+            }
+            else {
+                battleChampion[targetLocation.position / BATTLE_MAP_COLUMNS][targetLocation.position % BATTLE_MAP_COLUMNS] = currentChampion;
+                battleMap[targetLocation.position / BATTLE_MAP_COLUMNS][targetLocation.position % BATTLE_MAP_COLUMNS] = currentChampion->getAttributes().championCategory;
+            }
 
+            // 移动战斗英雄
+            championSprite->setPosition(nearestPoint);
+        }
+        
         // 关闭显示战斗英雄属性层和放置标记层
         hideChampionAttributesLayerAndPlacementMarkerLayer();
-
-        // 移动战斗英雄
-        championSprite->setPosition(nearestPoint);
     }
 }
 
@@ -318,13 +344,17 @@ void HumanPlayer::showChampionAttributesLayerAndPlacementMarkerLayer(const Champ
 
         // 创建战斗英雄属性层
         championAttributesLayer = ChampionAttributesLayer::create();
-        Director::getInstance()->getRunningScene()->addChild(championAttributesLayer);
         championAttributesLayer->showAttributes(championCategory);
+        currentScene->addChild(championAttributesLayer);
 
         // 创建放置标记层
         placementMarkerLayer = PlacementMarkerLayer::create();
-        Director::getInstance()->getRunningScene()->addChild(placementMarkerLayer);
         placementMarkerLayer->showPlacementMarker(battleMap, waitingMap);
+        currentScene->addChild(placementMarkerLayer);
+
+        // 开启战斗英雄删除按钮
+        deleteChampionButton->setEnabled(true);
+        deleteChampionButton->setVisible(true);
     }
 }
 
@@ -336,6 +366,21 @@ void HumanPlayer::hideChampionAttributesLayerAndPlacementMarkerLayer()
     championAttributesLayer = nullptr;
     currentScene->removeChild(placementMarkerLayer);
     placementMarkerLayer = nullptr;
+    deleteChampionButton->setVisible(false);
+    deleteChampionButton->setEnabled(false);
+}
+
+// 删除当前战斗英雄
+void HumanPlayer::deleteCurrentChampion()
+{
+    if (startLocation.status == WaitingArea) {
+        waitingChampion[startLocation.position]->getSprite()->removeFromParent();
+        waitingChampion[startLocation.position] = nullptr;
+    }
+    else {
+        battleChampion[startLocation.position / BATTLE_MAP_COLUMNS][startLocation.position % BATTLE_MAP_COLUMNS]->getSprite()->removeFromParent();
+        battleChampion[startLocation.position / BATTLE_MAP_COLUMNS][startLocation.position % BATTLE_MAP_COLUMNS] = nullptr;
+    }
 }
 
 // 刷新商店战斗英雄种类
