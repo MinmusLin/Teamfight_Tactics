@@ -343,8 +343,8 @@ void HumanPlayer::refreshShopChampionCategory()
 {
     // TODO: 杨兆镇：商店推荐算法
     shopChampionCategory[0] = CHAMPION_ATTR_MAP.at(Champion1).championCategory;
-    shopChampionCategory[1] = CHAMPION_ATTR_MAP.at(Champion2).championCategory;
-    shopChampionCategory[2] = CHAMPION_ATTR_MAP.at(Champion3).championCategory;
-    shopChampionCategory[3] = CHAMPION_ATTR_MAP.at(Champion4).championCategory;
-    shopChampionCategory[4] = CHAMPION_ATTR_MAP.at(Champion5).championCategory;
+    shopChampionCategory[1] = CHAMPION_ATTR_MAP.at(Champion3).championCategory;
+    shopChampionCategory[2] = CHAMPION_ATTR_MAP.at(Champion5).championCategory;
+    shopChampionCategory[3] = CHAMPION_ATTR_MAP.at(Champion7).championCategory;
+    shopChampionCategory[4] = CHAMPION_ATTR_MAP.at(Champion9).championCategory;
 }

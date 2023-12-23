@@ -126,7 +126,7 @@ constexpr int BACKGROUND_IMAGE_START_Y = 407;                               // ±
 constexpr int BACKGROUND_IMAGE_TRANSPARENCY = 230;                          // ±³¾°Í¼Í¸Ã÷¶È
 constexpr int CHAMPION_IMAGE_START_X = 110;                                 // Õ½¶·Ó¢ÐÛÍ¼Æ¬Î»ÖÃ X ×ø±ê
 constexpr int CHAMPION_IMAGE_START_Y = 547;                                 // Õ½¶·Ó¢ÐÛÍ¼Æ¬Î»ÖÃ Y ×ø±ê
-constexpr int CHAMPION_NAME_LABEL_START_X = 182;                            // Õ½¶·Ó¢ÐÛÃû³Æ±êÇ©Î»ÖÃ X ×ø±ê
+constexpr int CHAMPION_NAME_LABEL_START_X = 172;                            // Õ½¶·Ó¢ÐÛÃû³Æ±êÇ©Î»ÖÃ X ×ø±ê
 constexpr int CHAMPION_NAME_LABEL_START_Y = 564;                            // Õ½¶·Ó¢ÐÛÃû³Æ±êÇ©Î»ÖÃ Y ×ø±ê
 constexpr int FIRST_COLUMN_START_X = 130;                                   // µÚÒ»ÁÐÊôÐÔ±êÇ©Î»ÖÃ X ×ø±ê
 constexpr int SECOND_COLUMN_START_X = 242;                                  // µÚ¶þÁÐÊôÐÔ±êÇ©Î»ÖÃ X ×ø±ê
@@ -138,7 +138,7 @@ constexpr int PRICE_LABEL_START_Y = HEALTH_POINTS_LEBEL_START_Y;            // ¼
 constexpr int MOVEMENT_SPEED_START_Y = ATTACK_DAMAGE_LABEL_START_Y;         // ÒÆ¶¯ËÙ¶È±êÇ©Î»ÖÃ Y ×ø±ê
 constexpr int DEFENSE_COEFFICIENT_START_Y = ATTACK_RANGE_LABEL_START_Y;     // ·ÀÓùÏµÊý±êÇ©Î»ÖÃ Y ×ø±ê
 constexpr int SKILL_TRIGGER_THRESHOLD_START_Y = ATTACK_SPEED_LABEL_START_Y; // ¼¼ÄÜ´¥·¢ãÐÖµ±êÇ©Î»ÖÃ Y ×ø±ê
-constexpr int LEVEL_LABEL_START_X = 254;                                    // µÈ¼¶±êÇ©Î»ÖÃ X ×ø±ê
+constexpr int LEVEL_LABEL_START_X = 245;                                    // µÈ¼¶±êÇ©Î»ÖÃ X ×ø±ê
 constexpr int LEVEL_LABEL_START_Y = 521;                                    // µÈ¼¶±êÇ©Î»ÖÃ Y ×ø±ê
 
 // Á·Ï°Ä£Ê½ÄÑ¶È¶¨Òå
@@ -166,8 +166,8 @@ enum ChampionCategory {
     Champion14, // ËþÀï¿Ë£¨¶þÐÇ£©
     Champion15, // ÑÇË÷£¨Ò»ÐÇ£©
     Champion16, // ÑÇË÷£¨¶þÐÇ£©
-    Champion17, // ½ð¿ËË¹£¨Ò»ÐÇ£©
-    Champion18, // ½ð¿ËË¹£¨¶þÐÇ£©
+    Champion17, // ½ð¿ËË¿£¨Ò»ÐÇ£©
+    Champion18, // ½ð¿ËË¿£¨¶þÐÇ£©
     Champion19, // ËþÄ·£¨Ò»ÐÇ£©
     Champion20, // ËþÄ·£¨¶þÐÇ£©
     Champion21, // Îµ£¨Ò»ÐÇ£©
@@ -264,11 +264,11 @@ const ChampionAttributes CHAMPION_15_ATTR = { // ÑÇË÷£¨Ò»ÐÇ£©
 const ChampionAttributes CHAMPION_16_ATTR = { // ÑÇË÷£¨¶þÐÇ£©
     Champion16, "ÑÇË÷", "../Resources/Champions/Champion16.png", 2, 2, 250, 30, 50, 1, 0.6f, 1.2f, 1.1f
 };
-const ChampionAttributes CHAMPION_17_ATTR = { // ½ð¿ËË¹£¨Ò»ÐÇ£©
-    Champion17, "½ð¿ËË¹", "../Resources/Champions/Champion17.png", 2, 1, 150, 30, 200, 1, 0.5f, 1.5f, 0.7f
+const ChampionAttributes CHAMPION_17_ATTR = { // ½ð¿ËË¿£¨Ò»ÐÇ£©
+    Champion17, "½ð¿ËË¿", "../Resources/Champions/Champion17.png", 2, 1, 150, 30, 200, 1, 0.5f, 1.5f, 0.7f
 };
-const ChampionAttributes CHAMPION_18_ATTR = { // ½ð¿ËË¹£¨¶þÐÇ£©
-    Champion18, "½ð¿ËË¹", "../Resources/Champions/Champion18.png", 2, 2, 200, 35, 200, 2, 0.4f, 1.7f, 0.8f
+const ChampionAttributes CHAMPION_18_ATTR = { // ½ð¿ËË¿£¨¶þÐÇ£©
+    Champion18, "½ð¿ËË¿", "../Resources/Champions/Champion18.png", 2, 2, 200, 35, 200, 2, 0.4f, 1.7f, 0.8f
 };
 const ChampionAttributes CHAMPION_19_ATTR = { // ËþÄ·£¨Ò»ÐÇ£©
     Champion19, "ËþÄ·", "../Resources/Champions/Champion19.png", 3, 1, 300, 15, 150, 1, 1.0f, 1.0f, 1.2f
@@ -325,8 +325,8 @@ const std::map<ChampionCategory, ChampionAttributes> CHAMPION_ATTR_MAP = {
     {Champion14, CHAMPION_14_ATTR}, // ËþÀï¿Ë£¨¶þÐÇ£©
     {Champion15, CHAMPION_15_ATTR}, // ÑÇË÷£¨Ò»ÐÇ£©
     {Champion16, CHAMPION_16_ATTR}, // ÑÇË÷£¨¶þÐÇ£©
-    {Champion17, CHAMPION_17_ATTR}, // ½ð¿ËË¹£¨Ò»ÐÇ£©
-    {Champion18, CHAMPION_18_ATTR}, // ½ð¿ËË¹£¨¶þÐÇ£©
+    {Champion17, CHAMPION_17_ATTR}, // ½ð¿ËË¿£¨Ò»ÐÇ£©
+    {Champion18, CHAMPION_18_ATTR}, // ½ð¿ËË¿£¨¶þÐÇ£©
     {Champion19, CHAMPION_19_ATTR}, // ËþÄ·£¨Ò»ÐÇ£©
     {Champion20, CHAMPION_20_ATTR}, // ËþÄ·£¨¶þÐÇ£©
     {Champion21, CHAMPION_21_ATTR}, // Îµ£¨Ò»ÐÇ£©
