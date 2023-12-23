@@ -79,6 +79,8 @@ constexpr int BATTLE_SCENE_LOADINGBAR_Y = 669;                              // ∂
 constexpr int BATTLE_SCENE_LOADINGBAR_LABEL_FONT_SIZE = 20;                 // ∂‘’Ω≥°æ∞◊º±∏Ω¯∂»Ãı±Í«©◊÷ÃÂ¥Û–°
 constexpr int BATTLE_SCENE_LOADINGBAR_LABEL_OFFSET_X = -18;                 // ∂‘’Ω≥°æ∞◊º±∏Ω¯∂»Ãı±Í«©Œª÷√ X ∆´“∆¡ø
 constexpr int BATTLE_SCENE_LOADINGBAR_LABEL_THRESHOLD = 10;                 // ∂‘’Ω≥°æ∞◊º±∏ ±º‰œ‘ æ„–÷µ
+constexpr int BATTLE_SCENE_RETURN_MENU_OFFSET_X = 515;                      // ∂‘’Ω≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ X ∆´“∆¡ø
+constexpr int BATTLE_SCENE_RETURN_MENU_OFFSET_Y = -305;                     // ∂‘’Ω≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ Y ∆´“∆¡ø
 constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 15.0f;                   // ∂‘’Ω≥°æ∞◊º±∏ ±º‰
 
 // …ÃµÍ…Ë÷√

@@ -3,7 +3,7 @@
  * File Name:     OfflineModePreparationScene.cpp
  * File Function: OfflineModePreparationScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/23
  ****************************************************************/
 
 #include "OfflineModePreparationScene.h"
@@ -68,7 +68,7 @@ bool OfflineModePreparationScene::init()
         "../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuActiveButton.png");
 
     // 设置按钮位置
-    returnMenuButton->setPosition(Vec2(screenSize.width / 2 + 450, screenSize.height / 2 - 100)); // TODO: 按钮位置通过常变量替代
+    returnMenuButton->setPosition(Vec2(screenSize.width / 2 + BATTLE_SCENE_RETURN_MENU_OFFSET_X, screenSize.height / 2 + BATTLE_SCENE_RETURN_MENU_OFFSET_Y));
 
     // 为按钮添加事件处理器
     returnMenuButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
