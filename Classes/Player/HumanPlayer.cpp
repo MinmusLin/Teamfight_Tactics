@@ -3,7 +3,7 @@
  * File Name:     HumanPlayer.cpp
  * File Function: HumanPlayer类的实现
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/23
  ****************************************************************/
 
 #include <iostream>
@@ -15,8 +15,10 @@
 USING_NS_CC;
 
 // 构造函数
-HumanPlayer::HumanPlayer(std::string nickname) : 
+HumanPlayer::HumanPlayer(const std::string nickname) :
     Player(nickname),
+    championAttributesLayer(nullptr),
+    placementMarkerLayer(nullptr),
     maxBattleChampionCount(BATTLE_AREA_MIN_CHAMPION_COUNT),
     goldCoin(INITIAL_GOLD_COIN)
 {
@@ -26,8 +28,6 @@ HumanPlayer::HumanPlayer(std::string nickname) :
         std::fill_n(battleChampion[i], BATTLE_MAP_COLUMNS, nullptr);
     }
     std::fill_n(waitingChampion, WAITING_MAP_COUNT, nullptr);
-    attributesLayer = ChampionAttributesLayer::create();
-    attributesLayer->retain(); // 增加引用计数，防止被自动释放
 }
 
 // 析构函数
@@ -44,10 +44,6 @@ HumanPlayer::~HumanPlayer()
                 delete battleChampion[i][j];
             }
         }
-    }
-    if (attributesLayer) {
-        attributesLayer->release(); // 减少引用计数
-        attributesLayer = nullptr; // 清除指针，避免悬挂指针
     }
 }
 
@@ -188,18 +184,16 @@ void HumanPlayer::onMouseDown(Event* event, Sprite* championSprite)
             }
         }
 
-        // 更新地图信息
+        // 更新地图信息并开启显示战斗英雄属性层和放置标记层
         if (startLocation.status == WaitingArea) {
+            ChampionCategory currentChampionCategory = waitingMap[startLocation.position];
             waitingMap[startLocation.position] = NoChampion;
+            showChampionAttributesLayerAndPlacementMarkerLayer(currentChampionCategory);
         }
         else {
+            ChampionCategory currentChampionCategory = battleMap[startLocation.position / BATTLE_MAP_COLUMNS][startLocation.position % BATTLE_MAP_COLUMNS];
             battleMap[startLocation.position / BATTLE_MAP_COLUMNS][startLocation.position % BATTLE_MAP_COLUMNS] = NoChampion;
-        }
-
-        // 获取英雄指针
-        Champion* champion = getChampionByLocation(startLocation);
-        if (champion) {
-            showAttributesLayer(*champion);
+            showChampionAttributesLayerAndPlacementMarkerLayer(currentChampionCategory);
         }
     }
 }
@@ -235,6 +229,9 @@ void HumanPlayer::onMouseUp(Event* event, Sprite* championSprite)
                     }
                 }
                 else {
+                    if (currentLocation.position / BATTLE_MAP_COLUMNS >= PLACE_MAP_ROWS) {
+                        isEmpty = false;
+                    }
                     if (battleMap[currentLocation.position / BATTLE_MAP_COLUMNS][currentLocation.position % BATTLE_MAP_COLUMNS] != NoChampion) {
                         isEmpty = false;
                     }
@@ -296,11 +293,11 @@ void HumanPlayer::onMouseUp(Event* event, Sprite* championSprite)
             battleMap[targetLocation.position / BATTLE_MAP_COLUMNS][targetLocation.position % BATTLE_MAP_COLUMNS] = currentChampion->getAttributes().championCategory;
         }
 
+        // 关闭显示战斗英雄属性层和放置标记层
+        hideChampionAttributesLayerAndPlacementMarkerLayer();
+
         // 移动战斗英雄
         championSprite->setPosition(nearestPoint);
-
-        // 隐藏属性图层
-        hideAttributesLayer();
     }
 }
 
@@ -312,6 +309,35 @@ void HumanPlayer::removeChampionFromShop(const int index, cocos2d::Scene* curren
     shopChampionButton[index] = nullptr;
 }
 
+// 开启显示战斗英雄属性层和放置标记层
+void HumanPlayer::showChampionAttributesLayerAndPlacementMarkerLayer(const ChampionCategory championCategory)
+{
+    if (championAttributesLayer == nullptr) {
+        // 获取当前正在运行场景
+        auto currentScene = Director::getInstance()->getRunningScene();
+
+        // 创建战斗英雄属性层
+        championAttributesLayer = ChampionAttributesLayer::create();
+        Director::getInstance()->getRunningScene()->addChild(championAttributesLayer);
+        championAttributesLayer->showAttributes(championCategory);
+
+        // 创建放置标记层
+        placementMarkerLayer = PlacementMarkerLayer::create();
+        Director::getInstance()->getRunningScene()->addChild(placementMarkerLayer);
+        placementMarkerLayer->showPlacementMarker(battleMap, waitingMap);
+    }
+}
+
+// 关闭显示战斗英雄属性层和放置标记层
+void HumanPlayer::hideChampionAttributesLayerAndPlacementMarkerLayer()
+{
+    auto currentScene = Director::getInstance()->getRunningScene();
+    currentScene->removeChild(championAttributesLayer);
+    championAttributesLayer = nullptr;
+    currentScene->removeChild(placementMarkerLayer);
+    placementMarkerLayer = nullptr;
+}
+
 // 刷新商店战斗英雄种类
 void HumanPlayer::refreshShopChampionCategory()
 {
@@ -321,51 +347,4 @@ void HumanPlayer::refreshShopChampionCategory()
     shopChampionCategory[2] = CHAMPION_ATTR_MAP.at(Champion3).championCategory;
     shopChampionCategory[3] = CHAMPION_ATTR_MAP.at(Champion4).championCategory;
     shopChampionCategory[4] = CHAMPION_ATTR_MAP.at(Champion5).championCategory;
-}
-
-// 获取对应英雄指针
-Champion* HumanPlayer::getChampionByLocation(const Location& location)
-{
-    // 检查是否是候战区的位置
-    if (location.status == WaitingArea) {
-        // 假设候战区的位置和 waitingChampion 数组的索引是对应的
-        return waitingChampion[location.position];
-    }
-    // 检查是否是战斗区的位置
-    else if (location.status == BattleArea) {
-        // 假设战斗区的位置可以转换为二维数组的行和列索引
-        int row = location.position / BATTLE_MAP_COLUMNS;
-        int col = location.position % BATTLE_MAP_COLUMNS;
-        return battleChampion[row][col];
-    }
-    // 如果位置不在上述区域，返回 nullptr
-    return nullptr;
-}
-
-// 显示属性图层
-void HumanPlayer::showAttributesLayer(const Champion& champion)
-{
-    if (!attributesLayer) {
-        attributesLayer = ChampionAttributesLayer::create();
-        attributesLayer->retain(); // 增加引用计数，防止被自动释放
-    }
-    // 确保图层已添加到当前场景
-    if (attributesLayer->getParent() == nullptr) {
-        cocos2d::Scene* currentScene = cocos2d::Director::getInstance()->getRunningScene();
-        if (currentScene) {
-            currentScene->addChild(attributesLayer);
-        }
-    }
-
-    if (attributesLayer) {
-        attributesLayer->showAttributes(champion);
-    }
-}
-
-// 隐藏属性图层
-void HumanPlayer::hideAttributesLayer()
-{
-    if (attributesLayer) {
-        attributesLayer->hide();
-    }
 }
