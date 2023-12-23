@@ -3,7 +3,7 @@
  * File Name:     Player.h
  * File Function: Player类的定义
  * Author:        林继申
- * Update Date:   2023/12/21
+ * Update Date:   2023/12/23
  ****************************************************************/
 
 #pragma once
@@ -19,7 +19,7 @@
 class Player {
 public:
     // 构造函数
-    Player(std::string nickname);
+    Player(const std::string nickname);
 
     // 获取战斗区地图
     void getBattleMap(ChampionCategory(*&battleMap)[BATTLE_MAP_COLUMNS]);

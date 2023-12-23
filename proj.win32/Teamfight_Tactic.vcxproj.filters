@@ -28,14 +28,14 @@
     <Filter Include="Classes\Champion">
       <UniqueIdentifier>{ed5d1db5-2436-453f-a891-6047ac0c74b0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\GBKToUTF8">
-      <UniqueIdentifier>{c4acd934-8caa-4fdb-ab6d-dec6f6f6f2ca}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\LocationMap">
       <UniqueIdentifier>{85cff736-ddc5-45ca-a7b0-fda94795b4a7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\Layer">
       <UniqueIdentifier>{b9edde47-baa8-485f-a380-db5c5ce18252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GBKToUTF8">
+      <UniqueIdentifier>{c4acd934-8caa-4fdb-ab6d-dec6f6f6f2ca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +99,9 @@
     <ClCompile Include="..\Classes\Layer\ChampionAttributesLayer.cpp">
       <Filter>Classes\Layer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Layer\PlacementMarkerLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -159,6 +162,9 @@
       <Filter>Classes\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Layer\ChampionAttributesLayer.h">
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Layer\PlacementMarkerLayer.h">
       <Filter>Classes\Layer</Filter>
     </ClInclude>
   </ItemGroup>

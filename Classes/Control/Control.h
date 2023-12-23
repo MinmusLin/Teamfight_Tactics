@@ -3,7 +3,7 @@
  * File Name:     Control.h
  * File Function: Control类的定义
  * Author:        林继申
- * Update Date:   2023/12/19
+ * Update Date:   2023/12/23
  ****************************************************************/
 
 #pragma once
@@ -19,7 +19,7 @@
 class Control {
 public:
     // 构造函数
-    Control(int maxPlayersNum);
+    Control(const int maxPlayersNum);
 
 protected:
     int maxPlayers; // 最大玩家数量

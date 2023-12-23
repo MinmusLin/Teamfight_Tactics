@@ -1,164 +1,75 @@
 /****************************************************************
  * Project Name:  Teamfight_Tactic
- * File Name:     ChampionAttributeLayer.cpp
- * File Function: ChampionAttributeLayer类的实现
- * Author:        刘淑仪
- * Update Date:   2023/12/21
+ * File Name:     ChampionAttributesLayer.cpp
+ * File Function: ChampionAttributesLayer类的实现
+ * Author:        刘淑仪、林继申
+ * Update Date:   2023/12/23
  ****************************************************************/
 
 #include <sstream>
 #include <iomanip>
 #include "ChampionAttributesLayer.h"
 #include "GBKToUTF8/GBKToUTF8.h"
-#include "cocos2d.h"
-#include "proj.win32/Constant.h"
 
 USING_NS_CC;
 
-// 构造函数
-ChampionAttributesLayer::ChampionAttributesLayer()
-    : nameLabel(nullptr),  priceLabel(nullptr),
-    levelLabel(nullptr), healthLabel(nullptr), attackDamageLabel(nullptr),
-    skillThresholdLabel(nullptr), attackRangeLabel(nullptr),
-    attackSpeedLabel(nullptr), movementSpeedLabel(nullptr),
-    defenseCoefficientLabel(nullptr), backgroundSprite(nullptr) 
+// 初始化战斗英雄属性层
+bool ChampionAttributesLayer::init()
 {
-    ;
+    // 初始化
+    if (!Layer::init()) {
+        return false;
+    }
+
+    // 创建战斗英雄属性层背景图
+    Sprite* backgroundImage = Sprite::create("../Resources/Layers/ChampionAttributesLayer.png");
+    backgroundImage->setPosition(BACKGROUND_IMAGE_START_X, BACKGROUND_IMAGE_START_Y);
+    backgroundImage->setOpacity(BACKGROUND_IMAGE_TRANSPARENCY);
+    this->addChild(backgroundImage);
+
+    return true;
 }
-// 辅助函数转化小数点
-std::string ChampionAttributesLayer::formatFloat(float value, int precision) 
+
+// 显示战斗英雄属性
+void ChampionAttributesLayer::showAttributes(const ChampionCategory championCategory)
+{
+    // 获取战斗英雄属性
+    auto championAttributes = CHAMPION_ATTR_MAP.at(championCategory);
+
+    // 创建战斗英雄图片
+    int championNumber = championAttributes.championCategory % 2 == 1 ? championAttributes.championCategory : championAttributes.championCategory - 1;
+    std::string championImagePath = "../Resources/Champions/Champion" + std::to_string(championNumber) + "&" + std::to_string(championNumber + 1) + ".png";
+    Sprite* championImage = Sprite::create(championImagePath);
+    championImage->setPosition(CHAMPION_IMAGE_START_X, CHAMPION_IMAGE_START_Y);
+    this->addChild(championImage);
+
+    // 创建战斗英雄标签
+    createLabel(GBKToUTF8::getString(championAttributes.championName), CHAMPION_NAME_LABEL_START_X, CHAMPION_NAME_LABEL_START_Y, CHAMPION_NAME_LABEL_FONT_SIZE, championAttributes.championCategory % 2 == 1 ? Color4B::WHITE : Color4B({ GOLDEN_R, GOLDEN_G, GOLDEN_B }));
+    createLabel(std::to_string(championAttributes.level), LEVEL_LABEL_START_X, LEVEL_LABEL_START_Y);
+    createLabel(std::to_string(championAttributes.healthPoints), FIRST_COLUMN_START_X, HEALTH_POINTS_LEBEL_START_Y);
+    createLabel(std::to_string(championAttributes.attackDamage), FIRST_COLUMN_START_X, ATTACK_DAMAGE_LABEL_START_Y);
+    createLabel(std::to_string(championAttributes.attackRange), FIRST_COLUMN_START_X, ATTACK_RANGE_LABEL_START_Y);
+    createLabel(formatFloat(championAttributes.attackSpeed), FIRST_COLUMN_START_X, ATTACK_SPEED_LABEL_START_Y);
+    createLabel(std::to_string(championAttributes.price), SECOND_COLUMN_START_X, PRICE_LABEL_START_Y);
+    createLabel(formatFloat(championAttributes.movementSpeed), SECOND_COLUMN_START_X, MOVEMENT_SPEED_START_Y);
+    createLabel(formatFloat(championAttributes.defenseCoefficient), SECOND_COLUMN_START_X, DEFENSE_COEFFICIENT_START_Y);
+    createLabel(std::to_string(championAttributes.skillTriggerThreshold), SECOND_COLUMN_START_X, SKILL_TRIGGER_THRESHOLD_START_Y);
+}
+
+// 创建属性标签
+void ChampionAttributesLayer::createLabel(const std::string& text, const float x, const float y, const int fontSize, const Color4B color)
+{
+    auto label = Label::createWithTTF(text, "../Resources/Fonts/DingDingJinBuTi.ttf", fontSize);
+    label->setAnchorPoint(Vec2(0, 0.5));
+    label->setPosition(x, y);
+    label->setTextColor(color);
+    this->addChild(label);
+}
+
+// 浮点数格式化输出
+std::string ChampionAttributesLayer::formatFloat(const float value, const int precision)
 {
     std::ostringstream oss;
     oss << std::fixed << std::setprecision(precision) << value;
     return oss.str();
-}
-
-// 显示属性的方法
-void ChampionAttributesLayer::showAttributes(const Champion& champion)
-{
-    // 获取战斗英雄的属性
-    ChampionAttributes attributes = champion.getAttributes();
-
-    // 显示图层
-    this->setVisible(true);
-
-    //
-    std::ostringstream oss;
-    oss << std::fixed << std::setprecision(2) << attributes.attackSpeed;
-    attackSpeedLabel->setString(oss.str());
-
-    // 更新每个标签的文本以反映战斗英雄的属性
-    nameLabel->setString(GBKToUTF8::getString(attributes.championName));
-    priceLabel->setString(std::to_string(attributes.price));
-    levelLabel->setString(std::to_string(attributes.level));
-    healthLabel->setString(std::to_string(attributes.healthPoints));
-    attackDamageLabel->setString( std::to_string(attributes.attackDamage));
-    skillThresholdLabel->setString(std::to_string(attributes.skillTriggerThreshold));
-    attackRangeLabel->setString(std::to_string(attributes.attackRange));
-    attackSpeedLabel->setString(formatFloat(attributes.attackSpeed));
-    movementSpeedLabel->setString(formatFloat(attributes.movementSpeed));
-    defenseCoefficientLabel->setString(formatFloat(attributes.defenseCoefficient));
-
-    nameLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
-    priceLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
-    levelLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
-    healthLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
-    attackDamageLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
-    skillThresholdLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
-    attackRangeLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
-    attackSpeedLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
-    movementSpeedLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
-    defenseCoefficientLabel->setAnchorPoint(cocos2d::Vec2(0, 0.5));
-
-}
-
-// 隐藏属性图层
-void ChampionAttributesLayer::hide()
-{
-    this->setVisible(false);
-}
-
-// 初始化图层（可以在此添加静态元素，如背景等）
-bool ChampionAttributesLayer::init() 
-{
-    if (!Layer::init()) {
-        return false;
-    }
-    // 创建背景精灵
-    backgroundSprite = cocos2d::Sprite::create("../Resources/Champions/ChampionAttributesLabel.png");
-    if (!backgroundSprite) {
-        return false; // 如果创建失败，返回 false
-    }
-
-    // 设置背景精灵的位置
-    backgroundSprite->setPosition(LayerX, LayerY);
-
-    // 设置背景精灵的透明度（0-255，0为完全透明，255为完全不透明）
-    // backgroundSprite->setOpacity(200);
-    this->addChild(backgroundSprite);
-
-    if (!createAttributeLabels())
-        return false;
-    
-    return true;
-}
-
-// 实用的静态创建方法
-ChampionAttributesLayer* ChampionAttributesLayer::create()
-{
-    ChampionAttributesLayer* layer = new ChampionAttributesLayer();
-    if (layer && layer->init()) {
-        layer->autorelease();
-        return layer;
-    }
-    else {
-        delete layer;
-        return nullptr;
-    }
-}
-
-// 辅助函数用于创建标签
-Label* ChampionAttributesLayer::createLabel(const std::string& text, float posX,float posY) 
-{
-    auto label = cocos2d::Label::createWithTTF(text,"../Resources/Fonts/DingDingJinBuTi.ttf", 18);
-    label->setPosition(posX, posY);
-    return label;
-}
-
-// 创建和配置属性标签的私有方法
-bool ChampionAttributesLayer::createAttributeLabels()
-{
-    // 创建所有标签并设置位置
-    // 上三个标签
-    nameLabel = createLabel("Name: ", baseXUpMode,baseYUpMode);
-    levelLabel = createLabel("Level: ", baseXUpMode + deltaXUpMode, baseYUpMode - deltaYUpMode);
-
-    // 下四个标签
-    healthLabel = createLabel("Health: ", baseXDownMode, baseYDownMode);
-    attackDamageLabel = createLabel("Attack Damage: ", baseXDownMode, baseYDownMode - deltaYDownMode);
-    skillThresholdLabel = createLabel("Skill Threshold: ", baseXDownMode, baseYDownMode - 2 * deltaYDownMode);
-    attackRangeLabel = createLabel("Attack Range: ", baseXDownMode, baseYDownMode - 3 * deltaYDownMode);
-
-    priceLabel = createLabel("Price: ", baseXDownMode + deltaXDownMode, baseYDownMode);
-    attackSpeedLabel = createLabel("Attack Speed: ", baseXDownMode + deltaXDownMode, baseYDownMode - deltaYDownMode);
-    movementSpeedLabel = createLabel("Movement Speed: ", baseXDownMode + deltaXDownMode, baseYDownMode - 2 * deltaYDownMode);
-    defenseCoefficientLabel = createLabel("Defense Coefficient: ", baseXDownMode + deltaXDownMode, baseYDownMode - 3 * deltaYDownMode);
-
-    if (!nameLabel || !priceLabel || !levelLabel || !healthLabel || !attackDamageLabel
-        || !skillThresholdLabel || !attackRangeLabel || !attackSpeedLabel || !movementSpeedLabel || !defenseCoefficientLabel) {
-        return false; // 如果任何标签创建失败，返回 false
-    }
-    // 将标签添加到 Layer
-    this->addChild(nameLabel);
-    this->addChild(priceLabel);
-    this->addChild(levelLabel);
-    this->addChild(healthLabel);
-    this->addChild(attackDamageLabel);
-    this->addChild(skillThresholdLabel);
-    this->addChild(attackRangeLabel);
-    this->addChild(attackSpeedLabel);
-    this->addChild(movementSpeedLabel);
-    this->addChild(defenseCoefficientLabel);
-
-    return true;
 }

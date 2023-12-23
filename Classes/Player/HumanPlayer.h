@@ -3,7 +3,7 @@
  * File Name:     HumanPlayer.h
  * File Function: HumanPlayer类的定义
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/23
  ****************************************************************/
 
 #pragma once
@@ -14,6 +14,7 @@
 #include "Button/HoverButton.h"
 #include "Champion/Champion.h"
 #include "Layer/ChampionAttributesLayer.h"
+#include "Layer/PlacementMarkerLayer.h"
 
 /*
  * Class Name:     HumanPlayer
@@ -22,7 +23,7 @@
 class HumanPlayer : public Player {
 public:
     // 构造函数
-    HumanPlayer(std::string nickname);
+    HumanPlayer(const std::string nickname);
 
     // 析构函数
     ~HumanPlayer();
@@ -48,10 +49,10 @@ private:
     Champion* battleChampion[BATTLE_MAP_ROWS][BATTLE_MAP_COLUMNS];        // 战斗区战斗英雄指针
     Champion* waitingChampion[WAITING_MAP_COUNT];                         // 候战区战斗英雄指针
     Location startLocation;                                               // 战斗英雄移动起始位置属性
+    ChampionAttributesLayer* championAttributesLayer;                     // 战斗英雄属性层类指针
+    PlacementMarkerLayer* placementMarkerLayer;                                // 放置标记层类指针
     int maxBattleChampionCount;                                           // 战斗区最大英雄数量
     int goldCoin;                                                         // 金币数量
-    cocos2d::Sprite* currentAttributeSprite = nullptr;                    // 当前显示的属性精灵
-    ChampionAttributesLayer* attributesLayer;                             // 属性显示层
 
     // 添加战斗英雄
     void addChampion(const int index, cocos2d::Scene* currentScene);
@@ -68,17 +69,14 @@ private:
     // 从商店中移除战斗英雄
     void removeChampionFromShop(const int index, cocos2d::Scene* currentScene);
 
+    // 开启显示战斗英雄属性层和放置标记层
+    void showChampionAttributesLayerAndPlacementMarkerLayer(const ChampionCategory championCategory);
+
+    // 关闭显示战斗英雄属性层和放置标记层
+    void hideChampionAttributesLayerAndPlacementMarkerLayer();
+
     // 刷新商店战斗英雄种类
     void refreshShopChampionCategory();
-
-    // 获取对应英雄指针
-    Champion* getChampionByLocation(const Location& location);
-
-    // 显示属性图层
-    void showAttributesLayer(const Champion& champion);
-
-    // 隐藏属性图层
-    void hideAttributesLayer();
 };
 
 #endif // !_HUMAN_PLAYER_H_

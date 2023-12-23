@@ -3,14 +3,14 @@
  * File Name:     Battle.cpp
  * File Function: Battle类的实现
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/23
  ****************************************************************/
 
 #include <iostream>
 #include "Battle.h"
 
 // 构造函数
-Battle::Battle(ChampionCategory myFlagMap[][BATTLE_MAP_COLUMNS], ChampionCategory enemyFlagMap[][BATTLE_MAP_COLUMNS])
+Battle::Battle(const ChampionCategory myFlagMap[][BATTLE_MAP_COLUMNS], const ChampionCategory enemyFlagMap[][BATTLE_MAP_COLUMNS])
 {
     for (int i = 0; i < PLACE_MAP_ROWS; i++) {
         for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {

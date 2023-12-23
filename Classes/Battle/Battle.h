@@ -3,7 +3,7 @@
  * File Name:     Battle.h
  * File Function: Battle类的定义
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/23
  ****************************************************************/
 
 #pragma once
@@ -20,7 +20,7 @@
 class Battle {
 public:
     // 构造函数
-    Battle(ChampionCategory myFlagMap[][BATTLE_MAP_COLUMNS], ChampionCategory enemyFlagMap[][BATTLE_MAP_COLUMNS]);
+    Battle(const ChampionCategory myFlagMap[][BATTLE_MAP_COLUMNS], const ChampionCategory enemyFlagMap[][BATTLE_MAP_COLUMNS]);
 
     // 析构函数
     ~Battle();

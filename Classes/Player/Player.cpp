@@ -3,14 +3,14 @@
  * File Name:     Player.cpp
  * File Function: Player类的实现
  * Author:        林继申
- * Update Date:   2023/12/21
+ * Update Date:   2023/12/23
  ****************************************************************/
 
 #include <algorithm>
 #include "Player.h"
 
 // 构造函数
-Player::Player(std::string nickname) :
+Player::Player(const std::string nickname) :
     name(nickname)
 {
     for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
