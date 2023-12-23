@@ -46,7 +46,7 @@ constexpr int GOLDEN_B = 11;                                                // ╫
 constexpr int STARTUP_SCENE_FONT_SIZE = 20;                                 // фТ╤╞Ё║╬╟вжлЕ╢Сп║
 constexpr int STARTUP_SCENE_LOADINGBAR_OFFSET_Y = -241;                     // фТ╤╞Ё║╬╟╪сть╫Ь╤хлУн╩жц Y ф╚рфа©
 constexpr int STARTUP_SCENE_LOADING_LABEL_OFFSET_X = -30;                   // фТ╤╞Ё║╬╟╪сть╫Ь╤хлУ╠Йг╘н╩жц X ф╚рфа©
-constexpr float STARTUP_SCENE_DURATION = 0.1f;                              // фТ╤╞Ё║╬╟╪стьй╠╪Дё╗TODO: ╫зй║╣Вйтй╠╪Дё╘
+constexpr float STARTUP_SCENE_DURATION = 2.0f;                              // фТ╤╞Ё║╬╟╪стьй╠╪Д
 constexpr float SCENE_TRANSITION_DURATION = 0.3f;                           // Ё║╬╟гп╩╩й╠╪Д
 
 // ЁУй╪Ё║╬╟иХжц
@@ -66,6 +66,7 @@ constexpr int MENU_SCENE_OFFLINE_MODE_BUTTON_OFFSET_Y = -30;                // ╡
 constexpr int MENU_SCENE_ONLINE_MODE_BUTTON_OFFSET_Y = -150;                // ╡к╣╔Ё║╬╟а╙╩Здёй╫╟╢е╔н╩жц Y ф╚рфа©
 constexpr int MENU_SCENE_SETTINGS_BUTTON_OFFSET_Y = -270;                   // ╡к╣╔Ё║╬╟иХжц╟╢е╔н╩жц Y ф╚рфа©
 constexpr int MENU_SCENE_WELCOME_LABEL_OFFSET_Y = 240;                      // ╡к╣╔Ё║╬╟╩╤с╜╠Йг╘н╩жц Y ф╚рфа©
+constexpr float RANDOM_WELCOME_PROMPT_PROBABILITY = 0.5f;                   // кФ╩З╩╤с╜лАй╬сО╦ебй
 
 // ╤ту╫Ё║╬╟иХжц
 constexpr int WAITING_MAP_COUNT = 9;                                        // ╨Ру╫гЬ╣ьм╪╢Сп║
@@ -87,10 +88,11 @@ constexpr int BATTLE_SCENE_DELETE_CHAMPION_BUTTON_UPPER_BOUNDARY = 130;     // ╤
 constexpr int BATTLE_SCENE_DELETE_CHAMPION_BUTTON_LOWER_BOUNDARY = 24;      // ╤ту╫Ё║╬╟у╫╤╥с╒пши╬ЁЩ╟╢е╔об╠ъ╫Г Y вЬ╠Й
 constexpr int BATTLE_SCENE_DELETE_CHAMPION_BUTTON_LEFT_BOUNDARY = 25;       // ╤ту╫Ё║╬╟у╫╤╥с╒пши╬ЁЩ╟╢е╔вС╠ъ╫Г X вЬ╠Й
 constexpr int BATTLE_SCENE_DELETE_CHAMPION_BUTTON_RIGHT_BOUNDARY = 210;     // ╤ту╫Ё║╬╟у╫╤╥с╒пши╬ЁЩ╟╢е╔ср╠ъ╫Г X вЬ╠Й
-constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 15.0f;                   // ╤ту╫Ё║╬╟в╪╠╦й╠╪Д
+constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 30.0f;                   // ╤ту╫Ё║╬╟в╪╠╦й╠╪Д
 
 // ил╣ЙиХжц
 constexpr int MAX_SELECTABLE_CHAMPION_COUNT = 5;                            // вН╢С©ия║тЯу╫╤╥с╒пшйЩа©
+constexpr int CHAMPION_UPLEVEL_COUNT = 3;                                   // у╫╤╥с╒пшиЩ╪╤йЩа©
 constexpr int SHOP_CHAMPION_INTERVAL = 10;                                  // ил╣Йу╫╤╥с╒пш╟╢е╔╪Д╬Ю
 constexpr int SHOP_CHAMPION_WIDTH = 120;                                    // ил╣Йу╫╤╥с╒пш╟╢е╔©М╤х
 constexpr int SHOP_CHAMPION_HEIGHT = 100;                                   // ил╣Йу╫╤╥с╒пш╟╢е╔╦ъ╤х
@@ -347,7 +349,7 @@ const std::map<ChampionCategory, ChampionAttributes> CHAMPION_ATTR_MAP = {
     {Champion30, CHAMPION_30_ATTR}  // ©╗и╞ё╗╤Чпгё╘
 };
 
-// п║й╠йЩсК╩╤с╜лАй╬сО╪Эж╣╤т
+// пР╨есК╩╤с╜лАй╬сО╪Эж╣╤т
 const std::map<int, std::string> WELCOME_PROMPT = {
     {0,  "ё╛аХЁ©╨цё║пгпг╩╧тзё╛дЦр╡тзё╛сно╥ж╝бц╣х╢ЩведЦ."},
     {1,  "ё╛аХЁ©╨цё║р╧мМ╣дцьцэуЩтзсно╥йю╫Гжпу╧©╙."},
@@ -372,7 +374,31 @@ const std::map<int, std::string> WELCOME_PROMPT = {
     {20, "ё╛мМио╨цё║хцд╖╥╗╣ЦаадЦ╣дсно╥йю╫Г."},
     {21, "ё╛мМио╨цё║тзуБдЧ╬╡╣др╧мМё╛у╫╤╥╣╫╣в."},
     {22, "ё╛мМио╨цё║тзуБиЯць╣дй╠©лё╛уВ╥Чсно╥йю╫Г."},
-    {23, "ё╛мМио╨цё║р╧иНакё╛╟ИкФтб╧Бё╛©╙й╪дЦ╣дсно╥ж╝бц."}
+    {23, "ё╛мМио╨цё║р╧иНакё╛╟ИкФтб╧Бё╛©╙й╪дЦ╣дсно╥ж╝бц."},
+    {24, "ё╛хцжг╩ш╣д╩П╩╗тзвтвъфЕ╣дйю╫Гжпиар╚."},
+    {25, "ё╛╩╤с╜╩ью╢ё║фФ╩цц╟оунчй╠╡╩тз."},
+    {26, "ё╛сно╥йю╫Г╩╤с╜дЦё╛цноКфП╨╫."},
+    {27, "ё╛с╒пшё╛в╪╠╦╨цдЦ╣дфЕвсё╛с╝х║╫Яху╣дй╓юШ!"},
+    {28, "ё╛сКпгЁ╫м╛ппё╛л╫кВнчоч©идэ."},
+    {29, "ё╛у╫╤╥н╢мёё╛╢╚фФсидЦпЬп╢."},
+    {30, "ё╛втвъфЕ╣дйю╫ГюОё╛ц©р╩Ё║у╫╤╥╤╪ЁДбЗ╬╙о╡."},
+    {31, "ё╛с╒пш╧Ию╢ё╛ц╟оутыфТ╨╫."},
+    {32, "ё╛сно╥юО╣дц©р╩лЛё╛╤╪йгпб╣д╧ййб."},
+    {33, "ё╛д╖╥╗йю╫Г╣хдЦл╫кВё╛фФ╪ё╪╢╫╚╥╒иЗ."},
+    {34, "ё╛цнсКожй╣╫╩╩Цё╛сно╥йю╫Г╣д╧ййб©╙й╪."},
+    {35, "ё╛ц╟оунч╫Гочё╛ц©р╩╢н╣гб╪╤╪йгпб©╙й╪."},
+    {36, "ё╛сб╦р╣дл╫оууъё╛пб╣дфФ╪ё╣хдЦ╥╒ож."},
+    {37, "ё╛ц©р╩╢нсно╥ё╛╤╪йг╤тн╢ж╙╣дуВ╥Ч."},
+    {38, "ё╛Ё╛т╫╪╚очё╛хцц©р╩╢нЁ╒йт╤╪иар╚."},
+    {39, "ё╛ну╫Т╫ё╠Зё╛ц╟оу╣дб╥иодЦ╡╩╧б╣╔."},
+    {40, "ё╛тзпг╩тобё╛пЬп╢дЦ╣дс╒пш╢╚к╣."},
+    {41, "ё╛сб╢ЁлЛядё╛ц©р╩╦Жйю╫Г╤╪спдЦ╣д╢╚к╣."},
+    {42, "ё╛уЭ╬хйю╫ГхннЯтщмёё╛╫ЯлЛж╩вЖ©Люж╣дйбгИ."},
+    {43, "ё╛╢╘иопИдБеШ╥Гё╛╫ЯлЛдЦйгЁ╛╪╤с╒пш."},
+    {44, "ё╛╣Вф╓╣д╬╚аИря╬╜м╣въаксно╥цьцэё╛в╥!"},
+    {45, "ё╛в╪╠╦╨цакбПё©фЕелио╣дс╒пшцгуЩ╣хведЦ╣дуы╩╫."},
+    {46, "ё╛тзвтвъфЕ╣ду╫Ё║иоё╛ц©р╩╡╫╤╪йг╡ъбт╣д©╪яИ."},
+    {47, "ё╛╡ъбт╢Сй╕ё╛╫ЯхудЦ╫╚хГ╨н╣ъ╦╡фЕ╬ж?"}
 };
 
 #endif // !_CONSTANT_H_

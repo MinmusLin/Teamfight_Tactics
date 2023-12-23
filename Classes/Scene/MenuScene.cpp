@@ -93,12 +93,10 @@ bool MenuScene::init()
     this->addChild(onlineModeButton);
     this->addChild(settingsButton);
 
-    // 获取当前小时数
-    std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    const int hour = std::localtime(&now)->tm_hour;
-
     // 创建一个欢迎提示
-    auto welcomeLabel = Label::createWithTTF(cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName") + GBKToUTF8::getString(WELCOME_PROMPT.at(hour)), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", MENU_SCENE_FONT_SIZE);
+    std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    const int number = (rand() % 100 < RANDOM_WELCOME_PROMPT_PROBABILITY * 100) ? std::localtime(&now)->tm_hour : rand() % 24 + 24;
+    auto welcomeLabel = Label::createWithTTF(cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName") + GBKToUTF8::getString(WELCOME_PROMPT.at(number)), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", MENU_SCENE_FONT_SIZE);
     welcomeLabel->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_BUTTONS_OFFSET_X, screenSize.height / 2 + MENU_SCENE_WELCOME_LABEL_OFFSET_Y));
     welcomeLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(welcomeLabel);

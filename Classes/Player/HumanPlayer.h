@@ -58,6 +58,7 @@ private:
     Champion* waitingChampion[WAITING_MAP_COUNT];                         // 候战区战斗英雄指针
     ChampionAttributesLayer* championAttributesLayer;                     // 战斗英雄属性层类指针
     PlacementMarkerLayer* placementMarkerLayer;                           // 放置标记层类指针
+    cocos2d::Sprite* nearestPlacementMarker;                              // 最近放置标记指针
     Location startLocation;                                               // 战斗英雄移动起始位置属性
     int maxBattleChampionCount;                                           // 战斗区最大英雄数量
     int goldCoin;                                                         // 金币数量
@@ -88,6 +89,15 @@ private:
 
     // 刷新金币数量标签
     void refreshCoinLabel(int num);
+
+    // 统计特定种类战斗英雄的数量
+    int countSpecificChampion(const ChampionCategory championCategory);
+
+    // 升级战斗英雄
+    void uplevelChampion(const ChampionCategory championCategory);
+
+    // 寻找最近可放置坐标
+    cocos2d::Vec2 findNearestPoint(cocos2d::Sprite* championSprite);
 
     // 刷新商店战斗英雄种类
     void refreshShopChampionCategory();
