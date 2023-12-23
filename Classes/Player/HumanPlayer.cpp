@@ -17,6 +17,7 @@ USING_NS_CC;
 // 构造函数
 HumanPlayer::HumanPlayer(const std::string nickname) :
     Player(nickname),
+    currentScene(nullptr),
     deleteChampionButton(nullptr),
     championAttributesLayer(nullptr),
     placementMarkerLayer(nullptr),
@@ -48,23 +49,30 @@ HumanPlayer::~HumanPlayer()
     }
 }
 
-// 刷新商店
-void HumanPlayer::refreshShop(Scene* currentScene)
+// 设置当前场景指针
+void HumanPlayer::setCurrentScene(cocos2d::Scene* currentScene)
 {
+    this->currentScene = currentScene;
+}
+
+// 刷新商店
+void HumanPlayer::refreshShop()
+{
+    // 检查金币数量
+    if (goldCoin < REFRESH_SHOP_PRICE) {
+        return;
+    }
+
     // 销毁已存在按钮
     for (int i = 0; i < MAX_SELECTABLE_CHAMPION_COUNT; ++i) {
         if (shopChampionButton[i] != nullptr) {
-            removeChampionFromShop(i, currentScene);
+            removeChampionFromShop(i);
         }
     }
 
     // 刷新商店战斗英雄种类
     refreshShopChampionCategory();
-
-    // 更新金币数量
-    goldCoin -= REFRESH_SHOP_PRICE;
-    auto coinLabel = dynamic_cast<Label*>(currentScene->getChildByName("CoinLabel"));
-    coinLabel->setString(std::to_string(goldCoin));
+    refreshCoinLabel(-REFRESH_SHOP_PRICE);
 
     // 更新商店战斗英雄按钮
     for (int i = 0; i < MAX_SELECTABLE_CHAMPION_COUNT; i++) {
@@ -77,9 +85,9 @@ void HumanPlayer::refreshShop(Scene* currentScene)
         shopChampionButton[i]->setPosition(Vec2(SHOP_CHAMPION_START_X + i * (SHOP_CHAMPION_INTERVAL + SHOP_CHAMPION_WIDTH), SHOP_CHAMPION_START_Y));
 
         // 为按钮添加事件处理器
-        shopChampionButton[i]->addTouchEventListener([this, i, currentScene](Ref* sender, ui::Widget::TouchEventType type) {
+        shopChampionButton[i]->addTouchEventListener([this, i](Ref* sender, ui::Widget::TouchEventType type) {
             if (type == ui::Widget::TouchEventType::BEGAN) {
-                addChampion(i, currentScene);
+                addChampion(i);
             }
             });
 
@@ -109,12 +117,10 @@ int HumanPlayer::getCurrentBattleChampionCount() const
 }
 
 // 增加战斗区英雄数量
-void HumanPlayer::addBattleChampionCount(Scene* currentScene, const int num)
+void HumanPlayer::addBattleChampionCount(const int num)
 {
-    if (maxBattleChampionCount < BATTLE_AREA_MAX_CHAMPION_COUNT) {
-        goldCoin -= UPLEVEL_PRICE.at(maxBattleChampionCount);
-        auto coinLabel = dynamic_cast<Label*>(currentScene->getChildByName("CoinLabel"));
-        coinLabel->setString(std::to_string(goldCoin));
+    if (maxBattleChampionCount < BATTLE_AREA_MAX_CHAMPION_COUNT && goldCoin >= UPLEVEL_PRICE.at(maxBattleChampionCount)) {
+        refreshCoinLabel(-UPLEVEL_PRICE.at(maxBattleChampionCount));
         maxBattleChampionCount += num;
         auto levelLabel = dynamic_cast<Label*>(currentScene->getChildByName("LevelLabel"));
         if (maxBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT) {
@@ -133,7 +139,7 @@ int HumanPlayer::getGoldCoin() const
 }
 
 // 初始化战斗英雄删除按钮
-void HumanPlayer::initializeDeleteChampionButton(Scene* currentScene)
+void HumanPlayer::initializeDeleteChampionButton()
 {
     deleteChampionButton = HoverButton::create("../Resources/Buttons/OfflineModePreparationSceneButtons/DeleteChampionDefaultButton.png",
         "../Resources/Buttons/OfflineModePreparationSceneButtons/DeleteChampionHoverButton.png",
@@ -145,12 +151,16 @@ void HumanPlayer::initializeDeleteChampionButton(Scene* currentScene)
 }
 
 // 添加战斗英雄
-void HumanPlayer::addChampion(const int index, Scene* currentScene)
+void HumanPlayer::addChampion(const int index)
 {
     for (int pos = 0; pos < WAITING_MAP_COUNT; pos++) {
         if (waitingMap[pos] == NoChampion) {
             // 从商店中移除战斗英雄
-            removeChampionFromShop(index, currentScene);
+            if (goldCoin < CHAMPION_ATTR_MAP.at(shopChampionCategory[index]).price) {
+                return;
+            }
+            refreshCoinLabel(-CHAMPION_ATTR_MAP.at(shopChampionCategory[index]).price);
+            removeChampionFromShop(index);
 
             // 修改候战区棋盘信息
             waitingMap[pos] = shopChampionCategory[index];
@@ -328,7 +338,7 @@ void HumanPlayer::onMouseUp(Event* event, Sprite* championSprite)
 }
 
 // 从商店中移除战斗英雄
-void HumanPlayer::removeChampionFromShop(const int index, cocos2d::Scene* currentScene)
+void HumanPlayer::removeChampionFromShop(const int index)
 {
     shopChampionButton[index]->setEnabled(false);
     currentScene->removeChild(shopChampionButton[index]);
@@ -374,22 +384,31 @@ void HumanPlayer::hideChampionAttributesLayerAndPlacementMarkerLayer()
 void HumanPlayer::deleteCurrentChampion()
 {
     if (startLocation.status == WaitingArea) {
+        refreshCoinLabel(CHAMPION_ATTR_MAP.at(waitingChampion[startLocation.position]->getAttributes().championCategory).price);
         waitingChampion[startLocation.position]->getSprite()->removeFromParent();
         waitingChampion[startLocation.position] = nullptr;
     }
     else {
+        refreshCoinLabel(CHAMPION_ATTR_MAP.at(battleChampion[startLocation.position / BATTLE_MAP_COLUMNS][startLocation.position % BATTLE_MAP_COLUMNS]->getAttributes().championCategory).price);
         battleChampion[startLocation.position / BATTLE_MAP_COLUMNS][startLocation.position % BATTLE_MAP_COLUMNS]->getSprite()->removeFromParent();
         battleChampion[startLocation.position / BATTLE_MAP_COLUMNS][startLocation.position % BATTLE_MAP_COLUMNS] = nullptr;
     }
 }
 
+// 刷新金币数量标签
+void HumanPlayer::refreshCoinLabel(int num)
+{
+    goldCoin += num;
+    auto coinLabel = dynamic_cast<Label*>(currentScene->getChildByName("CoinLabel"));
+    coinLabel->setString(std::to_string(goldCoin));
+}
+
 // 刷新商店战斗英雄种类
 void HumanPlayer::refreshShopChampionCategory()
 {
-    // TODO: 杨兆镇：商店推荐算法
-    shopChampionCategory[0] = CHAMPION_ATTR_MAP.at(Champion1).championCategory;
-    shopChampionCategory[1] = CHAMPION_ATTR_MAP.at(Champion3).championCategory;
-    shopChampionCategory[2] = CHAMPION_ATTR_MAP.at(Champion5).championCategory;
-    shopChampionCategory[3] = CHAMPION_ATTR_MAP.at(Champion7).championCategory;
-    shopChampionCategory[4] = CHAMPION_ATTR_MAP.at(Champion9).championCategory;
+    shopChampionCategory[0] = CHAMPION_ATTR_MAP.at(static_cast<ChampionCategory>(2 * (rand() % 7 + 1) - 1)).championCategory;
+    shopChampionCategory[1] = CHAMPION_ATTR_MAP.at(static_cast<ChampionCategory>(2 * (rand() % 7 + 1) - 1)).championCategory;
+    shopChampionCategory[2] = CHAMPION_ATTR_MAP.at(static_cast<ChampionCategory>(2 * (rand() % 7 + 1) - 1)).championCategory;
+    shopChampionCategory[3] = CHAMPION_ATTR_MAP.at(static_cast<ChampionCategory>(2 * (rand() % 7 + 1) - 1)).championCategory;
+    shopChampionCategory[4] = CHAMPION_ATTR_MAP.at(static_cast<ChampionCategory>(2 * (rand() % 7 + 1) - 1)).championCategory;
 }

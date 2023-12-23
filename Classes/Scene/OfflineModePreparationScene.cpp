@@ -34,7 +34,10 @@ bool OfflineModePreparationScene::init()
     if (!Scene::init()) {
         return false;
     }
-    
+
+    // 设置 HumanPlayer 类的当前场景指针
+    g_offlineModeControl->getHumanPlayer()->setCurrentScene(this);
+
     // 加载背景
     const auto screenSize = Director::getInstance()->getVisibleSize();
     const auto background = Sprite::create("../Resources/Scenes/OfflineModePreparationScene.png");
@@ -98,12 +101,12 @@ bool OfflineModePreparationScene::init()
     // 为按钮添加事件处理器
     uplevelButton->addTouchEventListener([this](Ref* sender, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED) {
-            g_offlineModeControl->getHumanPlayer()->addBattleChampionCount(this);
+            g_offlineModeControl->getHumanPlayer()->addBattleChampionCount();
         }
         });
     refreshButton->addTouchEventListener([this](Ref* sender, ui::Widget::TouchEventType type) {
         if (type == ui::Widget::TouchEventType::ENDED) {
-            g_offlineModeControl->getHumanPlayer()->refreshShop(this);
+            g_offlineModeControl->getHumanPlayer()->refreshShop();
         }
         });
     returnMenuButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
@@ -120,7 +123,7 @@ bool OfflineModePreparationScene::init()
     this->addChild(returnMenuButton);
 
     // 初始化战斗英雄删除按钮
-    g_offlineModeControl->getHumanPlayer()->initializeDeleteChampionButton(this);
+    g_offlineModeControl->getHumanPlayer()->initializeDeleteChampionButton();
 
     return true;
 }
@@ -150,7 +153,7 @@ void OfflineModePreparationScene::onEnter()
 void OfflineModePreparationScene::setScheduleOnce(ui::LoadingBar* progressBar, Label* progressLabel)
 {
     // 刷新商店
-    g_offlineModeControl->getHumanPlayer()->refreshShop(this);
+    g_offlineModeControl->getHumanPlayer()->refreshShop();
 
     // 更新进度条和标签
     const float interval = BATTLE_SCENE_LOADINGBAR_DURATION / 1000.0f; // 每 0.1% 所需时间

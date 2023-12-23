@@ -3,7 +3,7 @@
  * File Name:     GameMain.cpp
  * File Function: 游戏程序入口点
  * Author:        林继申
- * Update Date:   2023/12/19
+ * Update Date:   2023/12/24
  ****************************************************************/
 
 #define WIN32_LEAN_AND_MEAN // 排除 Windows 头文件中不常用的部分
@@ -25,6 +25,10 @@
  */
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
 {
+    // 初始化随机数生成器
+    srand(static_cast<unsigned int>(time(0)));
+
+    // 初始化 Cocos2d-x 应用程序实例
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
     AppDelegate app;

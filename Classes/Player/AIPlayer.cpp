@@ -3,7 +3,7 @@
  * File Name:     AIPlayer.cpp
  * File Function: AIPlayer类的实现
  * Author:        林继申
- * Update Date:   2023/12/23
+ * Update Date:   2023/12/24
  ****************************************************************/
 
 #include "AIPlayer.h"
@@ -16,6 +16,5 @@ AIPlayer::AIPlayer(const std::string nickname, const Difficulty difficulty_) :
 // AI 落棋算法
 void AIPlayer::makeMoves()
 {
-    // TODO: 杨兆镇：AI落棋算法，难度根据私有变量difficulty决定
-    // AI 落棋算法的难度会在设置界面全局调整
+
 }
