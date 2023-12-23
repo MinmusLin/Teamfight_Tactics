@@ -3,7 +3,7 @@
  * File Name:     Constant.h
  * File Function: ≥£±‰¡øµƒ∂®“Â
  * Author:        ¡÷ºÃ…Í°¢¡ı Á“«°¢—Ó’◊’Ú°¢—Ó”ÓÁ˚
- * Update Date:   2023/12/23
+ * Update Date:   2023/12/24
  ****************************************************************/
 
 #pragma once
@@ -80,7 +80,7 @@ constexpr int BATTLE_SCENE_LOADINGBAR_LABEL_FONT_SIZE = 20;                 // ∂
 constexpr int BATTLE_SCENE_LOADINGBAR_LABEL_OFFSET_X = -18;                 // ∂‘’Ω≥°æ∞◊º±∏Ω¯∂»Ãı±Í«©Œª÷√ X ∆´“∆¡ø
 constexpr int BATTLE_SCENE_LOADINGBAR_LABEL_THRESHOLD = 10;                 // ∂‘’Ω≥°æ∞◊º±∏ ±º‰œ‘ æ„–÷µ
 constexpr int BATTLE_SCENE_RETURN_MENU_BUTTON_OFFSET_X = 522;               // ∂‘’Ω≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ X ∆´“∆¡ø
-constexpr int BATTLE_SCENE_RETURN_MENU_BUTTON_OFFSET_Y = -310;              // ∂‘’Ω≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ Y ∆´“∆¡ø
+constexpr int BATTLE_SCENE_RETURN_MENU_BUTTON_OFFSET_Y = -294;              // ∂‘’Ω≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ Y ∆´“∆¡ø
 constexpr int BATTLE_SCENE_DELETE_CHAMPION_BUTTON_START_X = 118;            // ∂‘’Ω≥°æ∞’Ω∂∑”¢–€…æ≥˝∞¥≈•Œª÷√ X ◊¯±Í
 constexpr int BATTLE_SCENE_DELETE_CHAMPION_BUTTON_START_Y = 77;             // ∂‘’Ω≥°æ∞’Ω∂∑”¢–€…æ≥˝∞¥≈•Œª÷√ Y ◊¯±Í
 constexpr int BATTLE_SCENE_DELETE_CHAMPION_BUTTON_UPPER_BOUNDARY = 130;     // ∂‘’Ω≥°æ∞’Ω∂∑”¢–€…æ≥˝∞¥≈•…œ±ﬂΩÁ Y ◊¯±Í

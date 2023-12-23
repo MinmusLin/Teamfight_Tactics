@@ -3,7 +3,7 @@
  * File Name:     OfflineModePreparationScene.cpp
  * File Function: OfflineModePreparationScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/23
+ * Update Date:   2023/12/24
  ****************************************************************/
 
 #include "OfflineModePreparationScene.h"
@@ -80,12 +80,12 @@ bool OfflineModePreparationScene::init()
     setScheduleOnce(progressBar, progressLabel);
 
     // 创建按钮
-    auto uplevelButton = HoverButton::create("../Resources/Buttons/ShopButtons/UplevelDefaultButton.png",
-        "../Resources/Buttons/ShopButtons/UplevelHoverButton.png",
-        "../Resources/Buttons/ShopButtons/UplevelActiveButton.png");
-    auto refreshButton = HoverButton::create("../Resources/Buttons/ShopButtons/RefreshDefaultButton.png",
-        "../Resources/Buttons/ShopButtons/RefreshHoverButton.png",
-        "../Resources/Buttons/ShopButtons/RefreshActiveButton.png");
+    auto uplevelButton = HoverButton::create("../Resources/Buttons/OfflineModePreparationSceneButtons/UplevelDefaultButton.png",
+        "../Resources/Buttons/OfflineModePreparationSceneButtons/UplevelHoverButton.png",
+        "../Resources/Buttons/OfflineModePreparationSceneButtons/UplevelActiveButton.png");
+    auto refreshButton = HoverButton::create("../Resources/Buttons/OfflineModePreparationSceneButtons/RefreshDefaultButton.png",
+        "../Resources/Buttons/OfflineModePreparationSceneButtons/RefreshHoverButton.png",
+        "../Resources/Buttons/OfflineModePreparationSceneButtons/RefreshActiveButton.png");
     auto returnMenuButton = HoverButton::create("../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuDefaultButton.png",
         "../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuHoverButton.png",
         "../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuActiveButton.png");
