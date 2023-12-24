@@ -228,91 +228,91 @@ const ChampionAttributes CHAMPION_1_ATTR = { // 劫（一星）
     Champion1, "劫", "../Resources/Champions/Champion1.png", 1, 1, 200, 30, 200, 1, 1.0f, 1.0f, 1.0f
 };
 const ChampionAttributes CHAMPION_2_ATTR = { // 劫（二星）
-    Champion2, "劫", "../Resources/Champions/Champion2.png", 1, 2, 250, 35, 200, 1, 0.9f, 1.2f, 1.1f
+    Champion2, "劫", "../Resources/Champions/Champion2.png", 3, 2, 250, 35, 200, 1, 0.9f, 1.2f, 1.1f
 };
 const ChampionAttributes CHAMPION_3_ATTR = { // 永恩（一星）
     Champion3, "永恩", "../Resources/Champions/Champion3.png", 1, 1, 200, 25, 50, 1, 0.8f, 1.0f, 1.0f
 };
 const ChampionAttributes CHAMPION_4_ATTR = { // 永恩（二星）
-    Champion4, "永恩", "../Resources/Champions/Champion4.png", 1, 2, 250, 30, 50, 1, 0.7f, 1.2f, 1.1f
+    Champion4, "永恩", "../Resources/Champions/Champion4.png", 3, 2, 250, 30, 50, 1, 0.7f, 1.2f, 1.1f
 };
 const ChampionAttributes CHAMPION_5_ATTR = { // 奥拉夫（一星）
     Champion5, "奥拉夫", "../Resources/Champions/Champion5.png", 1, 1, 250, 20, 120, 1, 0.8f, 1.2f, 0.8f
 };
 const ChampionAttributes CHAMPION_6_ATTR = { // 奥拉夫（二星）
-    Champion6, "奥拉夫", "../Resources/Champions/Champion6.png", 1, 2, 300, 25, 120, 1, 0.7f, 1.4f, 0.9f
+    Champion6, "奥拉夫", "../Resources/Champions/Champion6.png", 3, 2, 300, 25, 120, 1, 0.7f, 1.4f, 0.9f
 }; // 技能回血
 const ChampionAttributes CHAMPION_7_ATTR = { // 潘森（一星）
     Champion7, "潘森", "../Resources/Champions/Champion7.png", 1, 1, 250, 20, 100, 1, 1.0f, 1.0f, 1.1f
 };
 const ChampionAttributes CHAMPION_8_ATTR = { // 潘森（二星）
-    Champion8, "潘森", "../Resources/Champions/Champion8.png", 1, 2, 300, 25, 100, 1, 0.9f, 1.2f, 1.2f
+    Champion8, "潘森", "../Resources/Champions/Champion8.png", 3, 2, 300, 25, 100, 1, 0.9f, 1.2f, 1.2f
 };
 const ChampionAttributes CHAMPION_9_ATTR = { // 伊芙琳（一星）
     Champion9, "伊芙琳", "../Resources/Champions/Champion9.png", 1, 1, 175, 15, 200, 1, 1.0f, 1.0f, 1.0f
 };
 const ChampionAttributes CHAMPION_10_ATTR = { // 伊芙琳（二星）
-    Champion10, "伊芙琳", "../Resources/Champions/Champion10.png", 1, 2, 225, 20, 200, 1, 0.9f, 1.2f, 1.1f
+    Champion10, "伊芙琳", "../Resources/Champions/Champion10.png", 3, 2, 225, 20, 200, 1, 0.9f, 1.2f, 1.1f
 };
 const ChampionAttributes CHAMPION_11_ATTR = { // 库奇（一星）
     Champion11, "库奇", "../Resources/Champions/Champion11.png", 2, 1, 150, 23, 100, 3, 0.7f, 1.1f, 0.7f
 };
 const ChampionAttributes CHAMPION_12_ATTR = { // 库奇（二星）
-    Champion12, "库奇", "../Resources/Champions/Champion12.png", 2, 2, 200, 28, 100, 3, 0.6f, 1.3f, 0.8f
+    Champion12, "库奇", "../Resources/Champions/Champion12.png", 6, 2, 200, 28, 100, 3, 0.6f, 1.3f, 0.8f
 };
 const ChampionAttributes CHAMPION_13_ATTR = { // 塔里克（一星）
     Champion13, "塔里克", "../Resources/Champions/Champion13.png", 2, 1, 250, 20, 200, 1, 1.1f, 1.0f, 1.2f
 }; // 技能眩晕
 const ChampionAttributes CHAMPION_14_ATTR = { // 塔里克（二星）
-    Champion14, "塔里克", "../Resources/Champions/Champion14.png", 2, 2, 300, 25, 200, 1, 1.0f, 1.2f, 1.3f
+    Champion14, "塔里克", "../Resources/Champions/Champion14.png", 6, 2, 300, 25, 200, 1, 1.0f, 1.2f, 1.3f
 };
 const ChampionAttributes CHAMPION_15_ATTR = { // 亚索（一星）
     Champion15, "亚索", "../Resources/Champions/Champion15.png", 2, 1, 200, 25, 50, 1, 0.7f, 1.0f, 1.0f
 };
 const ChampionAttributes CHAMPION_16_ATTR = { // 亚索（二星）
-    Champion16, "亚索", "../Resources/Champions/Champion16.png", 2, 2, 250, 30, 50, 1, 0.6f, 1.2f, 1.1f
+    Champion16, "亚索", "../Resources/Champions/Champion16.png", 6, 2, 250, 30, 50, 1, 0.6f, 1.2f, 1.1f
 };
 const ChampionAttributes CHAMPION_17_ATTR = { // 金克丝（一星）
     Champion17, "金克丝", "../Resources/Champions/Champion17.png", 2, 1, 150, 30, 200, 1, 0.5f, 1.5f, 0.7f
 };
 const ChampionAttributes CHAMPION_18_ATTR = { // 金克丝（二星）
-    Champion18, "金克丝", "../Resources/Champions/Champion18.png", 2, 2, 200, 35, 200, 2, 0.4f, 1.7f, 0.8f
+    Champion18, "金克丝", "../Resources/Champions/Champion18.png", 6, 2, 200, 35, 200, 2, 0.4f, 1.7f, 0.8f
 };
 const ChampionAttributes CHAMPION_19_ATTR = { // 塔姆（一星）
     Champion19, "塔姆", "../Resources/Champions/Champion19.png", 3, 1, 300, 15, 150, 1, 1.0f, 1.0f, 1.2f
 };
 const ChampionAttributes CHAMPION_20_ATTR = { // 塔姆（二星）
-    Champion20, "塔姆", "../Resources/Champions/Champion20.png", 3, 2, 350, 20, 150, 1, 0.9f, 1.2f, 1.3f
+    Champion20, "塔姆", "../Resources/Champions/Champion20.png", 9, 2, 350, 20, 150, 1, 0.9f, 1.2f, 1.3f
 };
 const ChampionAttributes CHAMPION_21_ATTR = { // 蔚（一星）
     Champion21, "蔚", "../Resources/Champions/Champion21.png", 3, 1, 250, 30, 200, 1, 1.0f, 1.0f, 1.1f
 };
 const ChampionAttributes CHAMPION_22_ATTR = { // 蔚（二星）
-    Champion22, "蔚", "../Resources/Champions/Champion22.png", 3, 2, 300, 35, 200, 1, 0.9f, 1.2f, 1.2f
+    Champion22, "蔚", "../Resources/Champions/Champion22.png", 9, 2, 300, 35, 200, 1, 0.9f, 1.2f, 1.2f
 };
 const ChampionAttributes CHAMPION_23_ATTR = { // 阿木木（一星）
     Champion23, "阿木木", "../Resources/Champions/Champion23.png", 3, 1, 300, 20, 200, 1, 1.0f, 1.0f, 1.3f
 };
 const ChampionAttributes CHAMPION_24_ATTR = { // 阿木木（二星）
-    Champion24, "阿木木", "../Resources/Champions/Champion24.png", 3, 2, 350, 25, 200, 1, 0.9f, 1.2f, 1.4f
+    Champion24, "阿木木", "../Resources/Champions/Champion24.png", 9, 2, 350, 25, 200, 1, 0.9f, 1.2f, 1.4f
 };
 const ChampionAttributes CHAMPION_25_ATTR = { // 奎桑提（一星）
     Champion25, "奎桑提", "../Resources/Champions/Champion25.png", 4, 1, 300, 30, 50, 1, 0.7f, 1.0f, 1.1f
 };
 const ChampionAttributes CHAMPION_26_ATTR = { // 奎桑提（二星）
-    Champion26, "奎桑提", "../Resources/Champions/Champion26.png", 4, 2, 350, 35, 50, 1, 0.6f, 1.2f, 1.2f
+    Champion26, "奎桑提", "../Resources/Champions/Champion26.png", 12, 2, 350, 35, 50, 1, 0.6f, 1.2f, 1.2f
 };
 const ChampionAttributes CHAMPION_27_ATTR = { // 卡尔萨斯（一星）
     Champion27, "卡尔萨斯", "../Resources/Champions/Champion27.png", 4, 1, 200, 20, 200, 3, 1.0f, 0.8f, 1.0f
 };
 const ChampionAttributes CHAMPION_28_ATTR = { // 卡尔萨斯（二星）
-    Champion28, "卡尔萨斯", "../Resources/Champions/Champion28.png", 4, 2, 250, 25, 200, 3, 0.9f, 1.0f, 1.1f
+    Champion28, "卡尔萨斯", "../Resources/Champions/Champion28.png", 12, 2, 250, 25, 200, 3, 0.9f, 1.0f, 1.1f
 };
 const ChampionAttributes CHAMPION_29_ATTR = { // 卡莎（一星）
     Champion29, "卡莎", "../Resources/Champions/Champion29.png", 5, 1, 200, 35, 200, 4, 0.7f, 1.0f, 1.0f
 };
 const ChampionAttributes CHAMPION_30_ATTR = { // 卡莎（二星）
-    Champion30, "卡莎", "../Resources/Champions/Champion30.png", 5, 2, 250, 40, 200, 4, 0.6f, 1.2f, 1.1f
+    Champion30, "卡莎", "../Resources/Champions/Champion30.png", 15, 2, 250, 40, 200, 4, 0.6f, 1.2f, 1.1f
 };
 
 // 战斗英雄种类与属性键值对
