@@ -20,3 +20,11 @@ bool ScoreBoardLayer::init()
     }
     return true;
 }
+
+// 显示分数表
+void ScoreBoardLayer::showScoreBoard(int playerNum)
+{
+
+
+
+}

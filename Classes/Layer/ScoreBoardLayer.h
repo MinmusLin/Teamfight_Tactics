@@ -21,6 +21,9 @@ public:
     // 初始化分数表层类
     virtual bool init();
 
+    // 显示分数表
+    void showScoreBoard(int playerNum);
+
     // 实现 ScoreBoardLayer 类的 create 方法
     CREATE_FUNC(ScoreBoardLayer);
 };
