@@ -102,6 +102,9 @@
     <ClCompile Include="..\Classes\Layer\PlacementMarkerLayer.cpp">
       <Filter>Classes\Layer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Layer\ScoreBoardLayer.cpp">
+      <Filter>Classes\Layer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -165,6 +168,9 @@
       <Filter>Classes\Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Layer\PlacementMarkerLayer.h">
+      <Filter>Classes\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Layer\ScoreBoardLayer.h">
       <Filter>Classes\Layer</Filter>
     </ClInclude>
   </ItemGroup>
