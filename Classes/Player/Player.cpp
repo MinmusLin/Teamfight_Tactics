@@ -30,6 +30,9 @@ void Player::getBattleMap(ChampionCategory(*&battleMap)[BATTLE_MAP_COLUMNS])
 void Player::decreaseHealthPoints(const int num)
 {
     healthPoints -= num;
+    if (healthPoints <= 0) {
+        healthPoints = 0;
+    }
 }
 
 // 获取玩家生命值

@@ -95,8 +95,9 @@ constexpr int SCORE_BOARD_LAYER_NAME_LABEL_OFFSET_X = -125;                 // ·
 constexpr int SCORE_BOARD_LAYER_SCORE_LABEL_OFFSET_X = 90;                  // ·ÖÊý±í²ãÍæ¼ÒÉúÃüÖµ±êÇ©
 constexpr int SCORE_BOARD_LAYER_RANK_LABEL_OFFSET_X = 115;                  // ·ÖÊý±í²ãÍæ¼ÒÅÅÃû±êÇ©
 constexpr int SCORE_BOARD_LABEL_FONT_SIZE = 25;                             // ·ÖÊý±í²ã±êÇ©×ÖÌå´óÐ¡
+constexpr int BATTLE_END_LABEL_FONT_SIZE = 96;                              // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©×ÖÌå´óÐ¡
 constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 10.0f;                   // ¶ÔÕ½³¡¾°×¼±¸Ê±¼ä
-constexpr float BATTLE_END_DURATION = 1.5f;                                 // ¶ÔÕ½½áÊøÍ£ÁôÊ±¼ä
+constexpr float BATTLE_END_DURATION = 2.0f;                                 // ¶ÔÕ½½áÊøÍ£ÁôÊ±¼ä
 
 // ÉÌµêÉèÖÃ
 constexpr int MAX_SELECTABLE_CHAMPION_COUNT = 5;                            // ×î´ó¿ÉÑ¡ÔñÕ½¶·Ó¢ÐÛÊýÁ¿

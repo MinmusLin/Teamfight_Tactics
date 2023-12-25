@@ -83,12 +83,12 @@ void ScoreBoardLayer::showScoreBoard(HumanPlayer* humanPlayer, AIPlayer* enemyPl
     bool isHumanFirst = humanPlayer->getHealthPoints() >= enemyPlayer->getHealthPoints();
     std::string humanPlayerName = humanPlayer->getPlayerName();
     std::string enemyPlayerName = enemyPlayer->getPlayerName();
-    int humanPlayerScore = humanPlayer->getHealthPoints();
-    int enemyPlayerScore = enemyPlayer->getHealthPoints();
+    int humanPlayerHealthPoints = humanPlayer->getHealthPoints();
+    int enemyPlayerHealthPoints = enemyPlayer->getHealthPoints();
     playerNames[0]->setString(isHumanFirst ? humanPlayerName : enemyPlayerName);
     playerNames[1]->setString(isHumanFirst ? enemyPlayerName : humanPlayerName);
-    healthPoints[0]->setString(std::to_string(isHumanFirst ? humanPlayerScore : enemyPlayerScore));
-    healthPoints[1]->setString(std::to_string(isHumanFirst ? enemyPlayerScore : humanPlayerScore));
+    healthPoints[0]->setString(std::to_string(isHumanFirst ? humanPlayerHealthPoints : enemyPlayerHealthPoints));
+    healthPoints[1]->setString(std::to_string(isHumanFirst ? enemyPlayerHealthPoints : humanPlayerHealthPoints));
 }
 
 // 显示分数表（联机模式）

@@ -10,10 +10,13 @@
 #include "Control/OfflineModeControl.h"
 #include "LocationMap/LocationMap.h"
 #include "Layer/ScoreBoardLayer.h"
+#include "GBKToUTF8/GBKToUTF8.h"
+#include "MenuScene.h"
 
 // 命名空间
 using cocos2d::Scene;
 using cocos2d::Sprite;
+using cocos2d::Label;
 using cocos2d::Vec2;
 
 // 练习模式游戏控制类
@@ -116,30 +119,54 @@ void OfflineModeBattleScene::update(float delta)
         int enemyCount = g_offlineModeControl->getBattle()->getEnemyCount();
         if (myCount == 0 && enemyCount == 0) { // 平局
             g_offlineModeControl->getBattle()->setBattleSituation(Draw);
-            CCLOG("Draw"); // TODO: CCLOG
         }
         else if (enemyCount == 0) { // 胜利
             g_offlineModeControl->getBattle()->setBattleSituation(Win);
             g_offlineModeControl->getAIPlayer()->decreaseHealthPoints(myCount * DECREASED_HEALTH_POINTS);
             g_offlineModeControl->getHumanPlayer()->addGoldCoin(myCount * INCREASED_GOLD_COINS);
-            CCLOG("Win"); // TODO: CCLOG
         }
         else { // 失败
             g_offlineModeControl->getBattle()->setBattleSituation(Lose);
             g_offlineModeControl->getHumanPlayer()->decreaseHealthPoints(enemyCount * DECREASED_HEALTH_POINTS);
-            CCLOG("Lose"); // TODO: CCLOG
         }
 
         // 重置分数表层
         auto scoreBoardLayer = dynamic_cast<ScoreBoardLayer*>(this->getChildByName("ScoreBoardLayer"));
         scoreBoardLayer->showScoreBoard(g_offlineModeControl->getHumanPlayer(), g_offlineModeControl->getAIPlayer());
 
+        // 检查练习模式是否结束
+        int humanPlayerHealth = g_offlineModeControl->getHumanPlayer()->getHealthPoints();
+        int enemyPlayerHealth = g_offlineModeControl->getAIPlayer()->getHealthPoints();
+        bool isEnd = false;
+        std::string winningPrompt = "";
+        if (humanPlayerHealth == 0 && enemyPlayerHealth == 0) {
+            isEnd = true;
+            winningPrompt = "平局";
+        }
+        else if (enemyPlayerHealth == 0) {
+            isEnd = true;
+            winningPrompt = "胜利";
+        }
+        else if (humanPlayerHealth == 0) {
+            isEnd = true;
+            winningPrompt = "失败";
+        }
+        if (isEnd) {
+            auto winningLabel = Label::createWithTTF(GBKToUTF8::getString(winningPrompt), "../Resources/Fonts/DingDingJinBuTi.ttf", BATTLE_END_LABEL_FONT_SIZE);
+            const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
+            winningLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
+            this->addChild(winningLabel);
+        }
+
         // 释放练习模式对战场景
-        auto switchScene = [](float dt) {
+        auto switchScene = [isEnd](float dt) {
             cocos2d::Director::getInstance()->getRunningScene()->unscheduleUpdate();
             cocos2d::Director::getInstance()->popScene();
+            if (isEnd) {
+                cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
+            }
             };
-        this->scheduleOnce(switchScene, BATTLE_END_DURATION, "OfflineModeBattleScene");
+        this->scheduleOnce(switchScene, BATTLE_END_DURATION, "OfflineModeBattleSceneToOfflineModePreparationScene");
 
         // 重置对战类
         g_offlineModeControl->releaseBattle();
