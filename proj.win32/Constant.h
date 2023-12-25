@@ -88,7 +88,15 @@ constexpr int BATTLE_SCENE_DELETE_CHAMPION_BUTTON_UPPER_BOUNDARY = 130;     // ¶
 constexpr int BATTLE_SCENE_DELETE_CHAMPION_BUTTON_LOWER_BOUNDARY = 24;      // ¶ÔÕ½³¡¾°Õ½¶·Ó¢ÐÛÉ¾³ý°´Å¥ÏÂ±ß½ç Y ×ø±ê
 constexpr int BATTLE_SCENE_DELETE_CHAMPION_BUTTON_LEFT_BOUNDARY = 25;       // ¶ÔÕ½³¡¾°Õ½¶·Ó¢ÐÛÉ¾³ý°´Å¥×ó±ß½ç X ×ø±ê
 constexpr int BATTLE_SCENE_DELETE_CHAMPION_BUTTON_RIGHT_BOUNDARY = 210;     // ¶ÔÕ½³¡¾°Õ½¶·Ó¢ÐÛÉ¾³ý°´Å¥ÓÒ±ß½ç X ×ø±ê
+constexpr int SCORE_BOARD_LAYER_START_X = 1125;                             // ·ÖÊý±í²ã±³¾°Î»ÖÃ X ×ø±ê
+constexpr int SCORE_BOARD_LAYER_START_Y = 680;                              // ·ÖÊý±í²ã±³¾°Î»ÖÃ Y ×ø±ê
+constexpr int SCORE_BOARD_LAYER_VERTICAL_INTERVAL = 69;                     // ·ÖÊý±í²ã±³¾°´¹Ö±¼ä¾à
+constexpr int SCORE_BOARD_LAYER_NAME_LABEL_OFFSET_X = -125;                 // ·ÖÊý±í²ãÍæ¼ÒÐÕÃû±êÇ©
+constexpr int SCORE_BOARD_LAYER_SCORE_LABEL_OFFSET_X = 90;                  // ·ÖÊý±í²ãÍæ¼ÒÉúÃüÖµ±êÇ©
+constexpr int SCORE_BOARD_LAYER_RANK_LABEL_OFFSET_X = 115;                  // ·ÖÊý±í²ãÍæ¼ÒÅÅÃû±êÇ©
+constexpr int SCORE_BOARD_LABEL_FONT_SIZE = 25;                             // ·ÖÊý±í²ã±êÇ©×ÖÌå´óÐ¡
 constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 10.0f;                   // ¶ÔÕ½³¡¾°×¼±¸Ê±¼ä
+constexpr float BATTLE_END_DURATION = 1.5f;                                 // ¶ÔÕ½½áÊøÍ£ÁôÊ±¼ä
 
 // ÉÌµêÉèÖÃ
 constexpr int MAX_SELECTABLE_CHAMPION_COUNT = 5;                            // ×î´ó¿ÉÑ¡ÔñÕ½¶·Ó¢ÐÛÊýÁ¿

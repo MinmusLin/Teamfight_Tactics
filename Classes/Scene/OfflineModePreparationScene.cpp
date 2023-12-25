@@ -10,6 +10,7 @@
 #include "OfflineModeBattleScene.h"
 #include "Control/OfflineModeControl.h"
 #include "Button/HoverButton.h"
+#include "Layer/ScoreBoardLayer.h"
 #include "GBKToUTF8/GBKToUTF8.h"
 #include "MenuScene.h"
 
@@ -129,6 +130,13 @@ bool OfflineModePreparationScene::init()
     // 初始化战斗英雄删除按钮
     g_offlineModeControl->getHumanPlayer()->initializeDeleteChampionButton();
 
+    // 创建分数表层
+    auto scoreBoardLayer = ScoreBoardLayer::create();
+    scoreBoardLayer->initialize(2);
+    scoreBoardLayer->showScoreBoard(g_offlineModeControl->getHumanPlayer(), g_offlineModeControl->getAIPlayer());
+    scoreBoardLayer->setName("ScoreBoardLayer");
+    this->addChild(scoreBoardLayer);
+
     return true;
 }
 
@@ -138,10 +146,15 @@ void OfflineModePreparationScene::onEnter()
     // 调用基类的 onEnter 方法
     Scene::onEnter();
 
+    // 重置分数表层
+    auto scoreBoardLayer = dynamic_cast<ScoreBoardLayer*>(this->getChildByName("ScoreBoardLayer"));
+    scoreBoardLayer->showScoreBoard(g_offlineModeControl->getHumanPlayer(), g_offlineModeControl->getAIPlayer());
+
     // 重置进度条和标签
     auto progressBar = dynamic_cast<cocos2d::ui::LoadingBar*>(this->getChildByName("CountdownLoadingBar"));
     auto progressLabel = dynamic_cast<Label*>(this->getChildByName("CountdownLoadingBarLabel"));
     if (progressBar && progressLabel) {
+        // 设置进度条百分比
         progressBar->setPercent(0);
         progressLabel->setVisible(false);
 

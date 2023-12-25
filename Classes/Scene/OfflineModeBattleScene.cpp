@@ -9,6 +9,7 @@
 #include "OfflineModeBattleScene.h"
 #include "Control/OfflineModeControl.h"
 #include "LocationMap/LocationMap.h"
+#include "Layer/ScoreBoardLayer.h"
 
 // 命名空间
 using cocos2d::Scene;
@@ -71,6 +72,13 @@ bool OfflineModeBattleScene::init()
         }
     }
 
+    // 创建分数表层
+    auto scoreBoardLayer = ScoreBoardLayer::create();
+    scoreBoardLayer->initialize(2);
+    scoreBoardLayer->showScoreBoard(g_offlineModeControl->getHumanPlayer(), g_offlineModeControl->getAIPlayer());
+    scoreBoardLayer->setName("ScoreBoardLayer");
+    this->addChild(scoreBoardLayer);
+
     // 启用每一帧被自动调用的 update 方法
     this->scheduleUpdate();
 
@@ -122,9 +130,16 @@ void OfflineModeBattleScene::update(float delta)
             CCLOG("Lose"); // TODO: CCLOG
         }
 
+        // 重置分数表层
+        auto scoreBoardLayer = dynamic_cast<ScoreBoardLayer*>(this->getChildByName("ScoreBoardLayer"));
+        scoreBoardLayer->showScoreBoard(g_offlineModeControl->getHumanPlayer(), g_offlineModeControl->getAIPlayer());
+
         // 释放练习模式对战场景
-        cocos2d::Director::getInstance()->getRunningScene()->unscheduleUpdate();
-        cocos2d::Director::getInstance()->popScene();
+        auto switchScene = [](float dt) {
+            cocos2d::Director::getInstance()->getRunningScene()->unscheduleUpdate();
+            cocos2d::Director::getInstance()->popScene();
+            };
+        this->scheduleOnce(switchScene, BATTLE_END_DURATION, "OfflineModeBattleScene");
 
         // 重置对战类
         g_offlineModeControl->releaseBattle();
