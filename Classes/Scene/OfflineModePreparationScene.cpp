@@ -3,7 +3,7 @@
  * File Name:     OfflineModePreparationScene.cpp
  * File Function: OfflineModePreparationScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/24
+ * Update Date:   2023/12/20
  ****************************************************************/
 
 #include "OfflineModePreparationScene.h"
@@ -13,11 +13,7 @@
 #include "GBKToUTF8/GBKToUTF8.h"
 #include "MenuScene.h"
 
-// 命名空间
-using cocos2d::Scene;
-using cocos2d::Sprite;
-using cocos2d::Label;
-using cocos2d::Vec2;
+USING_NS_CC;
 
 // 练习模式游戏控制类
 extern OfflineModeControl* g_offlineModeControl;
@@ -38,12 +34,9 @@ bool OfflineModePreparationScene::init()
     if (!Scene::init()) {
         return false;
     }
-
-    // 设置 HumanPlayer 类的当前场景指针
-    g_offlineModeControl->getHumanPlayer()->setCurrentScene(this);
-
+    
     // 加载背景
-    const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
+    const auto screenSize = Director::getInstance()->getVisibleSize();
     const auto background = Sprite::create("../Resources/Scenes/OfflineModePreparationScene.png");
     background->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
     this->addChild(background);
@@ -69,8 +62,28 @@ bool OfflineModePreparationScene::init()
     coinLabel->setName("CoinLabel");
     this->addChild(coinLabel);
 
+    // 创建按钮
+    auto returnMenuButton = HoverButton::create("../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuDefaultButton.png",
+        "../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuHoverButton.png",
+        "../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuActiveButton.png");
+
+    // 设置按钮位置
+    returnMenuButton->setPosition(Vec2(screenSize.width / 2 + 450, screenSize.height / 2 - 100)); // TODO: 按钮位置通过常变量替代
+
+    // 为按钮添加事件处理器
+    returnMenuButton->addTouchEventListener([](Ref* sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::BEGAN) {
+            delete g_offlineModeControl;
+            g_offlineModeControl = nullptr;
+            Director::getInstance()->replaceScene(TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), Color3B::WHITE));
+        }
+        });
+
+    // 将按钮添加到场景中
+    this->addChild(returnMenuButton);
+
     // 创建进度条
-    auto progressBar = cocos2d::ui::LoadingBar::create("../Resources/LoadingBars/CountdownLoadingBar.png");
+    auto progressBar = ui::LoadingBar::create("../Resources/LoadingBars/CountdownLoadingBar.png");
     progressBar->setPosition(Vec2(BATTLE_SCENE_LOADINGBAR_X, BATTLE_SCENE_LOADINGBAR_Y));
     progressBar->setPercent(0);
     progressBar->setName("CountdownLoadingBar");
@@ -87,47 +100,32 @@ bool OfflineModePreparationScene::init()
     setScheduleOnce(progressBar, progressLabel);
 
     // 创建按钮
-    auto uplevelButton = HoverButton::create("../Resources/Buttons/OfflineModePreparationSceneButtons/UplevelDefaultButton.png",
-        "../Resources/Buttons/OfflineModePreparationSceneButtons/UplevelHoverButton.png",
-        "../Resources/Buttons/OfflineModePreparationSceneButtons/UplevelActiveButton.png");
-    auto refreshButton = HoverButton::create("../Resources/Buttons/OfflineModePreparationSceneButtons/RefreshDefaultButton.png",
-        "../Resources/Buttons/OfflineModePreparationSceneButtons/RefreshHoverButton.png",
-        "../Resources/Buttons/OfflineModePreparationSceneButtons/RefreshActiveButton.png");
-    auto returnMenuButton = HoverButton::create("../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuDefaultButton.png",
-        "../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuHoverButton.png",
-        "../Resources/Buttons/OfflineModePreparationSceneButtons/ReturnMenuActiveButton.png");
+    auto uplevelButton = HoverButton::create("../Resources/Buttons/ShopButtons/UplevelDefaultButton.png",
+        "../Resources/Buttons/ShopButtons/UplevelHoverButton.png",
+        "../Resources/Buttons/ShopButtons/UplevelActiveButton.png");
+    auto refreshButton = HoverButton::create("../Resources/Buttons/ShopButtons/RefreshDefaultButton.png",
+        "../Resources/Buttons/ShopButtons/RefreshHoverButton.png",
+        "../Resources/Buttons/ShopButtons/RefreshActiveButton.png");
 
     // 设置按钮位置
     uplevelButton->setPosition(Vec2(screenSize.width / 2 + SHOP_UPLEVEL_BUTTON_OFFSET_X, screenSize.height / 2 + SHOP_UPLEVEL_BUTTON_OFFSET_Y));
     refreshButton->setPosition(Vec2(screenSize.width / 2 + SHOP_REFRESH_BUTTON_OFFSET_X, screenSize.height / 2 + SHOP_REFRESH_BUTTON_OFFSET_Y));
-    returnMenuButton->setPosition(Vec2(screenSize.width / 2 + BATTLE_SCENE_RETURN_MENU_BUTTON_OFFSET_X, screenSize.height / 2 + BATTLE_SCENE_RETURN_MENU_BUTTON_OFFSET_Y));
 
     // 为按钮添加事件处理器
-    uplevelButton->addTouchEventListener([this](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
-        if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
-            g_offlineModeControl->getHumanPlayer()->addBattleChampionCount();
+    uplevelButton->addTouchEventListener([this](Ref* sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::ENDED) {
+            g_offlineModeControl->getHumanPlayer()->addBattleChampionCount(this);
         }
         });
-    refreshButton->addTouchEventListener([this](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
-        if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
-            g_offlineModeControl->getHumanPlayer()->refreshShop();
-        }
-        });
-    returnMenuButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
-        if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-            delete g_offlineModeControl;
-            g_offlineModeControl = nullptr;
-            cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
+    refreshButton->addTouchEventListener([this](Ref* sender, ui::Widget::TouchEventType type) {
+        if (type == ui::Widget::TouchEventType::ENDED) {
+            g_offlineModeControl->getHumanPlayer()->refreshShop(this);
         }
         });
 
     // 将按钮添加到场景中
     this->addChild(uplevelButton);
     this->addChild(refreshButton);
-    this->addChild(returnMenuButton);
-
-    // 初始化战斗英雄删除按钮
-    g_offlineModeControl->getHumanPlayer()->initializeDeleteChampionButton();
 
     return true;
 }
@@ -139,7 +137,7 @@ void OfflineModePreparationScene::onEnter()
     Scene::onEnter();
 
     // 重置进度条和标签
-    auto progressBar = dynamic_cast<cocos2d::ui::LoadingBar*>(this->getChildByName("CountdownLoadingBar"));
+    auto progressBar = dynamic_cast<ui::LoadingBar*>(this->getChildByName("CountdownLoadingBar"));
     auto progressLabel = dynamic_cast<Label*>(this->getChildByName("CountdownLoadingBarLabel"));
     if (progressBar && progressLabel) {
         progressBar->setPercent(0);
@@ -154,10 +152,10 @@ void OfflineModePreparationScene::onEnter()
 }
 
 // 设置进度条更新逻辑与计时器
-void OfflineModePreparationScene::setScheduleOnce(cocos2d::ui::LoadingBar* progressBar, Label* progressLabel)
+void OfflineModePreparationScene::setScheduleOnce(ui::LoadingBar* progressBar, Label* progressLabel)
 {
     // 刷新商店
-    g_offlineModeControl->getHumanPlayer()->refreshShop();
+    g_offlineModeControl->getHumanPlayer()->refreshShop(this);
 
     // 更新进度条和标签
     const float interval = BATTLE_SCENE_LOADINGBAR_DURATION / 1000.0f; // 每 0.1% 所需时间
@@ -176,11 +174,11 @@ void OfflineModePreparationScene::setScheduleOnce(cocos2d::ui::LoadingBar* progr
     // 设置计时器
     this->scheduleOnce([this](float dt) {
         // 创建和分派一个鼠标左键释放事件（强制放下当前战斗英雄）
-        cocos2d::EventMouse event(cocos2d::EventMouse::MouseEventType::MOUSE_UP);
-        event.setMouseButton(cocos2d::EventMouse::MouseButton::BUTTON_LEFT);
+        EventMouse event(EventMouse::MouseEventType::MOUSE_UP);
+        event.setMouseButton(EventMouse::MouseButton::BUTTON_LEFT);
         _eventDispatcher->dispatchEvent(&event);
 
         // 运行练习模式对战场景
-        cocos2d::Director::getInstance()->pushScene(OfflineModeBattleScene::create());
-        }, BATTLE_SCENE_LOADINGBAR_DURATION + SCENE_TRANSITION_DURATION, "IsAlreadyPrepared");
+        Director::getInstance()->pushScene(OfflineModeBattleScene::create());
+        }, 10/*BATTLE_SCENE_LOADINGBAR_DURATION + SCENE_TRANSITION_DURATION*/, "IsAlreadyPrepared");
 }

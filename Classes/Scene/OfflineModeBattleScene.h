@@ -22,7 +22,10 @@ public:
     static cocos2d::Scene* createScene();
 
     // 初始化场景
-    virtual bool init();
+    virtual bool init() override;
+
+    // update 方法会在每一帧自动被调用
+    virtual void update(float delta) override;
 
     // 实现 OfflineModeBattleScene 类的 create 方法
     CREATE_FUNC(OfflineModeBattleScene);
