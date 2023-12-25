@@ -2,19 +2,14 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     Battle.cpp
  * File Function: Battle类的实现
- * Author:        林继申
- * Update Date:   2023/12/23
+ * Author:        杨宇琨、林继申
+ * Update Date:   2023/12/25
  ****************************************************************/
 
 #include <iostream>
 #include "Battle.h"
-#include "Champion/Champion.h"
 
-<<<<<<< Updated upstream
 // 构造函数
-=======
- // 构造函数
->>>>>>> Stashed changes
 Battle::Battle(const ChampionCategory myFlagMap[][BATTLE_MAP_COLUMNS], const ChampionCategory enemyFlagMap[][BATTLE_MAP_COLUMNS])
 {
     for (int i = 0; i < PLACE_MAP_ROWS; i++) {
@@ -26,6 +21,7 @@ Battle::Battle(const ChampionCategory myFlagMap[][BATTLE_MAP_COLUMNS], const Cha
     for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
         for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
             if (championCategoryMap[i][j] != NoChampion) {
+                // 创建战斗英雄
                 try {
                     championMap[i][j] = new Champion(championCategoryMap[i][j]);
                 }
@@ -34,8 +30,9 @@ Battle::Battle(const ChampionCategory myFlagMap[][BATTLE_MAP_COLUMNS], const Cha
                     throw;
                 }
                 championMap[i][j]->setCurrentPosition(i, j);
-                // 设置阵营
-                if (i < 4) {
+
+                // 设置战斗英雄阵营
+                if (i < PLACE_MAP_ROWS) {
                     myCount++;
                     championMap[i][j]->setCamp(true);
                 }
@@ -51,12 +48,6 @@ Battle::Battle(const ChampionCategory myFlagMap[][BATTLE_MAP_COLUMNS], const Cha
     }
 }
 
-// 获取场上英雄信息
-Champion* Battle::getChampion(const int& x, const int& y)
-{
-    return championMap[x][y];
-}
-
 // 析构函数
 Battle::~Battle()
 {
@@ -69,63 +60,57 @@ Battle::~Battle()
     }
 }
 
-// 获取场上我方剩余数量
+// 获取战斗英雄指针
+Champion* Battle::getChampion(const int& x, const int& y)
+{
+    return championMap[x][y];
+}
+
+// 获取我方战斗英雄数量
 int Battle::getMyCount()
 {
     return myCount;
 }
 
-// 获取场上敌方剩余数量
+// 获取敌方战斗英雄数量
 int Battle::getEnemyCount()
 {
     return enemyCount;
 }
 
-// 增加敌方数量
-void Battle::addEnemyCount()
-{
-    enemyCount++;
-}
-
-// 增加我方数量
+// 增加我方战斗英雄数量
 void Battle::addMyCount()
 {
     myCount++;
 }
 
-// 重置数量
-void Battle::resetCount()
+// 增加敌方战斗英雄数量
+void Battle::addEnemyCount()
 {
-    enemyCount = 0;
-    myCount = 0;
+    enemyCount++;
 }
 
-// 将一个位置置空
+// 重置战斗英雄数量
+void Battle::resetCount()
+{
+    myCount = 0;
+    enemyCount = 0;
+}
+
+// 移除战斗英雄
 void Battle::setEmpty(const int& x, const int& y)
 {
     championMap[x][y] = nullptr;
 }
 
-// 放置一个棋子
+// 放置战斗英雄
 void Battle::placeChampion(const int& x, const int& y, Champion* champion)
 {
     championMap[x][y] = champion;
 }
 
-// 胜利
-void Battle::setWin()
+// 设置战斗胜负状态
+void Battle::setBattleSituation(const BattleSituation battleSituation)
 {
-    isWinning = win;
-}
-
-// 失败
-void Battle::setLose()
-{
-    isWinning = lose;
-}
-
-// 平局
-void Battle::setDraw()
-{
-    isWinning = draw;
+    this->battleSituation = battleSituation;
 }

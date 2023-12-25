@@ -14,7 +14,7 @@
 #include "Battle/Battle.h"
 #include "proj.win32/Constant.h"
 
-// Battle 类声明
+// Battle 类前声明（用于解决循环依赖）
 class Battle;
 
 /*
