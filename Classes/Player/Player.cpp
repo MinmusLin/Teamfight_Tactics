@@ -31,3 +31,15 @@ void Player::decreaseHealthPoints(const int num)
 {
     healthPoints -= num;
 }
+
+// 获取玩家生命值
+int Player::getHealthPoints() const
+{
+    return healthPoints;
+}
+
+// 获取玩家昵称
+std::string Player::getPlayerName() const
+{
+    return name;
+}

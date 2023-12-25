@@ -27,11 +27,17 @@ public:
     // 减少玩家生命值
     void decreaseHealthPoints(const int num);
 
+    // 获取玩家生命值
+    int getHealthPoints() const;
+
+    // 获取玩家昵称
+    std::string getPlayerName() const;
+
 protected:
     std::string name;                                                // 玩家昵称
     ChampionCategory battleMap[BATTLE_MAP_ROWS][BATTLE_MAP_COLUMNS]; // 战斗区地图
     ChampionCategory waitingMap[WAITING_MAP_COUNT];                  // 候战区地图
-    int healthPoints;                                                // 生命值
+    int healthPoints;                                                // 玩家生命值
 };
 
 #endif // !_PLAYER_H_
