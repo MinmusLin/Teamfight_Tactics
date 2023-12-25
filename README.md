@@ -134,6 +134,14 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 * 调整命名空间
 * 实现 `OfflineModePreparationScene` 类与交互细节
 
+### 2023/12/25
+
+* 实现 `Battle` 类
+* 实现 `Champion` 类
+* 实现 `OfflineModeBattleScene` 类
+* 工作对接与项目仓库整合
+* 实现练习模式
+
 ## 集成开发环境
 
 * Microsoft Visual Studio 2022
@@ -144,4 +152,4 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 
 ## 文档更新日期
 
-2023年12月24日
+2023年12月25日
