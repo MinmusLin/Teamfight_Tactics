@@ -18,9 +18,9 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 | 姓名 | 学号 | 分工 | 工作量 |
 | :---: | :---: | :---: | :---: |
 | 林继申 (组长) | 2250758 | 项目后端工作统筹 <br> 项目任务分工 <br> 代码审查 <br> 项目框架搭建 <br> 网络环境搭建 <br> 练习模式与联机模式 <br> `AppDelegate` 类 <br> `Battle` 类 <br> `HoverButton` 类 <br> `Champion` 类 <br> `Control` 类及其派生类 <br> `ChampionAttributesLayer` 类 <br> `PlacementMarkerLayer` 类 <br> `Player` 类及其派生类 <br> `Scene` 类及其派生类 <br> `Server` 类 <br> `GBKtoUTF8` 单例 <br> `LocationMap` 单例 | 0% |
-| 刘淑仪 | 2251730 | 项目前端工作统筹 <br> 练习模式与联机模式 <br> `ChampionAttributesLayer` 类 <br> 图标绘制 <br> 按钮绘制 <br> 战斗英雄绘制 <br> 战斗英雄属性层绘制 <br> 放置标记层绘制 <br> 进度条绘制 <br> 场景绘制 | 0% |
+| 刘淑仪 | 2251730 | 项目前端工作统筹 <br> 练习模式与联机模式 <br> `ChampionAttributesLayer` 类 <br> `PlacementMarkerLayer` 类 <br> 图标绘制 <br> 按钮绘制 <br> 战斗英雄绘制 <br> 战斗英雄属性层绘制 <br> 放置标记层绘制 <br> 进度条绘制 <br> 场景绘制 | 0% |
 | 杨兆镇 | 2252712 | 练习模式 <br> `AIPlayer` 类 | 0% |
-| 杨宇琨 | 2252843 | 练习模式与联机模式 <br> `Battle` 类 <br> `Champion` 类 <br> 战斗英雄绘制 | 0% |
+| 杨宇琨 | 2252843 | 练习模式与联机模式 <br> `Battle` 类 <br> `Champion` 类 <br> `OfflineModeControl` 类 <br> 战斗英雄绘制 | 0% |
 
 ## 项目开发日志
 
@@ -139,6 +139,7 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 * 实现 `Battle` 类
 * 实现 `Champion` 类
 * 实现 `OfflineModeBattleScene` 类
+* 实现 `OfflineModeControl` 类
 * 工作对接与项目仓库整合
 * 实现练习模式
 
