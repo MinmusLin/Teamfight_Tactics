@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     OfflineModeBattleScene.h
  * File Function: OfflineModeBattleScene类的定义
- * Author:        林继申
- * Update Date:   2023/12/20
+ * Author:        杨宇琨、林继申
+ * Update Date:   2023/12/25
  ****************************************************************/
 
 #pragma once
@@ -22,10 +22,10 @@ public:
     static cocos2d::Scene* createScene();
 
     // 初始化场景
-    virtual bool init() override;
+    virtual bool init();
 
-    // update 方法会在每一帧自动被调用
-    virtual void update(float delta) override;
+    // 每一帧被自动调用的 update 方法
+    virtual void update(float delta);
 
     // 实现 OfflineModeBattleScene 类的 create 方法
     CREATE_FUNC(OfflineModeBattleScene);
