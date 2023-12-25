@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "OfflineModeControl.h"
+#include "GBKToUTF8/GBKToUTF8.h"
 #include "Scene/OfflineModeBattleScene.h"
 
 // 构造函数
@@ -17,7 +18,7 @@ OfflineModeControl::OfflineModeControl() :
 {
     try {
         humanPlayer = new HumanPlayer(cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName"));
-        enemyPlayer = new AIPlayer("AI玩家", Easy);
+        enemyPlayer = new AIPlayer(GBKToUTF8::getString("AI玩家"), Easy);
     }
     catch (const std::bad_alloc& e) {
         std::cerr << "Memory allocation failed: " << e.what() << std::endl;

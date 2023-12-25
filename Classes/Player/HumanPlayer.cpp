@@ -3,7 +3,7 @@
  * File Name:     HumanPlayer.cpp
  * File Function: HumanPlayer类的实现
  * Author:        林继申
- * Update Date:   2023/12/24
+ * Update Date:   2023/12/25
  ****************************************************************/
 
 #include <iostream>
@@ -143,6 +143,12 @@ void HumanPlayer::addBattleChampionCount(const int num)
 int HumanPlayer::getGoldCoin() const
 {
     return goldCoin;
+}
+
+// 增加金币数量
+void HumanPlayer::addGoldCoin(const int num)
+{
+    goldCoin += num;
 }
 
 // 初始化战斗英雄删除按钮

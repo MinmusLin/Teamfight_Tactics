@@ -150,7 +150,10 @@ constexpr int LEVEL_LABEL_START_X = 245;                                    // µ
 constexpr int LEVEL_LABEL_START_Y = 521;                                    // µÈ¼¶±êÇ©Î»ÖÃ Y ×ø±ê
 
 // Õ½¶·²ÎÊıÉèÖÃ
-constexpr int INCREASED_MAGIC_POINTS = 20;                                  // Ã¿´ÎÔö¼ÓÄ§·¨Öµ
+constexpr int INITIAL_HEALTH_POINTS = 100;                                  // Íæ¼Ò³õÊ¼ÉúÃüÖµ
+constexpr int INCREASED_MAGIC_POINTS = 20;                                  // ¹¥»÷¶ÔÓ¦Ôö¼ÓÄ§·¨Öµ
+constexpr int DECREASED_HEALTH_POINTS = 5;                                  // ´æ»îÕ½¶·Ó¢ĞÛ¶ÔÓ¦¼õÉÙÉúÃüÖµ
+constexpr int INCREASED_GOLD_COINS = 5;                                     // ´æ»îÕ½¶·Ó¢ĞÛ¶ÔÓ¦Ôö¼Ó½ğ±ÒÊıÁ¿
 
 // Á·Ï°Ä£Ê½ÄÑ¶È¶¨Òå
 enum Difficulty {
@@ -206,12 +209,6 @@ enum BattleSituation {
     Win = 1    // Ê¤Àû
 };
 
-// Õ½¶·Î»ÖÃÊôĞÔ¶¨Òå
-struct BattleLocation {
-    int x; // X ×ø±ê
-    int y; // Y ×ø±ê
-};
-
 // Î»ÖÃÊôĞÔ¶¨Òå
 struct Location {
     LocationStatus status;                        // Î»ÖÃ×´Ì¬
@@ -239,6 +236,12 @@ typedef struct {
     float movementSpeed;               // ÒÆ¶¯ËÙ¶È
     float defenseCoefficient;          // ·ÀÓùÏµÊı
 } ChampionAttributes;
+
+// Õ½¶·Î»ÖÃÊôĞÔ¶¨Òå
+typedef struct {
+    int x; // X ×ø±ê
+    int y; // Y ×ø±ê
+} BattleLocation;
 
 // Õ½¶·Ó¢ĞÛÊôĞÔ²ÎÊı
 const ChampionAttributes CHAMPION_1_ATTR = { // ½Ù£¨Ò»ĞÇ£©

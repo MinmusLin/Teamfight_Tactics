@@ -3,7 +3,7 @@
  * File Name:     Player.h
  * File Function: Player类的定义
  * Author:        林继申
- * Update Date:   2023/12/23
+ * Update Date:   2023/12/25
  ****************************************************************/
 
 #pragma once
@@ -24,10 +24,14 @@ public:
     // 获取战斗区地图
     void getBattleMap(ChampionCategory(*&battleMap)[BATTLE_MAP_COLUMNS]);
 
+    // 减少玩家生命值
+    void decreaseHealthPoints(const int num);
+
 protected:
     std::string name;                                                // 玩家昵称
     ChampionCategory battleMap[BATTLE_MAP_ROWS][BATTLE_MAP_COLUMNS]; // 战斗区地图
     ChampionCategory waitingMap[WAITING_MAP_COUNT];                  // 候战区地图
+    int healthPoints;                                                // 生命值
 };
 
 #endif // !_PLAYER_H_

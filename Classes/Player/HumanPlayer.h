@@ -3,7 +3,7 @@
  * File Name:     HumanPlayer.h
  * File Function: HumanPlayer类的定义
  * Author:        林继申
- * Update Date:   2023/12/24
+ * Update Date:   2023/12/25
  ****************************************************************/
 
 #pragma once
@@ -45,6 +45,9 @@ public:
 
     // 获取金币数量
     int getGoldCoin() const;
+
+    // 增加金币数量
+    void addGoldCoin(const int num);
 
     // 初始化战斗英雄删除按钮
     void initializeDeleteChampionButton();

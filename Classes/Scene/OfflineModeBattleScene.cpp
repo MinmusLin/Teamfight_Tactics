@@ -104,16 +104,21 @@ void OfflineModeBattleScene::update(float delta)
         this->unscheduleUpdate();
 
         // 设置战斗胜负状态
-        if (g_offlineModeControl->getBattle()->getEnemyCount() == 0 && g_offlineModeControl->getBattle()->getMyCount() == 0) {
+        int myCount = g_offlineModeControl->getBattle()->getMyCount();
+        int enemyCount = g_offlineModeControl->getBattle()->getEnemyCount();
+        if (myCount == 0 && enemyCount == 0) { // 平局
             g_offlineModeControl->getBattle()->setBattleSituation(Draw);
             CCLOG("Draw"); // TODO: CCLOG
         }
-        else if (g_offlineModeControl->getBattle()->getEnemyCount() == 0) {
+        else if (enemyCount == 0) { // 胜利
             g_offlineModeControl->getBattle()->setBattleSituation(Win);
+            g_offlineModeControl->getAIPlayer()->decreaseHealthPoints(myCount * DECREASED_HEALTH_POINTS);
+            g_offlineModeControl->getHumanPlayer()->addGoldCoin(myCount * INCREASED_GOLD_COINS);
             CCLOG("Win"); // TODO: CCLOG
         }
-        else {
+        else { // 失败
             g_offlineModeControl->getBattle()->setBattleSituation(Lose);
+            g_offlineModeControl->getHumanPlayer()->decreaseHealthPoints(enemyCount * DECREASED_HEALTH_POINTS);
             CCLOG("Lose"); // TODO: CCLOG
         }
 
