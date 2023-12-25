@@ -2,15 +2,13 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     OfflineModeControl.cpp
  * File Function: OfflineModeControl类的实现
- * Author:        林继申
- * Update Date:   2023/12/21
+ * Author:        杨宇琨、林继申
+ * Update Date:   2023/12/25
  ****************************************************************/
 
 #include <iostream>
 #include "OfflineModeControl.h"
 #include "Scene/OfflineModeBattleScene.h"
-
-USING_NS_CC;
 
 // 构造函数
 OfflineModeControl::OfflineModeControl() :
@@ -64,18 +62,20 @@ Battle* OfflineModeControl::getBattle() const
 // 初始化对战类
 void OfflineModeControl::initializeBattle()
 {
+    // 获取战斗英雄地图
     ChampionCategory(*myFlagMap)[BATTLE_MAP_COLUMNS];
     ChampionCategory(*enemyFlagMap)[BATTLE_MAP_COLUMNS];
-
     humanPlayer->getBattleMap(myFlagMap);
     enemyPlayer->getBattleMap(enemyFlagMap);
-    //yykDebug
+
+    // TODO: AI 落棋算法
     (*enemyFlagMap)[0] = Champion1;
     (*(enemyFlagMap + 1))[2] = Champion2;
     (*(enemyFlagMap + 2))[5] = Champion3;
     (*(enemyFlagMap + 3))[6] = Champion3;
     (*(enemyFlagMap + 2))[8] = Champion4;
 
+    // 创建对战类
     try {
         battle = new Battle(myFlagMap, enemyFlagMap);
     }
@@ -102,5 +102,4 @@ void OfflineModeControl::releaseBattle()
     }
     delete battle;
     battle = nullptr;
-
 }
