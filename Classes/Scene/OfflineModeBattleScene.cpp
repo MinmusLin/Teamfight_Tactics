@@ -18,12 +18,6 @@ using cocos2d::Vec2;
 // 练习模式游戏控制类
 extern OfflineModeControl* g_offlineModeControl;
 
-// 当前场景战斗区战斗英雄指针
-static Champion* battleChampion[BATTLE_AREA_MAX_CHAMPION_COUNT * 2] = { nullptr };
-
-// 当前场景战斗区战斗英雄数量
-static int index = 0;
-
 // 创建场景
 Scene* OfflineModeBattleScene::createScene()
 {
@@ -69,7 +63,7 @@ bool OfflineModeBattleScene::init()
                 // 绑定战斗类
                 g_offlineModeControl->getBattle()->getChampion(i, j)->setBattle(g_offlineModeControl->getBattle());
                 g_offlineModeControl->getBattle()->getChampion(i, j)->setCurrentPosition(i, j);
-                battleChampion[index++] = g_offlineModeControl->getBattle()->getChampion(i, j);
+                battleChampion[battleChampionCount++] = g_offlineModeControl->getBattle()->getChampion(i, j);
             }
             else {
                 continue;
@@ -112,12 +106,15 @@ void OfflineModeBattleScene::update(float delta)
         // 设置战斗胜负状态
         if (g_offlineModeControl->getBattle()->getEnemyCount() == 0 && g_offlineModeControl->getBattle()->getMyCount() == 0) {
             g_offlineModeControl->getBattle()->setBattleSituation(Draw);
+            CCLOG("Draw"); // TODO: CCLOG
         }
         else if (g_offlineModeControl->getBattle()->getEnemyCount() == 0) {
             g_offlineModeControl->getBattle()->setBattleSituation(Win);
+            CCLOG("Win"); // TODO: CCLOG
         }
         else {
             g_offlineModeControl->getBattle()->setBattleSituation(Lose);
+            CCLOG("Lose"); // TODO: CCLOG
         }
 
         // 释放练习模式对战场景
@@ -126,18 +123,12 @@ void OfflineModeBattleScene::update(float delta)
 
         // 重置对战类
         g_offlineModeControl->releaseBattle();
-        for (int i = 0; i < index; i++) {
-            if (battleChampion[i] != nullptr) {
-                battleChampion[i] = nullptr;
-            }
-        }
-        index = 0;
 
         return;
     }
 
     // 更新战斗英雄
-    for (int i = 0; i < index; i++) {
+    for (int i = 0; i < battleChampionCount; i++) {
         if (battleChampion[i] != nullptr) { // 存在战斗英雄
             if (battleChampion[i]->getAttributes().healthPoints > 0) { // 角色存活
                 if (battleChampion[i]->getIsMoving()) { // 角色正在移动

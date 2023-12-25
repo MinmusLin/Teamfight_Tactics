@@ -11,6 +11,7 @@
 #define _OFFLINE_MODE_BATTLE_SCENE_H_
 
 #include "cocos2d.h"
+#include "Champion/Champion.h"
 
 /*
  * Class Name:     OfflineModeBattleScene
@@ -29,6 +30,10 @@ public:
 
     // 实现 OfflineModeBattleScene 类的 create 方法
     CREATE_FUNC(OfflineModeBattleScene);
+
+private:
+    int battleChampionCount = 0;                                                // 当前场景战斗区战斗英雄数量
+    Champion* battleChampion[BATTLE_AREA_MAX_CHAMPION_COUNT * 2] = { nullptr }; // 当前场景战斗区战斗英雄指针
 };
 
 #endif // !_OFFLINE_MODE_BATTLE_SCENE_H_
