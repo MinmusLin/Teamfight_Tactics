@@ -3,7 +3,7 @@
  * File Name:     OfflineModeBattleScene.cpp
  * File Function: OfflineModeBattleScene类的实现
  * Author:        杨宇琨、林继申
- * Update Date:   2023/12/25
+ * Update Date:   2023/12/26
  ****************************************************************/
 
 #include "OfflineModeBattleScene.h"
@@ -123,7 +123,7 @@ void OfflineModeBattleScene::update(float delta)
         else if (enemyCount == 0) { // 胜利
             g_offlineModeControl->getBattle()->setBattleSituation(Win);
             g_offlineModeControl->getAIPlayer()->decreaseHealthPoints(myCount * DECREASED_HEALTH_POINTS);
-            g_offlineModeControl->getHumanPlayer()->addGoldCoin(myCount * INCREASED_GOLD_COINS);
+            g_offlineModeControl->getHumanPlayer()->addGoldCoin(myCount * INCREASED_GOLD_COINS + REFRESH_SHOP_PRICE);
         }
         else { // 失败
             g_offlineModeControl->getBattle()->setBattleSituation(Lose);
@@ -139,6 +139,7 @@ void OfflineModeBattleScene::update(float delta)
         int enemyPlayerHealth = g_offlineModeControl->getAIPlayer()->getHealthPoints();
         bool isEnd = false;
         std::string winningPrompt = "";
+        cocos2d::Color4B outlineColor = cocos2d::Color4B::ORANGE;
         if (humanPlayerHealth == 0 && enemyPlayerHealth == 0) {
             isEnd = true;
             winningPrompt = "平局";
@@ -146,15 +147,20 @@ void OfflineModeBattleScene::update(float delta)
         else if (enemyPlayerHealth == 0) {
             isEnd = true;
             winningPrompt = "胜利";
+            outlineColor = cocos2d::Color4B::RED;
         }
         else if (humanPlayerHealth == 0) {
             isEnd = true;
             winningPrompt = "失败";
+            outlineColor = cocos2d::Color4B::BLUE;
         }
         if (isEnd) {
             auto winningLabel = Label::createWithTTF(GBKToUTF8::getString(winningPrompt), "../Resources/Fonts/DingDingJinBuTi.ttf", BATTLE_END_LABEL_FONT_SIZE);
             const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
-            winningLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
+            winningLabel->enableOutline(outlineColor, BATTLE_END_LABEL_OUTLINE_WIDTH);
+            cocos2d::Size shadowOffset(BATTLE_END_LABEL_SHADOW_OFFSET_X, BATTLE_END_LABEL_SHADOW_OFFSET_Y);
+            winningLabel->enableShadow(cocos2d::Color4B::GRAY, shadowOffset, BATTLE_END_LABEL_BLUR_RADIUS);
+            winningLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + BATTLE_END_LABEL_OFFSET_Y));
             this->addChild(winningLabel);
         }
 

@@ -3,7 +3,7 @@
  * File Name:     Constant.h
  * File Function: ³£±äÁ¿µÄ¶¨Òå
  * Author:        ÁÖ¼ÌÉê¡¢ÁõÊçÒÇ¡¢ÑîÕ×Õò¡¢ÑîÓîçû
- * Update Date:   2023/12/25
+ * Update Date:   2023/12/26
  ****************************************************************/
 
 #pragma once
@@ -66,6 +66,13 @@ constexpr int MENU_SCENE_OFFLINE_MODE_BUTTON_OFFSET_Y = -30;                // ²
 constexpr int MENU_SCENE_ONLINE_MODE_BUTTON_OFFSET_Y = -150;                // ²Ëµ¥³¡¾°Áª»úÄ£Ê½°´Å¥Î»ÖÃ Y Æ«ÒÆÁ¿
 constexpr int MENU_SCENE_SETTINGS_BUTTON_OFFSET_Y = -270;                   // ²Ëµ¥³¡¾°ÉèÖÃ°´Å¥Î»ÖÃ Y Æ«ÒÆÁ¿
 constexpr int MENU_SCENE_WELCOME_LABEL_OFFSET_Y = 240;                      // ²Ëµ¥³¡¾°»¶Ó­±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
+constexpr int ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_X = 415;                 // Áª»úÄ£Ê½²Ëµ¥³¡¾°°´Å¥Î»ÖÃ X Æ«ÒÆÁ¿
+constexpr int ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_Y = -220;                // Áª»úÄ£Ê½²Ëµ¥³¡¾°°´Å¥Î»ÖÃ Y Æ«ÒÆÁ¿
+constexpr int ONLINE_MODE_MENU_SCENE_FONT_SIZE = 30;                        // Áª»úÄ£Ê½²Ëµ¥³¡¾°×ÖÌå´óÐ¡
+constexpr int ONLINE_MODE_MENU_SCENE_IPV4_TEXTFIELD_OFFSET_Y = -167;        // Áª»úÄ£Ê½²Ëµ¥³¡¾° IPv4 ÎÄ±¾¿òÎ»ÖÃ Y Æ«ÒÆÁ¿
+constexpr int ONLINE_MODE_MENU_SCENE_PORT_TEXTFIELD_OFFSET_Y = -275;        // Áª»úÄ£Ê½²Ëµ¥³¡¾°¶Ë¿ÚÎÄ±¾¿òÎ»ÖÃ Y Æ«ÒÆÁ¿
+constexpr int IPV4_ADDRESS_MAX_LENGTH = 15;                                 // IPv4 µØÖ·×î´ó³¤¶È
+constexpr int PORT_MAX_LENGTH = 5;                                          // ¶Ë¿Ú×î´ó³¤¶È
 constexpr float RANDOM_WELCOME_PROMPT_PROBABILITY = 0.5f;                   // Ëæ»ú»¶Ó­ÌáÊ¾Óï¸ÅÂÊ
 
 // ¶ÔÕ½³¡¾°ÉèÖÃ
@@ -95,7 +102,12 @@ constexpr int SCORE_BOARD_LAYER_NAME_LABEL_OFFSET_X = -125;                 // ·
 constexpr int SCORE_BOARD_LAYER_SCORE_LABEL_OFFSET_X = 90;                  // ·ÖÊý±í²ãÍæ¼ÒÉúÃüÖµ±êÇ©
 constexpr int SCORE_BOARD_LAYER_RANK_LABEL_OFFSET_X = 115;                  // ·ÖÊý±í²ãÍæ¼ÒÅÅÃû±êÇ©
 constexpr int SCORE_BOARD_LABEL_FONT_SIZE = 25;                             // ·ÖÊý±í²ã±êÇ©×ÖÌå´óÐ¡
-constexpr int BATTLE_END_LABEL_FONT_SIZE = 96;                              // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©×ÖÌå´óÐ¡
+constexpr int BATTLE_END_LABEL_FONT_SIZE = 200;                             // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©×ÖÌå´óÐ¡
+constexpr int BATTLE_END_LABEL_OFFSET_Y = 74;                               // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
+constexpr int BATTLE_END_LABEL_OUTLINE_WIDTH = 4;                           // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©Ãè±ß¿í¶È
+constexpr int BATTLE_END_LABEL_SHADOW_OFFSET_X = 2;                         // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©ÒõÓ° X Æ«ÒÆÁ¿
+constexpr int BATTLE_END_LABEL_SHADOW_OFFSET_Y = -2;                        // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©ÒõÓ° Y Æ«ÒÆÁ¿
+constexpr int BATTLE_END_LABEL_BLUR_RADIUS = 3;                             // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©Ä£ºý°ë¾¶
 constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 10.0f;                   // ¶ÔÕ½³¡¾°×¼±¸Ê±¼ä
 constexpr float BATTLE_END_DURATION = 2.0f;                                 // ¶ÔÕ½½áÊøÍ£ÁôÊ±¼ä
 
@@ -117,7 +129,7 @@ constexpr int SHOP_LEVEL_LABEL_FONT_SIZE = 20;                              // É
 constexpr int SHOP_COIN_LABEL_FONT_SIZE = 20;                               // ÉÌµê½ð±ÒÊýÁ¿±êÇ©×ÖÌå´óÐ¡
 constexpr int SHOP_COIN_LABEL_OFFSET_X = 358;                               // ÉÌµê½ð±ÒÊýÁ¿±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
 constexpr int SHOP_COIN_LABEL_OFFSET_Y = -228;                              // ÉÌµê½ð±ÒÊýÁ¿±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
-constexpr int INITIAL_GOLD_COIN = 99;                                       // ³õÊ¼½ð±ÒÊýÁ¿£¨TODO: ²»ÖªµÀÎªÊ²Ã´ÔÚ³õÊ¼»¯Ê±»áË¢ÐÂÁ½´ÎÉÌµê£¬ËùÒÔ½ð±Ò³õÊ¼ÖµÒª¼Ó4£©
+constexpr int INITIAL_GOLD_COIN = 999;                                      // ³õÊ¼½ð±ÒÊýÁ¿£¨TODO: ²»ÖªµÀÎªÊ²Ã´ÔÚ³õÊ¼»¯Ê±»áË¢ÐÂÁ½´ÎÉÌµê£¬ËùÒÔ½ð±Ò³õÊ¼ÖµÒª¼Ó4£©
 constexpr int REFRESH_SHOP_PRICE = 2;                                       // Ë¢ÐÂÉÌµêËùÐè½ð±ÒÊýÁ¿
 const std::map<int, int> UPLEVEL_PRICE = {                                  // Éý¼¶ËùÐè½ð±ÒÊýÁ¿
     {BATTLE_AREA_MIN_CHAMPION_COUNT, 12},                                   // µÈ¼¶ 1 Éý¼¶ÖÁµÈ¼¶ 2 ËùÐè½ð±ÒÊýÁ¿
