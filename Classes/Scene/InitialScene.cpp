@@ -3,7 +3,7 @@
  * File Name:     InitialScene.cpp
  * File Function: InitialScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/24
+ * Update Date:   2023/12/26
  ****************************************************************/
 
 #include "InitialScene.h"
@@ -91,7 +91,8 @@ bool InitialScene::init()
             }
             else {
                 nameLabel->setVisible(true);
-                this->scheduleOnce([nameLabel](float dt) {nameLabel->setVisible(false); }, PROMPT_MESSAGE_DURATION, "HidePromptLabel");
+                this->scheduleOnce([nameLabel](float dt) {
+                    nameLabel->setVisible(false); }, PROMPT_MESSAGE_DURATION, "HidePromptLabel");
             }
         }
         });

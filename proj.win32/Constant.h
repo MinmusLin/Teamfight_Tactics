@@ -26,11 +26,13 @@ constexpr float FRAME_RATE = 60.0f;                                         // Ó
 const std::string APPLICATION_TITLE = "½ğ²ù²ùÖ®Õ½ Teamfight Tactics";        // Ó¦ÓÃ³ÌĞò±êÌâ
 
 // ÍøÂç»·¾³ÉèÖÃ
-constexpr int HOSTNAME_LENGHT = 128;                                        // Ö÷»úÃû³¤¶È
+constexpr int HOSTNAME_MAX_LENGHT = 128;                                    // Ö÷»úÃû×î´ó³¤¶È
+constexpr int IPV4_ADDRESS_MAX_LENGTH = 15;                                 // IPv4 µØÖ·×î´ó³¤¶È
+constexpr int PORT_MAX_LENGTH = 5;                                          // ¶Ë¿Ú×î´ó³¤¶È
 constexpr int MIN_PORT_ADDRESS = 49152;                                     // ×îĞ¡¶Ë¿ÚµØÖ·
 constexpr int MAX_PORT_ADDRESS = 65535;                                     // ×î´ó¶Ë¿ÚµØÖ·
 constexpr int MAX_CONNECTIONS = 8;                                          // ×î´óÁ¬½ÓÊıÁ¿
-constexpr int BUFFER_SIZE = 1024;                                           // »º³åÇø´óĞ¡
+constexpr int BUFFER_SIZE = 256;                                            // »º³åÇø´óĞ¡
 constexpr char CONNECTION_REFUSED_MSG[] = "Connection refused.";            // ¾Ü¾øÁ¬½ÓÌáÊ¾ÏûÏ¢
 constexpr char CONNECTION_ACCEPTED_MSG[] = "Connection accepted.";          // ½ÓÊÜÁ¬½ÓÌáÊ¾ÏûÏ¢
 
@@ -71,8 +73,8 @@ constexpr int ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_Y = -220;                // Á
 constexpr int ONLINE_MODE_MENU_SCENE_FONT_SIZE = 30;                        // Áª»úÄ£Ê½²Ëµ¥³¡¾°×ÖÌå´óĞ¡
 constexpr int ONLINE_MODE_MENU_SCENE_IPV4_TEXTFIELD_OFFSET_Y = -167;        // Áª»úÄ£Ê½²Ëµ¥³¡¾° IPv4 ÎÄ±¾¿òÎ»ÖÃ Y Æ«ÒÆÁ¿
 constexpr int ONLINE_MODE_MENU_SCENE_PORT_TEXTFIELD_OFFSET_Y = -275;        // Áª»úÄ£Ê½²Ëµ¥³¡¾°¶Ë¿ÚÎÄ±¾¿òÎ»ÖÃ Y Æ«ÒÆÁ¿
-constexpr int IPV4_ADDRESS_MAX_LENGTH = 15;                                 // IPv4 µØÖ·×î´ó³¤¶È
-constexpr int PORT_MAX_LENGTH = 5;                                          // ¶Ë¿Ú×î´ó³¤¶È
+constexpr int ONLINE_MODE_MENU_SCENE_PROMPT_LABEL_OFFSET_Y = 285;           // Áª»úÄ£Ê½²Ëµ¥³¡¾°ÌáÊ¾±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
+constexpr float CONNECTION_FAILED_PROMPT_MESSAGE_DURATION = 3.0f;           // ·şÎñÆ÷Á¬½ÓÊ§°ÜÌáÊ¾ĞÅÏ¢Í£ÁôÊ±¼ä
 constexpr float RANDOM_WELCOME_PROMPT_PROBABILITY = 0.5f;                   // Ëæ»ú»¶Ó­ÌáÊ¾Óï¸ÅÂÊ
 
 // ¶ÔÕ½³¡¾°ÉèÖÃ
@@ -176,10 +178,30 @@ constexpr int INCREASED_MAGIC_POINTS = 20;                                  // ¹
 constexpr int DECREASED_HEALTH_POINTS = 5;                                  // ´æ»îÕ½¶·Ó¢ĞÛ¶ÔÓ¦¼õÉÙÉúÃüÖµ
 constexpr int INCREASED_GOLD_COINS = 5;                                     // ´æ»îÕ½¶·Ó¢ĞÛ¶ÔÓ¦Ôö¼Ó½ğ±ÒÊıÁ¿
 
+// ÍøÂçÁ¬½Ó×´Ì¬¶¨Òå
+enum ConnectionStatus {
+    ConnectionError,   // ´íÎóÁ¬½Ó
+    ConnectionRefused, // ¾Ü¾øÁ¬½Ó
+    ConnectionAccepted // ½ÓÊÜÁ¬½Ó
+};
+
 // Á·Ï°Ä£Ê½ÄÑ¶È¶¨Òå
 enum Difficulty {
     Easy, // ¼òµ¥Ä£Ê½
     Hard  // À§ÄÑÄ£Ê½
+};
+
+// Î»ÖÃ×´Ì¬¶¨Òå
+enum LocationStatus {
+    WaitingArea, // ºòÕ½Çø
+    BattleArea   // Õ½¶·Çø
+};
+
+// Õ½¶·Ê¤¸º×´Ì¬¶¨Òå
+enum BattleSituation {
+    Lose = -1, // Ê§°Ü
+    Draw = 0,  // Æ½¾Ö
+    Win = 1    // Ê¤Àû
 };
 
 // Õ½¶·Ó¢ĞÛÖÖÀà¶¨Òå
@@ -215,19 +237,6 @@ enum ChampionCategory {
     Champion28, // ¿¨¶ûÈøË¹£¨¶şĞÇ£©
     Champion29, // ¿¨É¯£¨Ò»ĞÇ£©
     Champion30  // ¿¨É¯£¨¶şĞÇ£©
-};
-
-// Î»ÖÃ×´Ì¬¶¨Òå
-enum LocationStatus {
-    WaitingArea, // ºòÕ½Çø
-    BattleArea   // Õ½¶·Çø
-};
-
-// Õ½¶·Ê¤¸º×´Ì¬¶¨Òå
-enum BattleSituation {
-    Lose = -1, // Ê§°Ü
-    Draw = 0,  // Æ½¾Ö
-    Win = 1    // Ê¤Àû
 };
 
 // Î»ÖÃÊôĞÔ¶¨Òå
