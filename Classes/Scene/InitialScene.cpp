@@ -92,7 +92,8 @@ bool InitialScene::init()
             else {
                 nameLabel->setVisible(true);
                 this->scheduleOnce([nameLabel](float dt) {
-                    nameLabel->setVisible(false); }, PROMPT_MESSAGE_DURATION, "HidePromptLabel");
+                    nameLabel->setVisible(false);
+                    }, PROMPT_MESSAGE_DURATION, "HidePromptLabel");
             }
         }
         });

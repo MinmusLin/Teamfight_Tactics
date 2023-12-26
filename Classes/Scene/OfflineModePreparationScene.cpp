@@ -3,7 +3,7 @@
  * File Name:     OfflineModePreparationScene.cpp
  * File Function: OfflineModePreparationScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/25
+ * Update Date:   2023/12/26
  ****************************************************************/
 
 #include "OfflineModePreparationScene.h"
@@ -173,7 +173,7 @@ void OfflineModePreparationScene::setScheduleOnce(cocos2d::ui::LoadingBar* progr
     g_offlineModeControl->getHumanPlayer()->refreshShop();
 
     // 更新进度条和标签
-    const float interval = BATTLE_SCENE_LOADINGBAR_DURATION / 1000.0f; // 每 0.1% 所需时间
+    constexpr float interval = BATTLE_SCENE_LOADINGBAR_DURATION / 1000.0f; // 每 0.1% 所需时间
     for (int i = 0; i <= 1000; i++) {
         this->scheduleOnce([progressBar, progressLabel, i](float dt) {
             int sceond = static_cast<int>(BATTLE_SCENE_LOADINGBAR_DURATION - i * BATTLE_SCENE_LOADINGBAR_DURATION / 1000 + 0.999);
