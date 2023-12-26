@@ -28,6 +28,9 @@ public:
     // 创建客户端
     ConnectionStatus initializeClient();
 
+    // 获取客户端的 socket
+    SOCKET getSocket() const;
+
 private:
     char ipv4[IPV4_ADDRESS_MAX_LENGTH + 1]; // IPv4 地址
     int port;                               // 端口

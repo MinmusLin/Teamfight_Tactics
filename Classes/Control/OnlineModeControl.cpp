@@ -31,54 +31,110 @@ OnlineModeControl::~OnlineModeControl()
 ConnectionStatus OnlineModeControl::initializeClient()
 {
     // 初始化 Winsock
-    //     WSAStartup 用于启动 Windows Sockets API
-    //     MAKEWORD(2,2) 指定请求 2.2 版本的 Winsock
-    //     如果初始化失败，输出错误信息并返回 ConnectioError
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
         std::cerr << "Function WSAStartup failed with error: " << WSAGetLastError() << std::endl;
         return ConnectionError;
     }
 
     // 创建套接字
-    //     AF_INET 表示 IPv4 地址族
-    //     SOCK_STREAM 表示提供顺序、可靠、基于连接的字节流
-    //     如果套接字创建失败，输出错误信息并返回 ConnectioError
     if ((s = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET) {
         std::cerr << "Function socket failed with error: " << WSAGetLastError() << std::endl;
         return ConnectionError;
     }
 
+    // 将套接字设置为非阻塞
+    u_long mode = 1;
+    if (ioctlsocket(s, FIONBIO, &mode) != NO_ERROR) {
+        std::cerr << "Function ioctlsocket failed with error: " << WSAGetLastError() << std::endl;
+        return ConnectionError;
+    }
+
     // 准备 sockaddr_in 结构
-    //     inet_addr 转换 IPv4 地址从文本到二进制形式
-    //     htons 转换端口号为 TCP/IP 网络字节顺序
     server.sin_addr.s_addr = inet_addr(ipv4);
     server.sin_family = AF_INET;
     server.sin_port = htons(port);
 
     // 连接到远程服务器
-    //     connect 函数建立与指定套接字的连接
-    //     如果连接失败，输出错误信息并返回 ConnectioError
     if (connect(s, (struct sockaddr*)&server, sizeof(server)) < 0) {
-        std::cerr << "Function connect failed with error: " << WSAGetLastError() << std::endl;
-        return ConnectionError;
-    }
+        // 检查连接是否成功
+        if (WSAGetLastError() != WSAEWOULDBLOCK) {
+            std::cerr << "Function connect failed with error: " << WSAGetLastError() << std::endl;
+            return ConnectionError;
+        }
 
-    // 接收来自服务器的数据
-    //     recv 函数从套接字接收数据
-    //     如果接收失败，输出错误信息并返回 ConnectioError
-    if ((recvSize = recv(s, message, 1024, 0)) == SOCKET_ERROR) {
-        std::cerr << "Function recv failed with error: " << WSAGetLastError() << std::endl;
-        return ConnectionError;
-    }
+        // 使用 select 检测连接是否成功
+        fd_set writefds;
+        FD_ZERO(&writefds);
+        FD_SET(s, &writefds);
 
-    // 处理服务器的响应消息
-    //     如果服务器接受连接，返回 ConnectioAccepted
-    //     如果服务器拒绝连接（服务器已满），返回 ConnectioRefused
-    if (!strcmp(message, CONNECTION_ACCEPTED_MSG)) {
-        return ConnectionAccepted;
+        // 设置服务器连接超时时间
+        struct timeval timeout;
+        timeout.tv_sec = CONNECTION_TIMEOUT_DURATION;
+        timeout.tv_usec = 0;
+
+        // 检测套接字是否可写（即是否已连接）
+        int selectResult = select(0, NULL, &writefds, NULL, &timeout);
+        if (selectResult > 0) {
+            if (FD_ISSET(s, &writefds)) {
+                int optVal, optLen = sizeof(optVal);
+                if (getsockopt(s, SOL_SOCKET, SO_ERROR, (char*)&optVal, &optLen) == 0 && optVal == 0) {
+                    // 使用 select 等待数据到达
+                    fd_set readfds;
+                    FD_ZERO(&readfds);
+                    FD_SET(s, &readfds);
+
+                    // 设置服务器连接超时时间
+                    timeout.tv_sec = CONNECTION_TIMEOUT_DURATION;
+                    timeout.tv_usec = 0;
+
+                    // 等待套接字变为可读
+                    selectResult = select(0, &readfds, NULL, NULL, &timeout);
+                    if (selectResult > 0) {
+                        if (FD_ISSET(s, &readfds)) {
+                            memset(message, 0, sizeof(message));
+                            recvSize = recv(s, message, BUFFER_SIZE, 0);
+                            if (recvSize > 0) { // 处理服务器响应消息
+                                message[recvSize] = '\0';
+                                if (!strcmp(message, CONNECTION_ACCEPTED_MSG)) { // 连接接受
+                                    return ConnectionAccepted;
+                                }
+                                if (!strcmp(message, CONNECTION_REFUSED_MSG)) { // 连接拒绝
+                                    return ConnectionRefused;
+                                }
+                                return ConnectionError; // 连接错误
+                            }
+                            else if (recvSize == 0) { // 连接关闭
+                                return ConnectionError;
+                            }
+                            else { // 函数 recv 出错
+                                std::cerr << "Function recv failed with error: " << WSAGetLastError() << std::endl;
+                                return ConnectionError;
+                            }
+                        }
+                    }
+                    else if (selectResult == 0) { // 连接超时
+                        return ConnectionTimeout;
+                    }
+                    else { // 函数 select 出错
+                        std::cerr << "Function select failed with error: " << WSAGetLastError() << std::endl;
+                        return ConnectionError;
+                    }
+                }
+            }
+        }
+        else if (selectResult == 0) { // 连接超时
+            return ConnectionTimeout;
+        }
+        else { // 函数 select 出错
+            std::cerr << "Function select failed with error: " << WSAGetLastError() << std::endl;
+            return ConnectionError;
+        }
     }
-    if (!strcmp(message, CONNECTION_REFUSED_MSG)) {
-        return ConnectionRefused;
-    }
-    return ConnectionError;
+    return ConnectionError; // 连接错误
+}
+
+// 获取客户端的 socket
+SOCKET OnlineModeControl::getSocket() const
+{
+    return s;
 }

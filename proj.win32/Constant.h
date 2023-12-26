@@ -33,8 +33,13 @@ constexpr int MIN_PORT_ADDRESS = 49152;                                     // ×
 constexpr int MAX_PORT_ADDRESS = 65535;                                     // ×î´ó¶Ë¿ÚµØÖ·
 constexpr int MAX_CONNECTIONS = 8;                                          // ×î´óÁ¬½ÓÊıÁ¿
 constexpr int BUFFER_SIZE = 256;                                            // »º³åÇø´óĞ¡
-constexpr char CONNECTION_REFUSED_MSG[] = "Connection refused.";            // ¾Ü¾øÁ¬½ÓÌáÊ¾ÏûÏ¢
-constexpr char CONNECTION_ACCEPTED_MSG[] = "Connection accepted.";          // ½ÓÊÜÁ¬½ÓÌáÊ¾ÏûÏ¢
+constexpr int CONNECTION_TIMEOUT_DURATION = 2;                              // ·şÎñÆ÷Á¬½Ó³¬Ê±Ê±¼ä
+constexpr int CURRENT_CONNECTIONS_FORMAT_LENGTH = 20;                       // ·şÎñÆ÷µ±Ç°Á¬½ÓÊıÁ¿¸ñÊ½×Ö·û´®³¤¶È
+constexpr float SERVER_REFRESH_INTERVAL = 0.1f;                             // ¼àÌı·şÎñÆ÷Ë¢ĞÂÊ±¼ä¼ä¸ô
+constexpr char CONNECTION_REFUSED_MSG[] = "Connection refused.";            // ¾Ü¾øÁ¬½ÓÌáÊ¾ĞÅÏ¢
+constexpr char CONNECTION_ACCEPTED_MSG[] = "Connection accepted.";          // ½ÓÊÜÁ¬½ÓÌáÊ¾ĞÅÏ¢
+constexpr char START_GAME_MSG[] = "Start game.";                            // ¿ªÊ¼ÓÎÏ·ÌáÊ¾ĞÅÏ¢
+constexpr char CURRENT_CONNECTIONS_FORMAT[] = "CurrentConnections=%d";      // ·şÎñÆ÷µ±Ç°Á¬½ÓÊıÁ¿¸ñÊ½×Ö·û´®
 
 // ÑÕÉ«ÉèÖÃ
 constexpr int DARK_BLUE_R = 0;                                              // ÉîÀ¶É« R Í¨µÀ
@@ -180,9 +185,10 @@ constexpr int INCREASED_GOLD_COINS = 5;                                     // ´
 
 // ÍøÂçÁ¬½Ó×´Ì¬¶¨Òå
 enum ConnectionStatus {
-    ConnectionError,   // ´íÎóÁ¬½Ó
-    ConnectionRefused, // ¾Ü¾øÁ¬½Ó
-    ConnectionAccepted // ½ÓÊÜÁ¬½Ó
+    ConnectionError,    // Á¬½Ó´íÎó
+    ConnectionRefused,  // Á¬½Ó¾Ü¾ø
+    ConnectionAccepted, // Á¬½Ó½ÓÊÜ
+    ConnectionTimeout   // Á¬½Ó³¬Ê±
 };
 
 // Á·Ï°Ä£Ê½ÄÑ¶È¶¨Òå
