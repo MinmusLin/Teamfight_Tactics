@@ -3,18 +3,25 @@
  * File Name:     OnlineModeMenuScene.cpp
  * File Function: OnlineModeMenuScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/24
+ * Update Date:   2023/12/26
  ****************************************************************/
 
+#include <iostream>
 #include "OnlineModeMenuScene.h"
+#include "Control/OnlineModeControl.h"
 #include "Button/HoverButton.h"
 #include "MenuScene.h"
 #include "proj.win32/Constant.h"
+#include "GBKToUTF8/GBKToUTF8.h"
 
 // 命名空间
 using cocos2d::Scene;
 using cocos2d::Sprite;
+using cocos2d::Label;
 using cocos2d::Vec2;
+
+// 联机模式游戏控制类
+OnlineModeControl* g_onlineModeControl = nullptr;
 
 // 创建场景
 Scene* OnlineModeMenuScene::createScene()
@@ -40,9 +47,6 @@ bool OnlineModeMenuScene::init()
     this->addChild(background);
 
     // 创建按钮
-    auto createRoomButton = HoverButton::create("../Resources/Buttons/OnlineModeMenuSceneButtons/CreateRoomDefaultButton.png",
-        "../Resources/Buttons/OnlineModeMenuSceneButtons/CreateRoomHoverButton.png",
-        "../Resources/Buttons/OnlineModeMenuSceneButtons/CreateRoomActiveButton.png");
     auto joinRoomButton = HoverButton::create("../Resources/Buttons/OnlineModeMenuSceneButtons/JoinRoomDefaultButton.png",
         "../Resources/Buttons/OnlineModeMenuSceneButtons/JoinRoomHoverButton.png",
         "../Resources/Buttons/OnlineModeMenuSceneButtons/JoinRoomActiveButton.png");
@@ -51,19 +55,89 @@ bool OnlineModeMenuScene::init()
         "../Resources/Buttons/OnlineModeMenuSceneButtons/ReturnMenuActiveButton.png");
 
     // 设置按钮位置
-    createRoomButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + 200)); // TODO: 按钮位置通过常变量替代
-    joinRoomButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2)); // TODO: 按钮位置通过常变量替代
-    returnMenuButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 - 200)); // TODO: 按钮位置通过常变量替代
+    joinRoomButton->setPosition(Vec2(screenSize.width / 2 - ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_X, screenSize.height / 2 + ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_Y));
+    returnMenuButton->setPosition(Vec2(screenSize.width / 2 + ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_X, screenSize.height / 2 + ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_Y));
+
+    // 创建 IPv4 文本框
+    auto ipv4TextField = cocos2d::ui::TextField::create(GBKToUTF8::getString("请输入服务器 IPv4 地址"), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", ONLINE_MODE_MENU_SCENE_FONT_SIZE);
+    ipv4TextField->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + ONLINE_MODE_MENU_SCENE_IPV4_TEXTFIELD_OFFSET_Y));
+    ipv4TextField->setMaxLength(IPV4_ADDRESS_MAX_LENGTH);
+    ipv4TextField->setMaxLengthEnabled(true);
+    ipv4TextField->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
+    this->addChild(ipv4TextField);
+
+    // 创建端口文本框
+    auto portTextField = cocos2d::ui::TextField::create(GBKToUTF8::getString("请输入服务器端口"), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", ONLINE_MODE_MENU_SCENE_FONT_SIZE);
+    portTextField->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + ONLINE_MODE_MENU_SCENE_PORT_TEXTFIELD_OFFSET_Y));
+    portTextField->setMaxLength(PORT_MAX_LENGTH);
+    portTextField->setMaxLengthEnabled(true);
+    portTextField->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
+    this->addChild(portTextField);
+
+    // 创建一个提示标签
+    auto promptLabel = Label::createWithTTF("", "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", ONLINE_MODE_MENU_SCENE_FONT_SIZE);
+    promptLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + ONLINE_MODE_MENU_SCENE_PROMPT_LABEL_OFFSET_Y));
+    promptLabel->setVisible(false);
+    promptLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
+    this->addChild(promptLabel);
+
+    // 创建服务器连接失败提示
+    auto connectionFailedPrompt = Sprite::create("../Resources/Scenes/ServerConnectionFailedPrompt.png");
+    connectionFailedPrompt->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
+    connectionFailedPrompt->setVisible(false);
+    this->addChild(connectionFailedPrompt, 1);
 
     // 为按钮添加事件处理器
-    createRoomButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+    joinRoomButton->addTouchEventListener([this, ipv4TextField, portTextField, promptLabel, connectionFailedPrompt](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-            // TODO: 创建服务器场景接口
-        }
-        });
-    joinRoomButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
-        if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-            // TODO: 创建客户端场景接口
+            std::string ipv4 = ipv4TextField->getString();
+            std::string port = portTextField->getString();
+            if (ipv4.empty() && port.empty()) {
+                promptLabel->setString(GBKToUTF8::getString("服务器 IPv4 地址和端口不能为空"));
+                promptLabel->setVisible(true);
+                this->scheduleOnce([promptLabel](float dt) {promptLabel->setVisible(false);
+                    }, PROMPT_MESSAGE_DURATION, "IPv4AndPortHidePromptLabel");
+            }
+            else if (ipv4.empty() && !port.empty()) {
+                promptLabel->setString(GBKToUTF8::getString("服务器 IPv4 地址不能为空"));
+                promptLabel->setVisible(true);
+                this->scheduleOnce([promptLabel](float dt) {promptLabel->setVisible(false);
+                    }, PROMPT_MESSAGE_DURATION, "IPv4HidePromptLabel");
+            }
+            else if (!ipv4.empty() && port.empty()) {
+                promptLabel->setString(GBKToUTF8::getString("服务器端口不能为空"));
+                promptLabel->setVisible(true);
+                this->scheduleOnce([promptLabel](float dt) {promptLabel->setVisible(false);
+                    }, PROMPT_MESSAGE_DURATION, "PortHidePromptLabel");
+            }
+            else {
+                try {
+                    g_onlineModeControl = new OnlineModeControl(ipv4, port); // TODO: 目前未处理 delete
+                }
+                catch (const std::bad_alloc& e) {
+                    std::cerr << "Memory allocation failed: " << e.what() << std::endl;
+                    throw;
+                }
+                ConnectionStatus connectionStatus = g_onlineModeControl->initializeClient();
+                if (connectionStatus == ConnectionError) {
+                    connectionFailedPrompt->setVisible(true);
+                    this->scheduleOnce([connectionFailedPrompt](float dt) {connectionFailedPrompt->setVisible(false);
+                        }, CONNECTION_FAILED_PROMPT_MESSAGE_DURATION, "ConnectionErrorHidePromptLabel");
+                    delete g_onlineModeControl;
+                    g_onlineModeControl = nullptr;
+                }
+                else if (connectionStatus == ConnectionRefused) {
+                    promptLabel->setString(GBKToUTF8::getString("服务器达到最大连接数量"));
+                    promptLabel->setVisible(true);
+                    this->scheduleOnce([promptLabel](float dt) {promptLabel->setVisible(false);
+                        }, PROMPT_MESSAGE_DURATION, "ConnectionRefusedHidePromptLabel");
+                    delete g_onlineModeControl;
+                    g_onlineModeControl = nullptr;
+                }
+                else {
+                    // TODO
+                }
+            }
         }
         });
     returnMenuButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
@@ -73,7 +147,6 @@ bool OnlineModeMenuScene::init()
         });
 
     // 将按钮添加到场景中
-    this->addChild(createRoomButton);
     this->addChild(joinRoomButton);
     this->addChild(returnMenuButton);
 

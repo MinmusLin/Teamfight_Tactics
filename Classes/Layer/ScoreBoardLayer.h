@@ -11,6 +11,8 @@
 #define _SCORE_BOARD_LAYER_H_
 
 #include "cocos2d.h"
+#include "Player/HumanPlayer.h"
+#include "Player/AIPlayer.h"
 
 /*
  * Class Name:     ScoreBoardLayer
@@ -18,14 +20,27 @@
  */
 class ScoreBoardLayer : public cocos2d::Layer {
 public:
+    // 析构函数
+    ~ScoreBoardLayer();
+
     // 初始化分数表层类
     virtual bool init();
 
-    // 显示分数表
-    void showScoreBoard(int playerNum);
+    // 初始化分数表背景
+    void initialize(const int playerNum);
+
+    // 显示分数表（练习模式）
+    void showScoreBoard(HumanPlayer* humanPlayer, AIPlayer* enemyPlayer);
+
+    // 显示分数表（联机模式）
+    void showScoreBoard(const int playerNum, HumanPlayer** players);
 
     // 实现 ScoreBoardLayer 类的 create 方法
     CREATE_FUNC(ScoreBoardLayer);
+
+private:
+    cocos2d::Label** playerNames;  // 玩家昵称标签指针
+    cocos2d::Label** healthPoints; // 玩家生命值标签指针
 };
 
 #endif // !_SCORE_BOARD_LAYER_H_

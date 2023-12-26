@@ -3,16 +3,20 @@
  * File Name:     OfflineModeBattleScene.cpp
  * File Function: OfflineModeBattleScene类的实现
  * Author:        杨宇琨、林继申
- * Update Date:   2023/12/25
+ * Update Date:   2023/12/26
  ****************************************************************/
 
 #include "OfflineModeBattleScene.h"
 #include "Control/OfflineModeControl.h"
 #include "LocationMap/LocationMap.h"
+#include "Layer/ScoreBoardLayer.h"
+#include "GBKToUTF8/GBKToUTF8.h"
+#include "MenuScene.h"
 
 // 命名空间
 using cocos2d::Scene;
 using cocos2d::Sprite;
+using cocos2d::Label;
 using cocos2d::Vec2;
 
 // 练习模式游戏控制类
@@ -71,6 +75,13 @@ bool OfflineModeBattleScene::init()
         }
     }
 
+    // 创建分数表层
+    auto scoreBoardLayer = ScoreBoardLayer::create();
+    scoreBoardLayer->initialize(2);
+    scoreBoardLayer->showScoreBoard(g_offlineModeControl->getHumanPlayer(), g_offlineModeControl->getAIPlayer());
+    scoreBoardLayer->setName("ScoreBoardLayer");
+    this->addChild(scoreBoardLayer);
+
     // 启用每一帧被自动调用的 update 方法
     this->scheduleUpdate();
 
@@ -108,23 +119,60 @@ void OfflineModeBattleScene::update(float delta)
         int enemyCount = g_offlineModeControl->getBattle()->getEnemyCount();
         if (myCount == 0 && enemyCount == 0) { // 平局
             g_offlineModeControl->getBattle()->setBattleSituation(Draw);
-            CCLOG("Draw"); // TODO: CCLOG
         }
         else if (enemyCount == 0) { // 胜利
             g_offlineModeControl->getBattle()->setBattleSituation(Win);
             g_offlineModeControl->getAIPlayer()->decreaseHealthPoints(myCount * DECREASED_HEALTH_POINTS);
-            g_offlineModeControl->getHumanPlayer()->addGoldCoin(myCount * INCREASED_GOLD_COINS);
-            CCLOG("Win"); // TODO: CCLOG
+            g_offlineModeControl->getHumanPlayer()->addGoldCoin(myCount * INCREASED_GOLD_COINS + REFRESH_SHOP_PRICE);
         }
         else { // 失败
             g_offlineModeControl->getBattle()->setBattleSituation(Lose);
             g_offlineModeControl->getHumanPlayer()->decreaseHealthPoints(enemyCount * DECREASED_HEALTH_POINTS);
-            CCLOG("Lose"); // TODO: CCLOG
+        }
+
+        // 重置分数表层
+        auto scoreBoardLayer = dynamic_cast<ScoreBoardLayer*>(this->getChildByName("ScoreBoardLayer"));
+        scoreBoardLayer->showScoreBoard(g_offlineModeControl->getHumanPlayer(), g_offlineModeControl->getAIPlayer());
+
+        // 检查练习模式是否结束
+        int humanPlayerHealth = g_offlineModeControl->getHumanPlayer()->getHealthPoints();
+        int enemyPlayerHealth = g_offlineModeControl->getAIPlayer()->getHealthPoints();
+        bool isEnd = false;
+        std::string winningPrompt = "";
+        cocos2d::Color4B outlineColor = cocos2d::Color4B::ORANGE;
+        if (humanPlayerHealth == 0 && enemyPlayerHealth == 0) {
+            isEnd = true;
+            winningPrompt = "平局";
+        }
+        else if (enemyPlayerHealth == 0) {
+            isEnd = true;
+            winningPrompt = "胜利";
+            outlineColor = cocos2d::Color4B::RED;
+        }
+        else if (humanPlayerHealth == 0) {
+            isEnd = true;
+            winningPrompt = "失败";
+            outlineColor = cocos2d::Color4B::BLUE;
+        }
+        if (isEnd) {
+            auto winningLabel = Label::createWithTTF(GBKToUTF8::getString(winningPrompt), "../Resources/Fonts/DingDingJinBuTi.ttf", BATTLE_END_LABEL_FONT_SIZE);
+            const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
+            winningLabel->enableOutline(outlineColor, BATTLE_END_LABEL_OUTLINE_WIDTH);
+            cocos2d::Size shadowOffset(BATTLE_END_LABEL_SHADOW_OFFSET_X, BATTLE_END_LABEL_SHADOW_OFFSET_Y);
+            winningLabel->enableShadow(cocos2d::Color4B::GRAY, shadowOffset, BATTLE_END_LABEL_BLUR_RADIUS);
+            winningLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + BATTLE_END_LABEL_OFFSET_Y));
+            this->addChild(winningLabel);
         }
 
         // 释放练习模式对战场景
-        cocos2d::Director::getInstance()->getRunningScene()->unscheduleUpdate();
-        cocos2d::Director::getInstance()->popScene();
+        auto switchScene = [isEnd](float dt) {
+            cocos2d::Director::getInstance()->getRunningScene()->unscheduleUpdate();
+            cocos2d::Director::getInstance()->popScene();
+            if (isEnd) {
+                cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
+            }
+            };
+        this->scheduleOnce(switchScene, BATTLE_END_DURATION, "OfflineModeBattleSceneToOfflineModePreparationScene");
 
         // 重置对战类
         g_offlineModeControl->releaseBattle();

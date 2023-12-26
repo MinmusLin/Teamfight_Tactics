@@ -3,7 +3,7 @@
  * File Name:     StartupScene.cpp
  * File Function: StartupScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/24
+ * Update Date:   2023/12/26
  ****************************************************************/
 
 #include "StartupScene.h"
@@ -53,7 +53,7 @@ bool StartupScene::init()
     this->addChild(progressLabel);
 
     // 更新进度条和标签
-    const float interval = STARTUP_SCENE_DURATION / 100.0f; // 每 1% 所需时间
+    constexpr float interval = STARTUP_SCENE_DURATION / 100.0f; // 每 1% 所需时间
     for (int i = 0; i <= 100; i++) {
         this->scheduleOnce([progressBar, progressLabel, i](float dt) {
             progressLabel->setVisible(i >= 10);

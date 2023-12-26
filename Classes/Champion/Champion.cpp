@@ -25,7 +25,7 @@ Champion::Champion(const ChampionCategory championCategory) :
 {
     sprite = Sprite::create(attributes.championImagePath);
     maxHealthPoints = attributes.healthPoints;
-    maxMagicPoints = attributes.magicPoints;
+    maxMagicPoints = attributes.skillTriggerThreshold;
 }
 
 // ∞Û∂®’Ω∂∑¿‡
