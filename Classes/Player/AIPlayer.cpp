@@ -9,9 +9,8 @@
 #include "AIPlayer.h"
 #include <algorithm>
 #include <time.h>
-#include <queue>
 
-// 构造函数
+ // 构造函数
 AIPlayer::AIPlayer(const std::string nickname, const Difficulty difficulty_) :
     Player(nickname),
     difficulty(difficulty_) {}
@@ -29,11 +28,15 @@ std::map<ChampionCategory, int> AIPlayer::countChampionCategories() const
 {
     std::map<ChampionCategory, int> championsCount;
     for (const auto& champion : waitingMap) {
-        championsCount[champion]++;
+        if (champion != NoChampion) {
+            championsCount[champion]++;
+        }
     }
     for (const auto& championInRow : battleMap) {
         for (const auto& championInCol : championInRow) {
-            championsCount[championInCol]++;
+            if (championInCol != NoChampion) {
+                championsCount[championInCol]++;
+            }
         }
     }
     return championsCount;
@@ -44,7 +47,9 @@ int AIPlayer::getStageScore() const
 {
     int score = 0;
     for (const auto& e : champions) {
-        score += CHAMPION_ATTR_MAP.at(e.first).price;
+        for (int i = 0; i < e.second; i++) {
+            score += CHAMPION_ATTR_MAP.at(e.first).price;
+        }
     }
     return score;
 }
@@ -73,7 +78,7 @@ ChampionCategory AIPlayer::selectRandomChampion(const BattleStage stage) const
     for (int i = 0; i < CHAMPION_CATEGORY_NUMBERS / BATTLE_STAGE_NUMBERS; i++) {
         cumulativeRate += STAGE_WITH_RATE_OF_CHAMPIONS[static_cast<int>(stage)][i];
         if (random <= cumulativeRate) {
-            selectedChampion = championLevels[i][getRandom(CHAMPION_CATEGORY_NUMBERS / BATTLE_STAGE_NUMBERS + 1 - i) - 1];
+            selectedChampion = championLevels[i][getRandom(CHAMPION_CATEGORY_NUMBERS / BATTLE_STAGE_NUMBERS - i)];
             break;
         }
     }
@@ -143,14 +148,28 @@ void AIPlayer::updateChampionAfterUplevel(const ChampionCategory championCategor
 // 优化战斗英雄队伍配置
 void AIPlayer::optimizeChampionCollection()
 {
-    if (isUplevelAvailable()) {
-        ChampionCategory selectedChampion = selectBestChampionForUplevel();
-        updateChampionAfterUplevel(selectedChampion);
-    }
-    else {
+    // 如果当前无英雄（刚开始游戏）
+    if (champions.empty())
+    {
         BattleStage currentStage = determineCurrentBattleStage();
-        ChampionCategory selectedChampion = selectRandomChampion(currentStage);
-        champions[selectedChampion]++;
+        for (int i = 0; i < BATTLE_AREA_MIN_CHAMPION_COUNT; i++)
+        {
+            // 初始五英雄
+            ChampionCategory selectedChampion = selectRandomChampion(currentStage);
+            champions[selectedChampion]++;
+        }
+    }
+    else
+    {
+        if (isUplevelAvailable()) {
+            ChampionCategory selectedChampion = selectBestChampionForUplevel();
+            updateChampionAfterUplevel(selectedChampion);
+        }
+        else {
+            BattleStage currentStage = determineCurrentBattleStage();
+            ChampionCategory selectedChampion = selectRandomChampion(currentStage);
+            champions[selectedChampion]++;
+        }
     }
 }
 
@@ -160,7 +179,69 @@ int AIPlayer::getRandom(const int n) const
     return rand() % n + 1;
 }
 
-// 部署战斗英雄
+// 选择上场战斗英雄（困难），部署等待区英雄
+std::vector<ChampionCategory> AIPlayer::hardObtainBattleChampions(int maxChampions)
+{
+    // 基于优先队列排序战斗英雄
+    auto comp = [this](ChampionCategory a, ChampionCategory b) {
+        return calculateChampionScore(a) > calculateChampionScore(b);
+        };
+    std::priority_queue<ChampionCategory, std::vector<ChampionCategory>, decltype(comp)> orderedChampions(comp);
+    for (const auto& entry : champions) {
+        for (int i = 0; i < entry.second; i++) {
+            orderedChampions.push(entry.first);
+        }
+    }
+    // 选择战斗英雄
+    std::vector<ChampionCategory> chosenChampions;
+    for (int i = 0; i < maxChampions && !orderedChampions.empty(); i++) {
+        chosenChampions.push_back(orderedChampions.top());
+        orderedChampions.pop();
+    }
+    // 部署候战区战斗英雄
+    for (int i = 0; i < WAITING_MAP_COUNT && !orderedChampions.empty(); i++) {
+        waitingMap[i] = orderedChampions.top();
+        orderedChampions.pop();
+    }
+    return chosenChampions;
+}
+
+// 选择上场战斗英雄（简单），部署等待区英雄
+std::vector<ChampionCategory> AIPlayer::easyObtainBattleChampions(int maxChampions)
+{
+    // 获取当前全部英雄
+    std::vector<ChampionCategory> allChampions;
+    for (const auto& entry : champions) {
+        for (int i = 0; i < entry.second; i++) {
+            allChampions.push_back(entry.first);
+        }
+    }
+
+    // 打乱当前全部英雄
+    for (int i = 0; i < 20; i++) {
+        int a = getRandom(allChampions.size()) - 1;
+        int b = getRandom(allChampions.size()) - 1;
+        if (a == b) {
+            continue;
+        }
+        std::swap(allChampions[a], allChampions[b]);
+    }
+
+    // 选择战斗英雄
+    std::vector<ChampionCategory> chosenChampions;
+    for (int i = 0; i < maxChampions && !allChampions.empty(); i++) {
+        chosenChampions.push_back(allChampions.back());
+        allChampions.pop_back();
+    }
+    // 部署候战区战斗英雄
+    for (int i = 0; i < WAITING_MAP_COUNT && !allChampions.empty(); i++) {
+        waitingMap[i] = allChampions.back();
+        allChampions.pop_back();
+    }
+    return chosenChampions;
+}
+
+// 部署战斗区英雄
 void AIPlayer::deployChampions()
 {
     // 初始化地图
@@ -181,48 +262,33 @@ void AIPlayer::deployChampions()
         }
     }
 
-    // 基于优先队列排序战斗英雄
-    auto comp = [this](ChampionCategory a, ChampionCategory b) {
-        return calculateChampionScore(a) > calculateChampionScore(b);
-        };
-    std::priority_queue<ChampionCategory, std::vector<ChampionCategory>, decltype(comp)> orderedChampions(comp);
-    for (const auto& entry : champions) {
-        for (int i = 0; i < entry.second; i++) {
-            orderedChampions.push(entry.first);
-        }
-    }
-
-    // 选择战斗英雄
+    // 选择上场战斗英雄
     std::vector<ChampionCategory> chosenChampions;
-    for (int i = 0; i < maxChampions && !orderedChampions.empty(); i++) {
-        chosenChampions.push_back(orderedChampions.top());
-        orderedChampions.pop();
+    if (difficulty == Hard) {
+        chosenChampions = hardObtainBattleChampions(maxChampions);
+    }
+    else {
+        chosenChampions = easyObtainBattleChampions(maxChampions);
     }
 
     // 部署战斗区战斗英雄
     switch (chosenChampions.size()) {
-        case 8:
-            battleMap[0][5] = chosenChampions[7];
-        case 7:
-            battleMap[0][4] = chosenChampions[8];
-        case 6:
-            battleMap[0][1] = chosenChampions[5];
-        case 5:
-            battleMap[1][2] = chosenChampions[4];
-        case 4:
-            battleMap[1][4] = chosenChampions[3];
-        case 3:
-            battleMap[1][3] = chosenChampions[0];
-            battleMap[0][2] = chosenChampions[1];
-            battleMap[0][3] = chosenChampions[2];
-            break;
-        default:
-            break;
-    }
-
-    // 部署候战区战斗英雄
-    for (int i = 0; i < WAITING_MAP_COUNT && !orderedChampions.empty(); i++) {
-        waitingMap[i] = orderedChampions.top();
-        orderedChampions.pop();
+    case 8:
+        battleMap[1][2] = chosenChampions[7];
+    case 7:
+        battleMap[1][5] = chosenChampions[8];
+    case 6:
+        battleMap[0][5] = chosenChampions[5];
+    case 5:
+        battleMap[1][3] = chosenChampions[4];
+    case 4:
+        battleMap[0][2] = chosenChampions[3];
+    case 3:
+        battleMap[1][4] = chosenChampions[0];
+        battleMap[0][4] = chosenChampions[1];
+        battleMap[0][3] = chosenChampions[2];
+        break;
+    default:
+        break;
     }
 }

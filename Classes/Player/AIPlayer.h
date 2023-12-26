@@ -11,11 +11,12 @@
 #define _AI_PLAYER_H_
 
 #include "Player.h"
+#include <queue>
 
-/*
- * Class Name:     AIPlayer
- * Class Function: AI 玩家类
- */
+ /*
+  * Class Name:     AIPlayer
+  * Class Function: AI 玩家类
+  */
 class AIPlayer : public Player {
 public:
     // 构造函数
@@ -63,6 +64,12 @@ private:
 
     // 获取随机数
     int getRandom(const int n) const;
+
+    // 选择上场战斗英雄（困难），部署等待区英雄
+    std::vector<ChampionCategory> hardObtainBattleChampions(int maxChampions);
+
+    // 选择上场战斗英雄（简单），部署等待区英雄
+    std::vector<ChampionCategory> easyObtainBattleChampions(int maxChampions);
 
     // 部署战斗英雄
     void deployChampions();

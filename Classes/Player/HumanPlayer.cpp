@@ -12,7 +12,7 @@
 #include "LocationMap/LocationMap.h"
 #include "GBKToUTF8/GBKToUTF8.h"
 
-// 命名空间
+ // 命名空间
 using cocos2d::Scene;
 using cocos2d::Sprite;
 using cocos2d::Label;
@@ -329,7 +329,7 @@ void HumanPlayer::onMouseUp(Event* event, Sprite* championSprite)
             // 移动战斗英雄
             championSprite->setPosition(nearestPoint);
         }
-        
+
         // 关闭显示战斗英雄属性层和放置标记层
         hideChampionAttributesLayerAndPlacementMarkerLayer();
     }
@@ -494,9 +494,55 @@ Vec2 HumanPlayer::findNearestPoint(Sprite* championSprite)
 // 刷新商店战斗英雄种类
 void HumanPlayer::refreshShopChampionCategory()
 {
-    shopChampionCategory[0] = CHAMPION_ATTR_MAP.at(static_cast<ChampionCategory>(2 * (rand() % 7 + 1) - 1)).championCategory;
-    shopChampionCategory[1] = CHAMPION_ATTR_MAP.at(static_cast<ChampionCategory>(2 * (rand() % 7 + 1) - 1)).championCategory;
-    shopChampionCategory[2] = CHAMPION_ATTR_MAP.at(static_cast<ChampionCategory>(2 * (rand() % 7 + 1) - 1)).championCategory;
-    shopChampionCategory[3] = CHAMPION_ATTR_MAP.at(static_cast<ChampionCategory>(2 * (rand() % 7 + 1) - 1)).championCategory;
-    shopChampionCategory[4] = CHAMPION_ATTR_MAP.at(static_cast<ChampionCategory>(2 * (rand() % 7 + 1) - 1)).championCategory;
+    // 统计当前英雄数量
+    std::map<ChampionCategory, int> championsCount;
+    for (const auto& champion : waitingMap) {
+        if (champion != NoChampion) {
+            championsCount[champion]++;
+        }
+    }
+    for (const auto& championInRow : battleMap) {
+        for (const auto& championInCol : championInRow) {
+            if (championInCol != NoChampion) {
+                championsCount[championInCol]++;
+            }
+        }
+    }
+    // 获取当前局势分数
+    int stageScore = 0;
+    for (const auto& e : championsCount) {
+        for (int i = 0; i < e.second; i++) {
+            stageScore += CHAMPION_ATTR_MAP.at(e.first).price;
+        }
+    }
+    // 获取当前战斗阶段
+    BattleStage localStage;
+    if (stageScore < EARLY_MIDDLE_STAGE_THRESHOLD) {
+        localStage = EarlyStage;
+    }
+    else if (stageScore < MIDDLE_LATE_STAGE_THRESHOLD) {
+        localStage = MiddleStage;
+    }
+    else {
+        localStage = LateStage;
+    }
+    // 获取随机数
+    auto getRandom = [](int a) {
+        return rand() % a + 1;
+        };
+    // 根据战斗阶段随机生成英雄
+    const ChampionCategory* championLevels[] = { FIRST_LEVEL, SECOND_LEVEL, THIRD_LEVEL, FOURTH_LEVEL, FIFTH_LEVEL };
+    for (int i = 0; i < MAX_SELECTABLE_CHAMPION_COUNT; i++)
+    {
+        int random = getRandom(CHAMPION_CATEGORY_NUMBERS), cumulativeRate = 0;
+        ChampionCategory selectedChampion = NoChampion;
+        for (int i = 0; i < CHAMPION_CATEGORY_NUMBERS / BATTLE_STAGE_NUMBERS; i++) {
+            cumulativeRate += STAGE_WITH_RATE_OF_CHAMPIONS[static_cast<int>(localStage)][i];
+            if (random <= cumulativeRate) {
+                selectedChampion = championLevels[i][getRandom(CHAMPION_CATEGORY_NUMBERS / BATTLE_STAGE_NUMBERS - i)];
+                break;
+            }
+        }
+        shopChampionCategory[i] = selectedChampion;
+    }
 }
