@@ -15,7 +15,7 @@
 // 构造函数
 OnlineModeControl::OnlineModeControl(std::string ipv4, std::string portStr) :
     port(std::stoi(portStr)),
-    Control(0)
+    Control(0) // TODO: Control(0) 初始化
 {
     strcpy(this->ipv4, ipv4.c_str());
 }
@@ -159,22 +159,4 @@ void OnlineModeControl::setCurrentConnections(const int currentConnections)
 int OnlineModeControl::getCurrentConnections() const
 {
     return currentConnections;
-}
-
-// 添加联机玩家
-void OnlineModeControl::addOnlinePlayer(const OnlinePlayerInfo onlinePlayerInfo)
-{
-    playerList.push_back(onlinePlayerInfo);
-}
-
-// 初始化玩家
-void OnlineModeControl::initializePlayers()
-{
-    try {
-        humanPlayer = new HumanPlayer(cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName"));
-    }
-    catch (const std::bad_alloc& e) {
-        std::cerr << "Memory allocation failed: " << e.what() << std::endl;
-        throw;
-    }
 }

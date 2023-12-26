@@ -173,13 +173,14 @@ bool OnlineModeMenuScene::init()
                         int recvSize = recv(g_onlineModeControl->getSocket(), buffer, BUFFER_SIZE, 0);
                         if (recvSize > 0) {
                             buffer[recvSize] = '\0';
-                            if (!strcmp(buffer, START_GAME_MSG)) {
+                            if (/*!strcmp(buffer, START_GAME_MSG)*/false) {
+                                memset(buffer, 0, sizeof(buffer));
+                                sprintf(buffer, "ClientID=%d,PlayerName=%s", g_onlineModeControl->getSocket(), cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName").c_str());
+                                g_onlineModeControl->sendMessage(buffer, strlen(buffer));
+                            }
+                            else if (/*!strcmp(buffer, START_GAME_MSG)*/false) {
                                 this->unschedule("ServerMessageListener"); // 关闭服务器消息监听
-                                //memset(buffer, 0, sizeof(buffer));
-                                //sprintf(buffer, "ClientID=%d,PlayerName=%s", g_onlineModeControl->getSocket(), cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName").c_str());
-                                //g_onlineModeControl->sendMessage(buffer, strlen(buffer));
-                                CCLOG("Scene Changes");
-                                //cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, OnlineModePreparationScene::createScene(), cocos2d::Color3B::WHITE));
+                                // TODO
                             }
                             else {
                                 int currentConnections;
@@ -202,7 +203,9 @@ bool OnlineModeMenuScene::init()
         });
     startGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-            g_onlineModeControl->sendMessage(START_GAME_MSG, strlen(START_GAME_MSG));
+            char buffer[BUFFER_SIZE];
+            sprintf(buffer, "StartGame.PlayerName=%s", cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName").c_str());
+            g_onlineModeControl->sendMessage(buffer, strlen(buffer));
         }
         });
 

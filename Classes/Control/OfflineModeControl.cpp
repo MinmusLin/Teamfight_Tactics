@@ -3,7 +3,7 @@
  * File Name:     OfflineModeControl.cpp
  * File Function: OfflineModeControl类的实现
  * Author:        杨宇琨、林继申
- * Update Date:   2023/12/26
+ * Update Date:   2023/12/27
  ****************************************************************/
 
 #include <iostream>
@@ -49,18 +49,14 @@ AIPlayer* OfflineModeControl::getAIPlayer() const
 // 初始化对战类
 void OfflineModeControl::initializeBattle()
 {
+    // AI 落棋算法
+    enemyPlayer->makeMoves();
+
     // 获取战斗英雄地图
     ChampionCategory(*myFlagMap)[BATTLE_MAP_COLUMNS];
     ChampionCategory(*enemyFlagMap)[BATTLE_MAP_COLUMNS];
     humanPlayer->getBattleMap(myFlagMap);
     enemyPlayer->getBattleMap(enemyFlagMap);
-
-    // TODO: AI 落棋算法
-    (*enemyFlagMap)[0] = Champion1;
-    (*(enemyFlagMap + 1))[2] = Champion2;
-    (*(enemyFlagMap + 2))[5] = Champion3;
-    (*(enemyFlagMap + 3))[6] = Champion3;
-    (*(enemyFlagMap + 2))[8] = Champion4;
 
     // 创建对战类
     try {

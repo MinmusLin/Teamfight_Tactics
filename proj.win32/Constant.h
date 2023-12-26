@@ -3,7 +3,7 @@
  * File Name:     Constant.h
  * File Function: ³£±äÁ¿µÄ¶¨Òå
  * Author:        ÁÖ¼ÌÉê¡¢ÁõÊçÒÇ¡¢ÑîÕ×Õò¡¢ÑîÓîçû
- * Update Date:   2023/12/26
+ * Update Date:   2023/12/27
  ****************************************************************/
 
 #pragma once
@@ -38,7 +38,6 @@ constexpr int CURRENT_CONNECTIONS_FORMAT_LENGTH = 20;                       // ·
 constexpr float SERVER_REFRESH_INTERVAL = 0.1f;                             // ¼àÌı·şÎñÆ÷Ë¢ĞÂÊ±¼ä¼ä¸ô
 constexpr char CONNECTION_REFUSED_MSG[] = "Connection refused.";            // ¾Ü¾øÁ¬½ÓÌáÊ¾ĞÅÏ¢
 constexpr char CONNECTION_ACCEPTED_MSG[] = "Connection accepted.";          // ½ÓÊÜÁ¬½ÓÌáÊ¾ĞÅÏ¢
-constexpr char START_GAME_MSG[] = "Start game.";                            // ¿ªÊ¼ÓÎÏ·ÌáÊ¾ĞÅÏ¢
 constexpr char CURRENT_CONNECTIONS_FORMAT[] = "CurrentConnections=%d";      // ·şÎñÆ÷µ±Ç°Á¬½ÓÊıÁ¿¸ñÊ½×Ö·û´®
 
 // ÑÕÉ«ÉèÖÃ
@@ -179,10 +178,27 @@ constexpr int CHAMPION_HORIZONTAL_INTERVAL = 60;                            // Õ
 constexpr int CHAMPION_VERTICAL_INTERVAL = 45;                              // Õ½¶·Ó¢ĞÛ´¹Ö±¼ä¾à
 
 // Õ½¶·²ÎÊıÉèÖÃ
+constexpr int CHAMPION_CATEGORY_NUMBERS = 15;                               // Õ½¶·Ó¢ĞÛÖÖÀàÊıÁ¿
+constexpr int BATTLE_STAGE_NUMBERS = 3;                                     // Õ½¶·½×¶Î×´Ì¬ÊıÁ¿
 constexpr int INITIAL_HEALTH_POINTS = 100;                                  // Íæ¼Ò³õÊ¼ÉúÃüÖµ
 constexpr int INCREASED_MAGIC_POINTS = 20;                                  // ¹¥»÷¶ÔÓ¦Ôö¼ÓÄ§·¨Öµ
 constexpr int DECREASED_HEALTH_POINTS = 5;                                  // ´æ»îÕ½¶·Ó¢ĞÛ¶ÔÓ¦¼õÉÙÉúÃüÖµ
 constexpr int INCREASED_GOLD_COINS = 5;                                     // ´æ»îÕ½¶·Ó¢ĞÛ¶ÔÓ¦Ôö¼Ó½ğ±ÒÊıÁ¿
+constexpr int EARLY_MIDDLE_STAGE_THRESHOLD = 10;                            // Ç°ÖĞÆÚÕ½¶·½×¶ÎãĞÖµ
+constexpr int MIDDLE_LATE_STAGE_THRESHOLD = 50;                             // ÖĞºóÆÚÕ½¶·½×¶ÎãĞÖµ
+constexpr int DEFENSE_SCORE_COEFFICIENT = 200;                              // ·ÀÓù·ÖÊıÏµÊı
+constexpr int ATTACK_SCORE_COEFFICIENT = 30;                                // ¹¥»÷·ÖÊıÏµÊı
+constexpr int SPEED_SCORE_COEFFICIENT = 1;                                  // ËÙ¶È·ÖÊıÏµÊı
+constexpr int STAGE_SCORE_THRESHOLDS_COUNT = 6;                             // Õ½¶·½×¶Î»®·Ö¸öÊı
+constexpr double DEFENSE_SCORE_WEIGHT = 2.0;                                // Õ½¶·Ó¢ĞÛÖ°ÒµÆ«ºÃ·ÀÓù·ÖÊıÈ¨ÖØ
+constexpr double ATTACK_SCORE_WEIGHT = 2.5;                                 // Õ½¶·Ó¢ĞÛÖ°ÒµÆ«ºÃ¹¥»÷·ÖÊıÈ¨ÖØ
+constexpr double SPEED_SCORE_WEIGHT = 1.0;                                  // Õ½¶·Ó¢ĞÛÖ°ÒµÆ«ºÃËÙ¶È·ÖÊıÈ¨ÖØ
+constexpr int STAGE_SCORE_THRESHOLDS[] = { 0, 5, 10, 25, 50, 60 };          // Õ½¶·½×¶Î»®·ÖãĞÖµ
+constexpr int STAGE_WITH_RATE_OF_CHAMPIONS[3][5] = {                        // ¸÷¸öÕ½¶·½×¶ÎµÄÕ½¶·Ó¢ĞÛÑ¡Ôñ¸ÅÂÊ
+    {6, 4, 3, 2, 0},                                                        // Ç°ÆÚÕ½¶·½×¶ÎÕ½¶·Ó¢ĞÛÑ¡Ôñ¸ÅÂÊ
+    {5, 4, 3, 2, 1},                                                        // ÖĞÆÚÕ½¶·½×¶ÎÕ½¶·Ó¢ĞÛÑ¡Ôñ¸ÅÂÊ
+    {4, 5, 2, 2, 2},                                                        // ºóÆÚÕ½¶·½×¶ÎÕ½¶·Ó¢ĞÛÑ¡Ôñ¸ÅÂÊ
+};
 
 // ÍøÂçÁ¬½Ó×´Ì¬¶¨Òå
 enum ConnectionStatus {
@@ -209,6 +225,13 @@ enum BattleSituation {
     Lose, // Ê§°Ü
     Draw, // Æ½¾Ö
     Win   // Ê¤Àû
+};
+
+// Õ½¶·½×¶Î×´Ì¬¶¨Òå
+enum BattleStage {
+    EarlyStage,  // Ç°ÆÚÕ½¶·½×¶Î
+    MiddleStage, // ÖĞÆÚÕ½¶·½×¶Î
+    LateStage    // ºóÆÚÕ½¶·½×¶Î
 };
 
 // Õ½¶·Ó¢ĞÛÖÖÀà¶¨Òå
@@ -257,11 +280,18 @@ struct Location {
     }
 };
 
-// Áª»úÍæ¼ÒÊôĞÔ¶¨Òå
+// Õ½¶·Ó¢ĞÛÖ°ÒµÆ«ºÃ¶¨Òå
 typedef struct {
-    std::string playerName;
-    int client;
-} OnlinePlayerInfo;
+    double defenseScore; // ·ÀÓù·ÖÊı
+    double attackScore;  // ¹¥»÷·ÖÊı
+    double speedScore;   // ËÙ¶È·ÖÊı
+} ProfessionPreference;
+
+// Õ½¶·Î»ÖÃÊôĞÔ¶¨Òå
+typedef struct {
+    int x; // X ×ø±ê
+    int y; // Y ×ø±ê
+} BattleLocation;
 
 // Õ½¶·Ó¢ĞÛÊôĞÔ¶¨Òå
 typedef struct {
@@ -279,12 +309,6 @@ typedef struct {
     float movementSpeed;               // ÒÆ¶¯ËÙ¶È
     float defenseCoefficient;          // ·ÀÓùÏµÊı
 } ChampionAttributes;
-
-// Õ½¶·Î»ÖÃÊôĞÔ¶¨Òå
-typedef struct {
-    int x; // X ×ø±ê
-    int y; // Y ×ø±ê
-} BattleLocation;
 
 // Õ½¶·Ó¢ĞÛÊôĞÔ²ÎÊı
 const ChampionAttributes CHAMPION_1_ATTR = { // ½Ù£¨Ò»ĞÇ£©
@@ -304,7 +328,7 @@ const ChampionAttributes CHAMPION_5_ATTR = { // °ÂÀ­·ò£¨Ò»ĞÇ£©
 };
 const ChampionAttributes CHAMPION_6_ATTR = { // °ÂÀ­·ò£¨¶şĞÇ£©
     Champion6, "°ÂÀ­·ò", "../Resources/Champions/Champion6.png", 3, 2, 300, 0, 25, 120, 1, 0.7f, 1.4f, 0.9f
-}; // ¼¼ÄÜ»ØÑª
+};
 const ChampionAttributes CHAMPION_7_ATTR = { // ÅËÉ­£¨Ò»ĞÇ£©
     Champion7, "ÅËÉ­", "../Resources/Champions/Champion7.png", 1, 1, 250, 0, 20, 100, 1, 1.0f, 1.0f, 1.1f
 };
@@ -325,7 +349,7 @@ const ChampionAttributes CHAMPION_12_ATTR = { // ¿âÆæ£¨¶şĞÇ£©
 };
 const ChampionAttributes CHAMPION_13_ATTR = { // ËşÀï¿Ë£¨Ò»ĞÇ£©
     Champion13, "ËşÀï¿Ë", "../Resources/Champions/Champion13.png", 2, 1, 250, 0, 20, 200, 1, 1.1f, 1.0f, 1.2f
-}; // ¼¼ÄÜÑ£ÔÎ
+};
 const ChampionAttributes CHAMPION_14_ATTR = { // ËşÀï¿Ë£¨¶şĞÇ£©
     Champion14, "ËşÀï¿Ë", "../Resources/Champions/Champion14.png", 6, 2, 300, 0, 25, 200, 1, 1.0f, 1.2f, 1.3f
 };
@@ -376,6 +400,38 @@ const ChampionAttributes CHAMPION_29_ATTR = { // ¿¨É¯£¨Ò»ĞÇ£©
 };
 const ChampionAttributes CHAMPION_30_ATTR = { // ¿¨É¯£¨¶şĞÇ£©
     Champion30, "¿¨É¯", "../Resources/Champions/Champion30.png", 15, 2, 250, 0, 40, 200, 4, 0.6f, 1.2f, 1.1f
+};
+
+// Õ½¶·Ó¢ĞÛ¼Û¸ñ·ÖÀà¶¨Òå
+constexpr ChampionCategory FIRST_LEVEL[] = { // Õ½¶·Ó¢ĞÛÒ»¼¶¼Û¸ñ·ÖÀà
+    NoChampion, // ÎŞÕ½¶·Ó¢ĞÛ
+    Champion1,  // ½Ù£¨Ò»ĞÇ£©
+    Champion3,  // ÓÀ¶÷£¨Ò»ĞÇ£©
+    Champion5,  // °ÂÀ­·ò£¨Ò»ĞÇ£©
+    Champion7,  // ÅËÉ­£¨Ò»ĞÇ£©
+    Champion9   // ÒÁÜ½ÁÕ£¨Ò»ĞÇ£©
+};
+constexpr ChampionCategory SECOND_LEVEL[] = { // Õ½¶·Ó¢ĞÛ¶ş¼¶¼Û¸ñ·ÖÀà
+    NoChampion, // ÎŞÕ½¶·Ó¢ĞÛ
+    Champion11, // ¿âÆæ£¨Ò»ĞÇ£©
+    Champion13, // ËşÀï¿Ë£¨Ò»ĞÇ£©
+    Champion15, // ÑÇË÷£¨Ò»ĞÇ£©
+    Champion17  // ½ğ¿ËË¿£¨Ò»ĞÇ£©
+};
+constexpr ChampionCategory THIRD_LEVEL[] = { // Õ½¶·Ó¢ĞÛÈı¼¶¼Û¸ñ·ÖÀà
+    NoChampion, // ÎŞÕ½¶·Ó¢ĞÛ
+    Champion19, // ËşÄ·£¨Ò»ĞÇ£©
+    Champion21, // Îµ£¨Ò»ĞÇ£©
+    Champion23  // °¢Ä¾Ä¾£¨Ò»ĞÇ£©
+};
+constexpr ChampionCategory FOURTH_LEVEL[] = { // Õ½¶·Ó¢ĞÛËÄ¼¶¼Û¸ñ·ÖÀà
+    NoChampion, // ÎŞÕ½¶·Ó¢ĞÛ
+    Champion25, // ¿üÉ£Ìá£¨Ò»ĞÇ£©
+    Champion27  // ¿¨¶ûÈøË¹£¨Ò»ĞÇ£©
+};
+constexpr ChampionCategory FIFTH_LEVEL[] = { // Õ½¶·Ó¢ĞÛÎå¼¶¼Û¸ñ·ÖÀà
+    NoChampion, // ÎŞÕ½¶·Ó¢ĞÛ
+    Champion29  // ¿¨É¯£¨Ò»ĞÇ£©
 };
 
 // Õ½¶·Ó¢ĞÛÖÖÀàÓëÊôĞÔ¼üÖµ¶Ô
@@ -463,13 +519,5 @@ const std::map<int, std::string> WELCOME_PROMPT = {
     {46, "£¬ÔÚ×Ô×ßÆåµÄÕ½³¡ÉÏ£¬Ã¿Ò»²½¶¼ÊÇ²ßÂÔµÄ¿¼Ñé."},
     {47, "£¬²ßÂÔ´óÊ¦£¬½ñÈÕÄã½«ÈçºÎµß¸²Æå¾Ö?"}
 };
-
-typedef struct {
-    double defendScore;
-    double attackScore;
-    double speedScore;
-}ProfessionPreference;
-
-enum STAGE { stage1, stage2, stage3 };
 
 #endif // !_CONSTANT_H_

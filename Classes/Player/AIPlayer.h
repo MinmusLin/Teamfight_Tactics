@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     AIPlayer.h
  * File Function: AIPlayer类的定义
- * Author:        林继申
- * Update Date:   2023/12/20
+ * Author:        杨兆镇、林继申
+ * Update Date:   2023/12/27
  ****************************************************************/
 
 #pragma once
@@ -11,57 +11,61 @@
 #define _AI_PLAYER_H_
 
 #include "Player.h"
- /*
-  * Class Name:     AIPlayer
-  * Class Function: AI 玩家类
-  */
+
+/*
+ * Class Name:     AIPlayer
+ * Class Function: AI 玩家类
+ */
 class AIPlayer : public Player {
 public:
-	// 构造函数
-	AIPlayer(std::string nickname, Difficulty difficulty_);
+    // 构造函数
+    AIPlayer(const std::string nickname, const Difficulty difficulty_);
 
-	// AI 落棋算法
-	void makeMoves();
+    // AI 落棋算法
+    void makeMoves();
 
 private:
-	Difficulty difficulty; // 游戏难度
-	//当前我的英雄们
-	std::map<ChampionCategory, int>my_champions;
+    Difficulty difficulty;                     // 游戏难度
+    std::map<ChampionCategory, int> champions; // 战斗英雄种类与数量键值对
 
-	/*工具函数*/
+    // 统计各类战斗英雄数量
+    std::map<ChampionCategory, int> countChampionCategories() const;
 
-	//刷新界面,统计当前英雄
-	std::map<ChampionCategory, int> countMyChampions() const;
-	// 获取局势分数
-	int getStageScore() const;
-	// 局势分数->游戏阶段
-	STAGE getStage() const;
-	// 游戏阶段->获得随机英雄
-	ChampionCategory getRandomChampion(STAGE stage) const;
-	//英雄的估算属性函数
-	ProfessionPreference evaluateTheirScore(const ChampionAttributes& t) const;
-	//获取英雄的具体分数（待选->战斗）
-	double getChampionScore(const ChampionAttributes& t) const;
-	double getChampionScore(ChampionCategory t) const { return getChampionScore(CHAMPION_ATTR_MAP.at(t)); };
-	//能否升星（是否存在可升星英雄）
-	inline bool canStarUp() const;
-	//如果升星，找出最合适升星的英雄
-	ChampionCategory findBestStarUpChampion() const;
-	//升星之后对原Map的内部改变
-	void eraseAndPush(ChampionCategory champion);
+    // 获取当前局势分数
+    int getStageScore() const;
 
-	/*改变等待区*/
+    // 确定当前战斗阶段状态
+    BattleStage determineCurrentBattleStage() const;
 
-	//调整算法的核心：
-	void enrichMyChampions();//会改变waitingMap成员
+    // 为特定战斗阶段随机选择英雄
+    ChampionCategory selectRandomChampion(const BattleStage stage) const;
 
-	/*改变battle区*/
+    // 计算英雄的综合能力
+    ProfessionPreference calculateChampionProficiency(const ChampionAttributes& attributes) const;
 
-	//选择英雄上场
-	void chooseChampionToBattle();
+    // 计算战斗英雄分数
+    double calculateChampionScore(const ChampionAttributes& attributes) const;
 
+    // 计算战斗英雄分数
+    double calculateChampionScore(const ChampionCategory championCategory) const;
 
+    // 检查是否有可升级英雄
+    bool isUplevelAvailable() const;
 
+    // 选择最适合升级的英雄
+    ChampionCategory selectBestChampionForUplevel() const;
+
+    // 升级后更新英雄状态
+    void updateChampionAfterUplevel(const ChampionCategory championCategory);
+
+    // 优化战斗英雄队伍配置
+    void optimizeChampionCollection();
+
+    // 获取随机数
+    int getRandom(const int n) const;
+
+    // 部署战斗英雄
+    void deployChampions();
 };
 
 #endif // !_AI_PLAYER_H_
