@@ -25,6 +25,10 @@ OnlineModeControl::~OnlineModeControl()
 {
     closesocket(s);
     WSACleanup();
+    delete humanPlayer;
+    if (battle) {
+        delete battle;
+    }
 }
 
 // 创建客户端
@@ -143,4 +147,34 @@ SOCKET OnlineModeControl::getSocket() const
 int OnlineModeControl::sendMessage(const char* str, const int len)
 {
     return send(s, str, len, 0);
+}
+
+// 设置服务器当前连接数量
+void OnlineModeControl::setCurrentConnections(const int currentConnections)
+{
+    this->currentConnections = currentConnections;
+}
+
+// 获取服务器当前连接数量
+int OnlineModeControl::getCurrentConnections() const
+{
+    return currentConnections;
+}
+
+// 添加联机玩家
+void OnlineModeControl::addOnlinePlayer(const OnlinePlayerInfo onlinePlayerInfo)
+{
+    playerList.push_back(onlinePlayerInfo);
+}
+
+// 初始化玩家
+void OnlineModeControl::initializePlayers()
+{
+    try {
+        humanPlayer = new HumanPlayer(cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName"));
+    }
+    catch (const std::bad_alloc& e) {
+        std::cerr << "Memory allocation failed: " << e.what() << std::endl;
+        throw;
+    }
 }

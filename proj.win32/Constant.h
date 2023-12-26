@@ -257,6 +257,12 @@ struct Location {
     }
 };
 
+// 联机玩家属性定义
+typedef struct {
+    std::string playerName;
+    int client;
+} OnlinePlayerInfo;
+
 // 战斗英雄属性定义
 typedef struct {
     ChampionCategory championCategory; // 战斗英雄种类

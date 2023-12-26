@@ -35,7 +35,7 @@ public:
     void releaseBattle();
 
 private:
-    AIPlayer* enemyPlayer;    // AI Íæ¼Ò
+    AIPlayer* enemyPlayer; // AI Íæ¼Ò
 };
 
 #endif // !_OFFLINE_MODE_CONTROL_H_

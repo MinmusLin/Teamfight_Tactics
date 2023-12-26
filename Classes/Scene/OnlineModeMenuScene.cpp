@@ -175,13 +175,18 @@ bool OnlineModeMenuScene::init()
                             buffer[recvSize] = '\0';
                             if (!strcmp(buffer, START_GAME_MSG)) {
                                 this->unschedule("ServerMessageListener"); // 关闭服务器消息监听
-                                // TODO
+                                //memset(buffer, 0, sizeof(buffer));
+                                //sprintf(buffer, "ClientID=%d,PlayerName=%s", g_onlineModeControl->getSocket(), cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName").c_str());
+                                //g_onlineModeControl->sendMessage(buffer, strlen(buffer));
+                                CCLOG("Scene Changes");
+                                //cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, OnlineModePreparationScene::createScene(), cocos2d::Color3B::WHITE));
                             }
                             else {
                                 int currentConnections;
                                 if (sscanf(buffer, CURRENT_CONNECTIONS_FORMAT, &currentConnections) == 1) {
                                     promptLabel->setString(GBKToUTF8::getString("已建立连接 (服务器当前连接数量：") + std::to_string(currentConnections) + GBKToUTF8::getString(")"));
                                     promptLabel->setVisible(true);
+                                    g_onlineModeControl->setCurrentConnections(currentConnections);
                                 }
                             }
                         }
