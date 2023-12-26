@@ -2,7 +2,7 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     AIPlayer.cpp
  * File Function: AIPlayer类的实现
- * Author:        林继申
+ * Author:        杨兆镇、林继申
  * Update Date:   2023/12/27
  ****************************************************************/
 
