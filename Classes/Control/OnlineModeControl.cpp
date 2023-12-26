@@ -138,3 +138,9 @@ SOCKET OnlineModeControl::getSocket() const
 {
     return s;
 }
+
+// 向服务器发送信息
+int OnlineModeControl::sendMessage(const char* str, const int len)
+{
+    return send(s, str, len, 0);
+}

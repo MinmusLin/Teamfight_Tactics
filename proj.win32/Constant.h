@@ -79,6 +79,7 @@ constexpr int ONLINE_MODE_MENU_SCENE_FONT_SIZE = 30;                        // Á
 constexpr int ONLINE_MODE_MENU_SCENE_IPV4_TEXTFIELD_OFFSET_Y = -167;        // Áª»úÄ£Ê½²Ëµ¥³¡¾° IPv4 ÎÄ±¾¿òÎ»ÖÃ Y Æ«ÒÆÁ¿
 constexpr int ONLINE_MODE_MENU_SCENE_PORT_TEXTFIELD_OFFSET_Y = -275;        // Áª»úÄ£Ê½²Ëµ¥³¡¾°¶Ë¿ÚÎÄ±¾¿òÎ»ÖÃ Y Æ«ÒÆÁ¿
 constexpr int ONLINE_MODE_MENU_SCENE_PROMPT_LABEL_OFFSET_Y = 285;           // Áª»úÄ£Ê½²Ëµ¥³¡¾°ÌáÊ¾±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
+constexpr float START_GAME_BUTTON_APPEARANCE_DURATION = 1.0f;               // Áª»úÄ£Ê½²Ëµ¥³¡¾°¿ªÊ¼ÓÎÏ·°´Å¥³öÏÖÊ±¼ä¼ä¸ô
 constexpr float CONNECTION_FAILED_PROMPT_MESSAGE_DURATION = 3.0f;           // ·þÎñÆ÷Á¬½ÓÊ§°ÜÌáÊ¾ÐÅÏ¢Í£ÁôÊ±¼ä
 constexpr float RANDOM_WELCOME_PROMPT_PROBABILITY = 0.5f;                   // Ëæ»ú»¶Ó­ÌáÊ¾Óï¸ÅÂÊ
 

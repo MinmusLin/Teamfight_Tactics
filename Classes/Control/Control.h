@@ -3,7 +3,7 @@
  * File Name:     Control.h
  * File Function: Control类的定义
  * Author:        林继申
- * Update Date:   2023/12/23
+ * Update Date:   2023/12/26
  ****************************************************************/
 
 #pragma once
@@ -11,6 +11,8 @@
 #define _CONTROL_H_
 
 #include "cocos2d.h"
+#include "Player/HumanPlayer.h"
+#include "Battle/Battle.h"
 
 /*
  * Class Name:     Control
@@ -21,8 +23,16 @@ public:
     // 构造函数
     Control(const int maxPlayersNum);
 
+    // 获取人类玩家指针
+    HumanPlayer* getHumanPlayer() const;
+
+    // 获取对战类指针
+    Battle* getBattle() const;
+
 protected:
-    int maxPlayers; // 最大玩家数量
+    int maxPlayers;           // 最大玩家数量
+    HumanPlayer* humanPlayer; // 人类玩家
+    Battle* battle;           // 对战类
 };
 
 #endif // !_CONTROL_H_

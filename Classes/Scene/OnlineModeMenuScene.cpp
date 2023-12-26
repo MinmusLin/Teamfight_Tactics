@@ -151,8 +151,10 @@ bool OnlineModeMenuScene::init()
                     joinRoomButton->removeFromParent();
                     ipv4TextField->removeFromParent();
                     portTextField->removeFromParent();
-                    startGameButton->setEnabled(true);
-                    startGameButton->setVisible(true);
+                    this->scheduleOnce([startGameButton](float dt) {
+                        startGameButton->setEnabled(true);
+                        startGameButton->setVisible(true);
+                        }, START_GAME_BUTTON_APPEARANCE_DURATION, "StartGameButtonAppearance");
 
                     // 创建服务器 IPv4 和端口标签
                     auto ipv4Label = Label::createWithTTF(ipv4, "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", ONLINE_MODE_MENU_SCENE_FONT_SIZE);
@@ -170,11 +172,10 @@ bool OnlineModeMenuScene::init()
                         memset(buffer, 0, sizeof(buffer));
                         int recvSize = recv(g_onlineModeControl->getSocket(), buffer, BUFFER_SIZE, 0);
                         if (recvSize > 0) {
-                            CCLOG("recvSize=%d", recvSize);
                             buffer[recvSize] = '\0';
-                            CCLOG("%s", buffer);
                             if (!strcmp(buffer, START_GAME_MSG)) {
-                                this->unschedule("ServerMessageListener");
+                                this->unschedule("ServerMessageListener"); // 关闭服务器消息监听
+                                // TODO
                             }
                             else {
                                 int currentConnections;
@@ -185,7 +186,7 @@ bool OnlineModeMenuScene::init()
                             }
                         }
                         }, SERVER_REFRESH_INTERVAL, "ServerMessageListener");
-                }
+                } // TODO: 这一分支的 delete 没处理
             }
         }
         });
@@ -196,7 +197,7 @@ bool OnlineModeMenuScene::init()
         });
     startGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-            // TODO
+            g_onlineModeControl->sendMessage(START_GAME_MSG, strlen(START_GAME_MSG));
         }
         });
 

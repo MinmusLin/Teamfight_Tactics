@@ -3,18 +3,16 @@
  * File Name:     OfflineModeControl.cpp
  * File Function: OfflineModeControl类的实现
  * Author:        杨宇琨、林继申
- * Update Date:   2023/12/25
+ * Update Date:   2023/12/26
  ****************************************************************/
 
 #include <iostream>
 #include "OfflineModeControl.h"
 #include "GBKToUTF8/GBKToUTF8.h"
-#include "Scene/OfflineModeBattleScene.h"
 
 // 构造函数
 OfflineModeControl::OfflineModeControl() :
-    Control(2),
-    battle(nullptr)
+    Control(2)
 {
     try {
         humanPlayer = new HumanPlayer(cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName"));
@@ -42,22 +40,10 @@ OfflineModeControl::~OfflineModeControl()
     }
 }
 
-// 获取人类玩家指针
-HumanPlayer* OfflineModeControl::getHumanPlayer() const
-{
-    return humanPlayer;
-}
-
 // 获取 AI 玩家指针
 AIPlayer* OfflineModeControl::getAIPlayer() const
 {
     return enemyPlayer;
-}
-
-// 获取对战类指针
-Battle* OfflineModeControl::getBattle() const
-{
-    return battle;
 }
 
 // 初始化对战类

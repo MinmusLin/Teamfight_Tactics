@@ -11,7 +11,8 @@
 #define _ONLINE_MODE_CONTROL_H_
 
 #include "Control.h"
-#include "../Player/HumanPlayer.h"
+#include "Player/HumanPlayer.h"
+#include "Battle/Battle.h"
 
 /*
  * Class Name:     OnlineModeControl
@@ -30,6 +31,9 @@ public:
 
     // 获取客户端的 socket
     SOCKET getSocket() const;
+
+    // 向服务器发送信息
+    int sendMessage(const char* str, const int len);
 
 private:
     char ipv4[IPV4_ADDRESS_MAX_LENGTH + 1]; // IPv4 地址

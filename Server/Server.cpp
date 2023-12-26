@@ -50,7 +50,7 @@ static void clientHandler(SOCKET clientSocket, std::vector<SOCKET>& clients, int
 
     // 处理客户端断开连接
     if (recvSize == 0) {
-        std::cout << "Client disconnected" << std::endl;
+        std::cout << "Client disconnected." << std::endl;
     }
     else {
         std::cerr << "Function recv failed with error: " << WSAGetLastError() << std::endl;

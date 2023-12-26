@@ -3,7 +3,7 @@
  * File Name:     OfflineModeControl.h
  * File Function: OfflineModeControl类的定义
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/26
  ****************************************************************/
 
 #pragma once
@@ -11,9 +11,7 @@
 #define _OFFLINE_MODE_CONTROL_H_
 
 #include "Control.h"
-#include "../Player/HumanPlayer.h"
-#include "../Player/AIPlayer.h"
-#include "Battle/Battle.h"
+#include "Player/AIPlayer.h"
 
 /*
  * Class Name:     OfflineModeControl
@@ -27,14 +25,8 @@ public:
     // 析构函数
     ~OfflineModeControl();
 
-    // 获取人类玩家指针
-    HumanPlayer* getHumanPlayer() const;
-
     // 获取 AI 玩家指针
     AIPlayer* getAIPlayer() const;
-
-    // 获取对战类指针
-    Battle* getBattle() const;
 
     // 初始化对战类
     void initializeBattle();
@@ -43,9 +35,7 @@ public:
     void releaseBattle();
 
 private:
-    HumanPlayer* humanPlayer; // 人类玩家
     AIPlayer* enemyPlayer;    // AI 玩家
-    Battle* battle;           // 对战类
 };
 
 #endif // !_OFFLINE_MODE_CONTROL_H_
