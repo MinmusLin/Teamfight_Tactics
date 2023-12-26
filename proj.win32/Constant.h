@@ -464,4 +464,12 @@ const std::map<int, std::string> WELCOME_PROMPT = {
     {47, "，策略大师，今日你将如何颠覆棋局?"}
 };
 
+typedef struct {
+    double defendScore;
+    double attackScore;
+    double speedScore;
+}ProfessionPreference;
+
+enum STAGE { stage1, stage2, stage3 };
+
 #endif // !_CONSTANT_H_
