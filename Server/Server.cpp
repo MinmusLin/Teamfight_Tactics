@@ -3,7 +3,7 @@
  * File Name:     Server.cpp
  * File Function: Server类的实现
  * Author:        林继申
- * Update Date:   2023/12/19
+ * Update Date:   2023/12/26
  ****************************************************************/
 
 #pragma comment(lib, "Ws2_32.lib")
@@ -24,10 +24,11 @@
  */
 static void clientHandler(SOCKET clientSocket, std::vector<SOCKET>& clients, int& currentConnections)
 {
-    char buffer[BUFFER_SIZE + 1]; // 定义缓冲区用于存储接收的数据
+    char buffer[BUFFER_SIZE]; // 定义缓冲区用于存储接收的数据
     int recvSize; // 用于存储接收到的数据长度
 
     // 接受数据
+    memset(buffer, 0, sizeof(buffer));
     while ((recvSize = recv(clientSocket, buffer, BUFFER_SIZE, 0)) > 0) {
         buffer[recvSize] = '\0';
 
@@ -41,6 +42,7 @@ static void clientHandler(SOCKET clientSocket, std::vector<SOCKET>& clients, int
         std::cout << " [Client ID: " << clientSocket << "] Message: " << buffer << std::endl;
 
         // 遍历所有客户端，将接收到的消息转发给其他客户端
+        std::cout << "Broadcast: " << buffer << std::endl;
         for (const SOCKET& sock : clients) {
             send(sock, buffer, recvSize, 0);
         }
@@ -57,6 +59,13 @@ static void clientHandler(SOCKET clientSocket, std::vector<SOCKET>& clients, int
     // 关闭与客户端的连接
     closesocket(clientSocket);
     std::cout << "Current connections: " << --currentConnections << std::endl;
+
+    // 遍历所有客户端，将服务器当前连接数量转发给其他客户端
+    sprintf(buffer, CURRENT_CONNECTIONS_FORMAT, currentConnections);
+    std::cout << "Broadcast: " << buffer << std::endl;
+    for (const SOCKET& sock : clients) {
+        send(sock, buffer, CURRENT_CONNECTIONS_FORMAT_LENGTH, 0);
+    }
 }
 
 // 构造函数
@@ -148,17 +157,25 @@ void Server::handleConnections()
         if ((clientSocket = accept(serverSocket, (struct sockaddr*)&client, &c)) != INVALID_SOCKET) {
             if (currentConnections < MAX_CONNECTIONS) {
                 // 接受连接
-                std::cout << "Connection accepted." << std::endl;
-                send(clientSocket, CONNECTION_ACCEPTED_MSG, strlen(CONNECTION_ACCEPTED_MSG) + 1, 0);
+                std::cout << CONNECTION_ACCEPTED_MSG << std::endl;
+                send(clientSocket, CONNECTION_ACCEPTED_MSG, strlen(CONNECTION_ACCEPTED_MSG), 0);
                 clients.push_back(clientSocket);
                 std::thread clientThread(clientHandler, clientSocket, std::ref(clients), std::ref(currentConnections));
                 clientThread.detach();
                 std::cout << "Current connections: " << ++currentConnections << std::endl;
+
+                // 遍历所有客户端，将服务器当前连接数量转发给其他客户端
+                char buffer[BUFFER_SIZE];
+                sprintf(buffer, CURRENT_CONNECTIONS_FORMAT, currentConnections);
+                std::cout << "Broadcast: " << buffer << std::endl;
+                for (const SOCKET& sock : clients) {
+                    send(sock, buffer, CURRENT_CONNECTIONS_FORMAT_LENGTH, 0);
+                }
             }
             else {
                 // 拒绝连接
-                std::cout << "Maximum connections reached. Connection refused." << std::endl;
-                send(clientSocket, CONNECTION_REFUSED_MSG, strlen(CONNECTION_REFUSED_MSG) + 1, 0);
+                std::cout << "Maximum connections reached. " << CONNECTION_REFUSED_MSG << std::endl;
+                send(clientSocket, CONNECTION_REFUSED_MSG, strlen(CONNECTION_REFUSED_MSG), 0);
                 closesocket(clientSocket);
             }
         }
