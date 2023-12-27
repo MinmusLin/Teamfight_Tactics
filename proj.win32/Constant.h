@@ -212,6 +212,9 @@ constexpr int STAGE_WITH_RATE_OF_CHAMPIONS[3][5] = {                        // ¸
     {5, 4, 3, 2, 1},                                                        // ÖÐÆÚÕ½¶·½×¶ÎÕ½¶·Ó¢ÐÛÑ¡Ôñ¸ÅÂÊ
     {4, 5, 2, 2, 2},                                                        // ºóÆÚÕ½¶·½×¶ÎÕ½¶·Ó¢ÐÛÑ¡Ôñ¸ÅÂÊ
 };
+constexpr int SKILL_DAMAGE_UP = 50;
+constexpr float SKILL_DEFENSECOEFFICIENT_UP = 1.0f;
+constexpr float SKILL_ATTACKSPEED_UP = 2.0f;
 
 // ÍøÂçÁ¬½Ó×´Ì¬¶¨Òå
 enum ConnectionStatus {
@@ -326,94 +329,94 @@ typedef struct {
 
 // Õ½¶·Ó¢ÐÛÊôÐÔ²ÎÊý
 const ChampionAttributes CHAMPION_1_ATTR = { // ½Ù£¨Ò»ÐÇ£©
-    Champion1, "½Ù", "../Resources/Champions/Champion1.png", 1, 1, 200, 0, 30, 200, 1, 1.0f, 1.0f, 1.0f
+    Champion1, "½Ù", "../Resources/Champions/Champion1.png", 1, 1, 500, 0, 50, 200, 1, 0.75f, 1.0f, 1.0f
 };
 const ChampionAttributes CHAMPION_2_ATTR = { // ½Ù£¨¶þÐÇ£©
-    Champion2, "½Ù", "../Resources/Champions/Champion2.png", 3, 2, 250, 0, 35, 200, 1, 0.9f, 1.2f, 1.1f
+    Champion2, "½Ù", "../Resources/Champions/Champion2.png", 3, 2, 900, 0, 75, 200, 1, 0.75f, 1.0f, 1.0f
 };
 const ChampionAttributes CHAMPION_3_ATTR = { // ÓÀ¶÷£¨Ò»ÐÇ£©
-    Champion3, "ÓÀ¶÷", "../Resources/Champions/Champion3.png", 1, 1, 200, 0, 25, 200, 1, 0.8f, 1.0f, 1.0f
+    Champion3, "ÓÀ¶÷", "../Resources/Champions/Champion3.png", 1, 1, 550, 0, 45, 200, 1, 1.0f, 1.0f, 1.2f
 };
 const ChampionAttributes CHAMPION_4_ATTR = { // ÓÀ¶÷£¨¶þÐÇ£©
-    Champion4, "ÓÀ¶÷", "../Resources/Champions/Champion4.png", 3, 2, 250, 0, 30, 200, 1, 0.7f, 1.2f, 1.1f
+    Champion4, "ÓÀ¶÷", "../Resources/Champions/Champion4.png", 3, 2, 990, 0, 68, 200, 1, 1.0f, 1.0f, 1.2f
 };
 const ChampionAttributes CHAMPION_5_ATTR = { // °ÂÀ­·ò£¨Ò»ÐÇ£©
-    Champion5, "°ÂÀ­·ò", "../Resources/Champions/Champion5.png", 1, 1, 250, 0, 20, 200, 1, 0.8f, 1.2f, 0.8f
+    Champion5, "°ÂÀ­·ò", "../Resources/Champions/Champion5.png", 1, 1, 700, 0, 55, 200, 1, 0.6f, 1.0f, 1.4f
 };
 const ChampionAttributes CHAMPION_6_ATTR = { // °ÂÀ­·ò£¨¶þÐÇ£©
-    Champion6, "°ÂÀ­·ò", "../Resources/Champions/Champion6.png", 3, 2, 300, 0, 25, 200, 1, 0.7f, 1.4f, 0.9f
+    Champion6, "°ÂÀ­·ò", "../Resources/Champions/Champion6.png", 3, 2, 1260, 0, 83, 200, 1, 0.6f, 1.0f, 1.4f
 };
 const ChampionAttributes CHAMPION_7_ATTR = { // ÅËÉ­£¨Ò»ÐÇ£©
-    Champion7, "ÅËÉ­", "../Resources/Champions/Champion7.png", 1, 1, 250, 0, 20, 200, 1, 1.0f, 1.0f, 1.1f
+    Champion7, "ÅËÉ­", "../Resources/Champions/Champion7.png", 1, 1, 700, 0, 70, 200, 1, 0.5f, 1.0f, 1.2f
 };
 const ChampionAttributes CHAMPION_8_ATTR = { // ÅËÉ­£¨¶þÐÇ£©
-    Champion8, "ÅËÉ­", "../Resources/Champions/Champion8.png", 3, 2, 300, 0, 25, 200, 1, 0.9f, 1.2f, 1.2f
+    Champion8, "ÅËÉ­", "../Resources/Champions/Champion8.png", 3, 2, 1260, 0, 105, 200, 1, 0.5f, 1.0f, 1.2f
 };
 const ChampionAttributes CHAMPION_9_ATTR = { // ÒÁÜ½ÁÕ£¨Ò»ÐÇ£©
-    Champion9, "ÒÁÜ½ÁÕ", "../Resources/Champions/Champion9.png", 1, 1, 175, 0, 15, 200, 1, 1.0f, 1.0f, 1.0f
+    Champion9, "ÒÁÜ½ÁÕ", "../Resources/Champions/Champion9.png", 1, 1, 650, 0, 55, 200, 1, 0.55f, 1.0f, 1.3f
 };
 const ChampionAttributes CHAMPION_10_ATTR = { // ÒÁÜ½ÁÕ£¨¶þÐÇ£©
-    Champion10, "ÒÁÜ½ÁÕ", "../Resources/Champions/Champion10.png", 3, 2, 225, 0, 20, 200, 1, 0.9f, 1.2f, 1.1f
+    Champion10, "ÒÁÜ½ÁÕ", "../Resources/Champions/Champion10.png", 3, 2, 1170, 0, 83, 200, 1, 0.55f, 1.0f, 1.3f
 };
 const ChampionAttributes CHAMPION_11_ATTR = { // ¿âÆæ£¨Ò»ÐÇ£©
-    Champion11, "¿âÆæ", "../Resources/Champions/Champion11.png", 2, 1, 150, 0, 23, 200, 3, 0.7f, 1.1f, 0.7f
+    Champion11, "¿âÆæ", "../Resources/Champions/Champion11.png", 2, 1, 500, 0, 50, 200, 3, 0.7f, 1.0f, 1.0f
 };
 const ChampionAttributes CHAMPION_12_ATTR = { // ¿âÆæ£¨¶þÐÇ£©
-    Champion12, "¿âÆæ", "../Resources/Champions/Champion12.png", 6, 2, 200, 0, 28, 200, 3, 0.6f, 1.3f, 0.8f
+    Champion12, "¿âÆæ", "../Resources/Champions/Champion12.png", 6, 2, 900, 0, 75, 200, 3, 0.7f, 1.0f, 1.0f
 };
 const ChampionAttributes CHAMPION_13_ATTR = { // ËþÀï¿Ë£¨Ò»ÐÇ£©
-    Champion13, "ËþÀï¿Ë", "../Resources/Champions/Champion13.png", 2, 1, 250, 0, 20, 200, 1, 1.1f, 1.0f, 1.2f
+    Champion13, "ËþÀï¿Ë", "../Resources/Champions/Champion13.png", 2, 1, 750, 0, 60, 200, 1, 0.65f, 1.0f, 1.5f
 };
 const ChampionAttributes CHAMPION_14_ATTR = { // ËþÀï¿Ë£¨¶þÐÇ£©
-    Champion14, "ËþÀï¿Ë", "../Resources/Champions/Champion14.png", 6, 2, 300, 0, 25, 200, 1, 1.0f, 1.2f, 1.3f
+    Champion14, "ËþÀï¿Ë", "../Resources/Champions/Champion14.png", 6, 2, 1350, 0, 90, 200, 1, 0.65f, 1.0f, 1.5f
 };
 const ChampionAttributes CHAMPION_15_ATTR = { // ÑÇË÷£¨Ò»ÐÇ£©
-    Champion15, "ÑÇË÷", "../Resources/Champions/Champion15.png", 2, 1, 200, 0, 25, 200, 1, 0.7f, 1.0f, 1.0f
+    Champion15, "ÑÇË÷", "../Resources/Champions/Champion15.png", 2, 1, 700, 0, 50, 200, 1, 0.75f, 1.0f, 1.1f
 };
 const ChampionAttributes CHAMPION_16_ATTR = { // ÑÇË÷£¨¶þÐÇ£©
-    Champion16, "ÑÇË÷", "../Resources/Champions/Champion16.png", 6, 2, 250, 0, 30, 200, 1, 0.6f, 1.2f, 1.1f
+    Champion16, "ÑÇË÷", "../Resources/Champions/Champion16.png", 6, 2, 1260, 0, 75, 200, 1, 0.75f, 1.0f, 1.1f
 };
 const ChampionAttributes CHAMPION_17_ATTR = { // ½ð¿ËË¿£¨Ò»ÐÇ£©
-    Champion17, "½ð¿ËË¿", "../Resources/Champions/Champion17.png", 2, 1, 150, 0, 30, 200, 1, 0.5f, 1.5f, 0.7f
+    Champion17, "½ð¿ËË¿", "../Resources/Champions/Champion17.png", 2, 1, 600, 0, 65, 200, 5, 0.8f, 1.0f, 0.9f
 };
 const ChampionAttributes CHAMPION_18_ATTR = { // ½ð¿ËË¿£¨¶þÐÇ£©
-    Champion18, "½ð¿ËË¿", "../Resources/Champions/Champion18.png", 6, 2, 200, 0, 35, 200, 2, 0.4f, 1.7f, 0.8f
+    Champion18, "½ð¿ËË¿", "../Resources/Champions/Champion18.png", 6, 2, 1080, 0, 98, 200, 5, 0.8f, 1.0f, 0.9f
 };
 const ChampionAttributes CHAMPION_19_ATTR = { // ËþÄ·£¨Ò»ÐÇ£©
-    Champion19, "ËþÄ·", "../Resources/Champions/Champion19.png", 3, 1, 300, 0, 15, 200, 1, 1.0f, 1.0f, 1.2f
+    Champion19, "ËþÄ·", "../Resources/Champions/Champion19.png", 3, 1, 700, 0, 55, 200, 1, 0.6f, 1.0f, 1.6f
 };
 const ChampionAttributes CHAMPION_20_ATTR = { // ËþÄ·£¨¶þÐÇ£©
-    Champion20, "ËþÄ·", "../Resources/Champions/Champion20.png", 9, 2, 350, 0, 20, 200, 1, 0.9f, 1.2f, 1.3f
+    Champion20, "ËþÄ·", "../Resources/Champions/Champion20.png", 9, 2, 1260, 0, 83, 200, 1, 0.6f, 1.0f, 1.6f
 };
 const ChampionAttributes CHAMPION_21_ATTR = { // Îµ£¨Ò»ÐÇ£©
-    Champion21, "Îµ", "../Resources/Champions/Champion21.png", 3, 1, 250, 0, 30, 200, 1, 1.0f, 1.0f, 1.1f
+    Champion21, "Îµ", "../Resources/Champions/Champion21.png", 3, 1, 800, 0, 60, 200, 1, 0.65f, 1.0f, 1.55f
 };
 const ChampionAttributes CHAMPION_22_ATTR = { // Îµ£¨¶þÐÇ£©
-    Champion22, "Îµ", "../Resources/Champions/Champion22.png", 9, 2, 300, 0, 35, 200, 1, 0.9f, 1.2f, 1.2f
+    Champion22, "Îµ", "../Resources/Champions/Champion22.png", 9, 2, 1440, 0, 90, 200, 1, 0.65f, 1.0f, 1.55f
 };
 const ChampionAttributes CHAMPION_23_ATTR = { // °¢Ä¾Ä¾£¨Ò»ÐÇ£©
-    Champion23, "°¢Ä¾Ä¾", "../Resources/Champions/Champion23.png", 3, 1, 300, 0, 20, 200, 1, 1.0f, 1.0f, 1.3f
+    Champion23, "°¢Ä¾Ä¾", "../Resources/Champions/Champion23.png", 3, 1, 800, 0, 60, 200, 1, 0.7f, 1.0f, 1.5f
 };
 const ChampionAttributes CHAMPION_24_ATTR = { // °¢Ä¾Ä¾£¨¶þÐÇ£©
-    Champion24, "°¢Ä¾Ä¾", "../Resources/Champions/Champion24.png", 9, 2, 350, 0, 25, 200, 1, 0.9f, 1.2f, 1.4f
+    Champion24, "°¢Ä¾Ä¾", "../Resources/Champions/Champion24.png", 9, 2, 1440, 0, 90, 200, 1, 0.7f, 1.0f, 1.5f
 };
 const ChampionAttributes CHAMPION_25_ATTR = { // ¿üÉ£Ìá£¨Ò»ÐÇ£©
-    Champion25, "¿üÉ£Ìá", "../Resources/Champions/Champion25.png", 4, 1, 300, 0, 30, 200, 1, 0.7f, 1.0f, 1.1f
+    Champion25, "¿üÉ£Ìá", "../Resources/Champions/Champion25.png", 4, 1, 950, 0, 80, 200, 1, 0.85f, 1.0f, 1.5f
 };
 const ChampionAttributes CHAMPION_26_ATTR = { // ¿üÉ£Ìá£¨¶þÐÇ£©
-    Champion26, "¿üÉ£Ìá", "../Resources/Champions/Champion26.png", 12, 2, 350, 0, 35, 200, 1, 0.6f, 1.2f, 1.2f
+    Champion26, "¿üÉ£Ìá", "../Resources/Champions/Champion26.png", 12, 2, 1710, 0, 120, 200, 1, 0.85f, 1.0f, 1.5f
 };
 const ChampionAttributes CHAMPION_27_ATTR = { // ¿¨¶ûÈøË¹£¨Ò»ÐÇ£©
-    Champion27, "¿¨¶ûÈøË¹", "../Resources/Champions/Champion27.png", 4, 1, 200, 0, 20, 200, 3, 1.0f, 0.8f, 1.0f
+    Champion27, "¿¨¶ûÈøË¹", "../Resources/Champions/Champion27.png", 4, 1, 600, 0, 100, 200, 5, 0.85f, 1.0f, 0.9f
 };
 const ChampionAttributes CHAMPION_28_ATTR = { // ¿¨¶ûÈøË¹£¨¶þÐÇ£©
-    Champion28, "¿¨¶ûÈøË¹", "../Resources/Champions/Champion28.png", 12, 2, 250, 0, 25, 200, 3, 0.9f, 1.0f, 1.1f
+    Champion28, "¿¨¶ûÈøË¹", "../Resources/Champions/Champion28.png", 12, 2, 1080, 0, 140, 200, 5, 0.9f, 1.0f, 0.9f
 };
 const ChampionAttributes CHAMPION_29_ATTR = { // ¿¨É¯£¨Ò»ÐÇ£©
-    Champion29, "¿¨É¯", "../Resources/Champions/Champion29.png", 5, 1, 200, 0, 35, 200, 4, 0.7f, 1.0f, 1.0f
+    Champion29, "¿¨É¯", "../Resources/Champions/Champion29.png", 5, 1, 800, 0, 100, 200, 5, 0.9f, 1.0f, 0.9f
 };
 const ChampionAttributes CHAMPION_30_ATTR = { // ¿¨É¯£¨¶þÐÇ£©
-    Champion30, "¿¨É¯", "../Resources/Champions/Champion30.png", 15, 2, 250, 0, 40, 200, 4, 0.6f, 1.2f, 1.1f
+    Champion30, "¿¨É¯", "../Resources/Champions/Champion30.png", 15, 2, 1440, 0, 140, 200, 5, 0.9f, 1.0f, 0.9f
 };
 
 // Õ½¶·Ó¢ÐÛ¼Û¸ñ·ÖÀà¶¨Òå
