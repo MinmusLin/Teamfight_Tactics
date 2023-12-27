@@ -139,6 +139,7 @@ void OfflineModeBattleScene::update(float delta)
         int enemyCount = g_offlineModeControl->getBattle()->getEnemyCount();
         if (myCount == 0 && enemyCount == 0) { // 平局
             g_offlineModeControl->getBattle()->setBattleSituation(Draw);
+            g_offlineModeControl->getHumanPlayer()->addGoldCoin(REFRESH_SHOP_PRICE + NEW_BATTLE_INCREASED_GOLD_COINS);
         }
         else if (enemyCount == 0) { // 胜利
             g_offlineModeControl->getBattle()->setBattleSituation(Win);
@@ -148,6 +149,7 @@ void OfflineModeBattleScene::update(float delta)
         else { // 失败
             g_offlineModeControl->getBattle()->setBattleSituation(Lose);
             g_offlineModeControl->getHumanPlayer()->decreaseHealthPoints(enemyCount * DECREASED_HEALTH_POINTS);
+            g_offlineModeControl->getHumanPlayer()->addGoldCoin(REFRESH_SHOP_PRICE + NEW_BATTLE_INCREASED_GOLD_COINS);
         }
 
         // 重置分数表层

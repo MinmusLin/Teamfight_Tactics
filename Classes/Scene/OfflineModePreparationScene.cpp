@@ -3,7 +3,7 @@
  * File Name:     OfflineModePreparationScene.cpp
  * File Function: OfflineModePreparationScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/26
+ * Update Date:   2023/12/27
  ****************************************************************/
 
 #include "OfflineModePreparationScene.h"
@@ -103,10 +103,22 @@ bool OfflineModePreparationScene::init()
     refreshButton->setPosition(Vec2(screenSize.width / 2 + SHOP_REFRESH_BUTTON_OFFSET_X, screenSize.height / 2 + SHOP_REFRESH_BUTTON_OFFSET_Y));
     returnMenuButton->setPosition(Vec2(screenSize.width / 2 + BATTLE_SCENE_RETURN_MENU_BUTTON_OFFSET_X, screenSize.height / 2 + BATTLE_SCENE_RETURN_MENU_BUTTON_OFFSET_Y));
 
+    // 创建金币数量标签
+    auto refreshCoinLabel = Label::createWithTTF(std::to_string(REFRESH_SHOP_PRICE), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_COIN_LABEL_FONT_SIZE);
+    refreshCoinLabel->setAnchorPoint(Vec2(1, 0.5));
+    refreshCoinLabel->setPosition(SHOP_COIN_LABEL_START_X, SHOP_REFRESH_COIN_LABEL_START_Y);
+    this->addChild(refreshCoinLabel, 2);
+    auto uplevelCoinLabel = Label::createWithTTF(std::to_string(UPLEVEL_PRICE.at(g_offlineModeControl->getHumanPlayer()->getMaxBattleChampionCount())), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_COIN_LABEL_FONT_SIZE);
+    uplevelCoinLabel->setAnchorPoint(Vec2(1, 0.5));
+    uplevelCoinLabel->setPosition(SHOP_COIN_LABEL_START_X, SHOP_UPLEVEL_COIN_LABEL_START_Y);
+    this->addChild(uplevelCoinLabel, 2);
+
     // 为按钮添加事件处理器
-    uplevelButton->addTouchEventListener([this](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+    uplevelButton->addTouchEventListener([this, uplevelCoinLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
             g_offlineModeControl->getHumanPlayer()->addBattleChampionCount();
+            int maxBattleChampionCount = g_offlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
+            uplevelCoinLabel->setString(maxBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT ? "" : std::to_string(UPLEVEL_PRICE.at(maxBattleChampionCount)));
         }
         });
     refreshButton->addTouchEventListener([this](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
@@ -123,8 +135,8 @@ bool OfflineModePreparationScene::init()
         });
 
     // 将按钮添加到场景中
-    this->addChild(uplevelButton);
-    this->addChild(refreshButton);
+    this->addChild(uplevelButton, 1);
+    this->addChild(refreshButton, 1);
     this->addChild(returnMenuButton);
 
     // 初始化战斗英雄删除按钮

@@ -144,7 +144,10 @@ constexpr int SHOP_LEVEL_LABEL_FONT_SIZE = 20;                              // É
 constexpr int SHOP_COIN_LABEL_FONT_SIZE = 20;                               // ÉÌµê½ð±ÒÊýÁ¿±êÇ©×ÖÌå´óÐ¡
 constexpr int SHOP_COIN_LABEL_OFFSET_X = 358;                               // ÉÌµê½ð±ÒÊýÁ¿±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
 constexpr int SHOP_COIN_LABEL_OFFSET_Y = -228;                              // ÉÌµê½ð±ÒÊýÁ¿±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
-constexpr int INITIAL_GOLD_COIN = 14;                                       // ³õÊ¼½ð±ÒÊýÁ¿
+constexpr int SHOP_COIN_LABEL_START_X = 334;                                // Ë¢ÐÂÉÌµêºÍÉý¼¶ËùÐè½ð±ÒÊýÁ¿±êÇ©Î»ÖÃ X ×ø±ê
+constexpr int SHOP_REFRESH_COIN_LABEL_START_Y = 33;                         // Ë¢ÐÂÉÌµêËùÐè½ð±ÒÊýÁ¿±êÇ©Î»ÖÃ Y ×ø±ê
+constexpr int SHOP_UPLEVEL_COIN_LABEL_START_Y = 88;                         // Éý¼¶ËùÐè½ð±ÒÊýÁ¿±êÇ©Î»ÖÃ Y ×ø±ê
+constexpr int INITIAL_GOLD_COIN = 914;                                       // ³õÊ¼½ð±ÒÊýÁ¿
 constexpr int REFRESH_SHOP_PRICE = 2;                                       // Ë¢ÐÂÉÌµêËùÐè½ð±ÒÊýÁ¿
 const std::map<int, int> UPLEVEL_PRICE = {                                  // Éý¼¶ËùÐè½ð±ÒÊýÁ¿
     {BATTLE_AREA_MIN_CHAMPION_COUNT, 12},                                   // µÈ¼¶ 1 Éý¼¶ÖÁµÈ¼¶ 2 ËùÐè½ð±ÒÊýÁ¿
