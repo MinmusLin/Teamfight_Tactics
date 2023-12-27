@@ -17,14 +17,14 @@ Champion::Champion(const ChampionCategory championCategory) :
     currentDestination({ 0, 0 }),
     currentEnemy(nullptr),
     sword(nullptr),
+    healthBar(nullptr),
+    manaBar(nullptr),
     currentMove(nullptr),
     isMyFlag(false),
     isMoving(false),
     isAttaking(false),
     attackIntervalTimer(0.0f),
-    moveIntervalTimer(0.0f),
-    healthBar(nullptr),
-    manaBar(nullptr)
+    moveIntervalTimer(0.0f)
 {
     sprite = Sprite::create(attributes.championImagePath);
     maxHealthPoints = attributes.healthPoints;
@@ -524,10 +524,10 @@ void Champion::die()
 {
     auto championSprite = getSprite();
     championSprite->getParent()->removeChild(sprite, true);
-    manaBar->setScaleX(0); // 假设血条的 scaleX 代表血量比例
-    healthBar->setScaleX(0);     // 假设蓝条的 scaleX 代表蓝量比例
-    manaBar->getParent()->removeChild(manaBar, true);
+    healthBar->setScaleX(0); // 设置生命条比例
+    manaBar->setScaleX(0); // 设置经验条比例
     healthBar->getParent()->removeChild(healthBar, true);
+    manaBar->getParent()->removeChild(manaBar, true);
     sword->getParent()->removeChild(sword, true);
     Champion* temp = currentBattle->getChampion(currentLocation.x, currentLocation.y);
     currentBattle->championMap[currentLocation.x][currentLocation.y] = nullptr;
@@ -557,6 +557,42 @@ void Champion::setSwordPosition(const cocos2d::Vec2& position)
     sword->setPosition(position);
 }
 
+// 获取生命条
+cocos2d::Sprite* Champion::getHealthBar() const
+{
+    return healthBar;
+}
+
+// 获取经验条
+cocos2d::Sprite* Champion::getManaBar() const
+{
+    return manaBar;
+}
+
+// 获取最大生命值
+float Champion::getMaxHealthPoints() const
+{
+    return maxHealthPoints;
+}
+
+// 获取最大经验值
+float Champion::getMaxMagicPoints() const
+{
+    return maxMagicPoints;
+}
+
+// 设置生命条
+void Champion::setHealthBar(Sprite* HealthBar)
+{
+    healthBar = HealthBar;
+}
+
+// 设置经验条
+void Champion::setManaBar(Sprite* ManaBar)
+{
+    manaBar = ManaBar;
+}
+
 // 获取武器精灵类指针
 cocos2d::Sprite* Champion::getSword() const
 {
@@ -575,40 +611,3 @@ float Champion::distanceBetweenPoints(const cocos2d::Vec2& a, const cocos2d::Vec
 {
     return a.distance(b);
 }
-
-// 获蓝条
-cocos2d::Sprite* Champion::getHealthBar() const
-{
-    return healthBar;
-}
-
-// 获取血条
-cocos2d::Sprite* Champion::getManaBar() const
-{
-    return manaBar;
-}
-
-// 设置血条
-void Champion::setHealthBar(Sprite* HealthBar)
-{
-    healthBar = HealthBar;
-}
-
-// 设置蓝条
-void Champion::setManaBar(Sprite* ManaBar)
-{
-    manaBar = ManaBar;
-}
-
-// 获取最大血量
-float Champion::getMaxHealthPoints() const
-{
-    return maxHealthPoints;
-}
-
-// 获取最大蓝量
-float Champion::getMaxMagicPoints() const
-{
-    return maxMagicPoints;
-}
-

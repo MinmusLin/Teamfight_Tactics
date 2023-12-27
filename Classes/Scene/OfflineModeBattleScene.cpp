@@ -63,18 +63,18 @@ bool OfflineModeBattleScene::init()
                 this->addChild(currentChampion->getSword());
                 currentChampion->setSwordVisible(true);
 
-                // 创建血条和蓝条的 Sprite 或 Label
-                if (g_offlineModeControl->getBattle()->getChampion(i, j)->getCamp())
-                    g_offlineModeControl->getBattle()->getChampion(i, j)->setHealthBar(Sprite::create("../Resources/Layers/MyCampHealthBar.png"));
-                else
-                    g_offlineModeControl->getBattle()->getChampion(i, j)->setHealthBar(Sprite::create("../Resources/Layers/EnemyCampHealthBar.png"));
-                g_offlineModeControl->getBattle()->getChampion(i, j)->setManaBar(Sprite::create("../Resources/Layers/ManaBar.png"));
-                // 设置血条和蓝条的位置，相对于英雄
+                // 创建生命条和经验条
+                if (currentChampion->getCamp()) {
+                    currentChampion->setHealthBar(Sprite::create("../Resources/Layers/MyCampHealthBar.png"));
+                }
+                else {
+                    currentChampion->setHealthBar(Sprite::create("../Resources/Layers/EnemyCampHealthBar.png"));
+                }
+                currentChampion->setManaBar(Sprite::create("../Resources/Layers/ManaBar.png"));
                 currentChampion->getHealthBar()->setPosition(currentChampionLocation + Vec2(0, CHAMPION_HEALTHBAR_VERTICAL_INTERVAL));
                 currentChampion->getManaBar()->setPosition(currentChampionLocation + Vec2(0, CHAMPION_MANABAR_VERTICAL_INTERVAL)); 
-                // 将血条和蓝条添加为英雄的子节点
-                this->addChild(g_offlineModeControl->getBattle()->getChampion(i, j)->getHealthBar());
-                this->addChild(g_offlineModeControl->getBattle()->getChampion(i, j)->getManaBar());
+                this->addChild(currentChampion->getHealthBar());
+                this->addChild(currentChampion->getManaBar());
 
                 // 计算初始战斗英雄个数
                 if (i < PLACE_MAP_ROWS) {
@@ -203,10 +203,9 @@ void OfflineModeBattleScene::update(float delta)
     // 更新战斗英雄
     for (int i = 0; i < battleChampionCount; i++) {
         if (battleChampion[i] != nullptr) { // 存在战斗英雄
-
-            // 根据当前血量和蓝量设置血条和蓝条的显示比例或其他显示方式
-            battleChampion[i]->getHealthBar()->setScaleX(battleChampion[i]->getAttributes().healthPoints / battleChampion[i]->getMaxHealthPoints()); // 假设血条的 scaleX 代表血量比例
-            battleChampion[i]->getManaBar()->setScaleX(battleChampion[i]->getAttributes().magicPoints / battleChampion[i]->getMaxMagicPoints());     // 假设蓝条的 scaleX 代表蓝量比例
+            // 设置生命条和经验条
+            battleChampion[i]->getHealthBar()->setScaleX(battleChampion[i]->getAttributes().healthPoints / battleChampion[i]->getMaxHealthPoints());
+            battleChampion[i]->getManaBar()->setScaleX(battleChampion[i]->getAttributes().magicPoints / battleChampion[i]->getMaxMagicPoints());
 
             if (battleChampion[i]->getAttributes().healthPoints > 0) { // 角色存活
                 if (battleChampion[i]->getIsMoving()) { // 角色正在移动
@@ -264,15 +263,15 @@ void OfflineModeBattleScene::update(float delta)
                                 Vec2(LocationMap::getInstance().getLocationMap().at({ BattleArea, battleChampion[i]->getCurrentDestination().x * BATTLE_MAP_COLUMNS + battleChampion[i]->getCurrentDestination().y }).x + INTERVAL_BETWEEN_WEAPON_AND_CHAMPION,
                                     LocationMap::getInstance().getLocationMap().at({ BattleArea, battleChampion[i]->getCurrentDestination().x * BATTLE_MAP_COLUMNS + battleChampion[i]->getCurrentDestination().y }).y)));
 
-                            // 移动血条
+                            // 移动生命条
                             battleChampion[i]->getHealthBar()->runAction(cocos2d::MoveTo::create(1.0f / battleChampion[i]->getAttributes().movementSpeed,
                                 cocos2d::Vec2(LocationMap::getInstance().getLocationMap().at({ BattleArea, battleChampion[i]->getCurrentDestination().x * BATTLE_MAP_COLUMNS + battleChampion[i]->getCurrentDestination().y }).x,
                                     LocationMap::getInstance().getLocationMap().at({ BattleArea, battleChampion[i]->getCurrentDestination().x * BATTLE_MAP_COLUMNS + battleChampion[i]->getCurrentDestination().y }).y + CHAMPION_HEALTHBAR_VERTICAL_INTERVAL)));
 
-                            // 移动蓝条
+                            // 移动经验条
                             battleChampion[i]->getManaBar()->runAction(cocos2d::MoveTo::create(1.0f / battleChampion[i]->getAttributes().movementSpeed,
                                 cocos2d::Vec2(LocationMap::getInstance().getLocationMap().at({ BattleArea, battleChampion[i]->getCurrentDestination().x * BATTLE_MAP_COLUMNS + battleChampion[i]->getCurrentDestination().y }).x,
-                                    LocationMap::getInstance().getLocationMap().at({ BattleArea, battleChampion[i]->getCurrentDestination().x * BATTLE_MAP_COLUMNS + battleChampion[i]->getCurrentDestination().y }).y + CHAMPION_MANABAR_VERTICAL_INTERVAL)));//TODO::MagicNumber英雄与血条距离
+                                    LocationMap::getInstance().getLocationMap().at({ BattleArea, battleChampion[i]->getCurrentDestination().x * BATTLE_MAP_COLUMNS + battleChampion[i]->getCurrentDestination().y }).y + CHAMPION_MANABAR_VERTICAL_INTERVAL)));
 
                             // 移动战斗英雄
                             battleChampion[i]->getSprite()->runAction(battleChampion[i]->getCurrentMove());

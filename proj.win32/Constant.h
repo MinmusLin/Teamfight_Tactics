@@ -117,6 +117,8 @@ constexpr int BATTLE_END_LABEL_OUTLINE_WIDTH = 4;                           // ¶
 constexpr int BATTLE_END_LABEL_SHADOW_OFFSET_X = 2;                         // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©ÒõÓ° X Æ«ÒÆÁ¿
 constexpr int BATTLE_END_LABEL_SHADOW_OFFSET_Y = -2;                        // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©ÒõÓ° Y Æ«ÒÆÁ¿
 constexpr int BATTLE_END_LABEL_BLUR_RADIUS = 3;                             // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©Ä£ºý°ë¾¶
+constexpr int CHAMPION_HEALTHBAR_VERTICAL_INTERVAL = 30;                    // ¶ÔÕ½³¡¾°ÉúÃüÌõ´¹Ö±¼ä¾à
+constexpr int CHAMPION_MANABAR_VERTICAL_INTERVAL = 22;                      // ¶ÔÕ½³¡¾°¾­ÑéÌõ´¹Ö±¼ä¾à
 constexpr int INTERVAL_BETWEEN_WEAPON_AND_CHAMPION = 40;                    // ¶ÔÕ½³¡¾°Õ½¶·Ó¢ÐÛÓëÎäÆ÷¼ä¾à
 constexpr int WEAPON_ANIMATION_ROTATION_ANGLE = 60;                         // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ª½Ç¶È
 constexpr int WEAPON_ANIMATION_ROTATION_COUNT = 4;                          // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ª´ÎÊý
@@ -142,7 +144,7 @@ constexpr int SHOP_LEVEL_LABEL_FONT_SIZE = 20;                              // É
 constexpr int SHOP_COIN_LABEL_FONT_SIZE = 20;                               // ÉÌµê½ð±ÒÊýÁ¿±êÇ©×ÖÌå´óÐ¡
 constexpr int SHOP_COIN_LABEL_OFFSET_X = 358;                               // ÉÌµê½ð±ÒÊýÁ¿±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
 constexpr int SHOP_COIN_LABEL_OFFSET_Y = -228;                              // ÉÌµê½ð±ÒÊýÁ¿±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
-constexpr int INITIAL_GOLD_COIN = 14;                                       // ³õÊ¼½ð±ÒÊýÁ¿
+constexpr int INITIAL_GOLD_COIN = 9914;                                       // ³õÊ¼½ð±ÒÊýÁ¿
 constexpr int REFRESH_SHOP_PRICE = 2;                                       // Ë¢ÐÂÉÌµêËùÐè½ð±ÒÊýÁ¿
 const std::map<int, int> UPLEVEL_PRICE = {                                  // Éý¼¶ËùÐè½ð±ÒÊýÁ¿
     {BATTLE_AREA_MIN_CHAMPION_COUNT, 12},                                   // µÈ¼¶ 1 Éý¼¶ÖÁµÈ¼¶ 2 ËùÐè½ð±ÒÊýÁ¿
@@ -182,8 +184,6 @@ constexpr int BATTLE_AREA_START_X = 415;                                    // Õ
 constexpr int BATTLE_AREA_START_Y = 275;                                    // Õ½¶·ÇøÆðÊ¼ÆÁÄ»×ø±êÎ»ÖÃ Y ×ø±ê
 constexpr int CHAMPION_HORIZONTAL_INTERVAL = 60;                            // Õ½¶·Ó¢ÐÛË®Æ½¼ä¾à
 constexpr int CHAMPION_VERTICAL_INTERVAL = 45;                              // Õ½¶·Ó¢ÐÛ´¹Ö±¼ä¾à
-constexpr int CHAMPION_HEALTHBAR_VERTICAL_INTERVAL = 30;                    // Õ½¶·Ó¢ÐÛ´¹Ö±¼ä¾à
-constexpr int CHAMPION_MANABAR_VERTICAL_INTERVAL = 22;                      // Õ½¶·Ó¢ÐÛ´¹Ö±¼ä¾à
 
 // Õ½¶·²ÎÊýÉèÖÃ
 constexpr int CHAMPION_CATEGORY_NUMBERS = 15;                               // Õ½¶·Ó¢ÐÛÖÖÀàÊýÁ¿
@@ -326,22 +326,22 @@ const ChampionAttributes CHAMPION_2_ATTR = { // ½Ù£¨¶þÐÇ£©
     Champion2, "½Ù", "../Resources/Champions/Champion2.png", 3, 2, 250, 0, 35, 200, 1, 0.9f, 1.2f, 1.1f
 };
 const ChampionAttributes CHAMPION_3_ATTR = { // ÓÀ¶÷£¨Ò»ÐÇ£©
-    Champion3, "ÓÀ¶÷", "../Resources/Champions/Champion3.png", 1, 1, 200, 0, 25, 50, 1, 0.8f, 1.0f, 1.0f
+    Champion3, "ÓÀ¶÷", "../Resources/Champions/Champion3.png", 1, 1, 200, 0, 25, 200, 1, 0.8f, 1.0f, 1.0f
 };
 const ChampionAttributes CHAMPION_4_ATTR = { // ÓÀ¶÷£¨¶þÐÇ£©
-    Champion4, "ÓÀ¶÷", "../Resources/Champions/Champion4.png", 3, 2, 250, 0, 30, 50, 1, 0.7f, 1.2f, 1.1f
+    Champion4, "ÓÀ¶÷", "../Resources/Champions/Champion4.png", 3, 2, 250, 0, 30, 200, 1, 0.7f, 1.2f, 1.1f
 };
 const ChampionAttributes CHAMPION_5_ATTR = { // °ÂÀ­·ò£¨Ò»ÐÇ£©
-    Champion5, "°ÂÀ­·ò", "../Resources/Champions/Champion5.png", 1, 1, 250, 0, 20, 120, 1, 0.8f, 1.2f, 0.8f
+    Champion5, "°ÂÀ­·ò", "../Resources/Champions/Champion5.png", 1, 1, 250, 0, 20, 200, 1, 0.8f, 1.2f, 0.8f
 };
 const ChampionAttributes CHAMPION_6_ATTR = { // °ÂÀ­·ò£¨¶þÐÇ£©
-    Champion6, "°ÂÀ­·ò", "../Resources/Champions/Champion6.png", 3, 2, 300, 0, 25, 120, 1, 0.7f, 1.4f, 0.9f
+    Champion6, "°ÂÀ­·ò", "../Resources/Champions/Champion6.png", 3, 2, 300, 0, 25, 200, 1, 0.7f, 1.4f, 0.9f
 };
 const ChampionAttributes CHAMPION_7_ATTR = { // ÅËÉ­£¨Ò»ÐÇ£©
-    Champion7, "ÅËÉ­", "../Resources/Champions/Champion7.png", 1, 1, 250, 0, 20, 100, 1, 1.0f, 1.0f, 1.1f
+    Champion7, "ÅËÉ­", "../Resources/Champions/Champion7.png", 1, 1, 250, 0, 20, 200, 1, 1.0f, 1.0f, 1.1f
 };
 const ChampionAttributes CHAMPION_8_ATTR = { // ÅËÉ­£¨¶þÐÇ£©
-    Champion8, "ÅËÉ­", "../Resources/Champions/Champion8.png", 3, 2, 300, 0, 25, 100, 1, 0.9f, 1.2f, 1.2f
+    Champion8, "ÅËÉ­", "../Resources/Champions/Champion8.png", 3, 2, 300, 0, 25, 200, 1, 0.9f, 1.2f, 1.2f
 };
 const ChampionAttributes CHAMPION_9_ATTR = { // ÒÁÜ½ÁÕ£¨Ò»ÐÇ£©
     Champion9, "ÒÁÜ½ÁÕ", "../Resources/Champions/Champion9.png", 1, 1, 175, 0, 15, 200, 1, 1.0f, 1.0f, 1.0f
@@ -350,10 +350,10 @@ const ChampionAttributes CHAMPION_10_ATTR = { // ÒÁÜ½ÁÕ£¨¶þÐÇ£©
     Champion10, "ÒÁÜ½ÁÕ", "../Resources/Champions/Champion10.png", 3, 2, 225, 0, 20, 200, 1, 0.9f, 1.2f, 1.1f
 };
 const ChampionAttributes CHAMPION_11_ATTR = { // ¿âÆæ£¨Ò»ÐÇ£©
-    Champion11, "¿âÆæ", "../Resources/Champions/Champion11.png", 2, 1, 150, 0, 23, 100, 3, 0.7f, 1.1f, 0.7f
+    Champion11, "¿âÆæ", "../Resources/Champions/Champion11.png", 2, 1, 150, 0, 23, 200, 3, 0.7f, 1.1f, 0.7f
 };
 const ChampionAttributes CHAMPION_12_ATTR = { // ¿âÆæ£¨¶þÐÇ£©
-    Champion12, "¿âÆæ", "../Resources/Champions/Champion12.png", 6, 2, 200, 0, 28, 100, 3, 0.6f, 1.3f, 0.8f
+    Champion12, "¿âÆæ", "../Resources/Champions/Champion12.png", 6, 2, 200, 0, 28, 200, 3, 0.6f, 1.3f, 0.8f
 };
 const ChampionAttributes CHAMPION_13_ATTR = { // ËþÀï¿Ë£¨Ò»ÐÇ£©
     Champion13, "ËþÀï¿Ë", "../Resources/Champions/Champion13.png", 2, 1, 250, 0, 20, 200, 1, 1.1f, 1.0f, 1.2f
@@ -362,10 +362,10 @@ const ChampionAttributes CHAMPION_14_ATTR = { // ËþÀï¿Ë£¨¶þÐÇ£©
     Champion14, "ËþÀï¿Ë", "../Resources/Champions/Champion14.png", 6, 2, 300, 0, 25, 200, 1, 1.0f, 1.2f, 1.3f
 };
 const ChampionAttributes CHAMPION_15_ATTR = { // ÑÇË÷£¨Ò»ÐÇ£©
-    Champion15, "ÑÇË÷", "../Resources/Champions/Champion15.png", 2, 1, 200, 0, 25, 50, 1, 0.7f, 1.0f, 1.0f
+    Champion15, "ÑÇË÷", "../Resources/Champions/Champion15.png", 2, 1, 200, 0, 25, 200, 1, 0.7f, 1.0f, 1.0f
 };
 const ChampionAttributes CHAMPION_16_ATTR = { // ÑÇË÷£¨¶þÐÇ£©
-    Champion16, "ÑÇË÷", "../Resources/Champions/Champion16.png", 6, 2, 250, 0, 30, 50, 1, 0.6f, 1.2f, 1.1f
+    Champion16, "ÑÇË÷", "../Resources/Champions/Champion16.png", 6, 2, 250, 0, 30, 200, 1, 0.6f, 1.2f, 1.1f
 };
 const ChampionAttributes CHAMPION_17_ATTR = { // ½ð¿ËË¿£¨Ò»ÐÇ£©
     Champion17, "½ð¿ËË¿", "../Resources/Champions/Champion17.png", 2, 1, 150, 0, 30, 200, 1, 0.5f, 1.5f, 0.7f
@@ -374,10 +374,10 @@ const ChampionAttributes CHAMPION_18_ATTR = { // ½ð¿ËË¿£¨¶þÐÇ£©
     Champion18, "½ð¿ËË¿", "../Resources/Champions/Champion18.png", 6, 2, 200, 0, 35, 200, 2, 0.4f, 1.7f, 0.8f
 };
 const ChampionAttributes CHAMPION_19_ATTR = { // ËþÄ·£¨Ò»ÐÇ£©
-    Champion19, "ËþÄ·", "../Resources/Champions/Champion19.png", 3, 1, 300, 0, 15, 150, 1, 1.0f, 1.0f, 1.2f
+    Champion19, "ËþÄ·", "../Resources/Champions/Champion19.png", 3, 1, 300, 0, 15, 200, 1, 1.0f, 1.0f, 1.2f
 };
 const ChampionAttributes CHAMPION_20_ATTR = { // ËþÄ·£¨¶þÐÇ£©
-    Champion20, "ËþÄ·", "../Resources/Champions/Champion20.png", 9, 2, 350, 0, 20, 150, 1, 0.9f, 1.2f, 1.3f
+    Champion20, "ËþÄ·", "../Resources/Champions/Champion20.png", 9, 2, 350, 0, 20, 200, 1, 0.9f, 1.2f, 1.3f
 };
 const ChampionAttributes CHAMPION_21_ATTR = { // Îµ£¨Ò»ÐÇ£©
     Champion21, "Îµ", "../Resources/Champions/Champion21.png", 3, 1, 250, 0, 30, 200, 1, 1.0f, 1.0f, 1.1f
@@ -392,10 +392,10 @@ const ChampionAttributes CHAMPION_24_ATTR = { // °¢Ä¾Ä¾£¨¶þÐÇ£©
     Champion24, "°¢Ä¾Ä¾", "../Resources/Champions/Champion24.png", 9, 2, 350, 0, 25, 200, 1, 0.9f, 1.2f, 1.4f
 };
 const ChampionAttributes CHAMPION_25_ATTR = { // ¿üÉ£Ìá£¨Ò»ÐÇ£©
-    Champion25, "¿üÉ£Ìá", "../Resources/Champions/Champion25.png", 4, 1, 300, 0, 30, 50, 1, 0.7f, 1.0f, 1.1f
+    Champion25, "¿üÉ£Ìá", "../Resources/Champions/Champion25.png", 4, 1, 300, 0, 30, 200, 1, 0.7f, 1.0f, 1.1f
 };
 const ChampionAttributes CHAMPION_26_ATTR = { // ¿üÉ£Ìá£¨¶þÐÇ£©
-    Champion26, "¿üÉ£Ìá", "../Resources/Champions/Champion26.png", 12, 2, 350, 0, 35, 50, 1, 0.6f, 1.2f, 1.2f
+    Champion26, "¿üÉ£Ìá", "../Resources/Champions/Champion26.png", 12, 2, 350, 0, 35, 200, 1, 0.6f, 1.2f, 1.2f
 };
 const ChampionAttributes CHAMPION_27_ATTR = { // ¿¨¶ûÈøË¹£¨Ò»ÐÇ£©
     Champion27, "¿¨¶ûÈøË¹", "../Resources/Champions/Champion27.png", 4, 1, 200, 0, 20, 200, 3, 1.0f, 0.8f, 1.0f
