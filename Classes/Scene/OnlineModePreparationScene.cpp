@@ -3,13 +3,11 @@
  * File Name:     OnlineModePreparationScene.cpp
  * File Function: OnlineModePreparationScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
-#include "OnlineModePreparationScene.h" // TODO: 头文件要处理
-#include "OfflineModeBattleScene.h"
-#include "Control/OfflineModeControl.h"
+#include "OnlineModePreparationScene.h"
 #include "Control/OnlineModeControl.h"
 #include "Button/HoverButton.h"
 #include "Layer/ScoreBoardLayer.h"
@@ -24,7 +22,6 @@ using cocos2d::Vec2;
 
 // 练习模式游戏控制类
 extern OnlineModeControl* g_onlineModeControl;
-extern OfflineModeControl* g_offlineModeControl;
 
 // 创建场景
 Scene* OnlineModePreparationScene::createScene()
@@ -44,7 +41,7 @@ bool OnlineModePreparationScene::init()
     }
 
     // 设置 HumanPlayer 类的当前场景指针
-    g_offlineModeControl->getHumanPlayer()->setCurrentScene(this);
+    g_onlineModeControl->getHumanPlayer()->setCurrentScene(this);
 
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -54,7 +51,7 @@ bool OnlineModePreparationScene::init()
 
     // 创建等级标签
     Label* levelLabel;
-    const int currentBattleChampionCount = g_offlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
+    const int currentBattleChampionCount = g_onlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
     if (currentBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT) {
         levelLabel = Label::createWithTTF(GBKToUTF8::getString("最高等级"), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_LEVEL_LABEL_FONT_SIZE);
     }
@@ -67,7 +64,7 @@ bool OnlineModePreparationScene::init()
     this->addChild(levelLabel);
 
     // 创建金币数量标签
-    Label* coinLabel = Label::createWithTTF(std::to_string(g_offlineModeControl->getHumanPlayer()->getGoldCoin()), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_COIN_LABEL_FONT_SIZE);
+    Label* coinLabel = Label::createWithTTF(std::to_string(g_onlineModeControl->getHumanPlayer()->getGoldCoin()), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_COIN_LABEL_FONT_SIZE);
     coinLabel->setAnchorPoint(Vec2(1, 0.5));
     coinLabel->setPosition(Vec2(screenSize.width / 2 + SHOP_COIN_LABEL_OFFSET_X, screenSize.height / 2 + SHOP_COIN_LABEL_OFFSET_Y));
     coinLabel->setName("CoinLabel");
@@ -111,7 +108,7 @@ bool OnlineModePreparationScene::init()
     refreshCoinLabel->setAnchorPoint(Vec2(1, 0.5));
     refreshCoinLabel->setPosition(SHOP_COIN_LABEL_START_X, SHOP_REFRESH_COIN_LABEL_START_Y);
     this->addChild(refreshCoinLabel, 2);
-    auto uplevelCoinLabel = Label::createWithTTF(std::to_string(UPLEVEL_PRICE.at(g_offlineModeControl->getHumanPlayer()->getMaxBattleChampionCount())), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_COIN_LABEL_FONT_SIZE);
+    auto uplevelCoinLabel = Label::createWithTTF(std::to_string(UPLEVEL_PRICE.at(g_onlineModeControl->getHumanPlayer()->getMaxBattleChampionCount())), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_COIN_LABEL_FONT_SIZE);
     uplevelCoinLabel->setAnchorPoint(Vec2(1, 0.5));
     uplevelCoinLabel->setPosition(SHOP_COIN_LABEL_START_X, SHOP_UPLEVEL_COIN_LABEL_START_Y);
     this->addChild(uplevelCoinLabel, 2);
@@ -119,20 +116,20 @@ bool OnlineModePreparationScene::init()
     // 为按钮添加事件处理器
     uplevelButton->addTouchEventListener([this, uplevelCoinLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
-            g_offlineModeControl->getHumanPlayer()->addBattleChampionCount();
-            int maxBattleChampionCount = g_offlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
+            g_onlineModeControl->getHumanPlayer()->addBattleChampionCount();
+            int maxBattleChampionCount = g_onlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
             uplevelCoinLabel->setString(maxBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT ? "" : std::to_string(UPLEVEL_PRICE.at(maxBattleChampionCount)));
         }
         });
     refreshButton->addTouchEventListener([this](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
-            g_offlineModeControl->getHumanPlayer()->refreshShop();
+            g_onlineModeControl->getHumanPlayer()->refreshShop();
         }
         });
     returnMenuButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-            delete g_offlineModeControl; // TODO: 这里做好 g_onlineModeControl 的动态管理
-            g_offlineModeControl = nullptr;
+            delete g_onlineModeControl; // TODO: 这里做好 g_onlineModeControl 的动态管理
+            g_onlineModeControl = nullptr;
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });
@@ -143,12 +140,12 @@ bool OnlineModePreparationScene::init()
     this->addChild(returnMenuButton);
 
     // 初始化战斗英雄删除按钮
-    g_offlineModeControl->getHumanPlayer()->initializeDeleteChampionButton();
+    g_onlineModeControl->getHumanPlayer()->initializeDeleteChampionButton();
 
     // 创建分数表层
     auto scoreBoardLayer = ScoreBoardLayer::create();
-    scoreBoardLayer->initialize(2);
-    scoreBoardLayer->showScoreBoard(g_offlineModeControl->getHumanPlayer(), g_offlineModeControl->getAIPlayer());
+    scoreBoardLayer->initialize(g_onlineModeControl->getCurrentConnections());
+    //scoreBoardLayer->showScoreBoard(g_onlineModeControl->getHumanPlayer(), g_onlineModeControl->getEnemyPlayer());
     scoreBoardLayer->setName("ScoreBoardLayer");
     this->addChild(scoreBoardLayer);
 
@@ -163,7 +160,7 @@ void OnlineModePreparationScene::onEnter()
 
     // 重置分数表层
     auto scoreBoardLayer = dynamic_cast<ScoreBoardLayer*>(this->getChildByName("ScoreBoardLayer"));
-    scoreBoardLayer->showScoreBoard(g_offlineModeControl->getHumanPlayer(), g_offlineModeControl->getAIPlayer());
+    //scoreBoardLayer->showScoreBoard(g_onlineModeControl->getHumanPlayer(), g_onlineModeControl->getEnemyPlayer());
 
     // 重置进度条和标签
     auto progressBar = dynamic_cast<cocos2d::ui::LoadingBar*>(this->getChildByName("CountdownLoadingBar"));
@@ -185,7 +182,7 @@ void OnlineModePreparationScene::onEnter()
 void OnlineModePreparationScene::setScheduleOnce(cocos2d::ui::LoadingBar* progressBar, Label* progressLabel)
 {
     // 刷新商店
-    g_offlineModeControl->getHumanPlayer()->refreshShop();
+    g_onlineModeControl->getHumanPlayer()->refreshShop();
 
     // 更新进度条和标签
     constexpr float interval = BATTLE_SCENE_LOADINGBAR_DURATION / 1000.0f; // 每 0.1% 所需时间
@@ -209,6 +206,6 @@ void OnlineModePreparationScene::setScheduleOnce(cocos2d::ui::LoadingBar* progre
         _eventDispatcher->dispatchEvent(&event);
 
         // 运行练习模式对战场景
-        cocos2d::Director::getInstance()->pushScene(OfflineModeBattleScene::create());
+        //cocos2d::Director::getInstance()->pushScene(OnlineModeBattleScene::create());
         }, BATTLE_SCENE_LOADINGBAR_DURATION + SCENE_TRANSITION_DURATION, "IsAlreadyPrepared");
 }
