@@ -148,9 +148,12 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 ### 2023/12/26
 
 * 实现 `Control` 类
+* 实现生命条与经验条效果
+* 实现武器动画效果
 
 ### 2023/12/27
 
+* 完善游戏功能性与平衡性
 * 实现商店推荐算法
 * 实现 AI 落子算法
 * 实现 `Player` 类
