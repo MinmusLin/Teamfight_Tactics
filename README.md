@@ -64,6 +64,7 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 
 * 放弃 Boost 网络环境，配置 socket 网络环境
 * 初步搭建项目框架
+* 实现 `AppDelegate` 类
 
 ### 2023/12/10
 
@@ -141,6 +142,20 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 * 实现 `OfflineModeBattleScene` 类
 * 实现 `OfflineModeControl` 类
 * 实现 `ScoreBoardLayer` 类
+* 工作对接与项目仓库整合
+* 基本实现练习模式
+
+### 2023/12/26
+
+* 实现 `Control` 类
+
+### 2023/12/27
+
+* 实现商店推荐算法
+* 实现 AI 落子算法
+* 实现 `Player` 类
+* 实现 `AIPlayer` 类
+* 实现 `HumanPlayer` 类
 * 工作对接与项目仓库整合
 * 实现练习模式
 
