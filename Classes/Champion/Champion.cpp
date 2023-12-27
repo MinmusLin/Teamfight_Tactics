@@ -21,11 +21,51 @@ Champion::Champion(const ChampionCategory championCategory) :
     isMoving(false),
     isAttaking(false),
     attackIntervalTimer(0.0f),
-    moveIntervalTimer(0.0f)
+    moveIntervalTimer(0.0f),
+    sword(nullptr)
 {
     sprite = Sprite::create(attributes.championImagePath);
     maxHealthPoints = attributes.healthPoints;
     maxMagicPoints = attributes.skillTriggerThreshold;
+}
+
+// 显示武器
+void Champion::showSword()
+{
+    if (sword) {
+        sword->setVisible(true);
+    }
+}
+
+// 隐藏武器
+void Champion::hideSword()
+{
+    if (sword) {
+        sword->setVisible(false);
+    }
+}
+
+// 初始化武器
+void Champion::swordInit(const cocos2d::Vec2& position) {
+
+    // 创建剑的 Sprite
+    sword = cocos2d::Sprite::create("../Resources/Layers/Sword.png");
+    if (sword) {
+        sword->setPosition(position);   // 设置剑的位置
+        sword->setVisible(false);       // 剑不可见
+    }
+}
+
+// 获取武器精灵
+cocos2d::Sprite* Champion::getSword()
+{
+    return sword;
+}
+
+// 改变武器位置
+void Champion::setSwordPosition(const cocos2d::Vec2& position)
+{
+    sword->setPosition(position);
 }
 
 // 绑定战斗类
@@ -483,6 +523,26 @@ void Champion::attack()
     if (isInAttackRange() && currentEnemy) {
         currentEnemy->beingAttack(attributes.attackDamage);
         attributes.magicPoints += INCREASED_MAGIC_POINTS;
+        // 武器动态旋转
+        // 记录初始角度
+        float initialAngle = sword->getRotation();
+
+        // 定义旋转的目标角度和动作持续时间
+        float rotationAngle = 90; // 旋转的角度
+        float duration = 0.15; // 每次旋转持续 0.15 秒
+
+        // 创建旋转到特定角度的动作
+        auto rotateToAction = cocos2d::RotateTo::create(duration, initialAngle + rotationAngle);
+        auto rotateBackToAction = cocos2d::RotateTo::create(duration, initialAngle);
+
+        // 创建一个动作序列：旋转到特定角度，然后旋转回初始角度
+        auto sequenceAction = cocos2d::Sequence::create(rotateToAction, rotateBackToAction, nullptr);
+
+        // 重复动作序列
+        auto repeatAction = cocos2d::Repeat::create(sequenceAction, 4); // 假设重复 4 次
+
+        // 让精灵执行整个重复的旋转序列
+        sword->runAction(repeatAction);
     }
 }
 
@@ -512,6 +572,7 @@ void Champion::skill()
 void Champion::die()
 {
     auto championSprite = getSprite();
+    sword->getParent()->removeChild(sword,true);
     championSprite->getParent()->removeChild(sprite, true);
     Champion* temp = currentBattle->getChampion(currentLocation.x, currentLocation.y);
     currentBattle->championMap[currentLocation.x][currentLocation.y] = nullptr;

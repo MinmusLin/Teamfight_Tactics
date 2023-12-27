@@ -128,6 +128,21 @@ public:
     // 死亡
     void die();
 
+    // 显示武器
+    void showSword();
+
+    // 隐藏武器
+    void hideSword();
+
+    // 初始化武器位置
+    void swordInit(const cocos2d::Vec2& position);
+
+    // 改变武器位置
+    void setSwordPosition(const cocos2d::Vec2& position);
+
+    // 获取武器精灵
+    Sprite* Champion::getSword();
+
 private:
     Battle* currentBattle;             // 战斗类
     ChampionAttributes attributes;     // 战斗英雄属性
@@ -135,6 +150,7 @@ private:
     BattleLocation currentDestination; // 当前目标位置
     Champion* currentEnemy;            // 当前锁定敌人战斗英雄指针
     Sprite* sprite;                    // 精灵类指针
+    Sprite* sword;                     // 英雄对应剑
     cocos2d::MoveTo* currentMove;      // 当前移动
     int maxHealthPoints;               // 最大生命值
     int maxMagicPoints;                // 最大魔法值

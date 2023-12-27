@@ -53,8 +53,15 @@ bool OfflineModeBattleScene::init()
         for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
             if (g_offlineModeControl->getBattle()->getChampion(i, j) != nullptr) {
                 // 显示所有战斗英雄
-                g_offlineModeControl->getBattle()->getChampion(i, j)->getSprite()->setPosition(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }));
+                Champion* currentChampion = g_offlineModeControl->getBattle()->getChampion(i, j);
+                currentChampion->getSprite()->setPosition(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }));
                 this->addChild(g_offlineModeControl->getBattle()->getChampion(i, j)->getSprite());
+
+                // 显示对应武器
+                Vec2 currentChampionLocation = LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j });
+                currentChampion->swordInit(currentChampionLocation + Vec2(40,0));
+                this->addChild(currentChampion->getSword());          // 将剑添加为子节点
+                currentChampion->showSword();
 
                 // 计算初始战斗英雄个数
                 if (i < PLACE_MAP_ROWS) {
@@ -65,9 +72,9 @@ bool OfflineModeBattleScene::init()
                 }
 
                 // 绑定战斗类
-                g_offlineModeControl->getBattle()->getChampion(i, j)->setBattle(g_offlineModeControl->getBattle());
-                g_offlineModeControl->getBattle()->getChampion(i, j)->setCurrentPosition(i, j);
-                battleChampion[battleChampionCount++] = g_offlineModeControl->getBattle()->getChampion(i, j);
+                currentChampion->setBattle(g_offlineModeControl->getBattle());
+                currentChampion->setCurrentPosition(i, j);
+                battleChampion[battleChampionCount++] = currentChampion;
             }
             else {
                 continue;
@@ -212,12 +219,13 @@ void OfflineModeBattleScene::update(float delta)
 
                     if (battleChampion[i]->getCurrentEnemy()) { // 获取当前锁定敌人战斗英雄指针
                         if (battleChampion[i]->isInAttackRange()) { // 攻击范围内存在敌人战斗英雄
+                            
                             // 增加攻击时间间隔
                             battleChampion[i]->addAttackIntervalTimer(delta);
 
                             if (battleChampion[i]->getAttackIntervalTimer() >= (1.0f / battleChampion[i]->getAttributes().attackSpeed)) { // 达到攻击时间间隔
                                 // 攻击
-                                battleChampion[i]->attack();
+                                battleChampion[i]->attack();                                                            
 
                                 // 重置攻击时间间隔
                                 battleChampion[i]->resetAttackIntervalTimer();
@@ -234,9 +242,14 @@ void OfflineModeBattleScene::update(float delta)
                             battleChampion[i]->setCurrentMove(cocos2d::MoveTo::create(1.0f / battleChampion[i]->getAttributes().movementSpeed,
                                 LocationMap::getInstance().getLocationMap().at({ BattleArea, battleChampion[i]->getCurrentDestination().x * BATTLE_MAP_COLUMNS + battleChampion[i]->getCurrentDestination().y })));
 
+                            // 移动武器
+                            battleChampion[i]->getSword()->runAction(cocos2d::MoveTo::create(1.0f / battleChampion[i]->getAttributes().movementSpeed,
+                               Vec2(LocationMap::getInstance().getLocationMap().at({ BattleArea, battleChampion[i]->getCurrentDestination().x * BATTLE_MAP_COLUMNS + battleChampion[i]->getCurrentDestination().y }).x + 40,
+                                    LocationMap::getInstance().getLocationMap().at({ BattleArea, battleChampion[i]->getCurrentDestination().x * BATTLE_MAP_COLUMNS + battleChampion[i]->getCurrentDestination().y }).y)));
+
                             // 移动战斗英雄
                             battleChampion[i]->getSprite()->runAction(battleChampion[i]->getCurrentMove());
-
+                            
                             // 放置战斗英雄
                             g_offlineModeControl->getBattle()->placeChampion(battleChampion[i]->getCurrentDestination().x, battleChampion[i]->getCurrentDestination().y, battleChampion[i]);
 
@@ -250,6 +263,7 @@ void OfflineModeBattleScene::update(float delta)
                 }
             }
             else { // 角色死亡
+                battleChampion[i]->hideSword();
                 battleChampion[i]->die();
                 battleChampion[i] = nullptr;
             }
