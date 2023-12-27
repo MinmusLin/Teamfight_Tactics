@@ -143,7 +143,7 @@ void OfflineModeBattleScene::update(float delta)
         else if (enemyCount == 0) { // Ê¤Àû
             g_offlineModeControl->getBattle()->setBattleSituation(Win);
             g_offlineModeControl->getAIPlayer()->decreaseHealthPoints(myCount * DECREASED_HEALTH_POINTS);
-            g_offlineModeControl->getHumanPlayer()->addGoldCoin(myCount * INCREASED_GOLD_COINS + REFRESH_SHOP_PRICE);
+            g_offlineModeControl->getHumanPlayer()->addGoldCoin(myCount * INCREASED_GOLD_COINS + REFRESH_SHOP_PRICE + NEW_BATTLE_INCREASED_GOLD_COINS);
         }
         else { // Ê§°Ü
             g_offlineModeControl->getBattle()->setBattleSituation(Lose);

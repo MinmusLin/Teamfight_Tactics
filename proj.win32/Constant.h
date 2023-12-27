@@ -192,6 +192,7 @@ constexpr int INITIAL_HEALTH_POINTS = 100;                                  // Í
 constexpr int INCREASED_MAGIC_POINTS = 20;                                  // ¹¥»÷¶ÔÓ¦Ôö¼ÓÄ§·¨Öµ
 constexpr int DECREASED_HEALTH_POINTS = 5;                                  // ´æ»îÕ½¶·Ó¢ÐÛ¶ÔÓ¦¼õÉÙÉúÃüÖµ
 constexpr int INCREASED_GOLD_COINS = 5;                                     // ´æ»îÕ½¶·Ó¢ÐÛ¶ÔÓ¦Ôö¼Ó½ð±ÒÊýÁ¿
+constexpr int NEW_BATTLE_INCREASED_GOLD_COINS = 10;                         // ÐÂÕ½¶·Ôö¼Ó½ð±ÒÊýÁ¿
 constexpr int EARLY_MIDDLE_STAGE_THRESHOLD = 10;                            // Ç°ÖÐÆÚÕ½¶·½×¶ÎãÐÖµ
 constexpr int MIDDLE_LATE_STAGE_THRESHOLD = 50;                             // ÖÐºóÆÚÕ½¶·½×¶ÎãÐÖµ
 constexpr int DEFENSE_SCORE_COEFFICIENT = 200;                              // ·ÀÓù·ÖÊýÏµÊý
