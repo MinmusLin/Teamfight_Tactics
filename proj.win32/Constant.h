@@ -223,8 +223,9 @@ enum ConnectionStatus {
 
 // 练习模式难度定义
 enum Difficulty {
-    Easy, // 简单模式
-    Hard  // 困难模式
+    Easy,   // 简单模式
+    Normal, // 正常模式
+    Hard    // 困难模式
 };
 
 // 位置状态定义
