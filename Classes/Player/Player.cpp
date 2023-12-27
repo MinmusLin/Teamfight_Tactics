@@ -4,6 +4,7 @@
  * File Function: Player类的实现
  * Author:        林继申、杨兆镇
  * Update Date:   2023/12/27
+ * License:       MIT License
  ****************************************************************/
 
 #include <algorithm>

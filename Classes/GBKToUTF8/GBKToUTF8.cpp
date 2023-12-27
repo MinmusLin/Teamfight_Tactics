@@ -3,7 +3,8 @@
  * File Name:     GBKToUTF8.cpp
  * File Function: GBKToUTF8类的实现
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/27
+ * License:       MIT License
  ****************************************************************/
 
 #include <vector>

@@ -3,7 +3,8 @@
  * File Name:     GBKToUTF8.h
  * File Function: GBKToUTF8类的定义
  * Author:        林继申
- * Update Date:   2023/12/20
+ * Update Date:   2023/12/27
+ * License:       MIT License
  ****************************************************************/
 
 #pragma once

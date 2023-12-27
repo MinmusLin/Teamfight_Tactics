@@ -3,7 +3,8 @@
  * File Name:     ChampionAttributesLayer.cpp
  * File Function: ChampionAttributesLayer类的实现
  * Author:        刘淑仪、林继申
- * Update Date:   2023/12/24
+ * Update Date:   2023/12/27
+ * License:       MIT License
  ****************************************************************/
 
 #include <sstream>

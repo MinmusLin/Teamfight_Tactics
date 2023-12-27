@@ -4,6 +4,7 @@
  * File Function: OnlineModeMenuScene类的实现
  * Author:        林继申
  * Update Date:   2023/12/27
+ * License:       MIT License
  ****************************************************************/
 
 #include <iostream>
@@ -174,34 +175,15 @@ bool OnlineModeMenuScene::init()
                         if (recvSize > 0) {
                             //this->unschedule("ServerMessageListener"); // 关闭服务器消息监听
                             buffer[recvSize] = '\0';
-
                             if (!strncmp(buffer, "Connection", MESSAGE_IDENTIFIER_LENGTH)) {
-
-
-
-
-                            }
-
-
-
-
-
-                            if (/*!strcmp(buffer, START_GAME_MSG)*/false) {
-                                memset(buffer, 0, sizeof(buffer));
-                                sprintf(buffer, "ClientID=%d,PlayerName=%s", g_onlineModeControl->getSocket(), cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName").c_str());
-                                g_onlineModeControl->sendMessage(buffer, strlen(buffer));
-                            }
-                            else if (/*!strcmp(buffer, START_GAME_MSG)*/false) {
-                                this->unschedule("ServerMessageListener"); // 关闭服务器消息监听
-                                // TODO: 联机模式接口
-                            }
-                            else {
                                 int currentConnections;
-                                if (sscanf(buffer, CURRENT_CONNECTIONS_FORMAT, &currentConnections) == 1) {
-                                    promptLabel->setString(GBKToUTF8::getString("已建立连接 (服务器当前连接数量：") + std::to_string(currentConnections) + GBKToUTF8::getString(")"));
-                                    promptLabel->setVisible(true);
-                                    g_onlineModeControl->setCurrentConnections(currentConnections);
-                                }
+                                sscanf(buffer, CURRENT_CONNECTIONS_FORMAT, &currentConnections);
+                                promptLabel->setString(GBKToUTF8::getString("已建立连接 (服务器当前连接数量：") + std::to_string(currentConnections) + GBKToUTF8::getString(")"));
+                                promptLabel->setVisible(true);
+                                g_onlineModeControl->setCurrentConnections(currentConnections);
+                            }
+                            if (!strncmp(buffer, "Start game", MESSAGE_IDENTIFIER_LENGTH)) {
+                                exit(0);
                             }
                         }
                         }, SERVER_REFRESH_INTERVAL, "ServerMessageListener");
@@ -214,11 +196,12 @@ bool OnlineModeMenuScene::init()
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });
-    startGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+    startGameButton->addTouchEventListener([startGameButton](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             char buffer[BUFFER_SIZE];
-            sprintf(buffer, "StartGame.PlayerName=%s", cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName").c_str());
+            sprintf(buffer, PLAYER_NAME_FORMAT, cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName").c_str());
             g_onlineModeControl->sendMessage(buffer, strlen(buffer));
+            startGameButton->removeFromParent();
         }
         });
 

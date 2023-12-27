@@ -3,7 +3,8 @@
  * File Name:     InitialScene.h
  * File Function: InitialScene类的定义
  * Author:        林继申
- * Update Date:   2023/12/19
+ * Update Date:   2023/12/17
+ * License:       MIT License
  ****************************************************************/
 
 #pragma once

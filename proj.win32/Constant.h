@@ -4,6 +4,7 @@
  * File Function: ≥£±дЅњµƒґ®“е
  * Author:        Ѕ÷Љћ…к°ҐЅх з“«°Ґ—о’„’т°Ґ—о”озы
  * Update Date:   2023/12/27
+ * License:       MIT License
  ****************************************************************/
 
 #pragma once
@@ -147,7 +148,7 @@ constexpr int SHOP_COIN_LABEL_OFFSET_Y = -228;                              // …
 constexpr int SHOP_COIN_LABEL_START_X = 334;                                // ЋҐ–¬…ћµкЇЌ…эЉґЋщ–иљр±“ эЅњ±к«©ќї÷√ X „ш±к
 constexpr int SHOP_REFRESH_COIN_LABEL_START_Y = 33;                         // ЋҐ–¬…ћµкЋщ–иљр±“ эЅњ±к«©ќї÷√ Y „ш±к
 constexpr int SHOP_UPLEVEL_COIN_LABEL_START_Y = 88;                         // …эЉґЋщ–иљр±“ эЅњ±к«©ќї÷√ Y „ш±к
-constexpr int INITIAL_GOLD_COIN = 914;                                       // ≥х Љљр±“ эЅњ
+constexpr int INITIAL_GOLD_COIN = 14;                                       // ≥х Љљр±“ эЅњ
 constexpr int REFRESH_SHOP_PRICE = 2;                                       // ЋҐ–¬…ћµкЋщ–иљр±“ эЅњ
 const std::map<int, int> UPLEVEL_PRICE = {                                  // …эЉґЋщ–иљр±“ эЅњ
     {BATTLE_AREA_MIN_CHAMPION_COUNT, 12},                                   // µ»Љґ 1 …эЉґ÷Ѕµ»Љґ 2 Ћщ–иљр±“ эЅњ

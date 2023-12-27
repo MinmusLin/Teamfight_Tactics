@@ -3,7 +3,8 @@
  * File Name:     Server.h
  * File Function: Server类的定义
  * Author:        林继申
- * Update Date:   2023/12/26
+ * Update Date:   2023/12/27
+ * License:       MIT License
  ****************************************************************/
 
 #pragma once
@@ -29,21 +30,31 @@ public:
     // 运行服务器
     void run();
 
+    // 友元函数声明
+    friend void clientHandler(SOCKET clientSocket, Server& server);
+
 private:
-    WSADATA wsaData;                    // Windows Sockets API
-    SOCKET serverSocket, clientSocket;  // 服务器和客户端的 socket
-    struct sockaddr_in server, client;  // 服务器和客户端的地址信息
-    char hostname[HOSTNAME_MAX_LENGHT]; // 主机名
-    struct hostent* host;               // 主机地址
-    int port;                           // 端口
-    int currentConnections;             // 服务器当前连接数量
-    std::vector<SOCKET> clients;        // 所有连接到服务器的客户端套接字
+    WSADATA wsaData;                                        // Windows Sockets API
+    SOCKET serverSocket, clientSocket;                      // 服务器和客户端的 socket
+    struct sockaddr_in server, client;                      // 服务器和客户端的地址信息
+    char hostname[HOSTNAME_MAX_LENGHT];                     // 主机名
+    struct hostent* host;                                   // 主机地址
+    int port;                                               // 端口
+    int currentConnections;                                 // 服务器当前连接数量
+    std::vector<SOCKET> clients;                            // 所有连接到服务器的客户端套接字
+    std::vector<std::map<SOCKET, std::string>> playerNames; // 所有连接到服务器的客户端玩家昵称
 
     // 创建和尝试绑定套接字
     void createAndBindSocket();
 
     // 监听和接受客户端的连接请求并进行处理
     void handleConnections();
+
+    // 检查所有玩家是否加入游戏
+    bool areAllReady();
+
+    // 所有连接到服务器的客户端套接字和玩家昵称
+    void outputClientsAndPlayerNames();
 };
 
 #endif // !_SERVER_H_

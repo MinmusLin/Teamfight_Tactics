@@ -2,8 +2,9 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     PlacementMarkerLayer.h
  * File Function: PlacementMarkerLayer类的定义
- * Author:        林继申
- * Update Date:   2023/12/23
+ * Author:        刘淑仪、林继申
+ * Update Date:   2023/12/27
+ * License:       MIT License
  ****************************************************************/
 
 #pragma once

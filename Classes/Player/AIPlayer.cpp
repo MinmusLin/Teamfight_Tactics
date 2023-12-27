@@ -4,6 +4,7 @@
  * File Function: AIPlayer类的实现
  * Author:        杨兆镇、林继申
  * Update Date:   2023/12/27
+ * License:       MIT License
  ****************************************************************/
 
 #include "AIPlayer.h"

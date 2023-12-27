@@ -3,7 +3,8 @@
  * File Name:     Server.cpp
  * File Function: Server类的实现
  * Author:        林继申
- * Update Date:   2023/12/26
+ * Update Date:   2023/12/27
+ * License:       MIT License
  ****************************************************************/
 
 #pragma comment(lib, "Ws2_32.lib")
@@ -12,17 +13,17 @@
 #include <chrono>
 #include <iomanip>
 #include <ctime>
+#include <cstring>
 #include "Server.h"
 
 /*
  * Function Name:    clientHandler
  * Function:         处理客户端连接
  * Input Parameters: SOCKET clientSocket: 客户端的套接字连接
- *                   std::vector<SOCKET>& clients: 存储所有客户端套接字的向量
- *                   int& currentConnections: 服务器当前连接数量
+ *                   Server& server: 服务器类
  * Return Value:     void
  */
-static void clientHandler(SOCKET clientSocket, std::vector<SOCKET>& clients, int& currentConnections)
+void clientHandler(SOCKET clientSocket, Server& server)
 {
     char buffer[BUFFER_SIZE]; // 定义缓冲区用于存储接收的数据
     int recvSize; // 用于存储接收到的数据长度
@@ -41,9 +42,28 @@ static void clientHandler(SOCKET clientSocket, std::vector<SOCKET>& clients, int
         // 输出客户端 ID 和接收到的消息
         std::cout << " [Client ID: " << clientSocket << "] Message: " << buffer << std::endl;
 
+        // 接受玩家姓名信息
+        if (!strncmp(buffer, "PlayerName", MESSAGE_IDENTIFIER_LENGTH)) {
+            char playerName[BUFFER_SIZE];
+            sscanf(buffer, PLAYER_NAME_FORMAT, playerName);
+            for (auto& map : server.playerNames) {
+                if (map.find(clientSocket) != map.end()) {
+                    map[clientSocket] = static_cast<std::string>(playerName);
+                    std::cout << "Receive from " << clientSocket << " : " << map[clientSocket] << std::endl;
+                    break;
+                }
+            }
+            if (server.areAllReady()) {
+                std::cout << "Broadcast: " << START_GAME_MSG << std::endl;
+                for (const SOCKET& sock : server.clients) {
+                    send(sock, START_GAME_MSG, strlen(START_GAME_MSG), 0);
+                }
+            }
+        }
+
         // 遍历所有客户端，将接收到的消息转发给其他客户端
         std::cout << "Broadcast: " << buffer << std::endl;
-        for (const SOCKET& sock : clients) {
+        for (const SOCKET& sock : server.clients) {
             send(sock, buffer, recvSize, 0);
         }
     }
@@ -58,22 +78,25 @@ static void clientHandler(SOCKET clientSocket, std::vector<SOCKET>& clients, int
 
     // 关闭与客户端的连接
     closesocket(clientSocket);
-    std::cout << "Current connections: " << --currentConnections << std::endl;
+    server.clients.erase(std::remove(server.clients.begin(), server.clients.end(), clientSocket), server.clients.end());
+    server.playerNames.erase(std::remove_if(server.playerNames.begin(), server.playerNames.end(), [clientSocket](const std::map<SOCKET, std::string>& m) {
+        return m.find(clientSocket) != m.end();
+        }), server.playerNames.end());
+    std::cout << "Current connections: " << --server.currentConnections << std::endl;
+    server.outputClientsAndPlayerNames();
 
     // 遍历所有客户端，将服务器当前连接数量转发给其他客户端
-    sprintf(buffer, CURRENT_CONNECTIONS_FORMAT, currentConnections);
+    sprintf(buffer, CURRENT_CONNECTIONS_FORMAT, server.currentConnections);
     std::cout << "Broadcast: " << buffer << std::endl;
-    for (const SOCKET& sock : clients) {
-        send(sock, buffer, CURRENT_CONNECTIONS_FORMAT_LENGTH, 0);
+    for (const SOCKET& sock : server.clients) {
+        send(sock, buffer, strlen(buffer), 0);
     }
 }
 
 // 构造函数
-Server::Server()
+Server::Server() :
+    currentConnections(0)
 {
-    // 初始化服务器当前连接数量
-    currentConnections = 0;
-
     // 初始化 Winsock
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
         std::cerr << "Function WSAStartupError failed with error: " << WSAGetLastError() << std::endl;
@@ -160,16 +183,18 @@ void Server::handleConnections()
                 std::cout << CONNECTION_ACCEPTED_MSG << std::endl;
                 send(clientSocket, CONNECTION_ACCEPTED_MSG, strlen(CONNECTION_ACCEPTED_MSG), 0);
                 clients.push_back(clientSocket);
-                std::thread clientThread(clientHandler, clientSocket, std::ref(clients), std::ref(currentConnections));
+                playerNames.push_back({ {clientSocket, ""} });
+                std::thread clientThread(clientHandler, clientSocket, std::ref(*this));
                 clientThread.detach();
                 std::cout << "Current connections: " << ++currentConnections << std::endl;
+                outputClientsAndPlayerNames();
 
                 // 遍历所有客户端，将服务器当前连接数量转发给其他客户端
                 char buffer[BUFFER_SIZE];
                 sprintf(buffer, CURRENT_CONNECTIONS_FORMAT, currentConnections);
                 std::cout << "Broadcast: " << buffer << std::endl;
                 for (const SOCKET& sock : clients) {
-                    send(sock, buffer, CURRENT_CONNECTIONS_FORMAT_LENGTH, 0);
+                    send(sock, buffer, strlen(buffer), 0);
                 }
             }
             else {
@@ -182,6 +207,44 @@ void Server::handleConnections()
         else {
             std::cerr << "Function accept failed with error: " << WSAGetLastError() << std::endl;
             break;
+        }
+    }
+}
+
+// 检查所有玩家是否加入游戏
+bool Server::areAllReady()
+{
+    for (const SOCKET& clientSocket : clients) {
+        bool nameFound = false;
+        for (const auto& map : playerNames) {
+            auto it = map.find(clientSocket);
+            if (it != map.end()) {
+                nameFound = true;
+                if (it->second == "") {
+                    return false;
+                }
+                break;
+            }
+        }
+        if (!nameFound) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// 所有连接到服务器的客户端套接字和玩家昵称
+void Server::outputClientsAndPlayerNames()
+{
+    std::cout << "Current Clients: ";
+    for (const SOCKET& clientSocket : clients) {
+        std::cout << clientSocket << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "Current Player Names: " << std::endl;
+    for (const auto& playerMap : playerNames) {
+        for (const auto& pair : playerMap) {
+            std::cout << "Socket: " << pair.first << " - Player Name: " << pair.second << std::endl;
         }
     }
 }

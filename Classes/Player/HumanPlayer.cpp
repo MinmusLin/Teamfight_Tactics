@@ -4,6 +4,7 @@
  * File Function: HumanPlayer类的实现
  * Author:        林继申
  * Update Date:   2023/12/27
+ * License:       MIT License
  ****************************************************************/
 
 #include <iostream>

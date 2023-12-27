@@ -2,8 +2,9 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     PlacementMarkerLayer.cpp
  * File Function: PlacementMarkerLayer类的实现
- * Author:        林继申
- * Update Date:   2023/12/24
+ * Author:        刘淑仪、林继申
+ * Update Date:   2023/12/27
+ * License:       MIT License
  ****************************************************************/
 
 #include "PlacementMarkerLayer.h"
