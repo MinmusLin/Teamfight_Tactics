@@ -34,11 +34,13 @@ constexpr int MAX_PORT_ADDRESS = 65535;                                     // ×
 constexpr int MAX_CONNECTIONS = 8;                                          // ×î´óÁ¬½ÓÊýÁ¿
 constexpr int BUFFER_SIZE = 256;                                            // »º³åÇø´óÐ¡
 constexpr int CONNECTION_TIMEOUT_DURATION = 2;                              // ·þÎñÆ÷Á¬½Ó³¬Ê±Ê±¼ä
-constexpr int CURRENT_CONNECTIONS_FORMAT_LENGTH = 20;                       // ·þÎñÆ÷µ±Ç°Á¬½ÓÊýÁ¿¸ñÊ½×Ö·û´®³¤¶È
+constexpr int MESSAGE_IDENTIFIER_LENGTH = 10;                               // ·þÎñÆ÷ÏûÏ¢±êÊ¶·û³¤¶È
 constexpr float SERVER_REFRESH_INTERVAL = 0.1f;                             // ¼àÌý·þÎñÆ÷Ë¢ÐÂÊ±¼ä¼ä¸ô
 constexpr char CONNECTION_REFUSED_MSG[] = "Connection refused.";            // ¾Ü¾øÁ¬½ÓÌáÊ¾ÐÅÏ¢
 constexpr char CONNECTION_ACCEPTED_MSG[] = "Connection accepted.";          // ½ÓÊÜÁ¬½ÓÌáÊ¾ÐÅÏ¢
-constexpr char CURRENT_CONNECTIONS_FORMAT[] = "CurrentConnections=%d";      // ·þÎñÆ÷µ±Ç°Á¬½ÓÊýÁ¿¸ñÊ½×Ö·û´®
+constexpr char START_GAME_MSG[] = "Start game.";                            // ¿ªÊ¼ÓÎÏ·ÌáÊ¾ÐÅÏ¢
+constexpr char CURRENT_CONNECTIONS_FORMAT[] = "Connection=%d";              // ·þÎñÆ÷µ±Ç°Á¬½ÓÊýÁ¿¸ñÊ½×Ö·û´®
+constexpr char PLAYER_NAME_FORMAT[] = "PlayerName=%s";                      // Íæ¼ÒÐÕÃû¸ñÊ½×Ö·û´®
 
 // ÑÕÉ«ÉèÖÃ
 constexpr int DARK_BLUE_R = 0;                                              // ÉîÀ¶É« R Í¨µÀ
@@ -115,6 +117,10 @@ constexpr int BATTLE_END_LABEL_OUTLINE_WIDTH = 4;                           // ¶
 constexpr int BATTLE_END_LABEL_SHADOW_OFFSET_X = 2;                         // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©ÒõÓ° X Æ«ÒÆÁ¿
 constexpr int BATTLE_END_LABEL_SHADOW_OFFSET_Y = -2;                        // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©ÒõÓ° Y Æ«ÒÆÁ¿
 constexpr int BATTLE_END_LABEL_BLUR_RADIUS = 3;                             // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©Ä£ºý°ë¾¶
+constexpr int INTERVAL_BETWEEN_WEAPON_AND_CHAMPION = 40;                    // ¶ÔÕ½³¡¾°Õ½¶·Ó¢ÐÛÓëÎäÆ÷¼ä¾à
+constexpr int WEAPON_ANIMATION_ROTATION_ANGLE = 60;                         // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ª½Ç¶È
+constexpr int WEAPON_ANIMATION_ROTATION_COUNT = 4;                          // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ª´ÎÊý
+constexpr float WEAPON_ANIMATION_ROTATION_DURATION = 0.15f;                 // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ªÊ±¼ä
 constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 10.0f;                   // ¶ÔÕ½³¡¾°×¼±¸Ê±¼ä
 constexpr float BATTLE_END_DURATION = 2.0f;                                 // ¶ÔÕ½½áÊøÍ£ÁôÊ±¼ä
 
