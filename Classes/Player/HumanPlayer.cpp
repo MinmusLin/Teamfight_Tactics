@@ -28,6 +28,7 @@ HumanPlayer::HumanPlayer(const std::string nickname) :
     championAttributesLayer(nullptr),
     placementMarkerLayer(nullptr),
     nearestPlacementMarker(nullptr),
+    startLocation({ WaitingArea, -1 }),
     maxBattleChampionCount(BATTLE_AREA_MIN_CHAMPION_COUNT),
     goldCoin(INITIAL_GOLD_COIN)
 {

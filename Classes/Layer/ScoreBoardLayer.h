@@ -3,7 +3,7 @@
  * File Name:     ScoreBoardLayer.h
  * File Function: ScoreBoardLayer类的定义
  * Author:        刘淑仪、林继申
- * Update Date:   2023/12/25
+ * Update Date:   2023/12/27
  ****************************************************************/
 
 #pragma once
@@ -39,8 +39,8 @@ public:
     CREATE_FUNC(ScoreBoardLayer);
 
 private:
-    cocos2d::Label** playerNames;  // 玩家昵称标签指针
-    cocos2d::Label** healthPoints; // 玩家生命值标签指针
+    cocos2d::Label** playerNames = nullptr;  // 玩家昵称标签指针
+    cocos2d::Label** healthPoints = nullptr; // 玩家生命值标签指针
 };
 
 #endif // !_SCORE_BOARD_LAYER_H_

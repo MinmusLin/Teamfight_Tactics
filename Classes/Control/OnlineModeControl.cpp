@@ -3,7 +3,7 @@
  * File Name:     OnlineModeControl.cpp
  * File Function: OnlineModeControl类的实现
  * Author:        林继申
- * Update Date:   2023/12/26
+ * Update Date:   2023/12/27
  ****************************************************************/
 
 #pragma comment(lib, "Ws2_32.lib")
@@ -15,8 +15,11 @@
 // 构造函数
 OnlineModeControl::OnlineModeControl(std::string ipv4, std::string portStr) :
     port(std::stoi(portStr)),
+    recvSize(0),
+    currentConnections(0),
     Control(0) // TODO: Control(0) 初始化
 {
+    strcpy(this->message, "");
     strcpy(this->ipv4, ipv4.c_str());
 }
 
