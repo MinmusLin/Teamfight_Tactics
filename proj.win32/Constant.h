@@ -3,7 +3,7 @@
  * File Name:     Constant.h
  * File Function: ³£±äÁ¿µÄ¶¨Òå
  * Author:        ÁÖ¼ÌÉê¡¢ÁõÊçÒÇ¡¢ÑîÕ×Õò¡¢ÑîÓîçû
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -96,7 +96,7 @@ constexpr int BATTLE_SCENE_LOADINGBAR_X = 213;                              // ¶
 constexpr int BATTLE_SCENE_LOADINGBAR_Y = 669;                              // ¶ÔÕ½³¡¾°×¼±¸½ø¶ÈÌõÎ»ÖÃ Y ×ø±ê
 constexpr int BATTLE_SCENE_LOADINGBAR_LABEL_FONT_SIZE = 20;                 // ¶ÔÕ½³¡¾°×¼±¸½ø¶ÈÌõ±êÇ©×ÖÌå´óÐ¡
 constexpr int BATTLE_SCENE_LOADINGBAR_LABEL_OFFSET_X = -18;                 // ¶ÔÕ½³¡¾°×¼±¸½ø¶ÈÌõ±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
-constexpr int BATTLE_SCENE_LOADINGBAR_LABEL_THRESHOLD = 10;                 // ¶ÔÕ½³¡¾°×¼±¸Ê±¼äÏÔÊ¾ãÐÖµ
+constexpr int BATTLE_SCENE_LOADINGBAR_LABEL_THRESHOLD = 20;                 // ¶ÔÕ½³¡¾°×¼±¸Ê±¼äÏÔÊ¾ãÐÖµ
 constexpr int BATTLE_SCENE_RETURN_MENU_BUTTON_OFFSET_X = 522;               // ¶ÔÕ½³¡¾°·µ»Ø²Ëµ¥°´Å¥Î»ÖÃ X Æ«ÒÆÁ¿
 constexpr int BATTLE_SCENE_RETURN_MENU_BUTTON_OFFSET_Y = -294;              // ¶ÔÕ½³¡¾°·µ»Ø²Ëµ¥°´Å¥Î»ÖÃ Y Æ«ÒÆÁ¿
 constexpr int BATTLE_SCENE_DELETE_CHAMPION_BUTTON_START_X = 118;            // ¶ÔÕ½³¡¾°Õ½¶·Ó¢ÐÛÉ¾³ý°´Å¥Î»ÖÃ X ×ø±ê
@@ -124,7 +124,7 @@ constexpr int INTERVAL_BETWEEN_WEAPON_AND_CHAMPION = 40;                    // ¶
 constexpr int WEAPON_ANIMATION_ROTATION_ANGLE = 60;                         // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ª½Ç¶È
 constexpr int WEAPON_ANIMATION_ROTATION_COUNT = 4;                          // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ª´ÎÊý
 constexpr float WEAPON_ANIMATION_ROTATION_DURATION = 0.15f;                 // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ªÊ±¼ä
-constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 10.0f;                   // ¶ÔÕ½³¡¾°×¼±¸Ê±¼ä
+constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 30.0f;                   // ¶ÔÕ½³¡¾°×¼±¸Ê±¼ä
 constexpr float BATTLE_END_DURATION = 2.0f;                                 // ¶ÔÕ½½áÊøÍ£ÁôÊ±¼ä
 
 // ÉÌµêÉèÖÃ
@@ -203,6 +203,16 @@ constexpr int DEFENSE_SCORE_COEFFICIENT = 200;                              // ·
 constexpr int ATTACK_SCORE_COEFFICIENT = 30;                                // ¹¥»÷·ÖÊýÏµÊý
 constexpr int SPEED_SCORE_COEFFICIENT = 1;                                  // ËÙ¶È·ÖÊýÏµÊý
 constexpr int STAGE_SCORE_THRESHOLDS_COUNT = 6;                             // Õ½¶·½×¶Î»®·Ö¸öÊý
+constexpr int SKILL_ATTACK_DAMAGE_UP = 50;                                  // ¼¼ÄÜ¹¥»÷ÉËº¦Éý¼¶
+constexpr int ATTACK_RANGE_THRESHOLD = 1;                                   // ¹¥»÷·¶Î§ãÐÖµ
+constexpr int ATTACK_DAMAGE_MAGNIFICATION_HIGH = 5;                         // ¹¥»÷ÉËº¦¸ß±¶ÂÊ
+constexpr int ATTACK_DAMAGE_MAGNIFICATION_MIDDLE = 3;                       // ¹¥»÷ÉËº¦ÖÐ±¶ÂÊ
+constexpr int ATTACK_DAMAGE_MAGNIFICATION_LOW = 2;                          // ¹¥»÷ÉËº¦µÍ±¶ÂÊ
+constexpr int DEPLOY_CHAMPIONS_MAX_COUNT = 2;                               // ²¿ÊðÕ½¶·Ó¢ÐÛ³õÊ¼ÊýÁ¿
+constexpr float SKILL_DEFENSE_COEFFICIENT_UP = 1.0f;                        // ¼¼ÄÜ·ÀÓùÏµÊýÉý¼¶
+constexpr float SKILL_ATTACK_SPEED_UP = 2.0f;                               // ¼¼ÄÜ¹¥»÷ËÙ¶ÈÉý¼¶
+constexpr float DEFENSE_COEFFICIENT_THRESHOLD_HIGH = 1.5f;                  // ·ÀÓùÏµÊý¸ßãÐÖµ
+constexpr float DEFENSE_COEFFICIENT_THRESHOLD_LOW = 1.4f;                   // ·ÀÓùÏµÊýµÍãÐÖµ
 constexpr double DEFENSE_SCORE_WEIGHT = 2.0;                                // Õ½¶·Ó¢ÐÛÖ°ÒµÆ«ºÃ·ÀÓù·ÖÊýÈ¨ÖØ
 constexpr double ATTACK_SCORE_WEIGHT = 2.5;                                 // Õ½¶·Ó¢ÐÛÖ°ÒµÆ«ºÃ¹¥»÷·ÖÊýÈ¨ÖØ
 constexpr double SPEED_SCORE_WEIGHT = 1.0;                                  // Õ½¶·Ó¢ÐÛÖ°ÒµÆ«ºÃËÙ¶È·ÖÊýÈ¨ÖØ
@@ -212,9 +222,6 @@ constexpr int STAGE_WITH_RATE_OF_CHAMPIONS[3][5] = {                        // ¸
     {5, 4, 3, 2, 1},                                                        // ÖÐÆÚÕ½¶·½×¶ÎÕ½¶·Ó¢ÐÛÑ¡Ôñ¸ÅÂÊ
     {4, 5, 2, 2, 2},                                                        // ºóÆÚÕ½¶·½×¶ÎÕ½¶·Ó¢ÐÛÑ¡Ôñ¸ÅÂÊ
 };
-constexpr int SKILL_DAMAGE_UP = 50;
-constexpr float SKILL_DEFENSECOEFFICIENT_UP = 1.0f;
-constexpr float SKILL_ATTACKSPEED_UP = 2.0f;
 
 // ÍøÂçÁ¬½Ó×´Ì¬¶¨Òå
 enum ConnectionStatus {
@@ -226,64 +233,64 @@ enum ConnectionStatus {
 
 // Á·Ï°Ä£Ê½ÄÑ¶È¶¨Òå
 enum Difficulty {
-    Easy,   // ¼òµ¥Ä£Ê½
-    Normal, // Õý³£Ä£Ê½
-    Hard    // À§ÄÑÄ£Ê½
+    Easy,               // ¼òµ¥Ä£Ê½
+    Normal,             // Õý³£Ä£Ê½
+    Hard                // À§ÄÑÄ£Ê½
 };
 
 // Î»ÖÃ×´Ì¬¶¨Òå
 enum LocationStatus {
-    WaitingArea, // ºòÕ½Çø
-    BattleArea   // Õ½¶·Çø
+    WaitingArea,        // ºòÕ½Çø
+    BattleArea          // Õ½¶·Çø
 };
 
 // Õ½¶·Ê¤¸º×´Ì¬¶¨Òå
 enum BattleSituation {
-    Lose, // Ê§°Ü
-    Draw, // Æ½¾Ö
-    Win   // Ê¤Àû
+    Lose,               // Ê§°Ü
+    Draw,               // Æ½¾Ö
+    Win                 // Ê¤Àû
 };
 
 // Õ½¶·½×¶Î×´Ì¬¶¨Òå
 enum BattleStage {
-    EarlyStage,  // Ç°ÆÚÕ½¶·½×¶Î
-    MiddleStage, // ÖÐÆÚÕ½¶·½×¶Î
-    LateStage    // ºóÆÚÕ½¶·½×¶Î
+    EarlyStage,         // Ç°ÆÚÕ½¶·½×¶Î
+    MiddleStage,        // ÖÐÆÚÕ½¶·½×¶Î
+    LateStage           // ºóÆÚÕ½¶·½×¶Î
 };
 
 // Õ½¶·Ó¢ÐÛÖÖÀà¶¨Òå
 enum ChampionCategory {
-    NoChampion, // ÎÞÕ½¶·Ó¢ÐÛ
-    Champion1,  // ½Ù£¨Ò»ÐÇ£©
-    Champion2,  // ½Ù£¨¶þÐÇ£©
-    Champion3,  // ÓÀ¶÷£¨Ò»ÐÇ£©
-    Champion4,  // ÓÀ¶÷£¨¶þÐÇ£©
-    Champion5,  // °ÂÀ­·ò£¨Ò»ÐÇ£©
-    Champion6,  // °ÂÀ­·ò£¨¶þÐÇ£©
-    Champion7,  // ÅËÉ­£¨Ò»ÐÇ£©
-    Champion8,  // ÅËÉ­£¨¶þÐÇ£©
-    Champion9,  // ÒÁÜ½ÁÕ£¨Ò»ÐÇ£©
-    Champion10, // ÒÁÜ½ÁÕ£¨¶þÐÇ£©
-    Champion11, // ¿âÆæ£¨Ò»ÐÇ£©
-    Champion12, // ¿âÆæ£¨¶þÐÇ£©
-    Champion13, // ËþÀï¿Ë£¨Ò»ÐÇ£©
-    Champion14, // ËþÀï¿Ë£¨¶þÐÇ£©
-    Champion15, // ÑÇË÷£¨Ò»ÐÇ£©
-    Champion16, // ÑÇË÷£¨¶þÐÇ£©
-    Champion17, // ½ð¿ËË¿£¨Ò»ÐÇ£©
-    Champion18, // ½ð¿ËË¿£¨¶þÐÇ£©
-    Champion19, // ËþÄ·£¨Ò»ÐÇ£©
-    Champion20, // ËþÄ·£¨¶þÐÇ£©
-    Champion21, // Îµ£¨Ò»ÐÇ£©
-    Champion22, // Îµ£¨¶þÐÇ£©
-    Champion23, // °¢Ä¾Ä¾£¨Ò»ÐÇ£©
-    Champion24, // °¢Ä¾Ä¾£¨¶þÐÇ£©
-    Champion25, // ¿üÉ£Ìá£¨Ò»ÐÇ£©
-    Champion26, // ¿üÉ£Ìá£¨¶þÐÇ£©
-    Champion27, // ¿¨¶ûÈøË¹£¨Ò»ÐÇ£©
-    Champion28, // ¿¨¶ûÈøË¹£¨¶þÐÇ£©
-    Champion29, // ¿¨É¯£¨Ò»ÐÇ£©
-    Champion30  // ¿¨É¯£¨¶þÐÇ£©
+    NoChampion,         // ÎÞÕ½¶·Ó¢ÐÛ
+    Champion1,          // ½Ù£¨Ò»ÐÇ£©
+    Champion2,          // ½Ù£¨¶þÐÇ£©
+    Champion3,          // ÓÀ¶÷£¨Ò»ÐÇ£©
+    Champion4,          // ÓÀ¶÷£¨¶þÐÇ£©
+    Champion5,          // °ÂÀ­·ò£¨Ò»ÐÇ£©
+    Champion6,          // °ÂÀ­·ò£¨¶þÐÇ£©
+    Champion7,          // ÅËÉ­£¨Ò»ÐÇ£©
+    Champion8,          // ÅËÉ­£¨¶þÐÇ£©
+    Champion9,          // ÒÁÜ½ÁÕ£¨Ò»ÐÇ£©
+    Champion10,         // ÒÁÜ½ÁÕ£¨¶þÐÇ£©
+    Champion11,         // ¿âÆæ£¨Ò»ÐÇ£©
+    Champion12,         // ¿âÆæ£¨¶þÐÇ£©
+    Champion13,         // ËþÀï¿Ë£¨Ò»ÐÇ£©
+    Champion14,         // ËþÀï¿Ë£¨¶þÐÇ£©
+    Champion15,         // ÑÇË÷£¨Ò»ÐÇ£©
+    Champion16,         // ÑÇË÷£¨¶þÐÇ£©
+    Champion17,         // ½ð¿ËË¿£¨Ò»ÐÇ£©
+    Champion18,         // ½ð¿ËË¿£¨¶þÐÇ£©
+    Champion19,         // ËþÄ·£¨Ò»ÐÇ£©
+    Champion20,         // ËþÄ·£¨¶þÐÇ£©
+    Champion21,         // Îµ£¨Ò»ÐÇ£©
+    Champion22,         // Îµ£¨¶þÐÇ£©
+    Champion23,         // °¢Ä¾Ä¾£¨Ò»ÐÇ£©
+    Champion24,         // °¢Ä¾Ä¾£¨¶þÐÇ£©
+    Champion25,         // ¿üÉ£Ìá£¨Ò»ÐÇ£©
+    Champion26,         // ¿üÉ£Ìá£¨¶þÐÇ£©
+    Champion27,         // ¿¨¶ûÈøË¹£¨Ò»ÐÇ£©
+    Champion28,         // ¿¨¶ûÈøË¹£¨¶þÐÇ£©
+    Champion29,         // ¿¨É¯£¨Ò»ÐÇ£©
+    Champion30          // ¿¨É¯£¨¶þÐÇ£©
 };
 
 // Î»ÖÃÊôÐÔ¶¨Òå
@@ -291,23 +298,27 @@ struct Location {
     LocationStatus status;                        // Î»ÖÃ×´Ì¬
     int position;                                 // Î»ÖÃ×ø±ê
     bool operator<(const Location& other) const { // ÖØÔØÔËËã·û < ÓÃÓÚ std::map
-        if (status < other.status) return true;
-        if (status > other.status) return false;
+        if (status < other.status) {
+            return true;
+        }
+        if (status > other.status) {
+            return false;
+        }
         return position < other.position;
     }
 };
 
 // Õ½¶·Ó¢ÐÛÖ°ÒµÆ«ºÃ¶¨Òå
 typedef struct {
-    double defenseScore; // ·ÀÓù·ÖÊý
-    double attackScore;  // ¹¥»÷·ÖÊý
-    double speedScore;   // ËÙ¶È·ÖÊý
+    double defenseScore;               // ·ÀÓù·ÖÊý
+    double attackScore;                // ¹¥»÷·ÖÊý
+    double speedScore;                 // ËÙ¶È·ÖÊý
 } ProfessionPreference;
 
 // Õ½¶·Î»ÖÃÊôÐÔ¶¨Òå
 typedef struct {
-    int x; // X ×ø±ê
-    int y; // Y ×ø±ê
+    int x;                             // X ×ø±ê
+    int y;                             // Y ×ø±ê
 } BattleLocation;
 
 // Õ½¶·Ó¢ÐÛÊôÐÔ¶¨Òå

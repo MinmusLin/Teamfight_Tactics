@@ -3,7 +3,7 @@
  * File Name:     AIPlayer.cpp
  * File Function: AIPlayer类的实现
  * Author:        杨兆镇、林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -111,12 +111,17 @@ void AIPlayer::optimizeChampionCollection()
     }
 }
 
-// 部署候战区战斗英雄（简单模式）
-std::vector<ChampionCategory> AIPlayer::easyDeployChampions(const int maxChampions)
+// 部署候战区战斗英雄（简单模式与困难模式）
+std::vector<ChampionCategory> AIPlayer::deployChampions(const int maxChampions, Difficulty difficulty)
 {
     // 基于优先队列排序战斗英雄
-    auto comp = [this](ChampionCategory a, ChampionCategory b) {
-        return calculateChampionScore(a) < calculateChampionScore(b);
+    auto comp = [this, difficulty](ChampionCategory a, ChampionCategory b) {
+        if (difficulty == Hard) {
+            return calculateChampionScore(a) > calculateChampionScore(b); // 困难模式
+        }
+        else {
+            return calculateChampionScore(a) < calculateChampionScore(b); // 简单模式
+        }
         };
     std::priority_queue<ChampionCategory, std::vector<ChampionCategory>, decltype(comp)> orderedChampions(comp);
     for (const auto& entry : champions) {
@@ -141,7 +146,7 @@ std::vector<ChampionCategory> AIPlayer::easyDeployChampions(const int maxChampio
 }
 
 // 部署候战区战斗英雄（正常模式）
-std::vector<ChampionCategory> AIPlayer::normalDeployChampions(const int maxChampions)
+std::vector<ChampionCategory> AIPlayer::deployChampions(const int maxChampions)
 {
     // 获取当前全部战斗英雄
     std::vector<ChampionCategory> allChampions;
@@ -171,36 +176,7 @@ std::vector<ChampionCategory> AIPlayer::normalDeployChampions(const int maxChamp
     return selectedChampions;
 }
 
-// 部署候战区战斗英雄（困难模式）
-std::vector<ChampionCategory> AIPlayer::hardDeployChampions(const int maxChampions)
-{
-    // 基于优先队列排序战斗英雄
-    auto comp = [this](ChampionCategory a, ChampionCategory b) {
-        return calculateChampionScore(a) > calculateChampionScore(b);
-        };
-    std::priority_queue<ChampionCategory, std::vector<ChampionCategory>, decltype(comp)> orderedChampions(comp);
-    for (const auto& entry : champions) {
-        for (int i = 0; i < entry.second; i++) {
-            orderedChampions.push(entry.first);
-        }
-    }
-
-    // 选择战斗英雄
-    std::vector<ChampionCategory> selectedChampions;
-    for (int i = 0; i < maxChampions && !orderedChampions.empty(); i++) {
-        selectedChampions.push_back(orderedChampions.top());
-        orderedChampions.pop();
-    }
-
-    // 部署候战区战斗英雄
-    for (int i = 0; i < WAITING_MAP_COUNT && !orderedChampions.empty(); i++) {
-        waitingMap[i] = orderedChampions.top();
-        orderedChampions.pop();
-    }
-    return selectedChampions;
-}
-
-// 部署战斗区英雄
+// 部署战斗英雄
 void AIPlayer::deployChampions()
 {
     // 初始化地图
@@ -210,7 +186,7 @@ void AIPlayer::deployChampions()
     std::fill_n(waitingMap, WAITING_MAP_COUNT, NoChampion);
 
     // 计算最大战斗英雄数量
-    int maxChampions = 2;
+    int maxChampions = DEPLOY_CHAMPIONS_MAX_COUNT;
     const int currentStageScore = getStageScore();
     for (int i = 0; i < STAGE_SCORE_THRESHOLDS_COUNT; i++) {
         if (currentStageScore >= STAGE_SCORE_THRESHOLDS[i]) {
@@ -222,8 +198,13 @@ void AIPlayer::deployChampions()
     }
 
     // 选择战斗英雄
-    std::vector<ChampionCategory> selectedChampions = (difficulty == Normal ? normalDeployChampions(maxChampions)
-        : (difficulty == Easy ? easyDeployChampions(maxChampions) : hardDeployChampions(maxChampions)));
+    std::vector<ChampionCategory> selectedChampions;
+    if (difficulty == Normal) {
+        selectedChampions = deployChampions(maxChampions);
+    }
+    else {
+        selectedChampions = deployChampions(maxChampions, difficulty);
+    }
 
     // 部署战斗区战斗英雄
     switch (selectedChampions.size()) {

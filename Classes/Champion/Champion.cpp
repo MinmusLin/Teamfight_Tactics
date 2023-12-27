@@ -3,7 +3,7 @@
  * File Name:     Champion.cpp
  * File Function: Champion类的实现
  * Author:        杨宇琨、刘淑仪、林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -496,139 +496,46 @@ void Champion::attack()
         auto sequenceAction = cocos2d::Sequence::create(rotateToAction, rotateBackToAction, nullptr);
         auto repeatAction = cocos2d::Repeat::create(sequenceAction, WEAPON_ANIMATION_ROTATION_COUNT); // 假设重复 4 次
         sword->runAction(repeatAction);
-
     }
 }
 
 // 技能
 void Champion::skill()
 {
-    if (attributes.price == 5) {
-        for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
-            for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                if (currentBattle->getChampion(i, j) != nullptr) {
-                    // 在射程 + 1 范围内所有敌方战斗英雄受到一次攻击
-                    if (currentBattle->getChampion(i, j)->isMyFlag != isMyFlag && distanceBetweenPoints(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }),
-                        LocationMap::getInstance().getLocationMap().at({ BattleArea, currentLocation.x * BATTLE_MAP_COLUMNS + currentLocation.y })) <= attributes.attackRange * CHAMPION_HORIZONTAL_INTERVAL + 1) {
-                        currentBattle->getChampion(i, j)->beingAttack(attributes.attackDamage * 5);
-                    }
-                    else {
-                        continue;
-                    }
-                }
-                else {
-                    continue;
-                }
-            }
-        }
+    if (attributes.price == CHAMPION_ATTR_MAP.at(FIFTH_LEVEL[1]).price) {
+        triggerSkill(ATTACK_DAMAGE_MAGNIFICATION_HIGH);
     }
-    else if (attributes.price == 4) {
+    else if (attributes.price == CHAMPION_ATTR_MAP.at(FOURTH_LEVEL[1]).price) {
         if (attributes.championCategory == Champion25 || attributes.championCategory == Champion26) {
-            attributes.attackDamage += SKILL_DAMAGE_UP;
-            attributes.defenseCoefficient += SKILL_DEFENSECOEFFICIENT_UP;
+            attributes.attackDamage += SKILL_ATTACK_DAMAGE_UP;
+            attributes.defenseCoefficient += SKILL_DEFENSE_COEFFICIENT_UP;
         }
         else {
-            for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
-                for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                    if (currentBattle->getChampion(i, j) != nullptr) {
-                        // 在射程 + 1 范围内所有敌方战斗英雄受到一次攻击
-                        if (currentBattle->getChampion(i, j)->isMyFlag != isMyFlag) {
-                            currentBattle->getChampion(i, j)->beingAttack(attributes.attackDamage * 3);
-                        }
-                        else {
-                            continue;
-                        }
-                    }
-                    else {
-                        continue;
-                    }
-                }
-            }
-            
+            triggerSkill(ATTACK_DAMAGE_MAGNIFICATION_MIDDLE, false);
         }
     }
-    else if (attributes.price == 3) {
-        if (attributes.attackRange > 1) {
-            attributes.attackDamage += SKILL_DAMAGE_UP;
-            attributes.attackSpeed += SKILL_ATTACKSPEED_UP;
+    else if (attributes.price == CHAMPION_ATTR_MAP.at(SECOND_LEVEL[1]).price || attributes.price == CHAMPION_ATTR_MAP.at(THIRD_LEVEL[1]).price) {
+        if (attributes.attackRange > ATTACK_RANGE_THRESHOLD) {
+            attributes.attackDamage += SKILL_ATTACK_DAMAGE_UP;
+            attributes.attackSpeed += SKILL_ATTACK_SPEED_UP;
         }
-        else if (attributes.defenseCoefficient >= 1.5f) {
-            attributes.defenseCoefficient += SKILL_DEFENSECOEFFICIENT_UP;
+        else if (attributes.defenseCoefficient >= DEFENSE_COEFFICIENT_THRESHOLD_HIGH) {
+            attributes.defenseCoefficient += SKILL_DEFENSE_COEFFICIENT_UP;
         }
         else {
-            for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
-                for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                    if (currentBattle->getChampion(i, j) != nullptr) {
-                        // 在射程 + 1 范围内所有敌方战斗英雄受到一次攻击
-                        if (currentBattle->getChampion(i, j)->isMyFlag != isMyFlag && distanceBetweenPoints(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }),
-                            LocationMap::getInstance().getLocationMap().at({ BattleArea, currentLocation.x * BATTLE_MAP_COLUMNS + currentLocation.y })) <= attributes.attackRange * CHAMPION_HORIZONTAL_INTERVAL + 1) {
-                            currentBattle->getChampion(i, j)->beingAttack(attributes.attackDamage * 2);
-                        }
-                        else {
-                            continue;
-                        }
-                    }
-                    else {
-                        continue;
-                    }
-                }
-            }
+            triggerSkill(ATTACK_DAMAGE_MAGNIFICATION_LOW);
         }
     }
-    else if (attributes.price == 2) {
-        if (attributes.attackRange > 1) {
-            attributes.attackDamage += SKILL_DAMAGE_UP;
-            attributes.attackSpeed += SKILL_ATTACKSPEED_UP;
+    else if (attributes.price == CHAMPION_ATTR_MAP.at(FIRST_LEVEL[1]).price) {
+        if (attributes.attackRange > ATTACK_RANGE_THRESHOLD) {
+            attributes.attackDamage += SKILL_ATTACK_DAMAGE_UP;
+            attributes.attackSpeed += SKILL_ATTACK_SPEED_UP;
         }
-        else if (attributes.defenseCoefficient >= 1.5f) {
-            attributes.defenseCoefficient += SKILL_DEFENSECOEFFICIENT_UP;
-        }
-        else {
-            for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
-                for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                    if (currentBattle->getChampion(i, j) != nullptr) {
-                        // 在射程 + 1 范围内所有敌方战斗英雄受到一次攻击
-                        if (currentBattle->getChampion(i, j)->isMyFlag != isMyFlag && distanceBetweenPoints(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }),
-                            LocationMap::getInstance().getLocationMap().at({ BattleArea, currentLocation.x * BATTLE_MAP_COLUMNS + currentLocation.y })) <= attributes.attackRange * CHAMPION_HORIZONTAL_INTERVAL + 1) {
-                            currentBattle->getChampion(i, j)->beingAttack(attributes.attackDamage * 2);
-                        }
-                        else {
-                            continue;
-                        }
-                    }
-                    else {
-                        continue;
-                    }
-                }
-            }
-        }
-    }
-    else if (attributes.price == 1) {
-        if (attributes.attackRange > 1) {
-            attributes.attackDamage += SKILL_DAMAGE_UP;
-            attributes.attackSpeed += SKILL_ATTACKSPEED_UP;
-        }
-        else if (attributes.defenseCoefficient >= 1.4f) {
-            attributes.defenseCoefficient += SKILL_DEFENSECOEFFICIENT_UP;
+        else if (attributes.defenseCoefficient >= DEFENSE_COEFFICIENT_THRESHOLD_LOW) {
+            attributes.defenseCoefficient += SKILL_DEFENSE_COEFFICIENT_UP;
         }
         else {
-            for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
-                for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                    if (currentBattle->getChampion(i, j) != nullptr) {
-                        // 在射程 + 1 范围内所有敌方战斗英雄受到一次攻击
-                        if (currentBattle->getChampion(i, j)->isMyFlag != isMyFlag && distanceBetweenPoints(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }),
-                            LocationMap::getInstance().getLocationMap().at({ BattleArea, currentLocation.x * BATTLE_MAP_COLUMNS + currentLocation.y })) <= attributes.attackRange * CHAMPION_HORIZONTAL_INTERVAL + 1) {
-                            currentBattle->getChampion(i, j)->beingAttack(attributes.attackDamage * 2);
-                        }
-                        else {
-                            continue;
-                        }
-                    }
-                    else {
-                        continue;
-                    }
-                }
-            }
+            triggerSkill(ATTACK_DAMAGE_MAGNIFICATION_LOW);
         }
     }
     attributes.magicPoints = 0;
@@ -726,4 +633,27 @@ void Champion::beingAttack(const int& damage)
 float Champion::distanceBetweenPoints(const cocos2d::Vec2& a, const cocos2d::Vec2& b)
 {
     return a.distance(b);
+}
+
+// 触发技能
+void Champion::triggerSkill(const int magnification, bool isCondition)
+{
+    for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
+        for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+            if (currentBattle->getChampion(i, j) != nullptr) {
+                // 在射程 + 1 范围内所有敌方战斗英雄受到一次攻击
+                if (currentBattle->getChampion(i, j)->isMyFlag != isMyFlag
+                    && (isCondition ? (distanceBetweenPoints(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }),
+                        LocationMap::getInstance().getLocationMap().at({ BattleArea, currentLocation.x * BATTLE_MAP_COLUMNS + currentLocation.y })) <= attributes.attackRange * CHAMPION_HORIZONTAL_INTERVAL + 1) : true)) {
+                    currentBattle->getChampion(i, j)->beingAttack(attributes.attackDamage * magnification);
+                }
+                else {
+                    continue;
+                }
+            }
+            else {
+                continue;
+            }
+        }
+    }
 }

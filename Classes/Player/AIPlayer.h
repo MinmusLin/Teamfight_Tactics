@@ -3,7 +3,7 @@
  * File Name:     AIPlayer.h
  * File Function: AIPlayer类的定义
  * Author:        杨兆镇、林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -53,14 +53,11 @@ private:
     // 优化战斗英雄队伍配置
     void optimizeChampionCollection();
 
-    // 部署候战区战斗英雄（简单模式）
-    std::vector<ChampionCategory> easyDeployChampions(const int maxChampions);
+    // 部署候战区战斗英雄（简单模式与困难模式）
+    std::vector<ChampionCategory> deployChampions(const int maxChampions, Difficulty difficulty);
 
     // 部署候战区战斗英雄（正常模式）
-    std::vector<ChampionCategory> normalDeployChampions(const int maxChampions);
-
-    // 部署候战区战斗英雄（困难模式）
-    std::vector<ChampionCategory> hardDeployChampions(const int maxChampions);
+    std::vector<ChampionCategory> deployChampions(const int maxChampions);
 
     // 部署战斗英雄
     void deployChampions();

@@ -3,7 +3,7 @@
  * File Name:     Champion.h
  * File Function: Champion类的定义
  * Author:        杨宇琨、刘淑仪、林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -183,6 +183,9 @@ private:
 
     // 计算两点间距离
     float distanceBetweenPoints(const cocos2d::Vec2& a, const cocos2d::Vec2& b);
+
+    // 触发技能
+    void triggerSkill(const int magnification, bool isCondition = true);
 };
 
 #endif // !_CHAMPION_H_
