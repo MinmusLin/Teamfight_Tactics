@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include "OnlineModeMenuScene.h"
+#include "Scene/OnlineModePreparationScene.h"
 #include "Control/OnlineModeControl.h"
 #include "Button/HoverButton.h"
 #include "MenuScene.h"
@@ -173,7 +174,6 @@ bool OnlineModeMenuScene::init()
                         memset(buffer, 0, sizeof(buffer));
                         int recvSize = recv(g_onlineModeControl->getSocket(), buffer, BUFFER_SIZE, 0);
                         if (recvSize > 0) {
-                            //this->unschedule("ServerMessageListener"); // 关闭服务器消息监听
                             buffer[recvSize] = '\0';
                             if (!strncmp(buffer, "Connection", MESSAGE_IDENTIFIER_LENGTH)) {
                                 int currentConnections;
@@ -183,11 +183,12 @@ bool OnlineModeMenuScene::init()
                                 g_onlineModeControl->setCurrentConnections(currentConnections);
                             }
                             if (!strncmp(buffer, "Start game", MESSAGE_IDENTIFIER_LENGTH)) {
-                                exit(0);
+                                this->unschedule("ServerMessageListener"); // 关闭服务器消息监听
+                                cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, OnlineModePreparationScene::createScene(), cocos2d::Color3B::WHITE));
                             }
                         }
                         }, SERVER_REFRESH_INTERVAL, "ServerMessageListener");
-                } // TODO: 这一分支的 delete 没处理
+                }
             }
         }
         });
