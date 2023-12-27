@@ -3,7 +3,7 @@
  * File Name:     OfflineModeBattleScene.cpp
  * File Function: OfflineModeBattleScene类的实现
  * Author:        杨宇琨、刘淑仪、林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -184,7 +184,7 @@ void OfflineModeBattleScene::update(float delta)
             cocos2d::Size shadowOffset(BATTLE_END_LABEL_SHADOW_OFFSET_X, BATTLE_END_LABEL_SHADOW_OFFSET_Y);
             winningLabel->enableShadow(cocos2d::Color4B::GRAY, shadowOffset, BATTLE_END_LABEL_BLUR_RADIUS);
             winningLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + BATTLE_END_LABEL_OFFSET_Y));
-            this->addChild(winningLabel);
+            this->addChild(winningLabel, 2);
         }
 
         // 释放练习模式对战场景
