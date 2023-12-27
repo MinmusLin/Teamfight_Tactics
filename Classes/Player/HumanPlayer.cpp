@@ -3,7 +3,7 @@
  * File Name:     HumanPlayer.cpp
  * File Function: HumanPlayer类的实现
  * Author:        林继申
- * Update Date:   2023/12/25
+ * Update Date:   2023/12/27
  ****************************************************************/
 
 #include <iostream>
@@ -12,7 +12,7 @@
 #include "LocationMap/LocationMap.h"
 #include "GBKToUTF8/GBKToUTF8.h"
 
- // 命名空间
+// 命名空间
 using cocos2d::Scene;
 using cocos2d::Sprite;
 using cocos2d::Label;
@@ -33,7 +33,7 @@ HumanPlayer::HumanPlayer(const std::string nickname) :
 {
     std::fill_n(shopChampionCategory, MAX_SELECTABLE_CHAMPION_COUNT, NoChampion);
     std::fill_n(shopChampionButton, MAX_SELECTABLE_CHAMPION_COUNT, nullptr);
-    for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
+    for (int i = 0; i < PLACE_MAP_ROWS; i++) {
         std::fill_n(battleChampion[i], BATTLE_MAP_COLUMNS, nullptr);
     }
     std::fill_n(waitingChampion, WAITING_MAP_COUNT, nullptr);
@@ -47,7 +47,7 @@ HumanPlayer::~HumanPlayer()
             delete waitingChampion[i];
         }
     }
-    for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
+    for (int i = 0; i < PLACE_MAP_ROWS; i++) {
         for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
             if (battleChampion[i][j] != nullptr) {
                 delete battleChampion[i][j];
@@ -113,7 +113,7 @@ int HumanPlayer::getMaxBattleChampionCount() const
 int HumanPlayer::getCurrentBattleChampionCount() const
 {
     int count = 0;
-    for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
+    for (int i = 0; i < PLACE_MAP_ROWS; i++) {
         for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
             if (battleMap[i][j] != NoChampion) {
                 count++;
@@ -453,10 +453,8 @@ Vec2 HumanPlayer::findNearestPoint(Sprite* championSprite)
                 }
             }
             else {
-                if (currentLocation.position / BATTLE_MAP_COLUMNS >= PLACE_MAP_ROWS) {
-                    isEmpty = false;
-                }
-                if (battleMap[currentLocation.position / BATTLE_MAP_COLUMNS][currentLocation.position % BATTLE_MAP_COLUMNS] != NoChampion) {
+                if (currentLocation.position / BATTLE_MAP_COLUMNS >= PLACE_MAP_ROWS
+                    || battleMap[currentLocation.position / BATTLE_MAP_COLUMNS][currentLocation.position % BATTLE_MAP_COLUMNS] != NoChampion) {
                     isEmpty = false;
                 }
             }
@@ -494,55 +492,9 @@ Vec2 HumanPlayer::findNearestPoint(Sprite* championSprite)
 // 刷新商店战斗英雄种类
 void HumanPlayer::refreshShopChampionCategory()
 {
-    // 统计当前英雄数量
-    std::map<ChampionCategory, int> championsCount;
-    for (const auto& champion : waitingMap) {
-        if (champion != NoChampion) {
-            championsCount[champion]++;
-        }
-    }
-    for (const auto& championInRow : battleMap) {
-        for (const auto& championInCol : championInRow) {
-            if (championInCol != NoChampion) {
-                championsCount[championInCol]++;
-            }
-        }
-    }
-    // 获取当前局势分数
-    int stageScore = 0;
-    for (const auto& e : championsCount) {
-        for (int i = 0; i < e.second; i++) {
-            stageScore += CHAMPION_ATTR_MAP.at(e.first).price;
-        }
-    }
-    // 获取当前战斗阶段
-    BattleStage localStage;
-    if (stageScore < EARLY_MIDDLE_STAGE_THRESHOLD) {
-        localStage = EarlyStage;
-    }
-    else if (stageScore < MIDDLE_LATE_STAGE_THRESHOLD) {
-        localStage = MiddleStage;
-    }
-    else {
-        localStage = LateStage;
-    }
-    // 获取随机数
-    auto getRandom = [](int a) {
-        return rand() % a + 1;
-        };
-    // 根据战斗阶段随机生成英雄
-    const ChampionCategory* championLevels[] = { FIRST_LEVEL, SECOND_LEVEL, THIRD_LEVEL, FOURTH_LEVEL, FIFTH_LEVEL };
-    for (int i = 0; i < MAX_SELECTABLE_CHAMPION_COUNT; i++)
-    {
-        int random = getRandom(CHAMPION_CATEGORY_NUMBERS), cumulativeRate = 0;
-        ChampionCategory selectedChampion = NoChampion;
-        for (int i = 0; i < CHAMPION_CATEGORY_NUMBERS / BATTLE_STAGE_NUMBERS; i++) {
-            cumulativeRate += STAGE_WITH_RATE_OF_CHAMPIONS[static_cast<int>(localStage)][i];
-            if (random <= cumulativeRate) {
-                selectedChampion = championLevels[i][getRandom(CHAMPION_CATEGORY_NUMBERS / BATTLE_STAGE_NUMBERS - i)];
-                break;
-            }
-        }
-        shopChampionCategory[i] = selectedChampion;
+    champions = countChampionCategories();
+    BattleStage currentStage = evaluateStage(getStageScore());
+    for (int i = 0; i < MAX_SELECTABLE_CHAMPION_COUNT; i++) {
+        shopChampionCategory[i] = selectRandomChampion(currentStage);
     }
 }

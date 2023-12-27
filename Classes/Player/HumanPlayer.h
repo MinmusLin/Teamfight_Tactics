@@ -3,7 +3,7 @@
  * File Name:     HumanPlayer.h
  * File Function: HumanPlayer类的定义
  * Author:        林继申
- * Update Date:   2023/12/25
+ * Update Date:   2023/12/27
  ****************************************************************/
 
 #pragma once
