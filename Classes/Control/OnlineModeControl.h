@@ -3,7 +3,7 @@
  * File Name:     OnlineModeControl.h
  * File Function: OnlineModeControl类的定义
  * Author:        林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -13,8 +13,6 @@
 
 #include <vector>
 #include "Control.h"
-#include "Player/HumanPlayer.h"
-#include "Battle/Battle.h"
 
 /*
  * Class Name:     OnlineModeControl
@@ -43,6 +41,12 @@ public:
     // 获取服务器当前连接数量
     int getCurrentConnections() const;
 
+    // 获取敌人玩家指针
+    HumanPlayer* getEnemyPlayer() const;
+
+    // 初始化对战类
+    void initializeBattle();
+
 private:
     char ipv4[IPV4_ADDRESS_MAX_LENGTH + 1]; // IPv4 地址
     int port;                               // 端口
@@ -52,6 +56,7 @@ private:
     char message[BUFFER_SIZE];              // 数据缓冲区
     int recvSize;                           // 接收数据大小
     int currentConnections;                 // 服务器当前连接数量
+    HumanPlayer* enemyPlayer;               // 敌人玩家
 };
 
 #endif // !_ONLINE_MODE_CONTROL_H_

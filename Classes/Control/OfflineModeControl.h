@@ -3,7 +3,7 @@
  * File Name:     OfflineModeControl.h
  * File Function: OfflineModeControl类的定义
  * Author:        杨宇琨、林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -31,9 +31,6 @@ public:
 
     // 初始化对战类
     void initializeBattle();
-
-    // 释放对战类
-    void releaseBattle();
 
 private:
     AIPlayer* enemyPlayer; // AI 玩家

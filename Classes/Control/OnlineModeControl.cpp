@@ -3,7 +3,7 @@
  * File Name:     OnlineModeControl.cpp
  * File Function: OnlineModeControl类的实现
  * Author:        林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -22,6 +22,20 @@ OnlineModeControl::OnlineModeControl(std::string ipv4, std::string portStr) :
 {
     strcpy(this->message, "");
     strcpy(this->ipv4, ipv4.c_str());
+    try {
+        humanPlayer = new HumanPlayer(cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName"));
+        enemyPlayer = new HumanPlayer("");
+    }
+    catch (const std::bad_alloc& e) {
+        std::cerr << "Memory allocation failed: " << e.what() << std::endl;
+        if (humanPlayer) {
+            delete humanPlayer;
+        }
+        if (enemyPlayer) {
+            delete enemyPlayer;
+        }
+        throw;
+    }
 }
 
 // 析构函数
@@ -30,6 +44,7 @@ OnlineModeControl::~OnlineModeControl()
     closesocket(s);
     WSACleanup();
     delete humanPlayer;
+    delete enemyPlayer;
     if (battle) {
         delete battle;
     }
@@ -163,4 +178,29 @@ void OnlineModeControl::setCurrentConnections(const int currentConnections)
 int OnlineModeControl::getCurrentConnections() const
 {
     return currentConnections;
+}
+
+// 获取敌人玩家指针
+HumanPlayer* OnlineModeControl::getEnemyPlayer() const
+{
+    return enemyPlayer;
+}
+
+// 初始化对战类
+void OnlineModeControl::initializeBattle()
+{
+    // 获取战斗英雄地图
+    ChampionCategory(*myFlagMap)[BATTLE_MAP_COLUMNS];
+    ChampionCategory(*enemyFlagMap)[BATTLE_MAP_COLUMNS];
+    humanPlayer->getBattleMap(myFlagMap);
+    enemyPlayer->getBattleMap(enemyFlagMap);
+
+    // 创建对战类
+    try {
+        battle = new Battle(myFlagMap, enemyFlagMap);
+    }
+    catch (const std::bad_alloc& e) {
+        std::cerr << "Memory allocation failed: " << e.what() << std::endl;
+        throw;
+    }
 }

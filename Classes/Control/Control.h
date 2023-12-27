@@ -3,7 +3,7 @@
  * File Name:     Control.h
  * File Function: Control类的定义
  * Author:        林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -29,6 +29,9 @@ public:
 
     // 获取对战类指针
     Battle* getBattle() const;
+
+    // 释放对战类
+    void releaseBattle();
 
 protected:
     int maxPlayers;           // 最大玩家数量
