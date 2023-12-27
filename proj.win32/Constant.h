@@ -117,7 +117,7 @@ constexpr int BATTLE_END_LABEL_OUTLINE_WIDTH = 4;                           // ¶
 constexpr int BATTLE_END_LABEL_SHADOW_OFFSET_X = 2;                         // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©ÒõÓ° X Æ«ÒÆÁ¿
 constexpr int BATTLE_END_LABEL_SHADOW_OFFSET_Y = -2;                        // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©ÒõÓ° Y Æ«ÒÆÁ¿
 constexpr int BATTLE_END_LABEL_BLUR_RADIUS = 3;                             // ¶ÔÕ½½áÊøÌáÊ¾±êÇ©Ä£ºý°ë¾¶
-constexpr int CHAMPION_HEALTHBAR_VERTICAL_INTERVAL = 30;                    // ¶ÔÕ½³¡¾°ÉúÃüÌõ´¹Ö±¼ä¾à
+constexpr int CHAMPION_HEALTHBAR_VERTICAL_INTERVAL = 29;                    // ¶ÔÕ½³¡¾°ÉúÃüÌõ´¹Ö±¼ä¾à
 constexpr int CHAMPION_MANABAR_VERTICAL_INTERVAL = 22;                      // ¶ÔÕ½³¡¾°¾­ÑéÌõ´¹Ö±¼ä¾à
 constexpr int INTERVAL_BETWEEN_WEAPON_AND_CHAMPION = 40;                    // ¶ÔÕ½³¡¾°Õ½¶·Ó¢ÐÛÓëÎäÆ÷¼ä¾à
 constexpr int WEAPON_ANIMATION_ROTATION_ANGLE = 60;                         // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ª½Ç¶È
@@ -144,7 +144,7 @@ constexpr int SHOP_LEVEL_LABEL_FONT_SIZE = 20;                              // É
 constexpr int SHOP_COIN_LABEL_FONT_SIZE = 20;                               // ÉÌµê½ð±ÒÊýÁ¿±êÇ©×ÖÌå´óÐ¡
 constexpr int SHOP_COIN_LABEL_OFFSET_X = 358;                               // ÉÌµê½ð±ÒÊýÁ¿±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
 constexpr int SHOP_COIN_LABEL_OFFSET_Y = -228;                              // ÉÌµê½ð±ÒÊýÁ¿±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
-constexpr int INITIAL_GOLD_COIN = 9914;                                       // ³õÊ¼½ð±ÒÊýÁ¿
+constexpr int INITIAL_GOLD_COIN = 14;                                       // ³õÊ¼½ð±ÒÊýÁ¿
 constexpr int REFRESH_SHOP_PRICE = 2;                                       // Ë¢ÐÂÉÌµêËùÐè½ð±ÒÊýÁ¿
 const std::map<int, int> UPLEVEL_PRICE = {                                  // Éý¼¶ËùÐè½ð±ÒÊýÁ¿
     {BATTLE_AREA_MIN_CHAMPION_COUNT, 12},                                   // µÈ¼¶ 1 Éý¼¶ÖÁµÈ¼¶ 2 ËùÐè½ð±ÒÊýÁ¿

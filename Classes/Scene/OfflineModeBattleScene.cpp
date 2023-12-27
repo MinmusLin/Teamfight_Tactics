@@ -73,8 +73,8 @@ bool OfflineModeBattleScene::init()
                 currentChampion->setManaBar(Sprite::create("../Resources/Layers/ManaBar.png"));
                 currentChampion->getHealthBar()->setPosition(currentChampionLocation + Vec2(0, CHAMPION_HEALTHBAR_VERTICAL_INTERVAL));
                 currentChampion->getManaBar()->setPosition(currentChampionLocation + Vec2(0, CHAMPION_MANABAR_VERTICAL_INTERVAL)); 
-                this->addChild(currentChampion->getHealthBar());
-                this->addChild(currentChampion->getManaBar());
+                this->addChild(currentChampion->getHealthBar(), 1);
+                this->addChild(currentChampion->getManaBar(), 1);
 
                 // 计算初始战斗英雄个数
                 if (i < PLACE_MAP_ROWS) {
@@ -205,7 +205,7 @@ void OfflineModeBattleScene::update(float delta)
         if (battleChampion[i] != nullptr) { // 存在战斗英雄
             // 设置生命条和经验条
             battleChampion[i]->getHealthBar()->setScaleX(battleChampion[i]->getAttributes().healthPoints / battleChampion[i]->getMaxHealthPoints());
-            battleChampion[i]->getManaBar()->setScaleX(battleChampion[i]->getAttributes().magicPoints / battleChampion[i]->getMaxMagicPoints());
+            battleChampion[i]->getManaBar()->setScaleX((battleChampion[i]->getAttributes().magicPoints / battleChampion[i]->getMaxMagicPoints() >= 1) ? 1 : battleChampion[i]->getAttributes().magicPoints / battleChampion[i]->getMaxMagicPoints());
 
             if (battleChampion[i]->getAttributes().healthPoints > 0) { // 角色存活
                 if (battleChampion[i]->getIsMoving()) { // 角色正在移动
