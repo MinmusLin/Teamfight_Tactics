@@ -182,6 +182,8 @@ constexpr int BATTLE_AREA_START_X = 415;                                    // Õ
 constexpr int BATTLE_AREA_START_Y = 275;                                    // Õ½¶·ÇøÆðÊ¼ÆÁÄ»×ø±êÎ»ÖÃ Y ×ø±ê
 constexpr int CHAMPION_HORIZONTAL_INTERVAL = 60;                            // Õ½¶·Ó¢ÐÛË®Æ½¼ä¾à
 constexpr int CHAMPION_VERTICAL_INTERVAL = 45;                              // Õ½¶·Ó¢ÐÛ´¹Ö±¼ä¾à
+constexpr int CHAMPION_HEALTHBAR_VERTICAL_INTERVAL = 30;                    // Õ½¶·Ó¢ÐÛ´¹Ö±¼ä¾à
+constexpr int CHAMPION_MANABAR_VERTICAL_INTERVAL = 22;                      // Õ½¶·Ó¢ÐÛ´¹Ö±¼ä¾à
 
 // Õ½¶·²ÎÊýÉèÖÃ
 constexpr int CHAMPION_CATEGORY_NUMBERS = 15;                               // Õ½¶·Ó¢ÐÛÖÖÀàÊýÁ¿

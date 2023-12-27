@@ -22,7 +22,9 @@ Champion::Champion(const ChampionCategory championCategory) :
     isMoving(false),
     isAttaking(false),
     attackIntervalTimer(0.0f),
-    moveIntervalTimer(0.0f)
+    moveIntervalTimer(0.0f),
+    healthBar(nullptr),
+    manaBar(nullptr)
 {
     sprite = Sprite::create(attributes.championImagePath);
     maxHealthPoints = attributes.healthPoints;
@@ -521,8 +523,12 @@ void Champion::skill()
 void Champion::die()
 {
     auto championSprite = getSprite();
-    sword->getParent()->removeChild(sword,true);
     championSprite->getParent()->removeChild(sprite, true);
+    manaBar->setScaleX(0); // 假设血条的 scaleX 代表血量比例
+    healthBar->setScaleX(0);     // 假设蓝条的 scaleX 代表蓝量比例
+    manaBar->getParent()->removeChild(manaBar, true);
+    healthBar->getParent()->removeChild(healthBar, true);
+    sword->getParent()->removeChild(sword, true);
     Champion* temp = currentBattle->getChampion(currentLocation.x, currentLocation.y);
     currentBattle->championMap[currentLocation.x][currentLocation.y] = nullptr;
     delete temp;
@@ -569,3 +575,40 @@ float Champion::distanceBetweenPoints(const cocos2d::Vec2& a, const cocos2d::Vec
 {
     return a.distance(b);
 }
+
+// 获蓝条
+cocos2d::Sprite* Champion::getHealthBar() const
+{
+    return healthBar;
+}
+
+// 获取血条
+cocos2d::Sprite* Champion::getManaBar() const
+{
+    return manaBar;
+}
+
+// 设置血条
+void Champion::setHealthBar(Sprite* HealthBar)
+{
+    healthBar = HealthBar;
+}
+
+// 设置蓝条
+void Champion::setManaBar(Sprite* ManaBar)
+{
+    manaBar = ManaBar;
+}
+
+// 获取最大血量
+float Champion::getMaxHealthPoints() const
+{
+    return maxHealthPoints;
+}
+
+// 获取最大蓝量
+float Champion::getMaxMagicPoints() const
+{
+    return maxMagicPoints;
+}
+

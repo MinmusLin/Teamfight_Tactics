@@ -137,6 +137,24 @@ public:
     // 设置武器位置
     void setSwordPosition(const cocos2d::Vec2& position);
 
+    // 获取血条
+    Sprite* getHealthBar() const;
+
+    // 获取蓝条
+    Sprite* getManaBar() const;
+
+    // 获取最大血量
+    float getMaxHealthPoints() const;
+
+    // 获取最大蓝量
+    float getMaxMagicPoints() const;
+
+    // 设置血条
+    void setHealthBar(Sprite* HealthBar);
+
+    // 设置蓝条
+    void setManaBar(Sprite* ManaBar);
+
     // 获取武器精灵类指针
     Sprite* Champion::getSword() const;
 
@@ -148,6 +166,8 @@ private:
     Champion* currentEnemy;            // 当前锁定敌人战斗英雄指针
     Sprite* sprite;                    // 精灵类指针
     Sprite* sword;                     // 武器精灵类指针
+    Sprite* healthBar;                 // 精灵类指针
+    Sprite* manaBar;                   // 精灵类指针
     cocos2d::MoveTo* currentMove;      // 当前移动
     int maxHealthPoints;               // 最大生命值
     int maxMagicPoints;                // 最大魔法值
