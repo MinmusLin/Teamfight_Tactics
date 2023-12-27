@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     LocationMap.h
  * File Function: LocationMap类的定义
- * Author:        刘淑仪、林继申
- * Update Date:   2023/12/25
+ * Author:        林继申
+ * Update Date:   2023/12/27
  ****************************************************************/
 
 #pragma once
