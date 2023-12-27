@@ -3,7 +3,7 @@
  * File Name:     OnlineModeMenuScene.cpp
  * File Function: OnlineModeMenuScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/26
+ * Update Date:   2023/12/27
  ****************************************************************/
 
 #include <iostream>
@@ -180,7 +180,7 @@ bool OnlineModeMenuScene::init()
                             }
                             else if (/*!strcmp(buffer, START_GAME_MSG)*/false) {
                                 this->unschedule("ServerMessageListener"); // 关闭服务器消息监听
-                                // TODO
+                                // TODO: 联机模式接口
                             }
                             else {
                                 int currentConnections;
