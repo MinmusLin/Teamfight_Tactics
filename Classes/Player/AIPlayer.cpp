@@ -114,6 +114,35 @@ void AIPlayer::optimizeChampionCollection()
 // 部署候战区战斗英雄（简单模式）
 std::vector<ChampionCategory> AIPlayer::easyDeployChampions(const int maxChampions)
 {
+    // 基于优先队列排序战斗英雄
+    auto comp = [this](ChampionCategory a, ChampionCategory b) {
+        return calculateChampionScore(a) < calculateChampionScore(b);
+        };
+    std::priority_queue<ChampionCategory, std::vector<ChampionCategory>, decltype(comp)> orderedChampions(comp);
+    for (const auto& entry : champions) {
+        for (int i = 0; i < entry.second; i++) {
+            orderedChampions.push(entry.first);
+        }
+    }
+
+    // 选择战斗英雄
+    std::vector<ChampionCategory> selectedChampions;
+    for (int i = 0; i < maxChampions && !orderedChampions.empty(); i++) {
+        selectedChampions.push_back(orderedChampions.top());
+        orderedChampions.pop();
+    }
+
+    // 部署候战区战斗英雄
+    for (int i = 0; i < WAITING_MAP_COUNT && !orderedChampions.empty(); i++) {
+        waitingMap[i] = orderedChampions.top();
+        orderedChampions.pop();
+    }
+    return selectedChampions;
+}
+
+// 部署候战区战斗英雄（正常模式）
+std::vector<ChampionCategory> AIPlayer::normalDeployChampions(const int maxChampions)
+{
     // 获取当前全部战斗英雄
     std::vector<ChampionCategory> allChampions;
     for (const auto& entry : champions) {
@@ -193,7 +222,8 @@ void AIPlayer::deployChampions()
     }
 
     // 选择战斗英雄
-    std::vector<ChampionCategory> selectedChampions = (difficulty == Easy ? easyDeployChampions(maxChampions) : hardDeployChampions(maxChampions));
+    std::vector<ChampionCategory> selectedChampions = (difficulty == Normal ? normalDeployChampions(maxChampions)
+        : (difficulty == Easy ? easyDeployChampions(maxChampions) : hardDeployChampions(maxChampions)));
 
     // 部署战斗区战斗英雄
     switch (selectedChampions.size()) {

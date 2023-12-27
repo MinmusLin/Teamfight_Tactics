@@ -56,6 +56,9 @@ private:
     // 部署候战区战斗英雄（简单模式）
     std::vector<ChampionCategory> easyDeployChampions(const int maxChampions);
 
+    // 部署候战区战斗英雄（正常模式）
+    std::vector<ChampionCategory> normalDeployChampions(const int maxChampions);
+
     // 部署候战区战斗英雄（困难模式）
     std::vector<ChampionCategory> hardDeployChampions(const int maxChampions);
 
