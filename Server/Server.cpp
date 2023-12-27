@@ -19,11 +19,11 @@
 /*
  * Function Name:    clientHandler
  * Function:         处理客户端连接
- * Input Parameters: SOCKET clientSocket: 客户端的套接字连接
+ * Input Parameters: const SOCKET clientSocket: 客户端的套接字连接
  *                   Server& server: 服务器类
  * Return Value:     void
  */
-void clientHandler(SOCKET clientSocket, Server& server)
+void clientHandler(const SOCKET clientSocket, Server& server)
 {
     char buffer[BUFFER_SIZE]; // 定义缓冲区用于存储接收的数据
     int recvSize; // 用于存储接收到的数据长度
@@ -34,10 +34,8 @@ void clientHandler(SOCKET clientSocket, Server& server)
         buffer[recvSize] = '\0';
 
         // 获取当前服务器时间
-        auto now = std::chrono::system_clock::now();
-        std::time_t now_c = std::chrono::system_clock::to_time_t(now);
-        std::tm now_tm = *std::localtime(&now_c);
-        std::cout << std::put_time(&now_tm, "[%H:%M:%S]");
+        std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        std::cout << std::put_time(std::localtime(&now), "[%H:%M:%S]");
 
         // 输出客户端 ID 和接收到的消息
         std::cout << " [Client ID: " << clientSocket << "] Message: " << buffer << std::endl;
@@ -49,22 +47,17 @@ void clientHandler(SOCKET clientSocket, Server& server)
             for (auto& map : server.playerNames) {
                 if (map.find(clientSocket) != map.end()) {
                     map[clientSocket] = static_cast<std::string>(playerName);
-                    std::cout << "Receive from " << clientSocket << " : " << map[clientSocket] << std::endl;
                     break;
-                }
-            }
-            if (server.areAllReady()) {
-                std::cout << "Broadcast: " << START_GAME_MSG << std::endl;
-                for (const SOCKET& sock : server.clients) {
-                    send(sock, START_GAME_MSG, strlen(START_GAME_MSG), 0);
                 }
             }
         }
 
-        // 遍历所有客户端，将接收到的消息转发给其他客户端
-        std::cout << "Broadcast: " << buffer << std::endl;
-        for (const SOCKET& sock : server.clients) {
-            send(sock, buffer, recvSize, 0);
+        // 检测是否开始游戏
+        if (server.areAllReady()) {
+            std::cout << "Broadcast: " << START_GAME_MSG << std::endl;
+            for (const SOCKET& sock : server.clients) {
+                send(sock, START_GAME_MSG, static_cast<int>(strlen(START_GAME_MSG)), 0);
+            }
         }
     }
 
@@ -77,19 +70,25 @@ void clientHandler(SOCKET clientSocket, Server& server)
     }
 
     // 关闭与客户端的连接
-    closesocket(clientSocket);
-    server.clients.erase(std::remove(server.clients.begin(), server.clients.end(), clientSocket), server.clients.end());
-    server.playerNames.erase(std::remove_if(server.playerNames.begin(), server.playerNames.end(), [clientSocket](const std::map<SOCKET, std::string>& m) {
-        return m.find(clientSocket) != m.end();
-        }), server.playerNames.end());
+    server.closeClientSocket(clientSocket);
     std::cout << "Current connections: " << --server.currentConnections << std::endl;
-    server.outputClientsAndPlayerNames();
 
     // 遍历所有客户端，将服务器当前连接数量转发给其他客户端
     sprintf(buffer, CURRENT_CONNECTIONS_FORMAT, server.currentConnections);
     std::cout << "Broadcast: " << buffer << std::endl;
     for (const SOCKET& sock : server.clients) {
-        send(sock, buffer, strlen(buffer), 0);
+        send(sock, buffer, static_cast<int>(strlen(buffer)), 0);
+    }
+
+    // 设置延迟确保消息传递至客户端
+    std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(5000 * SERVER_REFRESH_INTERVAL)));
+
+    // 检测是否开始游戏
+    if (server.areAllReady()) {
+        std::cout << "Broadcast: " << START_GAME_MSG << std::endl;
+        for (const SOCKET& sock : server.clients) {
+            send(sock, START_GAME_MSG, static_cast<int>(strlen(START_GAME_MSG)), 0);
+        }
     }
 }
 
@@ -181,27 +180,26 @@ void Server::handleConnections()
             if (currentConnections < MAX_CONNECTIONS) {
                 // 接受连接
                 std::cout << CONNECTION_ACCEPTED_MSG << std::endl;
-                send(clientSocket, CONNECTION_ACCEPTED_MSG, strlen(CONNECTION_ACCEPTED_MSG), 0);
+                send(clientSocket, CONNECTION_ACCEPTED_MSG, static_cast<int>(strlen(CONNECTION_ACCEPTED_MSG)), 0);
                 clients.push_back(clientSocket);
                 playerNames.push_back({ {clientSocket, ""} });
                 std::thread clientThread(clientHandler, clientSocket, std::ref(*this));
                 clientThread.detach();
                 std::cout << "Current connections: " << ++currentConnections << std::endl;
-                outputClientsAndPlayerNames();
 
                 // 遍历所有客户端，将服务器当前连接数量转发给其他客户端
                 char buffer[BUFFER_SIZE];
                 sprintf(buffer, CURRENT_CONNECTIONS_FORMAT, currentConnections);
                 std::cout << "Broadcast: " << buffer << std::endl;
                 for (const SOCKET& sock : clients) {
-                    send(sock, buffer, strlen(buffer), 0);
+                    send(sock, buffer, static_cast<int>(strlen(buffer)), 0);
                 }
             }
             else {
                 // 拒绝连接
                 std::cout << "Maximum connections reached. " << CONNECTION_REFUSED_MSG << std::endl;
-                send(clientSocket, CONNECTION_REFUSED_MSG, strlen(CONNECTION_REFUSED_MSG), 0);
-                closesocket(clientSocket);
+                send(clientSocket, CONNECTION_REFUSED_MSG, static_cast<int>(strlen(CONNECTION_REFUSED_MSG)), 0);
+                closeClientSocket(clientSocket);
             }
         }
         else {
@@ -233,18 +231,23 @@ bool Server::areAllReady()
     return true;
 }
 
-// 所有连接到服务器的客户端套接字和玩家昵称
-void Server::outputClientsAndPlayerNames()
+// 关闭客户端套接字
+void Server::closeClientSocket(const SOCKET clientSocket)
 {
-    std::cout << "Current Clients: ";
-    for (const SOCKET& clientSocket : clients) {
-        std::cout << clientSocket << " ";
+    // 关闭与客户端的连接
+    closesocket(clientSocket);
+
+    // 移除客户端套接字
+    auto clientsIndex = std::find(clients.begin(), clients.end(), clientSocket);
+    if (clientsIndex != clients.end()) {
+        clients.erase(clientsIndex);
     }
-    std::cout << std::endl;
-    std::cout << "Current Player Names: " << std::endl;
-    for (const auto& playerMap : playerNames) {
-        for (const auto& pair : playerMap) {
-            std::cout << "Socket: " << pair.first << " - Player Name: " << pair.second << std::endl;
-        }
+
+    // 移除客户端玩家昵称
+    auto clientSocketIndex = std::find_if(playerNames.begin(), playerNames.end(), [clientSocket](const std::map<SOCKET, std::string>& m) {
+        return m.find(clientSocket) != m.end();
+        });
+    if (clientSocketIndex != playerNames.end()) {
+        playerNames.erase(clientSocketIndex);
     }
 }

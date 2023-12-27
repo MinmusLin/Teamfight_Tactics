@@ -31,7 +31,7 @@ public:
     void run();
 
     // 友元函数声明
-    friend void clientHandler(SOCKET clientSocket, Server& server);
+    friend void clientHandler(const SOCKET clientSocket, Server& server);
 
 private:
     WSADATA wsaData;                                        // Windows Sockets API
@@ -53,8 +53,8 @@ private:
     // 检查所有玩家是否加入游戏
     bool areAllReady();
 
-    // 所有连接到服务器的客户端套接字和玩家昵称
-    void outputClientsAndPlayerNames();
+    // 关闭客户端套接字
+    void closeClientSocket(const SOCKET clientSocket);
 };
 
 #endif // !_SERVER_H_
