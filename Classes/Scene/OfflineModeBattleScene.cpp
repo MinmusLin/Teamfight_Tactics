@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     OfflineModeBattleScene.cpp
  * File Function: OfflineModeBattleScene类的实现
- * Author:        杨宇琨、林继申
- * Update Date:   2023/12/26
+ * Author:        杨宇琨、刘淑仪、林继申
+ * Update Date:   2023/12/27
  ****************************************************************/
 
 #include "OfflineModeBattleScene.h"
@@ -57,11 +57,11 @@ bool OfflineModeBattleScene::init()
                 currentChampion->getSprite()->setPosition(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }));
                 this->addChild(g_offlineModeControl->getBattle()->getChampion(i, j)->getSprite());
 
-                // 显示对应武器
+                // 显示战斗英雄对应武器
                 Vec2 currentChampionLocation = LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j });
-                currentChampion->swordInit(currentChampionLocation + Vec2(40,0));
-                this->addChild(currentChampion->getSword());          // 将剑添加为子节点
-                currentChampion->showSword();
+                currentChampion->initializeSword(currentChampionLocation + Vec2(INTERVAL_BETWEEN_WEAPON_AND_CHAMPION, 0));
+                this->addChild(currentChampion->getSword());
+                currentChampion->setSwordVisible(true);
 
                 // 计算初始战斗英雄个数
                 if (i < PLACE_MAP_ROWS) {
@@ -219,13 +219,12 @@ void OfflineModeBattleScene::update(float delta)
 
                     if (battleChampion[i]->getCurrentEnemy()) { // 获取当前锁定敌人战斗英雄指针
                         if (battleChampion[i]->isInAttackRange()) { // 攻击范围内存在敌人战斗英雄
-                            
                             // 增加攻击时间间隔
                             battleChampion[i]->addAttackIntervalTimer(delta);
 
                             if (battleChampion[i]->getAttackIntervalTimer() >= (1.0f / battleChampion[i]->getAttributes().attackSpeed)) { // 达到攻击时间间隔
                                 // 攻击
-                                battleChampion[i]->attack();                                                            
+                                battleChampion[i]->attack();
 
                                 // 重置攻击时间间隔
                                 battleChampion[i]->resetAttackIntervalTimer();
@@ -244,12 +243,12 @@ void OfflineModeBattleScene::update(float delta)
 
                             // 移动武器
                             battleChampion[i]->getSword()->runAction(cocos2d::MoveTo::create(1.0f / battleChampion[i]->getAttributes().movementSpeed,
-                               Vec2(LocationMap::getInstance().getLocationMap().at({ BattleArea, battleChampion[i]->getCurrentDestination().x * BATTLE_MAP_COLUMNS + battleChampion[i]->getCurrentDestination().y }).x + 40,
+                                Vec2(LocationMap::getInstance().getLocationMap().at({ BattleArea, battleChampion[i]->getCurrentDestination().x * BATTLE_MAP_COLUMNS + battleChampion[i]->getCurrentDestination().y }).x + INTERVAL_BETWEEN_WEAPON_AND_CHAMPION,
                                     LocationMap::getInstance().getLocationMap().at({ BattleArea, battleChampion[i]->getCurrentDestination().x * BATTLE_MAP_COLUMNS + battleChampion[i]->getCurrentDestination().y }).y)));
 
                             // 移动战斗英雄
                             battleChampion[i]->getSprite()->runAction(battleChampion[i]->getCurrentMove());
-                            
+
                             // 放置战斗英雄
                             g_offlineModeControl->getBattle()->placeChampion(battleChampion[i]->getCurrentDestination().x, battleChampion[i]->getCurrentDestination().y, battleChampion[i]);
 
@@ -263,7 +262,7 @@ void OfflineModeBattleScene::update(float delta)
                 }
             }
             else { // 角色死亡
-                battleChampion[i]->hideSword();
+                battleChampion[i]->setSwordVisible(false);
                 battleChampion[i]->die();
                 battleChampion[i] = nullptr;
             }

@@ -172,7 +172,20 @@ bool OnlineModeMenuScene::init()
                         memset(buffer, 0, sizeof(buffer));
                         int recvSize = recv(g_onlineModeControl->getSocket(), buffer, BUFFER_SIZE, 0);
                         if (recvSize > 0) {
+                            //this->unschedule("ServerMessageListener"); // 关闭服务器消息监听
                             buffer[recvSize] = '\0';
+
+                            if (!strncmp(buffer, "Connection", MESSAGE_IDENTIFIER_LENGTH)) {
+
+
+
+
+                            }
+
+
+
+
+
                             if (/*!strcmp(buffer, START_GAME_MSG)*/false) {
                                 memset(buffer, 0, sizeof(buffer));
                                 sprintf(buffer, "ClientID=%d,PlayerName=%s", g_onlineModeControl->getSocket(), cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName").c_str());

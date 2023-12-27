@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     Champion.h
  * File Function: Champion类的定义
- * Author:        杨宇琨、林继申
- * Update Date:   2023/12/25
+ * Author:        杨宇琨、刘淑仪、林继申
+ * Update Date:   2023/12/27
  ****************************************************************/
 
 #pragma once
@@ -128,20 +128,17 @@ public:
     // 死亡
     void die();
 
-    // 显示武器
-    void showSword();
+    // 设置武器是否可见
+    void setSwordVisible(const bool visible);
 
-    // 隐藏武器
-    void hideSword();
+    // 初始化武器
+    void initializeSword(const cocos2d::Vec2& position);
 
-    // 初始化武器位置
-    void swordInit(const cocos2d::Vec2& position);
-
-    // 改变武器位置
+    // 设置武器位置
     void setSwordPosition(const cocos2d::Vec2& position);
 
-    // 获取武器精灵
-    Sprite* Champion::getSword();
+    // 获取武器精灵类指针
+    Sprite* Champion::getSword() const;
 
 private:
     Battle* currentBattle;             // 战斗类
@@ -150,7 +147,7 @@ private:
     BattleLocation currentDestination; // 当前目标位置
     Champion* currentEnemy;            // 当前锁定敌人战斗英雄指针
     Sprite* sprite;                    // 精灵类指针
-    Sprite* sword;                     // 英雄对应剑
+    Sprite* sword;                     // 武器精灵类指针
     cocos2d::MoveTo* currentMove;      // 当前移动
     int maxHealthPoints;               // 最大生命值
     int maxMagicPoints;                // 最大魔法值
