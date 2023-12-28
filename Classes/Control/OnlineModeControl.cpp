@@ -13,6 +13,9 @@
 #include <cstring>
 #include "OnlineModeControl.h"
 
+// 玩家昵称
+extern std::string g_PlayerName;
+
 // 构造函数
 OnlineModeControl::OnlineModeControl(std::string ipv4, std::string portStr) :
     port(std::stoi(portStr)),
@@ -23,7 +26,7 @@ OnlineModeControl::OnlineModeControl(std::string ipv4, std::string portStr) :
     strcpy(this->message, "");
     strcpy(this->ipv4, ipv4.c_str());
     try {
-        humanPlayer = new HumanPlayer(cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName"));
+        humanPlayer = new HumanPlayer(g_PlayerName);
         enemyPlayer = new HumanPlayer("");
     }
     catch (const std::bad_alloc& e) {

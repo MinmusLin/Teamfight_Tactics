@@ -11,12 +11,15 @@
 #include "OfflineModeControl.h"
 #include "GBKToUTF8/GBKToUTF8.h"
 
+// 玩家昵称
+extern std::string g_PlayerName;
+
 // 构造函数
 OfflineModeControl::OfflineModeControl() :
     Control(2)
 {
     try {
-        humanPlayer = new HumanPlayer(cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName"));
+        humanPlayer = new HumanPlayer(g_PlayerName);
         enemyPlayer = new AIPlayer(GBKToUTF8::getString("AI玩家"), Easy);
     }
     catch (const std::bad_alloc& e) {

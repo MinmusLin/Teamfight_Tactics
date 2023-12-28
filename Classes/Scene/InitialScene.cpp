@@ -21,6 +21,9 @@ using cocos2d::Sprite;
 using cocos2d::Label;
 using cocos2d::Vec2;
 
+// 玩家昵称
+std::string g_PlayerName = "";
+
 // 创建场景
 Scene* InitialScene::createScene()
 {
@@ -102,8 +105,7 @@ bool InitialScene::init()
                     }, PROMPT_MESSAGE_DURATION, "HideInvalidPromptLabel");
             }
             else {
-                cocos2d::UserDefault::getInstance()->setStringForKey("PlayerName", nickname); // PlayerName 内部存储编码为 UTF-8，无需调用 GBKToUTF8 单例方法
-                cocos2d::UserDefault::getInstance()->flush();
+                g_PlayerName = nickname; // g_PlayerName 内部存储编码为 UTF-8，无需调用 GBKToUTF8 单例方法
                 cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
             }
         }

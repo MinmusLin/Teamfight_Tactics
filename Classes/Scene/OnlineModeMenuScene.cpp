@@ -23,6 +23,9 @@ using cocos2d::Sprite;
 using cocos2d::Label;
 using cocos2d::Vec2;
 
+// 玩家昵称
+extern std::string g_PlayerName;
+
 // 联机模式游戏控制类
 OnlineModeControl* g_onlineModeControl = nullptr;
 
@@ -212,7 +215,7 @@ bool OnlineModeMenuScene::init()
     startGameButton->addTouchEventListener([startGameButton, waitingLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             char buffer[BUFFER_SIZE];
-            sprintf(buffer, PLAYER_NAME_FORMAT, cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName").c_str());
+            sprintf(buffer, PLAYER_NAME_FORMAT, g_PlayerName.c_str());
             g_onlineModeControl->sendMessage(buffer, strlen(buffer));
             startGameButton->removeFromParent();
             waitingLabel->setString(GBKToUTF8::getString("请等待其他玩家开始游戏"));
