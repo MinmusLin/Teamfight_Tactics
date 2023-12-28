@@ -2,17 +2,12 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     HoverButton.cpp
  * File Function: HoverButton类的实现
- * Author:        林继申、刘淑仪
+ * Author:        林继申
  * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
 #include "HoverButton.h"
-#include "AudioEngine.h"
-
-// 音频引擎设置
-extern float g_backgroundMusicVolumn;
-extern float g_effectMusicVolumn;
 
 // 创建一个新的 HoverButton 实例
 HoverButton* HoverButton::create(const std::string& defaultButtonImage, const std::string& hoverButtonImage, const std::string& activeButtonImage)
@@ -63,9 +58,6 @@ void HoverButton::onMouseUp(cocos2d::Event* event)
 {
     const auto mouseEvent = dynamic_cast<cocos2d::EventMouse*>(event);
     if (mouseEvent && this->getBoundingBox().containsPoint(this->getParent()->convertToNodeSpace(mouseEvent->getLocationInView()))) {
-        // 加载点击音效
-        int sliderEffect = cocos2d::experimental::AudioEngine::play2d("../Resources/Music/Effect/Click.mp3");
-        cocos2d::experimental::AudioEngine::setVolume(sliderEffect, g_effectMusicVolumn);
         this->loadTextureNormal(activeButtonImage);
     }
 }
