@@ -8,6 +8,11 @@
  ****************************************************************/
 
 #include "HoverButton.h"
+#include "AudioEngine.h"
+
+ // 音量变量
+extern float g_backgroundMusicVolumn;
+extern float g_effectVolumn;
 
 // 创建一个新的 HoverButton 实例
 HoverButton* HoverButton::create(const std::string& defaultButtonImage, const std::string& hoverButtonImage, const std::string& activeButtonImage)
@@ -45,7 +50,7 @@ bool HoverButton::init(const std::string& defaultButtonImage, const std::string&
 void HoverButton::onMouseMove(cocos2d::Event* event)
 {
     const auto mouseEvent = dynamic_cast<cocos2d::EventMouse*>(event);
-    if (mouseEvent && this->getBoundingBox().containsPoint(this->getParent()->convertToNodeSpace(mouseEvent->getLocationInView()))) {
+    if (mouseEvent && this->getBoundingBox().containsPoint(this->getParent()->convertToNodeSpace(mouseEvent->getLocationInView()))) {       
         this->loadTextureNormal(hoverButtonImage);
     }
     else {
@@ -58,6 +63,10 @@ void HoverButton::onMouseUp(cocos2d::Event* event)
 {
     const auto mouseEvent = dynamic_cast<cocos2d::EventMouse*>(event);
     if (mouseEvent && this->getBoundingBox().containsPoint(this->getParent()->convertToNodeSpace(mouseEvent->getLocationInView()))) {
+        // 加载点击音效
+        int sliderEFF = cocos2d::experimental::AudioEngine::play2d("../Resources/Music/Effect/Click.mp3");
+        cocos2d::experimental::AudioEngine::setVolume(sliderEFF, g_effectVolumn);
+
         this->loadTextureNormal(activeButtonImage);
     }
 }

@@ -16,6 +16,8 @@
 #include "Control/OfflineModeControl.h"
 #include "GBKToUTF8/GBKToUTF8.h"
 #include "proj.win32/Constant.h"
+#include "AudioEngine.h"
+#include "SettingsScene.h"
 
 // 命名空间
 using cocos2d::Scene;
@@ -28,6 +30,14 @@ extern std::string g_PlayerName;
 
 // 练习模式游戏控制类
 OfflineModeControl* g_offlineModeControl = nullptr;
+
+// 设置音乐引擎
+extern int backgroundMusic;
+extern int effectMusic;
+
+// 音量变量
+extern float g_backgroundMusicVolumn;
+extern float g_effectVolumn;
 
 // 创建场景
 Scene* MenuScene::createScene()
@@ -46,6 +56,13 @@ bool MenuScene::init()
         return false;
     }
     
+    // 加载背景音乐
+    if (backgroundMusic != -1) {
+        cocos2d::experimental::AudioEngine::stop(backgroundMusic);
+    }
+    backgroundMusic = cocos2d::experimental::AudioEngine::play2d("../Resources/Music/BackgroundMusic/MenuScene_DarkSideOfPower.mp3", true);
+    cocos2d::experimental::AudioEngine::setVolume(backgroundMusic, g_backgroundMusicVolumn);
+
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
     const auto background = Sprite::create("../Resources/Scenes/MenuScene.png");
@@ -88,6 +105,7 @@ bool MenuScene::init()
         });
     settingsButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+            cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, SettingsScene::createScene(), cocos2d::Color3B::WHITE));
             // TODO: 设置场景接口
         }
         });

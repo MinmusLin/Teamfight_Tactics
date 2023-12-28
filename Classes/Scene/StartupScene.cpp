@@ -11,12 +11,21 @@
 #include "InitialScene.h"
 #include "ui/CocosGUI.h"
 #include "proj.win32/Constant.h"
+#include "AudioEngine.h"
 
 // 命名空间
 using cocos2d::Scene;
 using cocos2d::Sprite;
 using cocos2d::Label;
 using cocos2d::Vec2;
+
+// 设置音乐引擎
+extern int backgroundMusic;
+extern int effectMusic;
+
+// 音量变量
+extern float g_backgroundMusicVolumn;
+extern float g_effectVolumn;
 
 // 创建场景
 Scene* StartupScene::createScene()
@@ -34,6 +43,13 @@ bool StartupScene::init()
     if (!Scene::init()) {
         return false;
     }
+
+    // 加载背景音乐
+    if (backgroundMusic != -1) {
+        cocos2d::experimental::AudioEngine::stop(backgroundMusic);
+    }
+    backgroundMusic = cocos2d::experimental::AudioEngine::play2d("../Resources/Music/BackgroundMusic/StartupScene_BreathAndLife.mp3", true);
+    cocos2d::experimental::AudioEngine::setVolume(backgroundMusic, g_backgroundMusicVolumn);
 
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
