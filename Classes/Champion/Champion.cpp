@@ -663,24 +663,24 @@ void Champion::bond()
 {
     switch (attributes.bond) {
         case Brotherhood:
-            attributes.movementSpeed = attributes.movementSpeed * 3;
-            attributes.attackSpeed = attributes.attackSpeed * 2;
+            attributes.movementSpeed *= BROTHERHOOD_MOVEMENT_SPEED_MULTIPLIER;
+            attributes.attackSpeed *= BROTHERHOOD_ATTACK_SPEED_MULTIPLIER;
             break;
         case Lout:
-            attributes.healthPoints *= 1.5;
-            attributes.movementSpeed *= 2;
-            attributes.attackDamage *= 2;
+            attributes.healthPoints = static_cast<int>(attributes.healthPoints * LOUT_HEALTH_POINTS_MULTIPLIER);
+            attributes.movementSpeed *= LOUT_MOVEMENT_SPEED_MULTIPLIER;
+            attributes.attackDamage *= LOUT_ATTACK_DAMAGE_MULTIPLIER;
             break;
         case DarkSide:
-            attributes.skillTriggerThreshold /= 2;
-            attributes.attackDamage *= 2;
+            attributes.skillTriggerThreshold = static_cast<int>(attributes.skillTriggerThreshold * DARKSIDE_SKILL_TRIGGER_MULTIPLIER);
+            attributes.attackDamage *= DARKSIDE_ATTACK_DAMAGE_MULTIPLIER;
             break;
         case GoodShooter:
-            attributes.attackSpeed *= 3;
+            attributes.attackSpeed *= GOODSHOOTER_ATTACK_SPEED_MULTIPLIER;
             break;
         case PopStar:
-            attributes.attackSpeed *= 3;
-            attributes.movementSpeed *= 5;
+            attributes.attackSpeed *= POPSTAR_ATTACK_SPEED_MULTIPLIER;
+            attributes.movementSpeed *= POPSTAR_MOVEMENT_SPEED_MULTIPLIER;
             break;
         default:
             break;
