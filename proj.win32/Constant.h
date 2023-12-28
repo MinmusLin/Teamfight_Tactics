@@ -140,6 +140,8 @@ constexpr int SETTINGS_SCENE_NORMAL_CHECKBOX_OFFSET_X = -150;               // …
 constexpr int SETTINGS_SCENE_DIFFICULT_CHECKBOX_OFFSET_X = -10;             // …Ë÷√≥°æ∞¿ßƒ—ƒ—∂»∏¥—°øÚ”Î±Í«©Œª÷√ X ∆´“∆¡ø
 constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_X = -150;            // …Ë÷√≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ X ∆´“∆¡ø
 constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_Y = -274;            // …Ë÷√≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ Y ∆´“∆¡ø
+constexpr int DEFAULT_MUSIC_SIGN = -1;                                      // ƒ¨»œ“Ù¿÷±Í ∂
+constexpr float DEFAULT_MUSIC_VOLUMN = 0.5f;                                // ƒ¨»œ“Ù¡ø¥Û–°
 
 // …ÃµÍ…Ë÷√
 constexpr int MAX_SELECTABLE_CHAMPION_COUNT = 5;                            // ◊Ó¥Ûø…—°‘Ò’Ω∂∑”¢–€ ˝¡ø
