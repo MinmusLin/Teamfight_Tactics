@@ -118,7 +118,7 @@ bool OnlineModePreparationScene::init()
     uplevelButton->addTouchEventListener([this, uplevelCoinLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
             g_onlineModeControl->getHumanPlayer()->addBattleChampionCount();
-            int maxBattleChampionCount = g_onlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
+            const int maxBattleChampionCount = g_onlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
             uplevelCoinLabel->setString(maxBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT ? "" : std::to_string(UPLEVEL_PRICE.at(maxBattleChampionCount)));
         }
         });

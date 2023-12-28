@@ -3,7 +3,7 @@
  * File Name:     OfflineModePreparationScene.cpp
  * File Function: OfflineModePreparationScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -118,7 +118,7 @@ bool OfflineModePreparationScene::init()
     uplevelButton->addTouchEventListener([this, uplevelCoinLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
             g_offlineModeControl->getHumanPlayer()->addBattleChampionCount();
-            int maxBattleChampionCount = g_offlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
+            const int maxBattleChampionCount = g_offlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
             uplevelCoinLabel->setString(maxBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT ? "" : std::to_string(UPLEVEL_PRICE.at(maxBattleChampionCount)));
         }
         });
