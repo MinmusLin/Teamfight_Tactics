@@ -56,6 +56,9 @@ public:
     // 获取所有连接到服务器的客户端玩家分数
     std::vector<std::map<SOCKET, int>> getPlayerHealthPoints() const;
 
+    // 序列化玩家战斗区地图
+    std::string serializePlayerMap();
+
 private:
     char ipv4[IPV4_ADDRESS_MAX_LENGTH + 1];                 // IPv4 地址
     int port;                                               // 端口

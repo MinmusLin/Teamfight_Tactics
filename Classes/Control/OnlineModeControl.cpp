@@ -249,3 +249,22 @@ std::vector<std::map<SOCKET, int>> OnlineModeControl::getPlayerHealthPoints() co
 {
     return playerHealthPoints;
 }
+
+// 序列化玩家战斗区地图
+std::string OnlineModeControl::serializePlayerMap()
+{
+    std::string serializedMap = "";
+    ChampionCategory(*championMap)[BATTLE_MAP_COLUMNS];
+    humanPlayer->getBattleMap(championMap);
+    for (int row = 0; row < PLACE_MAP_ROWS; ++row) {
+        for (int col = 0; col < BATTLE_MAP_COLUMNS; ++col) {
+            if (championMap[row][col] == NoChampion) {
+                serializedMap += '0';
+            }
+            else {
+                serializedMap += static_cast<char>(championMap[row][col] + 'A' - 1);
+            }
+        }
+    }
+    return serializedMap;
+}
