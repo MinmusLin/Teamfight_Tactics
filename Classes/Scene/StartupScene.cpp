@@ -2,7 +2,7 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     StartupScene.cpp
  * File Function: StartupSceneÀàµÄÊµÏÖ
- * Author:        ÁÖ¼ÌÉê¡¢ÁõÊçÒÇ
+ * Author:        ÁÖ¼ÌÉê
  * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
@@ -18,12 +18,6 @@ using cocos2d::Scene;
 using cocos2d::Sprite;
 using cocos2d::Label;
 using cocos2d::Vec2;
-
-// ÒôÆµÒýÇæÉèÖÃ
-extern int g_backgroundMusicSign;
-extern int g_effectMusicSign;
-extern float g_backgroundMusicVolumn;
-extern float g_effectMusicVolumn;
 
 // ´´½¨³¡¾°
 Scene* StartupScene::createScene()
@@ -41,13 +35,6 @@ bool StartupScene::init()
     if (!Scene::init()) {
         return false;
     }
-
-    // ¼ÓÔØ±³¾°ÒôÀÖ
-    if (g_backgroundMusicSign != DEFAULT_MUSIC_SIGN) {
-        cocos2d::experimental::AudioEngine::stop(g_backgroundMusicSign);
-    }
-    g_backgroundMusicSign = cocos2d::experimental::AudioEngine::play2d("../Resources/Music/BackgroundMusic/StartupScene_BreathAndLife.mp3", true);
-    cocos2d::experimental::AudioEngine::setVolume(g_backgroundMusicSign, g_backgroundMusicVolumn);
 
     // ¼ÓÔØ±³¾°
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();

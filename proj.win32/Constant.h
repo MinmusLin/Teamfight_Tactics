@@ -72,6 +72,7 @@ constexpr int INITIAL_SCENE_BUTTON_OFFSET_Y = -310;                         // ≥
 constexpr float PROMPT_MESSAGE_DURATION = 1.5f;                             // Ã· æ–≈œ¢Õ£¡Ù ±º‰
 
 // ≤Àµ•≥°æ∞…Ë÷√
+constexpr int RANDOM_PROMPT_COUNT = 24;                                     // ÀÊª˙ª∂”≠Ã· æ”Ô ˝¡ø
 constexpr int MENU_SCENE_FONT_SIZE = 24;                                    // ≤Àµ•≥°æ∞◊÷ÃÂ¥Û–°
 constexpr int MENU_SCENE_BUTTONS_OFFSET_X = -296;                           // ≤Àµ•≥°æ∞∞¥≈•”Î±Í«©Œª÷√ X ∆´“∆¡ø
 constexpr int MENU_SCENE_OFFLINE_MODE_BUTTON_OFFSET_Y = -30;                // ≤Àµ•≥°æ∞¡∑œ∞ƒ£ Ω∞¥≈•Œª÷√ Y ∆´“∆¡ø
@@ -132,14 +133,14 @@ constexpr float BATTLE_END_DURATION = 2.0f;                                 // ∂
 
 // …Ë÷√≥°æ∞…Ë÷√
 constexpr int SETTINGS_SCENE_SLIDER_OFFSET_X = -150;                        // …Ë÷√≥°æ∞“Ù¡øª¨∂ØÃı”Î±Í«©Œª÷√ X ∆´“∆¡ø
-constexpr int SETTINGS_SCENE_BGMSLIDER_OFFSET_Y = 75;                       // …Ë÷√≥°æ∞±≥æ∞“Ù¿÷ª¨∂ØÃı”Î±Í«©Œª÷√ Y ∆´“∆¡ø
-constexpr int SETTINGS_SCENE_EFFSLIDER_OFFSET_Y = 0;                        // …Ë÷√≥°æ∞“Ù–ßª¨∂ØÃı”Î±Í«©Œª÷√ Y ∆´“∆¡ø
-constexpr int SETTINGS_SCENE_CHECKBOX_OFFSET_Y = -110;                      // …Ë÷√≥°æ∞ƒ—∂»∏¥—°øÚ”Î±Í«©Œª÷√ Y ∆´“∆¡ø
-constexpr int SETTINGS_SCENE_EASY_CHECKBOX_OFFSET_X = -290;                 // …Ë÷√≥°æ∞ºÚµ•ƒ—∂»∏¥—°øÚ”Î±Í«©Œª÷√ X ∆´“∆¡ø
-constexpr int SETTINGS_SCENE_NORMAL_CHECKBOX_OFFSET_X = -150;               // …Ë÷√≥°æ∞’˝≥£ƒ—∂»∏¥—°øÚ”Î±Í«©Œª÷√ X ∆´“∆¡ø
-constexpr int SETTINGS_SCENE_DIFFICULT_CHECKBOX_OFFSET_X = -10;             // …Ë÷√≥°æ∞¿ßƒ—ƒ—∂»∏¥—°øÚ”Î±Í«©Œª÷√ X ∆´“∆¡ø
-constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_X = -150;            // …Ë÷√≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ X ∆´“∆¡ø
-constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_Y = -274;            // …Ë÷√≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ Y ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_BGMSLIDER_OFFSET_Y = 69;                       // …Ë÷√≥°æ∞±≥æ∞“Ù¿÷“Ù¡øª¨∂ØÃı”Î±Í«©Œª÷√ Y ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_EFFSLIDER_OFFSET_Y = -34;                      // …Ë÷√≥°æ∞“Ù–ß“Ù¡øª¨∂ØÃı”Î±Í«©Œª÷√ Y ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_CHECKBOX_OFFSET_Y = -157;                      // …Ë÷√≥°æ∞ƒ—∂»∏¥—°øÚ”Î±Í«©Œª÷√ Y ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_EASY_CHECKBOX_OFFSET_X = -307;                 // …Ë÷√≥°æ∞ºÚµ•ƒ—∂»∏¥—°øÚ”Î±Í«©Œª÷√ X ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_NORMAL_CHECKBOX_OFFSET_X = -166;               // …Ë÷√≥°æ∞’˝≥£ƒ—∂»∏¥—°øÚ”Î±Í«©Œª÷√ X ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_DIFFICULT_CHECKBOX_OFFSET_X = -25;             // …Ë÷√≥°æ∞¿ßƒ—ƒ—∂»∏¥—°øÚ”Î±Í«©Œª÷√ X ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_X = 529;             // …Ë÷√≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ X ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_Y = -300;            // …Ë÷√≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ Y ∆´“∆¡ø
 constexpr int DEFAULT_MUSIC_SIGN = -1;                                      // ƒ¨»œ“Ù¿÷±Í ∂
 constexpr float DEFAULT_MUSIC_VOLUMN = 0.5f;                                // ƒ¨»œ“Ù¡ø¥Û–°
 

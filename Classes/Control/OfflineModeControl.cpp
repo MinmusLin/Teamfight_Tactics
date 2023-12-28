@@ -14,13 +14,16 @@
 // 玩家昵称
 extern std::string g_PlayerName;
 
+// 游戏难度
+extern Difficulty g_difficulty;
+
 // 构造函数
 OfflineModeControl::OfflineModeControl() :
     Control(2)
 {
     try {
         humanPlayer = new HumanPlayer(g_PlayerName);
-        enemyPlayer = new AIPlayer(GBKToUTF8::getString("AI玩家"), Easy);
+        enemyPlayer = new AIPlayer(GBKToUTF8::getString("AI玩家"), g_difficulty);
     }
     catch (const std::bad_alloc& e) {
         std::cerr << "Memory allocation failed: " << e.what() << std::endl;

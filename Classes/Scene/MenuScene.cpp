@@ -2,7 +2,7 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     MenuScene.cpp
  * File Function: MenuScene类的实现
- * Author:        林继申、刘淑仪
+ * Author:        林继申
  * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
@@ -25,17 +25,11 @@ using cocos2d::Sprite;
 using cocos2d::Label;
 using cocos2d::Vec2;
 
-// 玩家昵称
-extern std::string g_PlayerName;
-
 // 练习模式游戏控制类
 OfflineModeControl* g_offlineModeControl = nullptr;
 
-// 音频引擎设置
-extern int g_backgroundMusicSign;
-extern int g_effectMusicSign;
-extern float g_backgroundMusicVolumn;
-extern float g_effectMusicVolumn;
+// 玩家昵称
+extern std::string g_PlayerName;
 
 // 创建场景
 Scene* MenuScene::createScene()
@@ -53,13 +47,6 @@ bool MenuScene::init()
     if (!Scene::init()) {
         return false;
     }
-    
-    // 加载背景音乐
-    if (g_backgroundMusicSign != DEFAULT_MUSIC_SIGN) {
-        cocos2d::experimental::AudioEngine::stop(g_backgroundMusicSign);
-    }
-    g_backgroundMusicSign = cocos2d::experimental::AudioEngine::play2d("../Resources/Music/BackgroundMusic/MenuScene_DarkSideOfPower.mp3", true);
-    cocos2d::experimental::AudioEngine::setVolume(g_backgroundMusicSign, g_backgroundMusicVolumn);
 
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -114,7 +101,7 @@ bool MenuScene::init()
 
     // 创建一个欢迎提示
     std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    const int number = (rand() % 100 < RANDOM_WELCOME_PROMPT_PROBABILITY * 100) ? std::localtime(&now)->tm_hour : rand() % 24 + 24;
+    const int number = (rand() % 100 < RANDOM_WELCOME_PROMPT_PROBABILITY * 100) ? std::localtime(&now)->tm_hour : rand() % 24 + RANDOM_PROMPT_COUNT;
     auto welcomeLabel = Label::createWithTTF(g_PlayerName + GBKToUTF8::getString(WELCOME_PROMPT.at(number)), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", MENU_SCENE_FONT_SIZE);
     welcomeLabel->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_BUTTONS_OFFSET_X, screenSize.height / 2 + MENU_SCENE_WELCOME_LABEL_OFFSET_Y));
     welcomeLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
