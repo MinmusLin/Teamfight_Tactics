@@ -39,8 +39,11 @@ constexpr int MESSAGE_IDENTIFIER_LENGTH = 10;                               // ·
 constexpr float SERVER_REFRESH_INTERVAL = 0.02f;                            // ¼àÌý·þÎñÆ÷Ë¢ÐÂÊ±¼ä¼ä¸ô
 constexpr char CONNECTION_REFUSED_MSG[] = "Connection refused.";            // ¾Ü¾øÁ¬½ÓÌáÊ¾ÐÅÏ¢
 constexpr char CONNECTION_ACCEPTED_MSG[] = "Connection accepted.";          // ½ÓÊÜÁ¬½ÓÌáÊ¾ÐÅÏ¢
+constexpr char START_GAME_IDENTIFIER[] = "Start game";                      // ¿ªÊ¼ÓÎÏ·ÌáÊ¾ÐÅÏ¢±êÊ¶·û
 constexpr char START_GAME_MSG[] = "Start game.";                            // ¿ªÊ¼ÓÎÏ·ÌáÊ¾ÐÅÏ¢
+constexpr char CURRENT_CONNECTIONS_IDENTIFIER[] = "Connection";             // ·þÎñÆ÷µ±Ç°Á¬½ÓÊýÁ¿±êÊ¶·û
 constexpr char CURRENT_CONNECTIONS_FORMAT[] = "Connection=%d";              // ·þÎñÆ÷µ±Ç°Á¬½ÓÊýÁ¿¸ñÊ½×Ö·û´®
+constexpr char PLAYER_NAME_IDENTIFIER[] = "PlayerName";                     // Íæ¼ÒÐÕÃû±êÊ¶·û
 constexpr char PLAYER_NAME_FORMAT[] = "PlayerName=%s";                      // Íæ¼ÒÐÕÃû¸ñÊ½×Ö·û´®
 
 // ÑÕÉ«ÉèÖÃ
@@ -81,7 +84,7 @@ constexpr int ONLINE_MODE_MENU_SCENE_FONT_SIZE = 30;                        // Á
 constexpr int ONLINE_MODE_MENU_SCENE_IPV4_TEXTFIELD_OFFSET_Y = -167;        // Áª»úÄ£Ê½²Ëµ¥³¡¾° IPv4 ÎÄ±¾¿òÎ»ÖÃ Y Æ«ÒÆÁ¿
 constexpr int ONLINE_MODE_MENU_SCENE_PORT_TEXTFIELD_OFFSET_Y = -275;        // Áª»úÄ£Ê½²Ëµ¥³¡¾°¶Ë¿ÚÎÄ±¾¿òÎ»ÖÃ Y Æ«ÒÆÁ¿
 constexpr int ONLINE_MODE_MENU_SCENE_PROMPT_LABEL_OFFSET_Y = 285;           // Áª»úÄ£Ê½²Ëµ¥³¡¾°ÌáÊ¾±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
-constexpr float START_GAME_BUTTON_APPEARANCE_DURATION = 1.0f;               // Áª»úÄ£Ê½²Ëµ¥³¡¾°¿ªÊ¼ÓÎÏ·°´Å¥³öÏÖÊ±¼ä¼ä¸ô
+constexpr float START_GAME_BUTTON_APPEARANCE_DURATION = 1.5f;               // Áª»úÄ£Ê½²Ëµ¥³¡¾°¿ªÊ¼ÓÎÏ·°´Å¥³öÏÖÊ±¼ä¼ä¸ô
 constexpr float CONNECTION_FAILED_PROMPT_MESSAGE_DURATION = 3.0f;           // ·þÎñÆ÷Á¬½ÓÊ§°ÜÌáÊ¾ÐÅÏ¢Í£ÁôÊ±¼ä
 constexpr float RANDOM_WELCOME_PROMPT_PROBABILITY = 0.5f;                   // Ëæ»ú»¶Ó­ÌáÊ¾Óï¸ÅÂÊ
 
