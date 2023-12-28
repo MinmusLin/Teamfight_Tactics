@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     AppDelegate.cpp
  * File Function: AppDelegate类的实现
- * Author:        林继申
- * Update Date:   2023/12/27
+ * Author:        林继申、刘淑仪
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -11,22 +11,13 @@
 #include "Scene/StartupScene.h"
 #include "GBKToUTF8/GBKToUTF8.h"
 #include "proj.win32/Constant.h"
-
-// 音频引擎选择
-#define USE_AUDIO_ENGINE 1
-#define USE_SIMPLE_AUDIO_ENGINE 0
-#if USE_AUDIO_ENGINE && USE_SIMPLE_AUDIO_ENGINE
-#error "Don't use AudioEngine and SimpleAudioEngine at the same time."
-#endif
-
-// 命名空间
-#if USE_AUDIO_ENGINE
 #include "audio/include/AudioEngine.h"
-using namespace cocos2d::experimental;
-#elif USE_SIMPLE_AUDIO_ENGINE
-#include "audio/include/SimpleAudioEngine.h"
-using namespace CocosDenshion;
-#endif
+
+// 音频引擎设置
+int g_backgroundMusicSign = DEFAULT_MUSIC_SIGN;
+int g_effectMusicSign = DEFAULT_MUSIC_SIGN;
+float g_backgroundMusicVolumn = DEFAULT_MUSIC_VOLUMN;
+float g_effectMusicVolumn = DEFAULT_MUSIC_VOLUMN;
 
 // 分辨率设置
 static cocos2d::Size s_designResolutionSize = cocos2d::Size(DESIGN_RESOLUTION_WIDTH, DESIGN_RESOLUTION_HEIGHT);
@@ -34,22 +25,10 @@ static cocos2d::Size s_smallResolutionSize = cocos2d::Size(SMALL_RESOLUTION_WIDT
 static cocos2d::Size s_mediumResolutionSize = cocos2d::Size(MEDIUM_RESOLUTION_WIDTH, MEDIUM_RESOLUTION_HEIGHT);
 static cocos2d::Size s_largeResolutionSize = cocos2d::Size(LARGE_RESOLUTION_WIDTH, LARGE_RESOLUTION_HEIGHT);
 
-// 设置音乐引擎
-int backgroundMusic = -1;
-int effectMusic = -1;
-
-// 设置背景音乐音量和音效音量
-float g_backgroundMusicVolumn = 0.5f;
-float g_effectVolumn = 0.5f;
-
 // 析构函数
 AppDelegate::~AppDelegate()
 {
-#if USE_AUDIO_ENGINE
-    AudioEngine::end();
-#elif USE_SIMPLE_AUDIO_ENGINE
-    SimpleAudioEngine::end();
-#endif
+    cocos2d::experimental::AudioEngine::end();
 }
 
 // 初始化 OpenGL 上下文属性
@@ -104,22 +83,12 @@ bool AppDelegate::applicationDidFinishLaunching()
 void AppDelegate::applicationDidEnterBackground()
 {
     cocos2d::Director::getInstance()->stopAnimation();
-#if USE_AUDIO_ENGINE
-    AudioEngine::pauseAll();
-#elif USE_SIMPLE_AUDIO_ENGINE
-    SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
-    SimpleAudioEngine::getInstance()->pauseAllEffects();
-#endif
+    cocos2d::experimental::AudioEngine::pauseAll();
 }
 
 // 当应用程序从后台返回到前台时调用此函数
 void AppDelegate::applicationWillEnterForeground()
 {
     cocos2d::Director::getInstance()->startAnimation();
-#if USE_AUDIO_ENGINE
-    AudioEngine::resumeAll();
-#elif USE_SIMPLE_AUDIO_ENGINE
-    SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
-    SimpleAudioEngine::getInstance()->resumeAllEffects();
-#endif
+    cocos2d::experimental::AudioEngine::resumeAll();
 }
