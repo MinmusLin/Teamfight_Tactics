@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     StartupScene.cpp
  * File Function: StartupScene类的实现
- * Author:        林继申
- * Update Date:   2023/12/27
+ * Author:        林继申、刘淑仪
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -19,13 +19,11 @@ using cocos2d::Sprite;
 using cocos2d::Label;
 using cocos2d::Vec2;
 
-// 设置音乐引擎
-extern int backgroundMusic;
-extern int effectMusic;
-
-// 音量变量
+// 音频引擎设置
+extern int g_backgroundMusicSign;
+extern int g_effectMusicSign;
 extern float g_backgroundMusicVolumn;
-extern float g_effectVolumn;
+extern float g_effectMusicVolumn;
 
 // 创建场景
 Scene* StartupScene::createScene()
@@ -45,11 +43,11 @@ bool StartupScene::init()
     }
 
     // 加载背景音乐
-    if (backgroundMusic != -1) {
-        cocos2d::experimental::AudioEngine::stop(backgroundMusic);
+    if (g_backgroundMusicSign != DEFAULT_MUSIC_SIGN) {
+        cocos2d::experimental::AudioEngine::stop(g_backgroundMusicSign);
     }
-    backgroundMusic = cocos2d::experimental::AudioEngine::play2d("../Resources/Music/BackgroundMusic/StartupScene_BreathAndLife.mp3", true);
-    cocos2d::experimental::AudioEngine::setVolume(backgroundMusic, g_backgroundMusicVolumn);
+    g_backgroundMusicSign = cocos2d::experimental::AudioEngine::play2d("../Resources/Music/BackgroundMusic/StartupScene_BreathAndLife.mp3", true);
+    cocos2d::experimental::AudioEngine::setVolume(g_backgroundMusicSign, g_backgroundMusicVolumn);
 
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();

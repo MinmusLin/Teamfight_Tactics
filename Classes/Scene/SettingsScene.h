@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     SettingsScene.h
  * File Function: SettingsScene类的定义
- * Author:        刘淑仪
- * Update Date:   2023/12/27
+ * Author:        刘淑仪、林继申
+ * Update Date:   2023/12/28
  ****************************************************************/
 
 #pragma once
@@ -12,10 +12,10 @@
 
 #include "cocos2d.h"
 
- /*
-  * Class Name:     SettingsScene
-  * Class Function: 设置场景类
-  */
+/*
+ * Class Name:     SettingsScene
+ * Class Function: 设置场景类
+ */
 class SettingsScene : public cocos2d::Scene {
 public:
     // 创建场景
@@ -24,7 +24,7 @@ public:
     // 初始化场景
     virtual bool init();
 
-    // 实现 StartupScene 类的 create 方法
+    // 实现 SettingsScene 类的 create 方法
     CREATE_FUNC(SettingsScene);
 };
 

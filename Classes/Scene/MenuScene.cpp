@@ -2,7 +2,7 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     MenuScene.cpp
  * File Function: MenuScene类的实现
- * Author:        林继申
+ * Author:        林继申、刘淑仪
  * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
@@ -31,13 +31,11 @@ extern std::string g_PlayerName;
 // 练习模式游戏控制类
 OfflineModeControl* g_offlineModeControl = nullptr;
 
-// 设置音乐引擎
-extern int backgroundMusic;
-extern int effectMusic;
-
-// 音量变量
+// 音频引擎设置
+extern int g_backgroundMusicSign;
+extern int g_effectMusicSign;
 extern float g_backgroundMusicVolumn;
-extern float g_effectVolumn;
+extern float g_effectMusicVolumn;
 
 // 创建场景
 Scene* MenuScene::createScene()
@@ -57,11 +55,11 @@ bool MenuScene::init()
     }
     
     // 加载背景音乐
-    if (backgroundMusic != -1) {
-        cocos2d::experimental::AudioEngine::stop(backgroundMusic);
+    if (g_backgroundMusicSign != DEFAULT_MUSIC_SIGN) {
+        cocos2d::experimental::AudioEngine::stop(g_backgroundMusicSign);
     }
-    backgroundMusic = cocos2d::experimental::AudioEngine::play2d("../Resources/Music/BackgroundMusic/MenuScene_DarkSideOfPower.mp3", true);
-    cocos2d::experimental::AudioEngine::setVolume(backgroundMusic, g_backgroundMusicVolumn);
+    g_backgroundMusicSign = cocos2d::experimental::AudioEngine::play2d("../Resources/Music/BackgroundMusic/MenuScene_DarkSideOfPower.mp3", true);
+    cocos2d::experimental::AudioEngine::setVolume(g_backgroundMusicSign, g_backgroundMusicVolumn);
 
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -106,7 +104,6 @@ bool MenuScene::init()
     settingsButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, SettingsScene::createScene(), cocos2d::Color3B::WHITE));
-            // TODO: 设置场景接口
         }
         });
 
