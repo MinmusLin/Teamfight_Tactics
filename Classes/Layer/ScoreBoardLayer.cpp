@@ -2,11 +2,12 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     ScoreBoardLayer.cpp
  * File Function: ScoreBoardLayer类的实现
- * Author:        刘淑仪、林继申
- * Update Date:   2023/12/27
+ * Author:        林继申、刘淑仪
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
+#include <WinSock2.h>
 #include <algorithm>
 #include <vector>
 #include <iostream>
@@ -93,14 +94,29 @@ void ScoreBoardLayer::showScoreBoard(HumanPlayer* humanPlayer, AIPlayer* enemyPl
 }
 
 // 显示分数表（联机模式）
-void ScoreBoardLayer::showScoreBoard(int playerNum, HumanPlayer** players)
+void ScoreBoardLayer::showScoreBoard(const int playerNum, const std::vector<std::map<SOCKET, std::string>>& playerNamesMap, const std::vector<std::map<SOCKET, int>>& playerHealthPointsMap)
 {
-    std::vector<HumanPlayer*> sortedPlayers(players, players + playerNum);
-    std::sort(sortedPlayers.begin(), sortedPlayers.end(), [](const HumanPlayer* a, const HumanPlayer* b) {
-        return a->getHealthPoints() > b->getHealthPoints();
+    std::vector<std::pair<SOCKET, int>> healthPointsVec;
+    for (const auto& map : playerHealthPointsMap) {
+        for (const auto& pair : map) {
+            healthPointsVec.push_back(pair);
+        }
+    }
+    std::sort(healthPointsVec.begin(), healthPointsVec.end(), [](const std::pair<SOCKET, int>& a, const std::pair<SOCKET, int>& b) {
+        return a.second > b.second;
         });
+    std::vector<std::string> sortedPlayerNames;
+    for (const auto& pair : healthPointsVec) {
+        for (const auto& map : playerNamesMap) {
+            auto it = map.find(pair.first);
+            if (it != map.end()) {
+                sortedPlayerNames.push_back(it->second);
+                break;
+            }
+        }
+    }
     for (int i = 0; i < playerNum; i++) {
-        playerNames[i]->setString(sortedPlayers[i]->getPlayerName());
-        healthPoints[i]->setString(std::to_string(sortedPlayers[i]->getHealthPoints()));
+        playerNames[i]->setString(sortedPlayerNames[i]);
+        healthPoints[i]->setString(std::to_string(healthPointsVec[i].second));
     }
 }

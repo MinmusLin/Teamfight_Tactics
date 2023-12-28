@@ -3,12 +3,13 @@
  * File Name:     Server.cpp
  * File Function: Server类的实现
  * Author:        林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
 #pragma comment(lib, "Ws2_32.lib")
 #include <iostream>
+#include <sstream>
 #include <thread>
 #include <chrono>
 #include <iomanip>
@@ -41,7 +42,7 @@ void clientHandler(const SOCKET clientSocket, Server& server)
         std::cout << " [Client ID: " << clientSocket << "] Message: " << buffer << std::endl;
 
         // 接受玩家姓名信息
-        if (!strncmp(buffer, "PlayerName", MESSAGE_IDENTIFIER_LENGTH)) {
+        if (!strncmp(buffer, PLAYER_NAME_IDENTIFIER, MESSAGE_IDENTIFIER_LENGTH)) {
             char playerName[BUFFER_SIZE];
             sscanf(buffer, PLAYER_NAME_FORMAT, playerName);
             for (auto& map : server.playerNames) {
@@ -54,9 +55,10 @@ void clientHandler(const SOCKET clientSocket, Server& server)
 
         // 检测是否开始游戏
         if (server.areAllReady()) {
-            std::cout << "Broadcast: " << START_GAME_MSG << std::endl;
+            strcpy(buffer, server.serializePlayerNames().c_str());
+            std::cout << "Broadcast: " << buffer << std::endl;
             for (const SOCKET& sock : server.clients) {
-                send(sock, START_GAME_MSG, static_cast<int>(strlen(START_GAME_MSG)), 0);
+                send(sock, buffer, static_cast<int>(strlen(buffer)), 0);
             }
         }
     }
@@ -85,9 +87,10 @@ void clientHandler(const SOCKET clientSocket, Server& server)
 
     // 检测是否开始游戏
     if (server.areAllReady()) {
-        std::cout << "Broadcast: " << START_GAME_MSG << std::endl;
+        strcpy(buffer, server.serializePlayerNames().c_str());
+        std::cout << "Broadcast: " << buffer << std::endl;
         for (const SOCKET& sock : server.clients) {
-            send(sock, START_GAME_MSG, static_cast<int>(strlen(START_GAME_MSG)), 0);
+            send(sock, buffer, static_cast<int>(strlen(buffer)), 0);
         }
     }
 }
@@ -250,4 +253,19 @@ void Server::closeClientSocket(const SOCKET clientSocket)
     if (clientSocketIndex != playerNames.end()) {
         playerNames.erase(clientSocketIndex);
     }
+}
+
+// 序列化所有连接到服务器的客户端玩家昵称
+std::string Server::serializePlayerNames()
+{
+    std::stringstream ss;
+    ss << START_GAME_MSG;
+    for (const auto& map : playerNames) {
+        for (const auto& pair : map) {
+            ss << pair.first << ":" << pair.second << ",";
+        }
+        ss.seekp(-1, ss.cur);
+        ss << ";";
+    }
+    return ss.str();
 }

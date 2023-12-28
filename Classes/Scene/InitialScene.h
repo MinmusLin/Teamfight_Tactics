@@ -3,7 +3,7 @@
  * File Name:     InitialScene.h
  * File Function: InitialScene类的定义
  * Author:        林继申
- * Update Date:   2023/12/17
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -27,6 +27,13 @@ public:
 
     // 实现 InitialScene 类的 create 方法
     CREATE_FUNC(InitialScene);
+
+private:
+    // 检查字符合法性
+    bool isValidCharacter(const char32_t ch);
+
+    // 检查字符串合法性
+    bool isValidString(const std::string& str);
 };
 
 #endif // !_INITIAL_SCENE_H_

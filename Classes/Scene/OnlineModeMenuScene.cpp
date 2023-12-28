@@ -3,11 +3,12 @@
  * File Name:     OnlineModeMenuScene.cpp
  * File Function: OnlineModeMenuScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
 #include <iostream>
+#include <cstring>
 #include "OnlineModeMenuScene.h"
 #include "Scene/OnlineModePreparationScene.h"
 #include "Control/OnlineModeControl.h"
@@ -80,12 +81,16 @@ bool OnlineModeMenuScene::init()
     portTextField->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(portTextField);
 
-    // 创建一个提示标签
+    // 创建提示标签
     auto promptLabel = Label::createWithTTF("", "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", ONLINE_MODE_MENU_SCENE_FONT_SIZE);
     promptLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + ONLINE_MODE_MENU_SCENE_PROMPT_LABEL_OFFSET_Y));
     promptLabel->setVisible(false);
     promptLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(promptLabel);
+    auto waitingLabel = Label::createWithTTF(GBKToUTF8::getString("成功与服务器建立连接"), "../Resources/Fonts/DingDingJinBuTi.ttf", ONLINE_MODE_MENU_SCENE_FONT_SIZE);
+    waitingLabel->setPosition(Vec2(screenSize.width / 2 - ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_X, screenSize.height / 2 + ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_Y));
+    waitingLabel->setVisible(false);
+    this->addChild(waitingLabel);
 
     // 创建服务器连接失败提示
     auto connectionFailedPrompt = Sprite::create("../Resources/Scenes/ServerConnectionFailedPrompt.png");
@@ -94,7 +99,7 @@ bool OnlineModeMenuScene::init()
     this->addChild(connectionFailedPrompt, 1);
 
     // 为按钮添加事件处理器
-    joinRoomButton->addTouchEventListener([this, ipv4TextField, portTextField, promptLabel, connectionFailedPrompt, joinRoomButton, screenSize, startGameButton](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+    joinRoomButton->addTouchEventListener([this, ipv4TextField, portTextField, promptLabel, connectionFailedPrompt, joinRoomButton, screenSize, startGameButton, waitingLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             std::string ipv4 = ipv4TextField->getString();
             std::string port = portTextField->getString();
@@ -153,7 +158,9 @@ bool OnlineModeMenuScene::init()
                     joinRoomButton->removeFromParent();
                     ipv4TextField->removeFromParent();
                     portTextField->removeFromParent();
-                    this->scheduleOnce([startGameButton](float dt) {
+                    waitingLabel->setVisible(true);
+                    this->scheduleOnce([startGameButton, waitingLabel](float dt) {
+                        waitingLabel->setVisible(false);
                         startGameButton->setEnabled(true);
                         startGameButton->setVisible(true);
                         }, START_GAME_BUTTON_APPEARANCE_DURATION, "StartGameButtonAppearance");
@@ -175,15 +182,17 @@ bool OnlineModeMenuScene::init()
                         int recvSize = recv(g_onlineModeControl->getSocket(), buffer, BUFFER_SIZE, 0);
                         if (recvSize > 0) {
                             buffer[recvSize] = '\0';
-                            if (!strncmp(buffer, "Connection", MESSAGE_IDENTIFIER_LENGTH)) {
+                            if (!strncmp(buffer, CURRENT_CONNECTIONS_IDENTIFIER, MESSAGE_IDENTIFIER_LENGTH)) {
                                 int currentConnections;
                                 sscanf(buffer, CURRENT_CONNECTIONS_FORMAT, &currentConnections);
                                 promptLabel->setString(GBKToUTF8::getString("已建立连接 (服务器当前连接数量：") + std::to_string(currentConnections) + GBKToUTF8::getString(")"));
                                 promptLabel->setVisible(true);
                                 g_onlineModeControl->setCurrentConnections(currentConnections);
                             }
-                            if (!strncmp(buffer, "Start game", MESSAGE_IDENTIFIER_LENGTH)) {
+                            if (!strncmp(buffer, START_GAME_IDENTIFIER, MESSAGE_IDENTIFIER_LENGTH)) {
                                 this->unschedule("ServerMessageListener"); // 关闭服务器消息监听
+                                std::string playerNamesBuffer = static_cast<std::string>(buffer);
+                                g_onlineModeControl->deserializePlayerNames(playerNamesBuffer);
                                 cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, OnlineModePreparationScene::createScene(), cocos2d::Color3B::WHITE));
                             }
                         }
@@ -192,17 +201,22 @@ bool OnlineModeMenuScene::init()
             }
         }
         });
-    returnMenuButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+    returnMenuButton->addTouchEventListener([this](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+            this->unschedule("ServerMessageListener"); // 关闭服务器消息监听
+            delete g_onlineModeControl;
+            g_onlineModeControl = nullptr;
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });
-    startGameButton->addTouchEventListener([startGameButton](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+    startGameButton->addTouchEventListener([startGameButton, waitingLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             char buffer[BUFFER_SIZE];
             sprintf(buffer, PLAYER_NAME_FORMAT, cocos2d::UserDefault::getInstance()->getStringForKey("PlayerName").c_str());
             g_onlineModeControl->sendMessage(buffer, strlen(buffer));
             startGameButton->removeFromParent();
+            waitingLabel->setString(GBKToUTF8::getString("请等待其他玩家开始游戏"));
+            waitingLabel->setVisible(true);
         }
         });
 

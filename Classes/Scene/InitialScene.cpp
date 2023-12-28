@@ -3,10 +3,12 @@
  * File Name:     InitialScene.cpp
  * File Function: InitialScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
+#include <locale>
+#include <codecvt>
 #include "InitialScene.h"
 #include "MenuScene.h"
 #include "Button/HoverButton.h"
@@ -61,7 +63,7 @@ bool InitialScene::init()
         if (type == cocos2d::ui::TextField::EventType::INSERT_TEXT || type == cocos2d::ui::TextField::EventType::DELETE_BACKWARD) {
             auto textField = dynamic_cast<cocos2d::ui::TextField*>(sender);
             std::string nickname = textField->getString();
-            std::string text = GBKToUTF8::getString("欢迎你！") + nickname;
+            std::string text = /*GBKToUTF8::getString("欢迎你！")*/u8"欢迎你！" + nickname;
             promptLabel->setString(text);
         }
         });
@@ -75,7 +77,7 @@ bool InitialScene::init()
     startButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + INITIAL_SCENE_BUTTON_OFFSET_Y));
 
     // 创建一个提示
-    auto nameLabel = Label::createWithTTF(GBKToUTF8::getString("游戏昵称不能为空"), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", INITIAL_SCENE_FONT_SIZE);
+    auto nameLabel = Label::createWithTTF("", "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", INITIAL_SCENE_FONT_SIZE);
     nameLabel->setPosition(Vec2(screenSize.width / 2 + INITIAL_SCENE_LABELS_OFFSET_X, screenSize.height / 2 + INITIAL_SCENE_NAME_LABEL_OFFSET_Y));
     nameLabel->setVisible(false);
     nameLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
@@ -85,16 +87,24 @@ bool InitialScene::init()
     startButton->addTouchEventListener([this, textField, nameLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
             std::string nickname = textField->getString();
-            if (!nickname.empty()) {
-                cocos2d::UserDefault::getInstance()->setStringForKey("PlayerName", nickname); // PlayerName 内部存储编码为 UTF-8，无需调用 GBKToUTF8 单例方法
-                cocos2d::UserDefault::getInstance()->flush();
-                cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
-            }
-            else {
+            if (nickname.empty()) {
+                nameLabel->setString(GBKToUTF8::getString("游戏昵称不能为空"));
                 nameLabel->setVisible(true);
                 this->scheduleOnce([nameLabel](float dt) {
                     nameLabel->setVisible(false);
-                    }, PROMPT_MESSAGE_DURATION, "HidePromptLabel");
+                    }, PROMPT_MESSAGE_DURATION, "HideEmptyPromptLabel");
+            }
+            else if (!isValidString(nickname)) {
+                nameLabel->setString(GBKToUTF8::getString("游戏昵称存在非法字符"));
+                nameLabel->setVisible(true);
+                this->scheduleOnce([nameLabel](float dt) {
+                    nameLabel->setVisible(false);
+                    }, PROMPT_MESSAGE_DURATION, "HideInvalidPromptLabel");
+            }
+            else {
+                cocos2d::UserDefault::getInstance()->setStringForKey("PlayerName", nickname); // PlayerName 内部存储编码为 UTF-8，无需调用 GBKToUTF8 单例方法
+                cocos2d::UserDefault::getInstance()->flush();
+                cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
             }
         }
         });
@@ -102,5 +112,33 @@ bool InitialScene::init()
     // 将按钮添加到场景中
     this->addChild(startButton);
 
+    return true;
+}
+
+// 检查字符合法性
+bool InitialScene::isValidCharacter(const char32_t ch)
+{
+    if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')) {
+        return true;
+    }
+    if (ch >= '0' && ch <= '9') {
+        return true;
+    }
+    if ((ch >= 0x4E00 && ch <= 0x9FFF) || (ch >= 0x3400 && ch <= 0x4DBF)) {
+        return true;
+    }
+    return false;
+}
+
+// 检查字符串合法性
+bool InitialScene::isValidString(const std::string& str)
+{
+    std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> converter;
+    std::u32string utf32str = converter.from_bytes(str);
+    for (auto ch : utf32str) {
+        if (!isValidCharacter(ch)) {
+            return false;
+        }
+    }
     return true;
 }

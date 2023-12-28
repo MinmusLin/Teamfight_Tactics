@@ -145,7 +145,7 @@ bool OnlineModePreparationScene::init()
     // 创建分数表层
     auto scoreBoardLayer = ScoreBoardLayer::create();
     scoreBoardLayer->initialize(g_onlineModeControl->getCurrentConnections());
-    //scoreBoardLayer->showScoreBoard(g_onlineModeControl->getHumanPlayer(), g_onlineModeControl->getEnemyPlayer());
+    scoreBoardLayer->showScoreBoard(g_onlineModeControl->getCurrentConnections(), g_onlineModeControl->getPlayerNames(), g_onlineModeControl->getPlayerHealthPoints());
     scoreBoardLayer->setName("ScoreBoardLayer");
     this->addChild(scoreBoardLayer);
 
@@ -160,7 +160,7 @@ void OnlineModePreparationScene::onEnter()
 
     // 重置分数表层
     auto scoreBoardLayer = dynamic_cast<ScoreBoardLayer*>(this->getChildByName("ScoreBoardLayer"));
-    //scoreBoardLayer->showScoreBoard(g_onlineModeControl->getHumanPlayer(), g_onlineModeControl->getEnemyPlayer());
+    scoreBoardLayer->showScoreBoard(g_onlineModeControl->getCurrentConnections(), g_onlineModeControl->getPlayerNames(), g_onlineModeControl->getPlayerHealthPoints());
 
     // 重置进度条和标签
     auto progressBar = dynamic_cast<cocos2d::ui::LoadingBar*>(this->getChildByName("CountdownLoadingBar"));

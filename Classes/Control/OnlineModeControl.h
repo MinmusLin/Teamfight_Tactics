@@ -47,16 +47,27 @@ public:
     // 初始化对战类
     void initializeBattle();
 
+    // 反序列化所有连接到服务器的客户端玩家昵称
+    void deserializePlayerNames(const std::string& data);
+
+    // 获取所有连接到服务器的客户端玩家昵称
+    std::vector<std::map<SOCKET, std::string>> getPlayerNames() const;
+
+    // 获取所有连接到服务器的客户端玩家分数
+    std::vector<std::map<SOCKET, int>> getPlayerHealthPoints() const;
+
 private:
-    char ipv4[IPV4_ADDRESS_MAX_LENGTH + 1]; // IPv4 地址
-    int port;                               // 端口
-    WSADATA wsaData;                        // Windows Sockets API
-    SOCKET s;                               // 客户端的 socket
-    struct sockaddr_in server;              // 服务器地址信息
-    char message[BUFFER_SIZE];              // 数据缓冲区
-    int recvSize;                           // 接收数据大小
-    int currentConnections;                 // 服务器当前连接数量
-    HumanPlayer* enemyPlayer;               // 敌人玩家
+    char ipv4[IPV4_ADDRESS_MAX_LENGTH + 1];                 // IPv4 地址
+    int port;                                               // 端口
+    WSADATA wsaData;                                        // Windows Sockets API
+    SOCKET s;                                               // 客户端的 socket
+    struct sockaddr_in server;                              // 服务器地址信息
+    char message[BUFFER_SIZE];                              // 数据缓冲区
+    int recvSize;                                           // 接收数据大小
+    int currentConnections;                                 // 服务器当前连接数量
+    HumanPlayer* enemyPlayer;                               // 敌人玩家
+    std::vector<std::map<SOCKET, std::string>> playerNames; // 所有连接到服务器的客户端玩家昵称
+    std::vector<std::map<SOCKET, int>> playerHealthPoints;  // 所有连接到服务器的客户端玩家分数
 };
 
 #endif // !_ONLINE_MODE_CONTROL_H_

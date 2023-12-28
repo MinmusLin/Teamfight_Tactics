@@ -204,3 +204,45 @@ void OnlineModeControl::initializeBattle()
         throw;
     }
 }
+
+// 反序列化所有连接到服务器的客户端玩家昵称
+void OnlineModeControl::deserializePlayerNames(const std::string& data)
+{
+    if (data.substr(0, strlen(START_GAME_MSG)) == static_cast<std::string>(START_GAME_MSG)) {
+        std::string newData = data.substr(strlen(START_GAME_MSG));
+        std::istringstream ss(newData);
+        std::string mapStr;
+        while (std::getline(ss, mapStr, ';')) {
+            if (!mapStr.empty()) {
+                std::istringstream mapStream(mapStr);
+                std::string pairStr;
+                std::map<SOCKET, std::string> map;
+                SOCKET key;
+                while (std::getline(mapStream, pairStr, ',')) {
+                    auto separatorPos = pairStr.find(':');
+                    if (separatorPos != std::string::npos) {
+                        key = std::stol(pairStr.substr(0, separatorPos));
+                        std::string value = pairStr.substr(separatorPos + 1);
+                        map[key] = value;
+                    }
+                }
+                if (!map.empty()) {
+                    playerNames.push_back(map);
+                    playerHealthPoints.push_back({ { key, INITIAL_HEALTH_POINTS } });
+                }
+            }
+        }
+    }
+}
+
+// 获取所有连接到服务器的客户端玩家昵称
+std::vector<std::map<SOCKET, std::string>> OnlineModeControl::getPlayerNames() const
+{
+    return playerNames;
+}
+
+// 获取所有连接到服务器的客户端玩家分数
+std::vector<std::map<SOCKET, int>> OnlineModeControl::getPlayerHealthPoints() const
+{
+    return playerHealthPoints;
+}

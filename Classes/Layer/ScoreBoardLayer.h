@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     ScoreBoardLayer.h
  * File Function: ScoreBoardLayer类的定义
- * Author:        刘淑仪、林继申
- * Update Date:   2023/12/27
+ * Author:        林继申、刘淑仪
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -11,6 +11,7 @@
 #ifndef _SCORE_BOARD_LAYER_H_
 #define _SCORE_BOARD_LAYER_H_
 
+#include <vector>
 #include "cocos2d.h"
 #include "Player/HumanPlayer.h"
 #include "Player/AIPlayer.h"
@@ -34,7 +35,7 @@ public:
     void showScoreBoard(HumanPlayer* humanPlayer, AIPlayer* enemyPlayer);
 
     // 显示分数表（联机模式）
-    void showScoreBoard(const int playerNum, HumanPlayer** players);
+    void showScoreBoard(const int playerNum, const std::vector<std::map<SOCKET, std::string>>& playerNamesMap, const std::vector<std::map<SOCKET, int>>& playerHealthPointsMap);
 
     // 实现 ScoreBoardLayer 类的 create 方法
     CREATE_FUNC(ScoreBoardLayer);

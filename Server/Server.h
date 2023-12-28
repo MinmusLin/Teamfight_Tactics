@@ -3,7 +3,7 @@
  * File Name:     Server.h
  * File Function: Server类的定义
  * Author:        林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -55,6 +55,9 @@ private:
 
     // 关闭客户端套接字
     void closeClientSocket(const SOCKET clientSocket);
+
+    // 序列化所有连接到服务器的客户端玩家昵称
+    std::string serializePlayerNames();
 };
 
 #endif // !_SERVER_H_
