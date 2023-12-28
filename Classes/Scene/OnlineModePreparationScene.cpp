@@ -9,6 +9,7 @@
 
 #include "OnlineModePreparationScene.h"
 #include "Control/OnlineModeControl.h"
+#include "Scene/OnlineModeBattleScene.h"
 #include "Button/HoverButton.h"
 #include "Layer/ScoreBoardLayer.h"
 #include "GBKToUTF8/GBKToUTF8.h"
@@ -206,6 +207,6 @@ void OnlineModePreparationScene::setScheduleOnce(cocos2d::ui::LoadingBar* progre
         _eventDispatcher->dispatchEvent(&event);
 
         // 运行练习模式对战场景
-        //cocos2d::Director::getInstance()->pushScene(OnlineModeBattleScene::create());
+        cocos2d::Director::getInstance()->pushScene(OnlineModeBattleScene::create());
         }, BATTLE_SCENE_LOADINGBAR_DURATION + SCENE_TRANSITION_DURATION, "IsAlreadyPrepared");
 }

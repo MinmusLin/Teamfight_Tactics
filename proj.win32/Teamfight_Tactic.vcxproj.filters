@@ -108,6 +108,9 @@
     <ClCompile Include="..\Classes\Scene\OnlineModePreparationScene.cpp">
       <Filter>Classes\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Scene\OnlineModeBattleScene.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -177,6 +180,9 @@
       <Filter>Classes\Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\OnlineModePreparationScene.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\OnlineModeBattleScene.h">
       <Filter>Classes\Scene</Filter>
     </ClInclude>
   </ItemGroup>
