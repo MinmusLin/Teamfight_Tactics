@@ -157,10 +157,10 @@ public:
     void setManaBar(Sprite* ManaBar);
 
     // 获取武器精灵类指针
-    Sprite* Champion::getSword() const;
+    Sprite* getSword() const;
 
-    // 获取武器精灵类指针
-    void Champion::bond();
+    // 羁绊效果
+    void bond();
 
 private:
     Battle* currentBattle;             // 战斗类

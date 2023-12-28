@@ -3,7 +3,7 @@
  * File Name:     Battle.cpp
  * File Function: Battle类的实现
  * Author:        杨宇琨、林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/28
  * License:       MIT License
  ****************************************************************/
 
@@ -125,142 +125,32 @@ void Battle::setBattleSituation(const BattleSituation battleSituation)
     this->battleSituation = battleSituation;
 }
 
-// 我方获取羁绊
+// 获取我方羁绊效果
 std::vector<int> Battle::getMyBond() const
 {
     return myBond;
 }
 
-// 获取敌方羁绊
+// 获取敌方羁绊效果
 std::vector<int> Battle::getEnemyBond() const
 {
     return enemyBond;
 }
 
-// 加强效果
-void Battle::bondEffect(Bond bond, bool isMy)
+// 羁绊效果
+void Battle::bondEffect(const Bond bond, const bool isMyFlag)
 {
-    if (isMy) {
-        switch (bond) {
-            case Brotherhood:
-                for (int i = 0; i < PLACE_MAP_ROWS; i++) {
-                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                        if (championMap[i][j] != nullptr) {
-                            if (championMap[i][j]->getAttributes().bond == Brotherhood) {
-                                championMap[i][j]->bond();
-                            }
-                        }
-                    }
-                }
-                break;
-            case Lout:
-                for (int i = 0; i < PLACE_MAP_ROWS; i++) {
-                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                        if (championMap[i][j] != nullptr) {
-                            if (championMap[i][j]->getAttributes().bond == Lout) {
-                                championMap[i][j]->bond();
-                            }
-                        }
-                    }
-                }
-                break;
-            case DarkSide:
-                for (int i = 0; i < PLACE_MAP_ROWS; i++) {
-                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                        if (championMap[i][j] != nullptr) {
-                            if (championMap[i][j]->getAttributes().bond == DarkSide) {
-                                championMap[i][j]->bond();
-                            }
-                        }
-                    }
-                }
-                break;
-            case GoodShooter:
-                for (int i = 0; i < PLACE_MAP_ROWS; i++) {
-                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                        if (championMap[i][j] != nullptr) {
-                            if (championMap[i][j]->getAttributes().bond == GoodShooter) {
-                                championMap[i][j]->bond();
-                            }
-                        }
-                    }
-                }
-                break;
-            case PopStar:
-                for (int i = 0; i < PLACE_MAP_ROWS; i++) {
-                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                        if (championMap[i][j] != nullptr) {
-                            if (championMap[i][j]->getAttributes().bond == PopStar) {
-                                championMap[i][j]->bond();
-                            }
-                        }
-                    }
-                }
-                break;
-            default:
-                break;
+    if (bond == NoBond) {
+        return;
+    }
+    int startRow = isMyFlag ? 0 : PLACE_MAP_ROWS;
+    int endRow = isMyFlag ? PLACE_MAP_ROWS : BATTLE_MAP_ROWS;
+    for (int i = startRow; i < endRow; i++) {
+        for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+            Champion* champion = championMap[i][j];
+            if (champion && champion->getAttributes().bond == bond) {
+                champion->bond();
+            }
         }
     }
-    else {
-        switch (bond) {
-            case Brotherhood:
-                for (int i = PLACE_MAP_ROWS; i < BATTLE_MAP_ROWS; i++) {
-                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                        if (championMap[i][j] != nullptr) {
-                            if (championMap[i][j]->getAttributes().bond == Brotherhood) {
-                                championMap[i][j]->bond();
-                            }
-                        }
-                    }
-                }
-                break;
-            case Lout:
-                for (int i = PLACE_MAP_ROWS; i < BATTLE_MAP_ROWS; i++) {
-                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                        if (championMap[i][j] != nullptr) {
-                            if (championMap[i][j]->getAttributes().bond == Lout) {
-                                championMap[i][j]->bond();
-                            }
-                        }
-                    }
-                }
-                break;
-            case DarkSide:
-                for (int i = PLACE_MAP_ROWS; i < BATTLE_MAP_ROWS; i++) {
-                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                        if (championMap[i][j] != nullptr) {
-                            if (championMap[i][j]->getAttributes().bond == DarkSide) {
-                                championMap[i][j]->bond();
-                            }
-                        }
-                    }
-                }
-                break;
-            case GoodShooter:
-                for (int i = PLACE_MAP_ROWS; i < BATTLE_MAP_ROWS; i++) {
-                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                        if (championMap[i][j] != nullptr) {
-                            if (championMap[i][j]->getAttributes().bond == GoodShooter) {
-                                championMap[i][j]->bond();
-                            }
-                        }
-                    }
-                }
-                break;
-            case PopStar:
-                for (int i = PLACE_MAP_ROWS; i < BATTLE_MAP_ROWS; i++) {
-                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-                        if (championMap[i][j] != nullptr) {
-                            if (championMap[i][j]->getAttributes().bond == PopStar) {
-                                championMap[i][j]->bond();
-                            }
-                        }
-                    }
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
 }

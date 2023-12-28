@@ -72,6 +72,7 @@ constexpr int INITIAL_SCENE_BUTTON_OFFSET_Y = -310;                         // ³
 constexpr float PROMPT_MESSAGE_DURATION = 1.5f;                             // ÌáÊ¾ÐÅÏ¢Í£ÁôÊ±¼ä
 
 // ²Ëµ¥³¡¾°ÉèÖÃ
+constexpr int RANDOM_PROMPT_COUNT = 24;                                     // Ëæ»ú»¶Ó­ÌáÊ¾ÓïÊýÁ¿
 constexpr int MENU_SCENE_FONT_SIZE = 24;                                    // ²Ëµ¥³¡¾°×ÖÌå´óÐ¡
 constexpr int MENU_SCENE_BUTTONS_OFFSET_X = -296;                           // ²Ëµ¥³¡¾°°´Å¥Óë±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
 constexpr int MENU_SCENE_OFFLINE_MODE_BUTTON_OFFSET_Y = -30;                // ²Ëµ¥³¡¾°Á·Ï°Ä£Ê½°´Å¥Î»ÖÃ Y Æ«ÒÆÁ¿
@@ -132,14 +133,14 @@ constexpr float BATTLE_END_DURATION = 2.0f;                                 // ¶
 
 // ÉèÖÃ³¡¾°ÉèÖÃ
 constexpr int SETTINGS_SCENE_SLIDER_OFFSET_X = -150;                        // ÉèÖÃ³¡¾°ÒôÁ¿»¬¶¯ÌõÓë±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
-constexpr int SETTINGS_SCENE_BGMSLIDER_OFFSET_Y = 75;                       // ÉèÖÃ³¡¾°±³¾°ÒôÀÖ»¬¶¯ÌõÓë±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
-constexpr int SETTINGS_SCENE_EFFSLIDER_OFFSET_Y = 0;                        // ÉèÖÃ³¡¾°ÒôÐ§»¬¶¯ÌõÓë±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
-constexpr int SETTINGS_SCENE_CHECKBOX_OFFSET_Y = -110;                      // ÉèÖÃ³¡¾°ÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
-constexpr int SETTINGS_SCENE_EASY_CHECKBOX_OFFSET_X = -290;                 // ÉèÖÃ³¡¾°¼òµ¥ÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
-constexpr int SETTINGS_SCENE_NORMAL_CHECKBOX_OFFSET_X = -150;               // ÉèÖÃ³¡¾°Õý³£ÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
-constexpr int SETTINGS_SCENE_DIFFICULT_CHECKBOX_OFFSET_X = -10;             // ÉèÖÃ³¡¾°À§ÄÑÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
-constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_X = -150;            // ÉèÖÃ³¡¾°·µ»Ø²Ëµ¥°´Å¥Î»ÖÃ X Æ«ÒÆÁ¿
-constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_Y = -274;            // ÉèÖÃ³¡¾°·µ»Ø²Ëµ¥°´Å¥Î»ÖÃ Y Æ«ÒÆÁ¿
+constexpr int SETTINGS_SCENE_BGMSLIDER_OFFSET_Y = 69;                       // ÉèÖÃ³¡¾°±³¾°ÒôÀÖÒôÁ¿»¬¶¯ÌõÓë±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
+constexpr int SETTINGS_SCENE_EFFSLIDER_OFFSET_Y = -34;                      // ÉèÖÃ³¡¾°ÒôÐ§ÒôÁ¿»¬¶¯ÌõÓë±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
+constexpr int SETTINGS_SCENE_CHECKBOX_OFFSET_Y = -157;                      // ÉèÖÃ³¡¾°ÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
+constexpr int SETTINGS_SCENE_EASY_CHECKBOX_OFFSET_X = -307;                 // ÉèÖÃ³¡¾°¼òµ¥ÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
+constexpr int SETTINGS_SCENE_NORMAL_CHECKBOX_OFFSET_X = -166;               // ÉèÖÃ³¡¾°Õý³£ÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
+constexpr int SETTINGS_SCENE_DIFFICULT_CHECKBOX_OFFSET_X = -25;             // ÉèÖÃ³¡¾°À§ÄÑÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
+constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_X = 529;             // ÉèÖÃ³¡¾°·µ»Ø²Ëµ¥°´Å¥Î»ÖÃ X Æ«ÒÆÁ¿
+constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_Y = -300;            // ÉèÖÃ³¡¾°·µ»Ø²Ëµ¥°´Å¥Î»ÖÃ Y Æ«ÒÆÁ¿
 constexpr int DEFAULT_MUSIC_SIGN = -1;                                      // Ä¬ÈÏÒôÀÖ±êÊ¶
 constexpr float DEFAULT_MUSIC_VOLUMN = 0.5f;                                // Ä¬ÈÏÒôÁ¿´óÐ¡
 
@@ -225,6 +226,17 @@ constexpr int ATTACK_DAMAGE_MAGNIFICATION_HIGH = 5;                         // ¹
 constexpr int ATTACK_DAMAGE_MAGNIFICATION_MIDDLE = 3;                       // ¹¥»÷ÉËº¦ÖÐ±¶ÂÊ
 constexpr int ATTACK_DAMAGE_MAGNIFICATION_LOW = 2;                          // ¹¥»÷ÉËº¦µÍ±¶ÂÊ
 constexpr int DEPLOY_CHAMPIONS_MAX_COUNT = 2;                               // ²¿ÊðÕ½¶·Ó¢ÐÛ³õÊ¼ÊýÁ¿
+constexpr int MAX_BOND_COUNT = 6;                                           // Õ½¶·Ó¢ÐÛî¿°íÐ§¹ûÊýÁ¿
+constexpr int BROTHERHOOD_MOVEMENT_SPEED_MULTIPLIER = 3;                    // ÐÖµÜî¿°íÐ§¹ûÒÆ¶¯ËÙ¶È³Ë·¨ÏµÊý
+constexpr int BROTHERHOOD_ATTACK_SPEED_MULTIPLIER = 2;                      // ÐÖµÜî¿°íÐ§¹û¹¥»÷ËÙ¶È³Ë·¨ÏµÊý
+constexpr int LOUT_MOVEMENT_SPEED_MULTIPLIER = 2;                           // Ã§·òî¿°íÐ§¹û³Ë·¨ÏµÊý
+constexpr int LOUT_ATTACK_DAMAGE_MULTIPLIER = 2;                            // Ã§·òî¿°íÐ§¹û³Ë·¨ÏµÊý
+constexpr int DARKSIDE_ATTACK_DAMAGE_MULTIPLIER = 2;                        // ËÀÉñî¿°íÐ§¹û³Ë·¨ÏµÊý
+constexpr int GOODSHOOTER_ATTACK_SPEED_MULTIPLIER = 3;                      // ÉñÉäÊÖî¿°íÐ§¹û³Ë·¨ÏµÊý
+constexpr int POPSTAR_ATTACK_SPEED_MULTIPLIER = 3;                          // ¿¨É¯î¿°íÐ§¹û³Ë·¨ÏµÊý
+constexpr int POPSTAR_MOVEMENT_SPEED_MULTIPLIER = 5;                        // ¿¨É¯î¿°íÐ§¹û³Ë·¨ÏµÊý
+constexpr float DARKSIDE_SKILL_TRIGGER_MULTIPLIER = 0.5f;                   // ËÀÉñî¿°íÐ§¹û³Ë·¨ÏµÊý
+constexpr float LOUT_HEALTH_POINTS_MULTIPLIER = 1.5f;                       // Ã§·òî¿°íÐ§¹û³Ë·¨ÏµÊý
 constexpr float SKILL_DEFENSE_COEFFICIENT_UP = 1.0f;                        // ¼¼ÄÜ·ÀÓùÏµÊýÉý¼¶
 constexpr float SKILL_ATTACK_SPEED_UP = 2.0f;                               // ¼¼ÄÜ¹¥»÷ËÙ¶ÈÉý¼¶
 constexpr float DEFENSE_COEFFICIENT_THRESHOLD_HIGH = 1.5f;                  // ·ÀÓùÏµÊý¸ßãÐÖµ
@@ -238,7 +250,6 @@ constexpr int STAGE_WITH_RATE_OF_CHAMPIONS[3][5] = {                        // ¸
     {5, 4, 3, 2, 1},                                                        // ÖÐÆÚÕ½¶·½×¶ÎÕ½¶·Ó¢ÐÛÑ¡Ôñ¸ÅÂÊ
     {4, 5, 2, 2, 2},                                                        // ºóÆÚÕ½¶·½×¶ÎÕ½¶·Ó¢ÐÛÑ¡Ôñ¸ÅÂÊ
 };
-constexpr int MAX_BOND_COUNT = 6;                                           // î¿°íÊýÁ¿
 
 // ÍøÂçÁ¬½Ó×´Ì¬¶¨Òå
 enum ConnectionStatus {
@@ -275,20 +286,20 @@ enum BattleStage {
     LateStage           // ºóÆÚÕ½¶·½×¶Î
 };
 
-// Õ½¶·Ó¢ÐÛÖ°Òµ¶¨Òå
+// Õ½¶·Ó¢ÐÛî¿°íÐ§¹û¶¨Òå
 enum Bond {
-    Null,                // ÎÞî¿°í
-    Brotherhood,         // ÐÖµÜ£¨ÓÀ¶÷¡¢ÑÇË÷£©
-    Lout,                // Ã§·ò£¨°ÂÀ­·ò¡¢ÅËÉ­£©
-    DarkSide,            // ËÀÉñ£¨ÒÁÜ½ÁÕ¡¢°¢Ä¾Ä¾¡¢¿¨¶ûÈøË¹£©
-    GoodShooter,         // ÉñÉäÊÖ£¨¿âÆæ¡¢½ð¿ËË¿£©
-    PopStar              // ¿¨É¯£¨¿¨É¯£©
+    NoBond,             // ÎÞî¿°íÐ§¹û
+    Brotherhood,        // ÐÖµÜ£¨ÓÀ¶÷¡¢ÑÇË÷£©
+    Lout,               // Ã§·ò£¨°ÂÀ­·ò¡¢ÅËÉ­£©
+    DarkSide,           // ËÀÉñ£¨ÒÁÜ½ÁÕ¡¢°¢Ä¾Ä¾¡¢¿¨¶ûÈøË¹£©
+    GoodShooter,        // ÉñÉäÊÖ£¨¿âÆæ¡¢½ð¿ËË¿£©
+    PopStar             // ¿¨É¯£¨¿¨É¯£©
 };
 
-// Ìì¸³·ûÎÄ
+// Õ½¶·Ó¢ÐÛÌì¸³·ûÎÄ¶¨Òå
 enum Talent {
-    Pirate,          // º£µÁ£¨¶àµÃÇ®£©
-    General,         // ÐÖµÜ£¨¶àÒ»¸öÓ¢ÐÛÎ»£©
+    Pirate,             // º£µÁ£¨Ôö¼Ó³õÊ¼½ð±Ò£©
+    General,            // ÐÖµÜ£¨Ôö¼ÓÓ¢ÐÛÎ»£©
 };
 
 // Õ½¶·Ó¢ÐÛÖÖÀà¶¨Òå
@@ -369,15 +380,15 @@ typedef struct {
     float attackSpeed;                 // ¹¥»÷ËÙ¶È
     float movementSpeed;               // ÒÆ¶¯ËÙ¶È
     float defenseCoefficient;          // ·ÀÓùÏµÊý
-    Bond bond;                         // î¿°í
+    Bond bond;                         // î¿°íÐ§¹û
 } ChampionAttributes;
 
 // Õ½¶·Ó¢ÐÛÊôÐÔ²ÎÊý
 const ChampionAttributes CHAMPION_1_ATTR = { // ½Ù£¨Ò»ÐÇ£©
-    Champion1, "½Ù", "../Resources/Champions/Champion1.png", 1, 1, 500, 0, 50, 200, 1, 0.75f, 1.0f, 1.0f, Null
+    Champion1, "½Ù", "../Resources/Champions/Champion1.png", 1, 1, 500, 0, 50, 200, 1, 0.75f, 1.0f, 1.0f, NoBond
 };
 const ChampionAttributes CHAMPION_2_ATTR = { // ½Ù£¨¶þÐÇ£©
-    Champion2, "½Ù", "../Resources/Champions/Champion2.png", 3, 2, 900, 0, 75, 200, 1, 0.75f, 1.0f, 1.0f, Null
+    Champion2, "½Ù", "../Resources/Champions/Champion2.png", 3, 2, 900, 0, 75, 200, 1, 0.75f, 1.0f, 1.0f, NoBond
 };
 const ChampionAttributes CHAMPION_3_ATTR = { // ÓÀ¶÷£¨Ò»ÐÇ£©
     Champion3, "ÓÀ¶÷", "../Resources/Champions/Champion3.png", 1, 1, 550, 0, 45, 200, 1, 1.0f, 1.0f, 1.2f, Brotherhood
@@ -410,10 +421,10 @@ const ChampionAttributes CHAMPION_12_ATTR = { // ¿âÆæ£¨¶þÐÇ£©
     Champion12, "¿âÆæ", "../Resources/Champions/Champion12.png", 6, 2, 900, 0, 75, 200, 3, 0.7f, 1.0f, 1.0f, GoodShooter
 };
 const ChampionAttributes CHAMPION_13_ATTR = { // ËþÀï¿Ë£¨Ò»ÐÇ£©
-    Champion13, "ËþÀï¿Ë", "../Resources/Champions/Champion13.png", 2, 1, 750, 0, 60, 200, 1, 0.65f, 1.0f, 1.5f, Null
+    Champion13, "ËþÀï¿Ë", "../Resources/Champions/Champion13.png", 2, 1, 750, 0, 60, 200, 1, 0.65f, 1.0f, 1.5f, NoBond
 };
 const ChampionAttributes CHAMPION_14_ATTR = { // ËþÀï¿Ë£¨¶þÐÇ£©
-    Champion14, "ËþÀï¿Ë", "../Resources/Champions/Champion14.png", 6, 2, 1350, 0, 90, 200, 1, 0.65f, 1.0f, 1.5f, Null
+    Champion14, "ËþÀï¿Ë", "../Resources/Champions/Champion14.png", 6, 2, 1350, 0, 90, 200, 1, 0.65f, 1.0f, 1.5f, NoBond
 };
 const ChampionAttributes CHAMPION_15_ATTR = { // ÑÇË÷£¨Ò»ÐÇ£©
     Champion15, "ÑÇË÷", "../Resources/Champions/Champion15.png", 2, 1, 700, 0, 50, 200, 1, 0.75f, 1.0f, 1.1f, Brotherhood
@@ -428,16 +439,16 @@ const ChampionAttributes CHAMPION_18_ATTR = { // ½ð¿ËË¿£¨¶þÐÇ£©
     Champion18, "½ð¿ËË¿", "../Resources/Champions/Champion18.png", 6, 2, 1080, 0, 98, 200, 5, 0.8f, 1.0f, 0.9f, GoodShooter
 };
 const ChampionAttributes CHAMPION_19_ATTR = { // ËþÄ·£¨Ò»ÐÇ£©
-    Champion19, "ËþÄ·", "../Resources/Champions/Champion19.png", 3, 1, 700, 0, 55, 200, 1, 0.6f, 1.0f, 1.6f, Null
+    Champion19, "ËþÄ·", "../Resources/Champions/Champion19.png", 3, 1, 700, 0, 55, 200, 1, 0.6f, 1.0f, 1.6f, NoBond
 };
 const ChampionAttributes CHAMPION_20_ATTR = { // ËþÄ·£¨¶þÐÇ£©
-    Champion20, "ËþÄ·", "../Resources/Champions/Champion20.png", 9, 2, 1260, 0, 83, 200, 1, 0.6f, 1.0f, 1.6f, Null
+    Champion20, "ËþÄ·", "../Resources/Champions/Champion20.png", 9, 2, 1260, 0, 83, 200, 1, 0.6f, 1.0f, 1.6f, NoBond
 };
 const ChampionAttributes CHAMPION_21_ATTR = { // Îµ£¨Ò»ÐÇ£©
-    Champion21, "Îµ", "../Resources/Champions/Champion21.png", 3, 1, 800, 0, 60, 200, 1, 0.65f, 1.0f, 1.55f, Null
+    Champion21, "Îµ", "../Resources/Champions/Champion21.png", 3, 1, 800, 0, 60, 200, 1, 0.65f, 1.0f, 1.55f, NoBond
 };
 const ChampionAttributes CHAMPION_22_ATTR = { // Îµ£¨¶þÐÇ£©
-    Champion22, "Îµ", "../Resources/Champions/Champion22.png", 9, 2, 1440, 0, 90, 200, 1, 0.65f, 1.0f, 1.55f, Null
+    Champion22, "Îµ", "../Resources/Champions/Champion22.png", 9, 2, 1440, 0, 90, 200, 1, 0.65f, 1.0f, 1.55f, NoBond
 };
 const ChampionAttributes CHAMPION_23_ATTR = { // °¢Ä¾Ä¾£¨Ò»ÐÇ£©
     Champion23, "°¢Ä¾Ä¾", "../Resources/Champions/Champion23.png", 3, 1, 800, 0, 60, 200, 1, 0.7f, 1.0f, 1.5f, DarkSide
@@ -446,10 +457,10 @@ const ChampionAttributes CHAMPION_24_ATTR = { // °¢Ä¾Ä¾£¨¶þÐÇ£©
     Champion24, "°¢Ä¾Ä¾", "../Resources/Champions/Champion24.png", 9, 2, 1440, 0, 90, 200, 1, 0.7f, 1.0f, 1.5f, DarkSide
 };
 const ChampionAttributes CHAMPION_25_ATTR = { // ¿üÉ£Ìá£¨Ò»ÐÇ£©
-    Champion25, "¿üÉ£Ìá", "../Resources/Champions/Champion25.png", 4, 1, 950, 0, 80, 200, 1, 0.85f, 1.0f, 1.5f, Null
+    Champion25, "¿üÉ£Ìá", "../Resources/Champions/Champion25.png", 4, 1, 950, 0, 80, 200, 1, 0.85f, 1.0f, 1.5f, NoBond
 };
 const ChampionAttributes CHAMPION_26_ATTR = { // ¿üÉ£Ìá£¨¶þÐÇ£©
-    Champion26, "¿üÉ£Ìá", "../Resources/Champions/Champion26.png", 12, 2, 1710, 0, 120, 200, 1, 0.85f, 1.0f, 1.5f, Null
+    Champion26, "¿üÉ£Ìá", "../Resources/Champions/Champion26.png", 12, 2, 1710, 0, 120, 200, 1, 0.85f, 1.0f, 1.5f, NoBond
 };
 const ChampionAttributes CHAMPION_27_ATTR = { // ¿¨¶ûÈøË¹£¨Ò»ÐÇ£©
     Champion27, "¿¨¶ûÈøË¹", "../Resources/Champions/Champion27.png", 4, 1, 600, 0, 100, 200, 5, 0.85f, 1.0f, 0.9f, DarkSide
