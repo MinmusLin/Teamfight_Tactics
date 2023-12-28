@@ -13,6 +13,7 @@
 
 #include "Champion/Champion.h"
 #include "proj.win32/Constant.h"
+#include <vector>
 
 // Champion 类前声明（用于解决循环依赖）
 class Champion;
@@ -56,6 +57,15 @@ public:
     // 设置战斗胜负状态
     void setBattleSituation(const BattleSituation battleSituation);
 
+    // 获取我方羁绊
+    std::vector<int> getMyBond() const;
+
+    // 获取敌方羁绊
+    std::vector<int> getEnemyBond() const;
+
+    // 加强效果
+    void bondEffect(Bond bond, bool isMy);
+
     // 声明友元类
     friend class Champion;
 
@@ -65,6 +75,8 @@ private:
     int myCount;                                                               // 我方战斗英雄数量
     int enemyCount;                                                            // 敌方战斗英雄数量
     BattleSituation battleSituation;                                           // 战斗胜负状态
+    std::vector<int> myBond;                                                   // 我方羁绊
+    std::vector<int> enemyBond;                                                // 敌方羁绊
 };
 
 #endif // !_BATTLE_H_

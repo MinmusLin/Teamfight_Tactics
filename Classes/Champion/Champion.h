@@ -159,6 +159,9 @@ public:
     // 获取武器精灵类指针
     Sprite* Champion::getSword() const;
 
+    // 获取武器精灵类指针
+    void Champion::bond();
+
 private:
     Battle* currentBattle;             // 战斗类
     ChampionAttributes attributes;     // 战斗英雄属性

@@ -80,6 +80,7 @@ bool OfflineModeBattleScene::init()
                 // 计算初始战斗英雄个数
                 if (i < PLACE_MAP_ROWS) {
                     g_offlineModeControl->getBattle()->addMyCount();
+
                 }
                 else {
                     g_offlineModeControl->getBattle()->addEnemyCount();
@@ -89,12 +90,79 @@ bool OfflineModeBattleScene::init()
                 currentChampion->setBattle(g_offlineModeControl->getBattle());
                 currentChampion->setCurrentPosition(i, j);
                 battleChampion[battleChampionCount++] = currentChampion;
+
             }
             else {
                 continue;
             }
         }
     }
+
+    for (int i = 1; i < MAX_BOND_COUNT; i++) {
+        if (g_offlineModeControl->getBattle()->getMyBond()[i] >= 2) {
+            g_offlineModeControl->getBattle()->bondEffect(static_cast<Bond>(i), true);
+
+            if (static_cast<Bond>(i) == Lout) {
+                auto sprite = cocos2d::Sprite::create("../Resources/Layers/Lout.png");
+                sprite->cocos2d::Sprite::setPosition(415, 100 * i);
+                this->addChild(sprite);
+            }
+            else if (static_cast<Bond>(i) == Brotherhood) {
+                auto sprite = cocos2d::Sprite::create("../Resources/Layers/Brotherhood.png");
+                sprite->cocos2d::Sprite::setPosition(415, 100 * i);
+                this->addChild(sprite);
+            }
+            else if (static_cast<Bond>(i) == PopStar) {
+                auto sprite = cocos2d::Sprite::create("../Resources/Layers/PopStar.png");
+                sprite->cocos2d::Sprite::setPosition(415, 100 * i);
+                this->addChild(sprite);
+            }
+            else if (static_cast<Bond>(i) == GoodShooter) {
+                auto sprite = cocos2d::Sprite::create("../Resources/Layers/GoodShooter.png");
+                sprite->cocos2d::Sprite::setPosition(415, 100 * i);
+                this->addChild(sprite);
+            }
+            else if (static_cast<Bond>(i) == DarkSide) {
+                auto sprite = cocos2d::Sprite::create("../Resources/Layers/DarkSide.png");
+                sprite->cocos2d::Sprite::setPosition(415, 100 * i);
+                this->addChild(sprite);
+            }
+
+        }
+        if (g_offlineModeControl->getBattle()->getEnemyBond()[i] >= 2) {
+
+            g_offlineModeControl->getBattle()->bondEffect(static_cast<Bond>(i), false);
+
+            if (static_cast<Bond>(i) == Lout) {
+                auto sprite = cocos2d::Sprite::create("../Resources/Layers/Lout.png");
+                sprite->cocos2d::Sprite::setPosition(415 * 2, 100 * i);
+                this->addChild(sprite);
+            }
+            else if (static_cast<Bond>(i) == Brotherhood) {
+                auto sprite = cocos2d::Sprite::create("../Resources/Layers/Brotherhood.png");
+                sprite->cocos2d::Sprite::setPosition(415 * 2, 100 * i);
+                this->addChild(sprite);
+            }
+            else if (static_cast<Bond>(i) == PopStar) {
+                auto sprite = cocos2d::Sprite::create("../Resources/Layers/PopStar.png");
+                sprite->cocos2d::Sprite::setPosition(415 * 2, 100 * i);
+                this->addChild(sprite);
+            }
+            else if (static_cast<Bond>(i) == GoodShooter) {
+                auto sprite = cocos2d::Sprite::create("../Resources/Layers/GoodShooter.png");
+                sprite->cocos2d::Sprite::setPosition(415 * 2, 100 * i);
+                this->addChild(sprite);
+            }
+            else if (static_cast<Bond>(i) == DarkSide) {
+                auto sprite = cocos2d::Sprite::create("../Resources/Layers/DarkSide.png");
+                sprite->cocos2d::Sprite::setPosition(415 * 2, 100 * i);
+                this->addChild(sprite);
+            }
+
+        }
+
+    }
+
 
     // 创建分数表层
     auto scoreBoardLayer = ScoreBoardLayer::create();

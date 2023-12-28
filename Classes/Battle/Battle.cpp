@@ -16,6 +16,10 @@ Battle::Battle(const ChampionCategory myFlagMap[][BATTLE_MAP_COLUMNS], const Cha
     myCount(0),
     battleSituation(Draw)
 {
+    for (int i = 0; i < MAX_BOND_COUNT; i++) {
+        myBond.push_back(0);
+        enemyBond.push_back(0);
+    }
     for (int i = 0; i < PLACE_MAP_ROWS; i++) {
         for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
             championCategoryMap[i][j] = myFlagMap[i][j];
@@ -39,10 +43,12 @@ Battle::Battle(const ChampionCategory myFlagMap[][BATTLE_MAP_COLUMNS], const Cha
                 if (i < PLACE_MAP_ROWS) {
                     myCount++;
                     championMap[i][j]->setCamp(true);
+                    myBond[championMap[i][j]->getAttributes().bond]++;
                 }
                 else {
                     enemyCount++;
                     championMap[i][j]->setCamp(false);
+                    enemyBond[championMap[i][j]->getAttributes().bond]++;
                 }
             }
             else {
@@ -117,4 +123,144 @@ void Battle::placeChampion(const int& x, const int& y, Champion* champion)
 void Battle::setBattleSituation(const BattleSituation battleSituation)
 {
     this->battleSituation = battleSituation;
+}
+
+// 我方获取羁绊
+std::vector<int> Battle::getMyBond() const
+{
+    return myBond;
+}
+
+// 获取敌方羁绊
+std::vector<int> Battle::getEnemyBond() const
+{
+    return enemyBond;
+}
+
+// 加强效果
+void Battle::bondEffect(Bond bond, bool isMy)
+{
+    if (isMy) {
+        switch (bond) {
+            case Brotherhood:
+                for (int i = 0; i < PLACE_MAP_ROWS; i++) {
+                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+                        if (championMap[i][j] != nullptr) {
+                            if (championMap[i][j]->getAttributes().bond == Brotherhood) {
+                                championMap[i][j]->bond();
+                            }
+                        }
+                    }
+                }
+                break;
+            case Lout:
+                for (int i = 0; i < PLACE_MAP_ROWS; i++) {
+                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+                        if (championMap[i][j] != nullptr) {
+                            if (championMap[i][j]->getAttributes().bond == Lout) {
+                                championMap[i][j]->bond();
+                            }
+                        }
+                    }
+                }
+                break;
+            case DarkSide:
+                for (int i = 0; i < PLACE_MAP_ROWS; i++) {
+                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+                        if (championMap[i][j] != nullptr) {
+                            if (championMap[i][j]->getAttributes().bond == DarkSide) {
+                                championMap[i][j]->bond();
+                            }
+                        }
+                    }
+                }
+                break;
+            case GoodShooter:
+                for (int i = 0; i < PLACE_MAP_ROWS; i++) {
+                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+                        if (championMap[i][j] != nullptr) {
+                            if (championMap[i][j]->getAttributes().bond == GoodShooter) {
+                                championMap[i][j]->bond();
+                            }
+                        }
+                    }
+                }
+                break;
+            case PopStar:
+                for (int i = 0; i < PLACE_MAP_ROWS; i++) {
+                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+                        if (championMap[i][j] != nullptr) {
+                            if (championMap[i][j]->getAttributes().bond == PopStar) {
+                                championMap[i][j]->bond();
+                            }
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    else {
+        switch (bond) {
+            case Brotherhood:
+                for (int i = PLACE_MAP_ROWS; i < BATTLE_MAP_ROWS; i++) {
+                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+                        if (championMap[i][j] != nullptr) {
+                            if (championMap[i][j]->getAttributes().bond == Brotherhood) {
+                                championMap[i][j]->bond();
+                            }
+                        }
+                    }
+                }
+                break;
+            case Lout:
+                for (int i = PLACE_MAP_ROWS; i < BATTLE_MAP_ROWS; i++) {
+                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+                        if (championMap[i][j] != nullptr) {
+                            if (championMap[i][j]->getAttributes().bond == Lout) {
+                                championMap[i][j]->bond();
+                            }
+                        }
+                    }
+                }
+                break;
+            case DarkSide:
+                for (int i = PLACE_MAP_ROWS; i < BATTLE_MAP_ROWS; i++) {
+                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+                        if (championMap[i][j] != nullptr) {
+                            if (championMap[i][j]->getAttributes().bond == DarkSide) {
+                                championMap[i][j]->bond();
+                            }
+                        }
+                    }
+                }
+                break;
+            case GoodShooter:
+                for (int i = PLACE_MAP_ROWS; i < BATTLE_MAP_ROWS; i++) {
+                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+                        if (championMap[i][j] != nullptr) {
+                            if (championMap[i][j]->getAttributes().bond == GoodShooter) {
+                                championMap[i][j]->bond();
+                            }
+                        }
+                    }
+                }
+                break;
+            case PopStar:
+                for (int i = PLACE_MAP_ROWS; i < BATTLE_MAP_ROWS; i++) {
+                    for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+                        if (championMap[i][j] != nullptr) {
+                            if (championMap[i][j]->getAttributes().bond == PopStar) {
+                                championMap[i][j]->bond();
+                            }
+                        }
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
 }

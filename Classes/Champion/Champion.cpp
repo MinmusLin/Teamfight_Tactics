@@ -657,3 +657,32 @@ void Champion::triggerSkill(const int magnification, bool isCondition)
         }
     }
 }
+
+// î¿°íÐ§¹û
+void Champion::bond()
+{
+    switch (attributes.bond) {
+        case Brotherhood:
+            attributes.movementSpeed = attributes.movementSpeed * 3;
+            attributes.attackSpeed = attributes.attackSpeed * 2;
+            break;
+        case Lout:
+            attributes.healthPoints *= 1.5;
+            attributes.movementSpeed *= 2;
+            attributes.attackDamage *= 2;
+            break;
+        case DarkSide:
+            attributes.skillTriggerThreshold /= 2;
+            attributes.attackDamage *= 2;
+            break;
+        case GoodShooter:
+            attributes.attackSpeed *= 3;
+            break;
+        case PopStar:
+            attributes.attackSpeed *= 3;
+            attributes.movementSpeed *= 5;
+            break;
+        default:
+            break;
+    }
+}
