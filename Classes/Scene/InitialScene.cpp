@@ -66,7 +66,7 @@ bool InitialScene::init()
         if (type == cocos2d::ui::TextField::EventType::INSERT_TEXT || type == cocos2d::ui::TextField::EventType::DELETE_BACKWARD) {
             auto textField = dynamic_cast<cocos2d::ui::TextField*>(sender);
             std::string nickname = textField->getString();
-            std::string text = /*GBKToUTF8::getString("»¶Ó­Äã£¡")*/u8"»¶Ó­Äã£¡" + nickname;
+            std::string text = GBKToUTF8::getString("»¶Ó­Äã£¡") + nickname;
             promptLabel->setString(text);
         }
         });
