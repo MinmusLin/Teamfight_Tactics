@@ -128,11 +128,15 @@ constexpr int BOND_EFFECT_START_X = -2;                                     // î
 constexpr int BOND_EFFECT_HORIZONTAL_INTERVAL = 65;                         // î¿°íÐ§¹ûË®Æ½¼ä¾à
 constexpr int MY_BOND_EFFECT_START_Y = 194;                                 // ÎÒ·½î¿°íÐ§¹ûÎ»ÖÃ Y ×ø±ê
 constexpr int ENEMY_BOND_EFFECT_START_Y = 670;                              // µÐ·½î¿°íÐ§¹ûÎ»ÖÃ Y ×ø±ê
+constexpr int LITTLE_CHAMPION_OFFSET_Y = -250;                              // Ð¡Ð¡Ó¢ÐÛÎ»ÖÃ Y Æ«ÒÆÁ¿
+constexpr int LITTLE_CHAMPION_MOVEMENT_SPEED = 200;                         // Ð¡Ð¡Ó¢ÐÛÒÆ¶¯ËÙ¶È
+constexpr int LITTLE_CHAMPION_LABEL_OFFSET_Y = -315;                        // Ð¡Ð¡Ó¢ÐÛµÇ³¡±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
+constexpr int LITTLE_CHAMPION_LABEL_FONT_SIZE = 30;                         // Ð¡Ð¡Ó¢ÐÛµÇ³¡±êÇ©×ÖÌå´óÐ¡
 constexpr int INTERVAL_BETWEEN_WEAPON_AND_CHAMPION = 40;                    // ¶ÔÕ½³¡¾°Õ½¶·Ó¢ÐÛÓëÎäÆ÷¼ä¾à
 constexpr int WEAPON_ANIMATION_ROTATION_ANGLE = 60;                         // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ª½Ç¶È
 constexpr int WEAPON_ANIMATION_ROTATION_COUNT = 4;                          // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ª´ÎÊý
 constexpr float WEAPON_ANIMATION_ROTATION_DURATION = 0.15f;                 // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ªÊ±¼ä
-constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 30.0f;                   // ¶ÔÕ½³¡¾°×¼±¸Ê±¼ä
+constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 10.0f;                   // ¶ÔÕ½³¡¾°×¼±¸Ê±¼ä(TODO)
 constexpr float BATTLE_END_DURATION = 2.0f;                                 // ¶ÔÕ½½áÊøÍ£ÁôÊ±¼ä
 
 // ÉèÖÃ³¡¾°ÉèÖÃ
