@@ -3,7 +3,7 @@
  * File Name:     OfflineModeBattleScene.cpp
  * File Function: OfflineModeBattleScene类的实现
  * Author:        杨宇琨、刘淑仪、林继申
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
@@ -166,6 +166,41 @@ bool OfflineModeBattleScene::init()
     // 启用每一帧被自动调用的 update 方法
     this->scheduleUpdate();
 
+    // 创建小小英雄登场标签
+    auto winSize = cocos2d::Director::getInstance()->getWinSize();
+    auto littleChampionLabel = Label::createWithTTF(GBKToUTF8::getString("小小英雄登场!"), "../Resources/Fonts/DingDingJinBuTi.ttf", LITTLE_CHAMPION_LABEL_FONT_SIZE);
+    littleChampionLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
+    littleChampionLabel->setPosition(winSize.width / 2, winSize.height / 2 + LITTLE_CHAMPION_LABEL_OFFSET_Y);
+    this->addChild(littleChampionLabel);
+    scheduleOnce([littleChampionLabel](float dt) {
+        littleChampionLabel->setVisible(false);
+        }, PROMPT_MESSAGE_DURATION, "HideLittleChampionLabel");
+
+    // 创建小小英雄
+    auto littleChampion = Sprite::create("../Resources/Champions/LittleChampion.png");
+    littleChampion->setPosition(winSize.width / 2, winSize.height / 2 + LITTLE_CHAMPION_OFFSET_Y);
+    this->addChild(littleChampion, 2);
+
+    // 创建粒子系统
+    auto particleSystem = cocos2d::ParticleFlower::create();
+    particleSystem->setPosition(littleChampion->getPosition());
+    this->addChild(particleSystem, 1);
+    this->scheduleUpdate();
+    this->schedule([=](float dt) {
+        particleSystem->setPosition(littleChampion->getPosition());
+        }, "ParticleFollow");
+
+    // 创建小小英雄鼠标事件监听
+    auto listener = cocos2d::EventListenerMouse::create();
+    listener->onMouseDown = [littleChampion](cocos2d::Event* event) {
+        cocos2d::EventMouse* e = dynamic_cast<cocos2d::EventMouse*>(event);
+        Vec2 location = e->getLocationInView();
+        float duration = littleChampion->getPosition().distance(location) / LITTLE_CHAMPION_MOVEMENT_SPEED;
+        littleChampion->stopAllActions();
+        littleChampion->runAction(cocos2d::MoveTo::create(duration, location));
+        };
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
     return true;
 }
 
@@ -244,7 +279,7 @@ void OfflineModeBattleScene::update(float delta)
             cocos2d::Size shadowOffset(BATTLE_END_LABEL_SHADOW_OFFSET_X, BATTLE_END_LABEL_SHADOW_OFFSET_Y);
             winningLabel->enableShadow(cocos2d::Color4B::GRAY, shadowOffset, BATTLE_END_LABEL_BLUR_RADIUS);
             winningLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + BATTLE_END_LABEL_OFFSET_Y));
-            this->addChild(winningLabel, 2);
+            this->addChild(winningLabel, 3);
         }
 
         // 释放练习模式对战场景
