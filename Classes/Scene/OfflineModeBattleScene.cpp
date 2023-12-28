@@ -158,8 +158,8 @@ void OfflineModeBattleScene::update(float delta)
         scoreBoardLayer->showScoreBoard(g_offlineModeControl->getHumanPlayer(), g_offlineModeControl->getAIPlayer());
 
         // 检查练习模式是否结束
-        int humanPlayerHealth = g_offlineModeControl->getHumanPlayer()->getHealthPoints();
-        int enemyPlayerHealth = g_offlineModeControl->getAIPlayer()->getHealthPoints();
+        const int humanPlayerHealth = g_offlineModeControl->getHumanPlayer()->getHealthPoints();
+        const int enemyPlayerHealth = g_offlineModeControl->getAIPlayer()->getHealthPoints();
         bool isEnd = false;
         std::string winningPrompt = "";
         cocos2d::Color4B outlineColor = cocos2d::Color4B::ORANGE;

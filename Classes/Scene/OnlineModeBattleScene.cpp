@@ -158,8 +158,8 @@ void OnlineModeBattleScene::update(float delta)
         scoreBoardLayer->showScoreBoard(g_onlineModeControl->getCurrentConnections(), g_onlineModeControl->getPlayerNames(), g_onlineModeControl->getPlayerHealthPoints());
 
         // 检查练习模式是否结束
-        int humanPlayerHealth = g_onlineModeControl->getHumanPlayer()->getHealthPoints();
-        int enemyPlayerHealth = g_onlineModeControl->getEnemyPlayer()->getHealthPoints();
+        const int humanPlayerHealth = g_onlineModeControl->getHumanPlayer()->getHealthPoints();
+        const int enemyPlayerHealth = g_onlineModeControl->getEnemyPlayer()->getHealthPoints();
         bool isEnd = false;
         std::string winningPrompt = "";
         cocos2d::Color4B outlineColor = cocos2d::Color4B::ORANGE;
