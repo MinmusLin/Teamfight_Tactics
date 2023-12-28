@@ -135,9 +135,9 @@ constexpr int SETTINGS_SCENE_SLIDER_OFFSET_X = -150;                        // É
 constexpr int SETTINGS_SCENE_BGMSLIDER_OFFSET_Y = 75;                       // ÉèÖÃ³¡¾°±³¾°ÒôÀÖ»¬¶¯ÌõÓë±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
 constexpr int SETTINGS_SCENE_EFFSLIDER_OFFSET_Y = 0;                        // ÉèÖÃ³¡¾°ÒôÐ§»¬¶¯ÌõÓë±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
 constexpr int SETTINGS_SCENE_CHECKBOX_OFFSET_Y = -110;                      // ÉèÖÃ³¡¾°ÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
-constexpr int SETTINGS_SCENE_EASY_CHECKBOX_OFFSET_X = -290;                 // ÉèÖÃ³¡¾°ÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
-constexpr int SETTINGS_SCENE_NORMAL_CHECKBOX_OFFSET_X = -150;               // ÉèÖÃ³¡¾°ÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
-constexpr int SETTINGS_SCENE_DIFFICULT_CHECKBOX_OFFSET_X = -10;             // ÉèÖÃ³¡¾°ÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
+constexpr int SETTINGS_SCENE_EASY_CHECKBOX_OFFSET_X = -290;                 // ÉèÖÃ³¡¾°¼òµ¥ÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
+constexpr int SETTINGS_SCENE_NORMAL_CHECKBOX_OFFSET_X = -150;               // ÉèÖÃ³¡¾°Õý³£ÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
+constexpr int SETTINGS_SCENE_DIFFICULT_CHECKBOX_OFFSET_X = -10;             // ÉèÖÃ³¡¾°À§ÄÑÄÑ¶È¸´Ñ¡¿òÓë±êÇ©Î»ÖÃ X Æ«ÒÆÁ¿
 constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_X = -150;            // ÉèÖÃ³¡¾°·µ»Ø²Ëµ¥°´Å¥Î»ÖÃ X Æ«ÒÆÁ¿
 constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_Y = -274;            // ÉèÖÃ³¡¾°·µ»Ø²Ëµ¥°´Å¥Î»ÖÃ Y Æ«ÒÆÁ¿
 
