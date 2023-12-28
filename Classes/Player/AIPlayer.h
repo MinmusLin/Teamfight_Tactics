@@ -54,10 +54,13 @@ private:
     void optimizeChampionCollection();
 
     // 部署候战区战斗英雄（简单模式与困难模式）
-    std::vector<ChampionCategory> deployChampions(const int maxChampions, Difficulty difficulty);
+    std::vector<ChampionCategory> deployBattleChampionsByOrder(const int maxChampions);
 
     // 部署候战区战斗英雄（正常模式）
-    std::vector<ChampionCategory> deployChampions(const int maxChampions);
+    std::vector<ChampionCategory> deployBattleChampionsByRandom(const int maxChampions);
+
+    // 部署战斗区战斗英雄位置
+    void deployBattleChampionPositions(const std::vector<ChampionCategory>& battleChampions);
 
     // 部署战斗英雄
     void deployChampions();
