@@ -130,6 +130,17 @@ constexpr float WEAPON_ANIMATION_ROTATION_DURATION = 0.15f;                 // ∂
 constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 30.0f;                   // ∂‘’Ω≥°æ∞◊º±∏ ±º‰
 constexpr float BATTLE_END_DURATION = 2.0f;                                 // ∂‘’ΩΩ· ¯Õ£¡Ù ±º‰
 
+// …Ë÷√≥°æ∞…Ë÷√
+constexpr int SETTINGS_SCENE_SLIDER_OFFSET_X = -150;                        // …Ë÷√≥°æ∞“Ù¡øª¨∂ØÃı”Î±Í«©Œª÷√ X ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_BGMSLIDER_OFFSET_Y = 75;                       // …Ë÷√≥°æ∞±≥æ∞“Ù¿÷ª¨∂ØÃı”Î±Í«©Œª÷√ Y ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_EFFSLIDER_OFFSET_Y = 0;                        // …Ë÷√≥°æ∞“Ù–ßª¨∂ØÃı”Î±Í«©Œª÷√ Y ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_CHECKBOX_OFFSET_Y = -110;                      // …Ë÷√≥°æ∞ƒ—∂»∏¥—°øÚ”Î±Í«©Œª÷√ Y ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_EASY_CHECKBOX_OFFSET_X = -290;                 // …Ë÷√≥°æ∞ƒ—∂»∏¥—°øÚ”Î±Í«©Œª÷√ X ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_NORMAL_CHECKBOX_OFFSET_X = -150;               // …Ë÷√≥°æ∞ƒ—∂»∏¥—°øÚ”Î±Í«©Œª÷√ X ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_DIFFICULT_CHECKBOX_OFFSET_X = -10;             // …Ë÷√≥°æ∞ƒ—∂»∏¥—°øÚ”Î±Í«©Œª÷√ X ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_X = -150;            // …Ë÷√≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ X ∆´“∆¡ø
+constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_Y = -274;            // …Ë÷√≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ Y ∆´“∆¡ø
+
 // …ÃµÍ…Ë÷√
 constexpr int MAX_SELECTABLE_CHAMPION_COUNT = 5;                            // ◊Ó¥Ûø…—°‘Ò’Ω∂∑”¢–€ ˝¡ø
 constexpr int CHAMPION_UPLEVEL_COUNT = 3;                                   // ’Ω∂∑”¢–€…˝º∂ ˝¡ø
