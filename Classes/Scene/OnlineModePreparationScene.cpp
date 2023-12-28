@@ -129,7 +129,7 @@ bool OnlineModePreparationScene::init()
         });
     returnMenuButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-            delete g_onlineModeControl; // TODO: 这里做好 g_onlineModeControl 的动态管理
+            delete g_onlineModeControl;
             g_onlineModeControl = nullptr;
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
         }
@@ -207,6 +207,9 @@ void OnlineModePreparationScene::setScheduleOnce(cocos2d::ui::LoadingBar* progre
         _eventDispatcher->dispatchEvent(&event);
 
         // 运行练习模式对战场景
+        char buffer[BUFFER_SIZE];
+        strcpy(buffer, g_onlineModeControl->serializePlayerMap().c_str());
+        g_onlineModeControl->sendMessage(buffer, strlen(buffer));
         cocos2d::Director::getInstance()->pushScene(OnlineModeBattleScene::create());
         }, BATTLE_SCENE_LOADINGBAR_DURATION + SCENE_TRANSITION_DURATION, "IsAlreadyPrepared");
 }
