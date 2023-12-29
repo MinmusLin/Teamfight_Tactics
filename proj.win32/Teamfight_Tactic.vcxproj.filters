@@ -197,6 +197,9 @@
     <ClInclude Include="..\Classes\AppDelegate\AppDelegate.h">
       <Filter>Classes\AppDelegate</Filter>
     </ClInclude>
+    <ClInclude Include="AudioPlayer.h">
+      <Filter>Win32</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Icon.rc">

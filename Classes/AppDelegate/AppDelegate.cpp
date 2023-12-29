@@ -10,7 +10,7 @@
 #include "AppDelegate.h"
 #include "Scene/StartupScene.h"
 #include "proj.win32/Constant.h"
-#include "audio/include/AudioEngine.h"
+#include "AudioEngine.h"
 
 // 音频引擎设置
 int g_backgroundMusicSign = DEFAULT_MUSIC_SIGN;
@@ -23,6 +23,12 @@ static cocos2d::Size s_designResolutionSize = cocos2d::Size(DESIGN_RESOLUTION_WI
 static cocos2d::Size s_smallResolutionSize = cocos2d::Size(SMALL_RESOLUTION_WIDTH, SMALL_RESOLUTION_HEIGHT);
 static cocos2d::Size s_mediumResolutionSize = cocos2d::Size(MEDIUM_RESOLUTION_WIDTH, MEDIUM_RESOLUTION_HEIGHT);
 static cocos2d::Size s_largeResolutionSize = cocos2d::Size(LARGE_RESOLUTION_WIDTH, LARGE_RESOLUTION_HEIGHT);
+
+// 音频引擎方法
+void audioPlayer(const std::string& audioPath, bool isLoop = false)
+{
+    // TODO: 音频引擎方法
+}
 
 // 析构函数
 AppDelegate::~AppDelegate()
