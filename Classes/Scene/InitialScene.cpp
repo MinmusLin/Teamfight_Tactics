@@ -3,7 +3,7 @@
  * File Name:     InitialScene.cpp
  * File Function: InitialScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
@@ -11,6 +11,7 @@
 #include <codecvt>
 #include "InitialScene.h"
 #include "MenuScene.h"
+#include "SelectionScene.h"
 #include "Button/HoverButton.h"
 #include "GBKToUTF8/GBKToUTF8.h"
 #include "proj.win32/Constant.h"
@@ -106,7 +107,7 @@ bool InitialScene::init()
             }
             else {
                 g_PlayerName = nickname; // g_PlayerName 内部存储编码为 UTF-8，无需调用 GBKToUTF8 单例方法
-                cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
+                cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, SelectionScene::createScene(), cocos2d::Color3B::WHITE));
             }
         }
         });
