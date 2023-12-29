@@ -3,7 +3,7 @@
  * File Name:     Server.cpp
  * File Function: Server类的实现
  * Author:        林继申
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
@@ -83,7 +83,7 @@ void clientHandler(const SOCKET clientSocket, Server& server)
     }
 
     // 设置延迟确保消息传递至客户端
-    std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(5000 * SERVER_REFRESH_INTERVAL)));
+    std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(1000 * SERVER_REFRESH_INTERVAL_MAGNIFICATION * SERVER_REFRESH_INTERVAL)));
 
     // 检测是否开始游戏
     if (server.areAllReady()) {
