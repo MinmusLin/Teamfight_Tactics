@@ -152,7 +152,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\AppDelegate\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Battle\Battle.cpp" />
     <ClCompile Include="..\Classes\Button\HoverButton.cpp" />
     <ClCompile Include="..\Classes\Champion\Champion.cpp" />
@@ -180,7 +180,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)\Resources\" /D /E /I /F /Y
     <ClCompile Include="GameMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\AppDelegate\AppDelegate.h" />
     <ClInclude Include="..\Classes\Battle\Battle.h" />
     <ClInclude Include="..\Classes\Button\HoverButton.h" />
     <ClInclude Include="..\Classes\Champion\Champion.h" />

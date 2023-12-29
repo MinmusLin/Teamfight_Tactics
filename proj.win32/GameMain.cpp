@@ -27,7 +27,7 @@
  * File Name:     GameMain.cpp
  * File Function: 游戏程序入口点
  * Author:        林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
@@ -36,8 +36,7 @@
 #include <Windows.h>
 #include <tchar.h>
 #include "platform/CCStdC.h"
-#include "AppDelegate.h"
-#include "cocos2d.h"
+#include "AppDelegate/AppDelegate.h"
 
 /*
  * Function Name:    _tWinMain
