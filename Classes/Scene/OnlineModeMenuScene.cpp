@@ -95,7 +95,7 @@ bool OnlineModeMenuScene::init()
     this->addChild(waitingLabel);
 
     // 创建服务器连接失败提示
-    auto connectionFailedPrompt = Sprite::create("../Resources/Scenes/ServerConnectionFailedPrompt.png");
+    auto connectionFailedPrompt = Sprite::create("../Resources/ImageElements/ServerConnectionFailedPrompt.png");
     connectionFailedPrompt->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
     connectionFailedPrompt->setVisible(false);
     this->addChild(connectionFailedPrompt, 1);
