@@ -71,12 +71,14 @@ constexpr int INITIAL_SCENE_NAME_LABEL_OFFSET_Y = 280;                      // ≥
 constexpr int INITIAL_SCENE_BUTTON_OFFSET_Y = -310;                         // ≥ı º≥°æ∞∞¥≈•Œª÷√ Y ∆´“∆¡ø
 constexpr float PROMPT_MESSAGE_DURATION = 1.5f;                             // Ã· æ–≈œ¢Õ£¡Ù ±º‰
 
-// —°‘Ò–°–°”¢–€≥°æ∞…Ë÷√
-constexpr int MAX_LITTLE_CHAMPION_COUNT = 8;                                      // –°–°”¢–€◊Ó¥Û ˝¡ø
-constexpr int SELECTION_SCENE_LITTLE_CHAMPION_BUTTON_OFFSET_X = -450;          // —°‘Ò≥°æ∞–°–°”¢–€∞¥≈•Œª÷√ X ∆´“∆¡ø
-constexpr int SELECTION_SCENE_LITTLE_CHAMPION_BUTTON_OFFSET_Y = -200;          // —°‘Ò≥°æ∞–°–°”¢–€∞¥≈•Œª÷√ Y ∆´“∆¡ø
-constexpr int SELECTION_SCENE_LITTLE_CHAMPION_BUTTON_DELTA_X = 300;           // —°‘Ò≥°æ∞–°–°”¢–€∞¥≈•Œª÷√ X ≤Ó∑÷¡ø
-constexpr int SELECTION_SCENE_LITTLE_CHAMPION_BUTTON_DELTA_Y = 250;           // —°‘Ò≥°æ∞–°–°”¢–€∞¥≈•Œª÷√ Y ≤Ó∑÷¡ø
+// —°‘Ò≥°æ∞…Ë÷√
+constexpr int MAX_LITTLE_CHAMPION_COUNT = 8;                                // –°–°”¢–€÷÷¿‡◊Ó¥Û ˝¡ø
+constexpr int SELECTION_SCENE_BUTTON_OFFSET_X = -450;                       // —°‘Ò≥°æ∞–°–°”¢–€∞¥≈•Œª÷√ X ∆´“∆¡ø
+constexpr int SELECTION_SCENE_BUTTON_OFFSET_Y = -200;                       // —°‘Ò≥°æ∞–°–°”¢–€∞¥≈•Œª÷√ Y ∆´“∆¡ø
+constexpr int SELECTION_SCENE_BUTTON_HORIZONTAL_INTERVAL = 300;             // —°‘Ò≥°æ∞–°–°”¢–€∞¥≈•Œª÷√ÀÆ∆Ωº‰æ‡
+constexpr int SELECTION_SCENE_BUTTON_VERTICAL_INTERVAL = 250;               // —°‘Ò≥°æ∞–°–°”¢–€∞¥≈•Œª÷√¥π÷±º‰æ‡
+constexpr int SELECTION_SCENE_LABEL_OFFSET_Y = 250;                         // —°‘Ò≥°æ∞Ã· æ±Í«©Œª÷√ Y ∆´“∆¡ø
+constexpr int SELECTION_SCENE_LABEL_FONT_SIZE = 50;                         // —°‘Ò≥°æ∞Ã· æ±Í«©◊÷ÃÂ¥Û–°
 
 // ≤Àµ•≥°æ∞…Ë÷√
 constexpr int RANDOM_PROMPT_COUNT = 24;                                     // ÀÊª˙ª∂”≠Ã· æ”Ô ˝¡ø

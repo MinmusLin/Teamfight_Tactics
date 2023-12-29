@@ -2,7 +2,7 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     SelectionScene.h
  * File Function: SelectionScene类的定义
- * Author:        刘淑仪
+ * Author:        刘淑仪、林继申
  * Update Date:   2023/12/29
  ****************************************************************/
 
@@ -12,10 +12,10 @@
 
 #include "cocos2d.h"
 
- /*
-  * Class Name:     SelectionScene
-  * Class Function: 选择英雄场景类
-  */
+/*
+ * Class Name:     SelectionScene
+ * Class Function: 选择场景类
+ */
 class SelectionScene : public cocos2d::Scene {
 public:
     // 创建场景

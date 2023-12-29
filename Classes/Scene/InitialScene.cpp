@@ -10,7 +10,6 @@
 #include <locale>
 #include <codecvt>
 #include "InitialScene.h"
-#include "MenuScene.h"
 #include "SelectionScene.h"
 #include "Button/HoverButton.h"
 #include "GBKToUTF8/GBKToUTF8.h"
