@@ -117,6 +117,9 @@
     <ClCompile Include="..\Classes\Scene\SelectionScene.cpp">
       <Filter>Classes\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Scene\OfflineModeRuneScene.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -195,6 +198,9 @@
       <Filter>Classes\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\SelectionScene.h">
+      <Filter>Classes\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\OfflineModeRuneScene.h">
       <Filter>Classes\Scene</Filter>
     </ClInclude>
   </ItemGroup>

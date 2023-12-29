@@ -3,7 +3,7 @@
  * File Name:     MenuScene.cpp
  * File Function: MenuScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
@@ -12,7 +12,7 @@
 #include "MenuScene.h"
 #include "Button/HoverButton.h"
 #include "OnlineModeMenuScene.h"
-#include "OfflineModePreparationScene.h"
+#include "OfflineModeRuneScene.h"
 #include "Control/OfflineModeControl.h"
 #include "GBKToUTF8/GBKToUTF8.h"
 #include "proj.win32/Constant.h"
@@ -80,7 +80,7 @@ bool MenuScene::init()
                 std::cerr << "Memory allocation failed: " << e.what() << std::endl;
                 throw;
             }
-            cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, OfflineModePreparationScene::createScene(), cocos2d::Color3B::WHITE));
+            cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, OfflineModeRuneScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });
     onlineModeButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
@@ -101,7 +101,7 @@ bool MenuScene::init()
 
     // 创建一个欢迎提示
     std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-    const int number = (rand() % 100 < RANDOM_WELCOME_PROMPT_PROBABILITY * 100) ? std::localtime(&now)->tm_hour : rand() % 24 + RANDOM_PROMPT_COUNT;
+    const int number = (rand() % 100 < RANDOM_WELCOME_PROMPT_PROBABILITY * 100) ? std::localtime(&now)->tm_hour : rand() % RANDOM_PROMPT_COUNT + 24;
     auto welcomeLabel = Label::createWithTTF(g_PlayerName + GBKToUTF8::getString(WELCOME_PROMPT.at(number)), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", MENU_SCENE_FONT_SIZE);
     welcomeLabel->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_BUTTONS_OFFSET_X, screenSize.height / 2 + MENU_SCENE_WELCOME_LABEL_OFFSET_Y));
     welcomeLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
