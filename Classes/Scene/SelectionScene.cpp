@@ -2,7 +2,7 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     SelectionScene.h
  * File Function: SelectionScene类的实现
- * Author:        刘淑仪
+ * Author:        刘淑仪、林继申
  * Update Date:   2023/12/29
  ****************************************************************/
 
@@ -17,6 +17,9 @@ using cocos2d::Scene;
 using cocos2d::Sprite;
 using cocos2d::Label;
 using cocos2d::Vec2;
+
+// 玩家昵称
+extern std::string g_PlayerName;
 
 // 创建场景
 Scene* SelectionScene::createScene()
@@ -41,16 +44,22 @@ bool SelectionScene::init()
     background->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
     this->addChild(background);
 
+    // 创建标签
+    auto promptLabel = Label::createWithTTF(g_PlayerName + GBKToUTF8::getString("，请选择你的小小英雄!"), "../Resources/Fonts/DingDingJinBuTi.ttf", SELECTION_SCENE_LABEL_FONT_SIZE);
+    promptLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + SELECTION_SCENE_LABEL_OFFSET_Y));
+    promptLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
+    this->addChild(promptLabel);
+
     // 创建小小英雄按钮
     for (int i = 0; i < MAX_LITTLE_CHAMPION_COUNT; i++) {
         auto littleChampion = HoverButton::create(static_cast<std::string>("../Resources/Buttons/SelectionSceneButtons/LittleChampion") + std::to_string(i + 1) + static_cast<std::string>("DefaultButton.png"),
             static_cast<std::string>("../Resources/Buttons/SelectionSceneButtons/LittleChampion") + std::to_string(i + 1) + static_cast<std::string>("HoverButton.png"),
             static_cast<std::string>("../Resources/Buttons/SelectionSceneButtons/LittleChampion") + std::to_string(i + 1) + static_cast<std::string>("ActiveButton.png"));
-        littleChampion->setPosition(Vec2(screenSize.width / 2 + SELECTION_SCENE_LITTLE_CHAMPION_BUTTON_OFFSET_X + (i % (MAX_LITTLE_CHAMPION_COUNT / 2)) * SELECTION_SCENE_LITTLE_CHAMPION_BUTTON_DELTA_X,
-            screenSize.height / 2 + SELECTION_SCENE_LITTLE_CHAMPION_BUTTON_OFFSET_Y + (i / (MAX_LITTLE_CHAMPION_COUNT / 2)) * SELECTION_SCENE_LITTLE_CHAMPION_BUTTON_DELTA_Y));
-        littleChampion->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        littleChampion->setPosition(Vec2(screenSize.width / 2 + SELECTION_SCENE_BUTTON_OFFSET_X + (i % (MAX_LITTLE_CHAMPION_COUNT / 2)) * SELECTION_SCENE_BUTTON_HORIZONTAL_INTERVAL,
+            screenSize.height / 2 + SELECTION_SCENE_BUTTON_OFFSET_Y + (i / (MAX_LITTLE_CHAMPION_COUNT / 2)) * SELECTION_SCENE_BUTTON_VERTICAL_INTERVAL));
+        littleChampion->addTouchEventListener([i](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
             if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-                // TODO : 设置小小英雄
+                cocos2d::UserDefault::getInstance()->setStringForKey("LittleChampionCategory", std::to_string(i + 1));
                 cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
             }
             });
