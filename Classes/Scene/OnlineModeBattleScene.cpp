@@ -177,13 +177,15 @@ bool OnlineModeBattleScene::init()
         }, PROMPT_MESSAGE_DURATION, "HideLittleChampionLabel");
 
     // 创建小小英雄
-    auto littleChampion = Sprite::create("../Resources/Champions/LittleChampion.png");
+    auto littleChampion = Sprite::create("../Resources/LittleChampions/LittleChampion1.png");
     littleChampion->setPosition(winSize.width / 2, winSize.height / 2 + LITTLE_CHAMPION_OFFSET_Y);
     this->addChild(littleChampion, 2);
 
     // 创建粒子系统
     auto particleSystem = cocos2d::ParticleFlower::create();
     particleSystem->setPosition(littleChampion->getPosition());
+    particleSystem->setScale(LITTLE_CHAMPION_PARTICLE_SCALE);
+    particleSystem->setLife(LITTLE_CHAMPION_PARTICLE_LIFE);
     this->addChild(particleSystem, 1);
     this->scheduleUpdate();
     this->schedule([=](float dt) {
