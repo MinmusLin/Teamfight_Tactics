@@ -30,9 +30,8 @@ Difficulty g_difficulty = Normal;
 // 音频引擎方法
 void audioPlayer(const std::string& audioPath, bool isLoop = false)
 {
-    // TODO: 音频引擎方法
     if (isLoop) {
-        if (g_backgroundMusicSign != -1) {
+        if (g_backgroundMusicSign != DEFAULT_MUSIC_SIGN) {
             cocos2d::experimental::AudioEngine::stop(g_backgroundMusicSign);
         }
         g_backgroundMusicSign = cocos2d::experimental::AudioEngine::play2d(audioPath, isLoop);
