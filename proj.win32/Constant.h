@@ -235,7 +235,7 @@ constexpr int INCREASED_MAGIC_POINTS = 20;                                  // ¹
 constexpr int DECREASED_HEALTH_POINTS = 5;                                  // ´æ»îÕ½¶·Ó¢ÐÛ¶ÔÓ¦¼õÉÙÉúÃüÖµ
 constexpr int INCREASED_GOLD_COINS = 5;                                     // ´æ»îÕ½¶·Ó¢ÐÛ¶ÔÓ¦Ôö¼Ó½ð±ÒÊýÁ¿
 constexpr int NEW_BATTLE_INCREASED_GOLD_COINS = 10;                         // ÐÂÕ½¶·Ôö¼Ó½ð±ÒÊýÁ¿
-constexpr int EARLY_MIDDLE_STAGE_THRESHOLD = 10;                            // Ç°ÖÐÆÚÕ½¶·½×¶ÎãÐÖµ
+constexpr int EARLY_MIDDLE_STAGE_THRESHOLD = 20;                            // Ç°ÖÐÆÚÕ½¶·½×¶ÎãÐÖµ
 constexpr int MIDDLE_LATE_STAGE_THRESHOLD = 50;                             // ÖÐºóÆÚÕ½¶·½×¶ÎãÐÖµ
 constexpr int DEFENSE_SCORE_COEFFICIENT = 200;                              // ·ÀÓù·ÖÊýÏµÊý
 constexpr int ATTACK_SCORE_COEFFICIENT = 30;                                // ¹¥»÷·ÖÊýÏµÊý
@@ -268,8 +268,8 @@ constexpr double ATTACK_SCORE_WEIGHT = 2.5;                                 // Õ
 constexpr double SPEED_SCORE_WEIGHT = 1.0;                                  // Õ½¶·Ó¢ÐÛÖ°ÒµÆ«ºÃËÙ¶È·ÖÊýÈ¨ÖØ
 constexpr int STAGE_SCORE_THRESHOLDS[] = { 0, 5, 10, 25, 50, 60 };          // Õ½¶·½×¶Î»®·ÖãÐÖµ
 constexpr int STAGE_WITH_RATE_OF_CHAMPIONS[3][5] = {                        // ¸÷¸öÕ½¶·½×¶ÎµÄÕ½¶·Ó¢ÐÛÑ¡Ôñ¸ÅÂÊ
-    {6, 4, 3, 2, 0},                                                        // Ç°ÆÚÕ½¶·½×¶ÎÕ½¶·Ó¢ÐÛÑ¡Ôñ¸ÅÂÊ
-    {5, 4, 3, 2, 1},                                                        // ÖÐÆÚÕ½¶·½×¶ÎÕ½¶·Ó¢ÐÛÑ¡Ôñ¸ÅÂÊ
+    {6, 5, 3, 1, 0},                                                        // Ç°ÆÚÕ½¶·½×¶ÎÕ½¶·Ó¢ÐÛÑ¡Ôñ¸ÅÂÊ
+    {5, 5, 3, 1, 1},                                                        // ÖÐÆÚÕ½¶·½×¶ÎÕ½¶·Ó¢ÐÛÑ¡Ôñ¸ÅÂÊ
     {4, 5, 2, 2, 2},                                                        // ºóÆÚÕ½¶·½×¶ÎÕ½¶·Ó¢ÐÛÑ¡Ôñ¸ÅÂÊ
 };
 
