@@ -14,9 +14,9 @@
 
 // 音频引擎设置
 int g_backgroundMusicSign = DEFAULT_MUSIC_SIGN;
-int g_effectMusicSign = DEFAULT_MUSIC_SIGN;
+int g_soundEffectSign = DEFAULT_MUSIC_SIGN;
 float g_backgroundMusicVolumn = DEFAULT_MUSIC_VOLUMN;
-float g_effectMusicVolumn = DEFAULT_MUSIC_VOLUMN;
+float g_soundEffectVolumn = DEFAULT_MUSIC_VOLUMN;
 
 // 分辨率设置
 static cocos2d::Size s_designResolutionSize = cocos2d::Size(DESIGN_RESOLUTION_WIDTH, DESIGN_RESOLUTION_HEIGHT);
