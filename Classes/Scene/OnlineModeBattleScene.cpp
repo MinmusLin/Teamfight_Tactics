@@ -195,11 +195,15 @@ bool OnlineModeBattleScene::init()
     // 创建小小英雄鼠标事件监听
     auto listener = cocos2d::EventListenerMouse::create();
     listener->onMouseDown = [littleChampion](cocos2d::Event* event) {
-        cocos2d::EventMouse* e = dynamic_cast<cocos2d::EventMouse*>(event);
-        Vec2 location = e->getLocationInView();
-        float duration = littleChampion->getPosition().distance(location) / LITTLE_CHAMPION_MOVEMENT_SPEED;
+        const cocos2d::EventMouse* e = dynamic_cast<cocos2d::EventMouse*>(event);
+        const Vec2 location = e->getLocationInView();
+        const float duration = littleChampion->getPosition().distance(location) / LITTLE_CHAMPION_MOVEMENT_SPEED;
         littleChampion->stopAllActions();
-        littleChampion->runAction(cocos2d::MoveTo::create(duration, location));
+        const auto moveTo = cocos2d::MoveTo::create(duration, location);
+        float angle = CC_RADIANS_TO_DEGREES(atan2(littleChampion->getPosition().y - location.y, location.x - littleChampion->getPosition().x));
+        angle = angle < 0.0f ? angle + 360.0f : angle;
+        const auto rotateTo = cocos2d::RotateTo::create(LITTLE_CHAMPION_ROTATE_DURATION, angle + 90);
+        littleChampion->runAction(cocos2d::Spawn::createWithTwoActions(moveTo, rotateTo));
         };
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 

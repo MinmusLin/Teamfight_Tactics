@@ -145,10 +145,11 @@ constexpr int LITTLE_CHAMPION_LABEL_FONT_SIZE = 30;                         // Ð
 constexpr int INTERVAL_BETWEEN_WEAPON_AND_CHAMPION = 40;                    // ¶ÔÕ½³¡¾°Õ½¶·Ó¢ÐÛÓëÎäÆ÷¼ä¾à
 constexpr int WEAPON_ANIMATION_ROTATION_ANGLE = 60;                         // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ª½Ç¶È
 constexpr int WEAPON_ANIMATION_ROTATION_COUNT = 4;                          // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ª´ÎÊý
-constexpr float LITTLE_CHAMPION_PARTICLE_SCALE = 0.6f;                      // Ð¡Ð¡Ó¢ÐÛÁ£×ÓÐ§¹ûËõ·Å±ÈÀý
-constexpr float LITTLE_CHAMPION_PARTICLE_LIFE = 0.8f;                       // Ð¡Ð¡Ó¢ÐÛÁ£×ÓÐ§¹ûÉúÃüÖÜÆÚ
+constexpr float LITTLE_CHAMPION_PARTICLE_SCALE = 0.75f;                     // Ð¡Ð¡Ó¢ÐÛÁ£×ÓÐ§¹ûËõ·Å±ÈÀý
+constexpr float LITTLE_CHAMPION_PARTICLE_LIFE = 1.0f;                       // Ð¡Ð¡Ó¢ÐÛÁ£×ÓÐ§¹ûÉúÃüÖÜÆÚ
+constexpr float LITTLE_CHAMPION_ROTATE_DURATION = 0.5f;                     // Ð¡Ð¡Ó¢ÐÛÐý×ª¶¯»­Ê±¼ä
 constexpr float WEAPON_ANIMATION_ROTATION_DURATION = 0.15f;                 // ¶ÔÕ½³¡¾°ÎäÆ÷¶¯»­Ðý×ªÊ±¼ä
-constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 10.0f;                   // ¶ÔÕ½³¡¾°×¼±¸Ê±¼ä(TODO)
+constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 30.0f;                   // ¶ÔÕ½³¡¾°×¼±¸Ê±¼ä
 constexpr float BATTLE_END_DURATION = 2.0f;                                 // ¶ÔÕ½½áÊøÍ£ÁôÊ±¼ä
 
 // ÉèÖÃ³¡¾°ÉèÖÃ
