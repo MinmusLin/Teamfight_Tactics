@@ -3,13 +3,13 @@
  * File Name:     SettingsScene.cpp
  * File Function: SettingsScene类的实现
  * Author:        刘淑仪、林继申
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/29
  ****************************************************************/
 
 #include "SettingsScene.h"
-#include "AudioEngine.h"
 #include "Button/HoverButton.h"
 #include "MenuScene.h"
+#include "AudioEngine.h"
 #include "proj.win32/Constant.h"
 
 // 命名空间
@@ -18,14 +18,20 @@ using cocos2d::Sprite;
 using cocos2d::Label;
 using cocos2d::Vec2;
 
+// 音频引擎设置
+int g_backgroundMusicSign = DEFAULT_MUSIC_SIGN;
+int g_soundEffectSign = DEFAULT_MUSIC_SIGN;
+float g_backgroundMusicVolumn = DEFAULT_MUSIC_VOLUMN;
+float g_soundEffectVolumn = DEFAULT_MUSIC_VOLUMN;
+
 // 游戏难度
 Difficulty g_difficulty = Normal;
 
-// 音频引擎设置
-extern int g_backgroundMusicSign;
-extern int g_effectMusicSign;
-extern float g_backgroundMusicVolumn;
-extern float g_effectMusicVolumn;
+// 音频引擎方法
+void audioPlayer(const std::string& audioPath, bool isLoop = false)
+{
+    // TODO: 音频引擎方法
+}
 
 // 创建场景
 Scene* SettingsScene::createScene()
@@ -52,21 +58,21 @@ bool SettingsScene::init()
 
     // 创建滑动条
     auto backgroundMusicVolumnSlider = cocos2d::ui::Slider::create();
-    backgroundMusicVolumnSlider->loadBarTexture("../Resources/Layers/SliderBack.png");
-    backgroundMusicVolumnSlider->loadSlidBallTextures("../Resources/Layers/SliderNodeNormal.png",
-        "../Resources/Layers/SliderNodePress.png",
-        "../Resources/Layers/SliderNodeDisable.png");
-    backgroundMusicVolumnSlider->loadProgressBarTexture("../Resources/Layers/SliderPressBar.png");
+    backgroundMusicVolumnSlider->loadBarTexture("../Resources/ImageElements/SliderBack.png");
+    backgroundMusicVolumnSlider->loadSlidBallTextures("../Resources/ImageElements/SliderNodeNormal.png",
+        "../Resources/ImageElements/SliderNodePress.png",
+        "../Resources/ImageElements/SliderNodeDisable.png");
+    backgroundMusicVolumnSlider->loadProgressBarTexture("../Resources/ImageElements/SliderPressBar.png");
     backgroundMusicVolumnSlider->setPosition(cocos2d::Vec2(screenSize.width / 2 + SETTINGS_SCENE_SLIDER_OFFSET_X, screenSize.height / 2 + SETTINGS_SCENE_BGMSLIDER_OFFSET_Y));
     backgroundMusicVolumnSlider->setPercent(g_backgroundMusicVolumn * 100);
     auto effectVolumnslider = cocos2d::ui::Slider::create();
-    effectVolumnslider->loadBarTexture("../Resources/Layers/SliderBack.png");
-    effectVolumnslider->loadSlidBallTextures("../Resources/Layers/SliderNodeNormal.png",
-        "../Resources/Layers/SliderNodePress.png",
-        "../Resources/Layers/SliderNodeDisable.png");
-    effectVolumnslider->loadProgressBarTexture("../Resources/Layers/SliderPressBar.png");
+    effectVolumnslider->loadBarTexture("../Resources/ImageElements/SliderBack.png");
+    effectVolumnslider->loadSlidBallTextures("../Resources/ImageElements/SliderNodeNormal.png",
+        "../Resources/ImageElements/SliderNodePress.png",
+        "../Resources/ImageElements/SliderNodeDisable.png");
+    effectVolumnslider->loadProgressBarTexture("../Resources/ImageElements/SliderPressBar.png");
     effectVolumnslider->setPosition(cocos2d::Vec2(screenSize.width / 2 + SETTINGS_SCENE_SLIDER_OFFSET_X, screenSize.height / 2 + SETTINGS_SCENE_EFFSLIDER_OFFSET_Y));
-    effectVolumnslider->setPercent(g_effectMusicVolumn * 100);
+    effectVolumnslider->setPercent(g_soundEffectVolumn * 100);
 
     // 为滑动条添加事件处理器
     backgroundMusicVolumnSlider->addEventListener([=](Ref* sender, cocos2d::ui::Slider::EventType type) {
@@ -81,8 +87,8 @@ bool SettingsScene::init()
         if (type == cocos2d::ui::Slider::EventType::ON_PERCENTAGE_CHANGED) {
             cocos2d::ui::Slider* effectVolumnslider = dynamic_cast<cocos2d::ui::Slider*>(sender);
             const float percent = effectVolumnslider->getPercent();
-            g_effectMusicVolumn = percent / 100.0f;
-            cocos2d::experimental::AudioEngine::setVolume(g_effectMusicSign, g_effectMusicVolumn);
+            g_soundEffectVolumn = percent / 100.0f;
+            cocos2d::experimental::AudioEngine::setVolume(g_soundEffectSign, g_soundEffectVolumn);
         }
         });
 
@@ -103,21 +109,21 @@ bool SettingsScene::init()
     this->addChild(returnMenuButton);
 
     // 创建复选框
-    auto easyCheckBox = cocos2d::ui::CheckBox::create("../Resources/Layers/CheckBoxNormal.png",
-        "../Resources/Layers/CheckBoxNormalPress.png",
-        "../Resources/Layers/CheckBoxActive.png",
-        "../Resources/Layers/CheckBoxNormalDisable.png",
-        "../Resources/Layers/CheckBoxActiveDisable.png");
-    auto normalCheckBox = cocos2d::ui::CheckBox::create("../Resources/Layers/CheckBoxNormal.png",
-        "../Resources/Layers/CheckBoxNormalPress.png",
-        "../Resources/Layers/CheckBoxActive.png",
-        "../Resources/Layers/CheckBoxNormalDisable.png",
-        "../Resources/Layers/CheckBoxActiveDisable.png");
-    auto difficultCheckBox = cocos2d::ui::CheckBox::create("../Resources/Layers/CheckBoxNormal.png",
-        "../Resources/Layers/CheckBoxNormalPress.png",
-        "../Resources/Layers/CheckBoxActive.png",
-        "../Resources/Layers/CheckBoxNormalDisable.png",
-        "../Resources/Layers/CheckBoxActiveDisable.png");
+    auto easyCheckBox = cocos2d::ui::CheckBox::create("../Resources/ImageElements/CheckBoxNormal.png",
+        "../Resources/ImageElements/CheckBoxNormalPress.png",
+        "../Resources/ImageElements/CheckBoxActive.png",
+        "../Resources/ImageElements/CheckBoxNormalDisable.png",
+        "../Resources/ImageElements/CheckBoxActiveDisable.png");
+    auto normalCheckBox = cocos2d::ui::CheckBox::create("../Resources/ImageElements/CheckBoxNormal.png",
+        "../Resources/ImageElements/CheckBoxNormalPress.png",
+        "../Resources/ImageElements/CheckBoxActive.png",
+        "../Resources/ImageElements/CheckBoxNormalDisable.png",
+        "../Resources/ImageElements/CheckBoxActiveDisable.png");
+    auto difficultCheckBox = cocos2d::ui::CheckBox::create("../Resources/ImageElements/CheckBoxNormal.png",
+        "../Resources/ImageElements/CheckBoxNormalPress.png",
+        "../Resources/ImageElements/CheckBoxActive.png",
+        "../Resources/ImageElements/CheckBoxNormalDisable.png",
+        "../Resources/ImageElements/CheckBoxActiveDisable.png");
     easyCheckBox->setPosition(cocos2d::Vec2(screenSize.width / 2 + SETTINGS_SCENE_EASY_CHECKBOX_OFFSET_X, screenSize.height / 2 + SETTINGS_SCENE_CHECKBOX_OFFSET_Y));
     normalCheckBox->setPosition(cocos2d::Vec2(screenSize.width / 2 + SETTINGS_SCENE_NORMAL_CHECKBOX_OFFSET_X, screenSize.height / 2 + SETTINGS_SCENE_CHECKBOX_OFFSET_Y));
     difficultCheckBox->setPosition(cocos2d::Vec2(screenSize.width / 2 + SETTINGS_SCENE_DIFFICULT_CHECKBOX_OFFSET_X, screenSize.height / 2 + SETTINGS_SCENE_CHECKBOX_OFFSET_Y));

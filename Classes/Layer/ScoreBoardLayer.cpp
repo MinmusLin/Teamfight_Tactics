@@ -3,7 +3,7 @@
  * File Name:     ScoreBoardLayer.cpp
  * File Function: ScoreBoardLayer类的实现
  * Author:        林继申、刘淑仪
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
@@ -55,7 +55,7 @@ void ScoreBoardLayer::initialize(const int playerNum)
     // 初始化分数表
     for (int i = 0; i < playerNum; i++) {
         // 创建分数表背景
-        auto scoreBoardBackground = Sprite::create("../Resources/Layers/ScoreBoardLayerBackground.png");
+        auto scoreBoardBackground = Sprite::create("../Resources/ImageElements/ScoreBoardLayerBackground.png");
         scoreBoardBackground->setPosition(SCORE_BOARD_LAYER_START_X, SCORE_BOARD_LAYER_START_Y - i * SCORE_BOARD_LAYER_VERTICAL_INTERVAL);
         this->addChild(scoreBoardBackground);
 

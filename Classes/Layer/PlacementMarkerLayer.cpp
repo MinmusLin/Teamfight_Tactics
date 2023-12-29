@@ -3,7 +3,7 @@
  * File Name:     PlacementMarkerLayer.cpp
  * File Function: PlacementMarkerLayer类的实现
  * Author:        林继申、刘淑仪
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
@@ -43,7 +43,7 @@ void PlacementMarkerLayer::showPlacementMarker(const ChampionCategory battleMap[
 // 创建放置标记
 void PlacementMarkerLayer::createPlacementMarker(const Location& location)
 {
-    Sprite* placementMarker = Sprite::create("../Resources/Layers/AvailablePlacementMarker.png");
+    Sprite* placementMarker = Sprite::create("../Resources/ImageElements/AvailablePlacementMarker.png");
     Vec2 coordinate = LocationMap::getInstance().getLocationMap().at(location);
     placementMarker->setPosition(coordinate);
     this->addChild(placementMarker);

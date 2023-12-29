@@ -2,7 +2,7 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     AppDelegate.cpp
  * File Function: AppDelegate类的实现
- * Author:        林继申、刘淑仪
+ * Author:        林继申
  * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
@@ -10,25 +10,13 @@
 #include "AppDelegate.h"
 #include "Scene/StartupScene.h"
 #include "proj.win32/Constant.h"
-#include "AudioEngine.h"
-
-// 音频引擎设置
-int g_backgroundMusicSign = DEFAULT_MUSIC_SIGN;
-int g_soundEffectSign = DEFAULT_MUSIC_SIGN;
-float g_backgroundMusicVolumn = DEFAULT_MUSIC_VOLUMN;
-float g_soundEffectVolumn = DEFAULT_MUSIC_VOLUMN;
+#include "proj.win32/AudioPlayer.h"
 
 // 分辨率设置
 static cocos2d::Size s_designResolutionSize = cocos2d::Size(DESIGN_RESOLUTION_WIDTH, DESIGN_RESOLUTION_HEIGHT);
 static cocos2d::Size s_smallResolutionSize = cocos2d::Size(SMALL_RESOLUTION_WIDTH, SMALL_RESOLUTION_HEIGHT);
 static cocos2d::Size s_mediumResolutionSize = cocos2d::Size(MEDIUM_RESOLUTION_WIDTH, MEDIUM_RESOLUTION_HEIGHT);
 static cocos2d::Size s_largeResolutionSize = cocos2d::Size(LARGE_RESOLUTION_WIDTH, LARGE_RESOLUTION_HEIGHT);
-
-// 音频引擎方法
-void audioPlayer(const std::string& audioPath, bool isLoop = false)
-{
-    // TODO: 音频引擎方法
-}
 
 // 析构函数
 AppDelegate::~AppDelegate()

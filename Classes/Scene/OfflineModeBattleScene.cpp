@@ -65,12 +65,12 @@ bool OfflineModeBattleScene::init()
 
                 // 创建生命条和经验条
                 if (currentChampion->getCamp()) {
-                    currentChampion->setHealthBar(Sprite::create("../Resources/Layers/MyCampHealthBar.png"));
+                    currentChampion->setHealthBar(Sprite::create("../Resources/ImageElements/MyCampHealthBar.png"));
                 }
                 else {
-                    currentChampion->setHealthBar(Sprite::create("../Resources/Layers/EnemyCampHealthBar.png"));
+                    currentChampion->setHealthBar(Sprite::create("../Resources/ImageElements/EnemyCampHealthBar.png"));
                 }
-                currentChampion->setManaBar(Sprite::create("../Resources/Layers/ManaBar.png"));
+                currentChampion->setManaBar(Sprite::create("../Resources/ImageElements/ManaBar.png"));
                 currentChampion->getHealthBar()->setPosition(currentChampionLocation + Vec2(0, CHAMPION_HEALTHBAR_VERTICAL_INTERVAL));
                 currentChampion->getManaBar()->setPosition(currentChampionLocation + Vec2(0, CHAMPION_MANABAR_VERTICAL_INTERVAL)); 
                 this->addChild(currentChampion->getHealthBar(), 1);
@@ -100,27 +100,27 @@ bool OfflineModeBattleScene::init()
         if (g_offlineModeControl->getBattle()->getMyBond()[i] >= BOND_EFFECT_TRIGGER_CONDITION) {
             g_offlineModeControl->getBattle()->bondEffect(static_cast<Bond>(i), true);
             if (static_cast<Bond>(i) == Lout) {
-                auto sprite = cocos2d::Sprite::create("../Resources/Layers/MyBondLout.png");
+                auto sprite = cocos2d::Sprite::create("../Resources/ImageElements/MyBondLout.png");
                 sprite->cocos2d::Sprite::setPosition(BOND_EFFECT_START_X + i * BOND_EFFECT_HORIZONTAL_INTERVAL, MY_BOND_EFFECT_START_Y);
                 this->addChild(sprite);
             }
             else if (static_cast<Bond>(i) == Brotherhood) {
-                auto sprite = cocos2d::Sprite::create("../Resources/Layers/MyBondBrotherhood.png");
+                auto sprite = cocos2d::Sprite::create("../Resources/ImageElements/MyBondBrotherhood.png");
                 sprite->cocos2d::Sprite::setPosition(BOND_EFFECT_START_X + i * BOND_EFFECT_HORIZONTAL_INTERVAL, MY_BOND_EFFECT_START_Y);
                 this->addChild(sprite);
             }
             else if (static_cast<Bond>(i) == PopStar) {
-                auto sprite = cocos2d::Sprite::create("../Resources/Layers/MyBondPopStar.png");
+                auto sprite = cocos2d::Sprite::create("../Resources/ImageElements/MyBondPopStar.png");
                 sprite->cocos2d::Sprite::setPosition(BOND_EFFECT_START_X + i * BOND_EFFECT_HORIZONTAL_INTERVAL, MY_BOND_EFFECT_START_Y);
                 this->addChild(sprite);
             }
             else if (static_cast<Bond>(i) == GoodShooter) {
-                auto sprite = cocos2d::Sprite::create("../Resources/Layers/MyBondGoodShooter.png");
+                auto sprite = cocos2d::Sprite::create("../Resources/ImageElements/MyBondGoodShooter.png");
                 sprite->cocos2d::Sprite::setPosition(BOND_EFFECT_START_X + i * BOND_EFFECT_HORIZONTAL_INTERVAL, MY_BOND_EFFECT_START_Y);
                 this->addChild(sprite);
             }
             else if (static_cast<Bond>(i) == DarkSide) {
-                auto sprite = cocos2d::Sprite::create("../Resources/Layers/MyBondDarkSide.png");
+                auto sprite = cocos2d::Sprite::create("../Resources/ImageElements/MyBondDarkSide.png");
                 sprite->cocos2d::Sprite::setPosition(BOND_EFFECT_START_X + i * BOND_EFFECT_HORIZONTAL_INTERVAL, MY_BOND_EFFECT_START_Y);
                 this->addChild(sprite);
             }
@@ -128,27 +128,27 @@ bool OfflineModeBattleScene::init()
         if (g_offlineModeControl->getBattle()->getEnemyBond()[i] >= BOND_EFFECT_TRIGGER_CONDITION) {
             g_offlineModeControl->getBattle()->bondEffect(static_cast<Bond>(i), false);
             if (static_cast<Bond>(i) == Lout) {
-                auto sprite = cocos2d::Sprite::create("../Resources/Layers/EnemyBondLout.png");
+                auto sprite = cocos2d::Sprite::create("../Resources/ImageElements/EnemyBondLout.png");
                 sprite->cocos2d::Sprite::setPosition(BOND_EFFECT_START_X + i * BOND_EFFECT_HORIZONTAL_INTERVAL, ENEMY_BOND_EFFECT_START_Y);
                 this->addChild(sprite);
             }
             else if (static_cast<Bond>(i) == Brotherhood) {
-                auto sprite = cocos2d::Sprite::create("../Resources/Layers/EnemyBondBrotherhood.png");
+                auto sprite = cocos2d::Sprite::create("../Resources/ImageElements/EnemyBondBrotherhood.png");
                 sprite->cocos2d::Sprite::setPosition(BOND_EFFECT_START_X + i * BOND_EFFECT_HORIZONTAL_INTERVAL, ENEMY_BOND_EFFECT_START_Y);
                 this->addChild(sprite);
             }
             else if (static_cast<Bond>(i) == PopStar) {
-                auto sprite = cocos2d::Sprite::create("../Resources/Layers/EnemyBondPopStar.png");
+                auto sprite = cocos2d::Sprite::create("../Resources/ImageElements/EnemyBondPopStar.png");
                 sprite->cocos2d::Sprite::setPosition(BOND_EFFECT_START_X + i * BOND_EFFECT_HORIZONTAL_INTERVAL, ENEMY_BOND_EFFECT_START_Y);
                 this->addChild(sprite);
             }
             else if (static_cast<Bond>(i) == GoodShooter) {
-                auto sprite = cocos2d::Sprite::create("../Resources/Layers/EnemyBondGoodShooter.png");
+                auto sprite = cocos2d::Sprite::create("../Resources/ImageElements/EnemyBondGoodShooter.png");
                 sprite->cocos2d::Sprite::setPosition(BOND_EFFECT_START_X + i * BOND_EFFECT_HORIZONTAL_INTERVAL, ENEMY_BOND_EFFECT_START_Y);
                 this->addChild(sprite);
             }
             else if (static_cast<Bond>(i) == DarkSide) {
-                auto sprite = cocos2d::Sprite::create("../Resources/Layers/EnemyBondDarkSide.png");
+                auto sprite = cocos2d::Sprite::create("../Resources/ImageElements/EnemyBondDarkSide.png");
                 sprite->cocos2d::Sprite::setPosition(BOND_EFFECT_START_X + i * BOND_EFFECT_HORIZONTAL_INTERVAL, ENEMY_BOND_EFFECT_START_Y);
                 this->addChild(sprite);
             }

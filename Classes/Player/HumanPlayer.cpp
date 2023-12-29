@@ -228,7 +228,7 @@ void HumanPlayer::onMouseDown(Event* event, Sprite* championSprite)
     if (championSprite->getBoundingBox().containsPoint(location) && mouseEvent->getMouseButton() == EventMouse::MouseButton::BUTTON_LEFT) {
         // 标记选中状态
         championSprite->setUserData(reinterpret_cast<void*>(1));
-        nearestPlacementMarker = Sprite::create("../Resources/Layers/NearestPlacementMarker.png");
+        nearestPlacementMarker = Sprite::create("../Resources/ImageElements/NearestPlacementMarker.png");
         nearestPlacementMarker->setVisible(false);
         currentScene->addChild(nearestPlacementMarker);
 

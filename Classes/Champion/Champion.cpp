@@ -3,7 +3,7 @@
  * File Name:     Champion.cpp
  * File Function: ChampionÀàµÄÊµÏÖ
  * Author:        ÑîÓîçû¡¢ÁõÊçÒÇ¡¢ÁÖ¼ÌÉê
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
@@ -567,7 +567,7 @@ void Champion::setSwordVisible(const bool visible)
 // ³õÊ¼»¯ÎäÆ÷
 void Champion::initializeSword(const cocos2d::Vec2& position)
 {
-    sword = cocos2d::Sprite::create("../Resources/Layers/Sword.png");
+    sword = cocos2d::Sprite::create("../Resources/ImageElements/Sword.png");
     if (sword) {
         sword->setPosition(position);
         sword->setVisible(false);

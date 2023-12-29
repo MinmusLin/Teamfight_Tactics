@@ -25,7 +25,7 @@ bool ChampionAttributesLayer::init()
     }
 
     // ´´½¨Õ½¶·Ó¢ÐÛÊôÐÔ²ã±³¾°Í¼
-    Sprite* backgroundImage = Sprite::create("../Resources/Layers/ChampionAttributesLayerBackground.png");
+    Sprite* backgroundImage = Sprite::create("../Resources/ImageElements/ChampionAttributesLayerBackground.png");
     backgroundImage->setPosition(BACKGROUND_IMAGE_START_X, BACKGROUND_IMAGE_START_Y);
     backgroundImage->setOpacity(BACKGROUND_IMAGE_TRANSPARENCY);
     this->addChild(backgroundImage);
