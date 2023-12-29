@@ -71,7 +71,7 @@ bool OfflineModePreparationScene::init()
     this->addChild(coinLabel);
 
     // 创建进度条
-    auto progressBar = cocos2d::ui::LoadingBar::create("../Resources/LoadingBars/CountdownLoadingBar.png");
+    auto progressBar = cocos2d::ui::LoadingBar::create("../Resources/ImageElements/CountdownLoadingBar.png");
     progressBar->setPosition(Vec2(BATTLE_SCENE_LOADINGBAR_X, BATTLE_SCENE_LOADINGBAR_Y));
     progressBar->setPercent(0);
     progressBar->setName("CountdownLoadingBar");

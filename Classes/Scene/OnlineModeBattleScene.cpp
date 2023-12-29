@@ -176,7 +176,9 @@ bool OnlineModeBattleScene::init()
         }, PROMPT_MESSAGE_DURATION, "HideLittleChampionLabel");
 
     // 创建小小英雄
-    auto littleChampion = Sprite::create("../Resources/LittleChampions/LittleChampion1.png");
+    auto littleChampion = Sprite::create(static_cast<std::string>("../Resources/Champions/LittleChampion")
+        + cocos2d::UserDefault::getInstance()->getStringForKey("LittleChampionCategory")
+        + static_cast<std::string>(".png"));
     littleChampion->setPosition(winSize.width / 2, winSize.height / 2 + LITTLE_CHAMPION_OFFSET_Y);
     this->addChild(littleChampion, 2);
 

@@ -58,19 +58,19 @@ bool SettingsScene::init()
 
     // 创建滑动条
     auto backgroundMusicVolumnSlider = cocos2d::ui::Slider::create();
-    backgroundMusicVolumnSlider->loadBarTexture("../Resources/ImageElements/SliderBack.png");
+    backgroundMusicVolumnSlider->loadBarTexture("../Resources/ImageElements/SliderBackground.png");
     backgroundMusicVolumnSlider->loadSlidBallTextures("../Resources/ImageElements/SliderNodeNormal.png",
         "../Resources/ImageElements/SliderNodePress.png",
         "../Resources/ImageElements/SliderNodeDisable.png");
-    backgroundMusicVolumnSlider->loadProgressBarTexture("../Resources/ImageElements/SliderPressBar.png");
+    backgroundMusicVolumnSlider->loadProgressBarTexture("../Resources/ImageElements/SliderBar.png");
     backgroundMusicVolumnSlider->setPosition(cocos2d::Vec2(screenSize.width / 2 + SETTINGS_SCENE_SLIDER_OFFSET_X, screenSize.height / 2 + SETTINGS_SCENE_BGMSLIDER_OFFSET_Y));
     backgroundMusicVolumnSlider->setPercent(g_backgroundMusicVolumn * 100);
     auto effectVolumnslider = cocos2d::ui::Slider::create();
-    effectVolumnslider->loadBarTexture("../Resources/ImageElements/SliderBack.png");
+    effectVolumnslider->loadBarTexture("../Resources/ImageElements/SliderBackground.png");
     effectVolumnslider->loadSlidBallTextures("../Resources/ImageElements/SliderNodeNormal.png",
         "../Resources/ImageElements/SliderNodePress.png",
         "../Resources/ImageElements/SliderNodeDisable.png");
-    effectVolumnslider->loadProgressBarTexture("../Resources/ImageElements/SliderPressBar.png");
+    effectVolumnslider->loadProgressBarTexture("../Resources/ImageElements/SliderBar.png");
     effectVolumnslider->setPosition(cocos2d::Vec2(screenSize.width / 2 + SETTINGS_SCENE_SLIDER_OFFSET_X, screenSize.height / 2 + SETTINGS_SCENE_EFFSLIDER_OFFSET_Y));
     effectVolumnslider->setPercent(g_soundEffectVolumn * 100);
 

@@ -3,7 +3,7 @@
  * File Name:     StartupScene.cpp
  * File Function: StartupScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
@@ -43,7 +43,7 @@ bool StartupScene::init()
     this->addChild(background);
 
     // 创建进度条
-    auto progressBar = cocos2d::ui::LoadingBar::create("../Resources/LoadingBars/StartupLoadingBar.png");
+    auto progressBar = cocos2d::ui::LoadingBar::create("../Resources/ImageElements/StartupLoadingBar.png");
     progressBar->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + STARTUP_SCENE_LOADINGBAR_OFFSET_Y));
     progressBar->setPercent(0);
     this->addChild(progressBar);
