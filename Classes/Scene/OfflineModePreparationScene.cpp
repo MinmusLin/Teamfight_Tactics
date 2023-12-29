@@ -3,7 +3,7 @@
  * File Name:     OfflineModePreparationScene.cpp
  * File Function: OfflineModePreparationScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
@@ -12,7 +12,6 @@
 #include "Control/OfflineModeControl.h"
 #include "Button/HoverButton.h"
 #include "Layer/ScoreBoardLayer.h"
-#include "GBKToUTF8/GBKToUTF8.h"
 #include "MenuScene.h"
 
 // 命名空间
@@ -54,10 +53,10 @@ bool OfflineModePreparationScene::init()
     Label* levelLabel;
     const int currentBattleChampionCount = g_offlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
     if (currentBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT) {
-        levelLabel = Label::createWithTTF(GBKToUTF8::getString("最高等级"), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_LEVEL_LABEL_FONT_SIZE);
+        levelLabel = Label::createWithTTF(u8"最高等级", "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_LEVEL_LABEL_FONT_SIZE);
     }
     else {
-        levelLabel = Label::createWithTTF(GBKToUTF8::getString("等级：") + std::to_string(currentBattleChampionCount - BATTLE_AREA_MIN_CHAMPION_COUNT + 1), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_LEVEL_LABEL_FONT_SIZE);
+        levelLabel = Label::createWithTTF(u8"等级：" + std::to_string(currentBattleChampionCount - BATTLE_AREA_MIN_CHAMPION_COUNT + 1), "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_LEVEL_LABEL_FONT_SIZE);
     }
     levelLabel->setAnchorPoint(Vec2(0, 0.5));
     levelLabel->setPosition(Vec2(screenSize.width / 2 + SHOP_LEVEL_LABEL_OFFSET_X, screenSize.height / 2 + SHOP_LEVEL_LABEL_OFFSET_Y));

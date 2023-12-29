@@ -24,7 +24,7 @@ constexpr int MEDIUM_RESOLUTION_HEIGHT = 720;                               // Ö
 constexpr int LARGE_RESOLUTION_WIDTH = 1920;                                // ´ó·Ö±æÂÊ¿í¶È
 constexpr int LARGE_RESOLUTION_HEIGHT = 1080;                               // ´ó·Ö±æÂÊ¸ß¶È
 constexpr float FRAME_RATE = 60.0f;                                         // Ó¦ÓÃ³ÌĞòÖ¡ÂÊ
-const std::string APPLICATION_TITLE = "½ğ²ù²ùÖ®Õ½ Teamfight Tactics";        // Ó¦ÓÃ³ÌĞò±êÌâ
+const std::string APPLICATION_TITLE = u8"½ğ²ù²ùÖ®Õ½ Teamfight Tactics";      // Ó¦ÓÃ³ÌĞò±êÌâ
 
 // ÍøÂç»·¾³ÉèÖÃ
 constexpr int HOSTNAME_MAX_LENGHT = 128;                                    // Ö÷»úÃû×î´ó³¤¶È
@@ -407,94 +407,94 @@ typedef struct {
 
 // Õ½¶·Ó¢ĞÛÊôĞÔ²ÎÊı
 const ChampionAttributes CHAMPION_1_ATTR = { // ½Ù£¨Ò»ĞÇ£©
-    Champion1, "½Ù", "../Resources/Champions/Champion1.png", 1, 1, 500, 0, 50, 200, 1, 0.75f, 1.0f, 1.0f, NoBond
+    Champion1, u8"½Ù", "../Resources/Champions/Champion1.png", 1, 1, 500, 0, 50, 200, 1, 0.75f, 1.0f, 1.0f, NoBond
 };
 const ChampionAttributes CHAMPION_2_ATTR = { // ½Ù£¨¶şĞÇ£©
-    Champion2, "½Ù", "../Resources/Champions/Champion2.png", 3, 2, 900, 0, 75, 200, 1, 0.75f, 1.0f, 1.0f, NoBond
+    Champion2, u8"½Ù", "../Resources/Champions/Champion2.png", 3, 2, 900, 0, 75, 200, 1, 0.75f, 1.0f, 1.0f, NoBond
 };
 const ChampionAttributes CHAMPION_3_ATTR = { // ÓÀ¶÷£¨Ò»ĞÇ£©
-    Champion3, "ÓÀ¶÷", "../Resources/Champions/Champion3.png", 1, 1, 550, 0, 45, 200, 1, 1.0f, 1.0f, 1.2f, Brotherhood
+    Champion3, u8"ÓÀ¶÷", "../Resources/Champions/Champion3.png", 1, 1, 550, 0, 45, 200, 1, 1.0f, 1.0f, 1.2f, Brotherhood
 };
 const ChampionAttributes CHAMPION_4_ATTR = { // ÓÀ¶÷£¨¶şĞÇ£©
-    Champion4, "ÓÀ¶÷", "../Resources/Champions/Champion4.png", 3, 2, 990, 0, 68, 200, 1, 1.0f, 1.0f, 1.2f, Brotherhood
+    Champion4, u8"ÓÀ¶÷", "../Resources/Champions/Champion4.png", 3, 2, 990, 0, 68, 200, 1, 1.0f, 1.0f, 1.2f, Brotherhood
 };
 const ChampionAttributes CHAMPION_5_ATTR = { // °ÂÀ­·ò£¨Ò»ĞÇ£©
-    Champion5, "°ÂÀ­·ò", "../Resources/Champions/Champion5.png", 1, 1, 700, 0, 55, 200, 1, 0.6f, 1.0f, 1.4f, Lout
+    Champion5, u8"°ÂÀ­·ò", "../Resources/Champions/Champion5.png", 1, 1, 700, 0, 55, 200, 1, 0.6f, 1.0f, 1.4f, Lout
 };
 const ChampionAttributes CHAMPION_6_ATTR = { // °ÂÀ­·ò£¨¶şĞÇ£©
-    Champion6, "°ÂÀ­·ò", "../Resources/Champions/Champion6.png", 3, 2, 1260, 0, 83, 200, 1, 0.6f, 1.0f, 1.4f, Lout
+    Champion6, u8"°ÂÀ­·ò", "../Resources/Champions/Champion6.png", 3, 2, 1260, 0, 83, 200, 1, 0.6f, 1.0f, 1.4f, Lout
 };
 const ChampionAttributes CHAMPION_7_ATTR = { // ÅËÉ­£¨Ò»ĞÇ£©
-    Champion7, "ÅËÉ­", "../Resources/Champions/Champion7.png", 1, 1, 700, 0, 70, 200, 1, 0.5f, 1.0f, 1.2f, Lout
+    Champion7, u8"ÅËÉ­", "../Resources/Champions/Champion7.png", 1, 1, 700, 0, 70, 200, 1, 0.5f, 1.0f, 1.2f, Lout
 };
 const ChampionAttributes CHAMPION_8_ATTR = { // ÅËÉ­£¨¶şĞÇ£©
-    Champion8, "ÅËÉ­", "../Resources/Champions/Champion8.png", 3, 2, 1260, 0, 105, 200, 1, 0.5f, 1.0f, 1.2f, Lout
+    Champion8, u8"ÅËÉ­", "../Resources/Champions/Champion8.png", 3, 2, 1260, 0, 105, 200, 1, 0.5f, 1.0f, 1.2f, Lout
 };
 const ChampionAttributes CHAMPION_9_ATTR = { // ÒÁÜ½ÁÕ£¨Ò»ĞÇ£©
-    Champion9, "ÒÁÜ½ÁÕ", "../Resources/Champions/Champion9.png", 1, 1, 650, 0, 55, 200, 1, 0.55f, 1.0f, 1.3f, DarkSide
+    Champion9, u8"ÒÁÜ½ÁÕ", "../Resources/Champions/Champion9.png", 1, 1, 650, 0, 55, 200, 1, 0.55f, 1.0f, 1.3f, DarkSide
 };
 const ChampionAttributes CHAMPION_10_ATTR = { // ÒÁÜ½ÁÕ£¨¶şĞÇ£©
-    Champion10, "ÒÁÜ½ÁÕ", "../Resources/Champions/Champion10.png", 3, 2, 1170, 0, 83, 200, 1, 0.55f, 1.0f, 1.3f, DarkSide
+    Champion10, u8"ÒÁÜ½ÁÕ", "../Resources/Champions/Champion10.png", 3, 2, 1170, 0, 83, 200, 1, 0.55f, 1.0f, 1.3f, DarkSide
 };
 const ChampionAttributes CHAMPION_11_ATTR = { // ¿âÆæ£¨Ò»ĞÇ£©
-    Champion11, "¿âÆæ", "../Resources/Champions/Champion11.png", 2, 1, 500, 0, 50, 200, 3, 0.7f, 1.0f, 1.0f, GoodShooter
+    Champion11, u8"¿âÆæ", "../Resources/Champions/Champion11.png", 2, 1, 500, 0, 50, 200, 3, 0.7f, 1.0f, 1.0f, GoodShooter
 };
 const ChampionAttributes CHAMPION_12_ATTR = { // ¿âÆæ£¨¶şĞÇ£©
-    Champion12, "¿âÆæ", "../Resources/Champions/Champion12.png", 6, 2, 900, 0, 75, 200, 3, 0.7f, 1.0f, 1.0f, GoodShooter
+    Champion12, u8"¿âÆæ", "../Resources/Champions/Champion12.png", 6, 2, 900, 0, 75, 200, 3, 0.7f, 1.0f, 1.0f, GoodShooter
 };
 const ChampionAttributes CHAMPION_13_ATTR = { // ËşÀï¿Ë£¨Ò»ĞÇ£©
-    Champion13, "ËşÀï¿Ë", "../Resources/Champions/Champion13.png", 2, 1, 750, 0, 60, 200, 1, 0.65f, 1.0f, 1.5f, NoBond
+    Champion13, u8"ËşÀï¿Ë", "../Resources/Champions/Champion13.png", 2, 1, 750, 0, 60, 200, 1, 0.65f, 1.0f, 1.5f, NoBond
 };
 const ChampionAttributes CHAMPION_14_ATTR = { // ËşÀï¿Ë£¨¶şĞÇ£©
-    Champion14, "ËşÀï¿Ë", "../Resources/Champions/Champion14.png", 6, 2, 1350, 0, 90, 200, 1, 0.65f, 1.0f, 1.5f, NoBond
+    Champion14, u8"ËşÀï¿Ë", "../Resources/Champions/Champion14.png", 6, 2, 1350, 0, 90, 200, 1, 0.65f, 1.0f, 1.5f, NoBond
 };
 const ChampionAttributes CHAMPION_15_ATTR = { // ÑÇË÷£¨Ò»ĞÇ£©
-    Champion15, "ÑÇË÷", "../Resources/Champions/Champion15.png", 2, 1, 700, 0, 50, 200, 1, 0.75f, 1.0f, 1.1f, Brotherhood
+    Champion15, u8"ÑÇË÷", "../Resources/Champions/Champion15.png", 2, 1, 700, 0, 50, 200, 1, 0.75f, 1.0f, 1.1f, Brotherhood
 };
 const ChampionAttributes CHAMPION_16_ATTR = { // ÑÇË÷£¨¶şĞÇ£©
-    Champion16, "ÑÇË÷", "../Resources/Champions/Champion16.png", 6, 2, 1260, 0, 75, 200, 1, 0.75f, 1.0f, 1.1f, Brotherhood
+    Champion16, u8"ÑÇË÷", "../Resources/Champions/Champion16.png", 6, 2, 1260, 0, 75, 200, 1, 0.75f, 1.0f, 1.1f, Brotherhood
 };
 const ChampionAttributes CHAMPION_17_ATTR = { // ½ğ¿ËË¿£¨Ò»ĞÇ£©
-    Champion17, "½ğ¿ËË¿", "../Resources/Champions/Champion17.png", 2, 1, 600, 0, 65, 200, 5, 0.8f, 1.0f, 0.9f, GoodShooter
+    Champion17, u8"½ğ¿ËË¿", "../Resources/Champions/Champion17.png", 2, 1, 600, 0, 65, 200, 5, 0.8f, 1.0f, 0.9f, GoodShooter
 };
 const ChampionAttributes CHAMPION_18_ATTR = { // ½ğ¿ËË¿£¨¶şĞÇ£©
-    Champion18, "½ğ¿ËË¿", "../Resources/Champions/Champion18.png", 6, 2, 1080, 0, 98, 200, 5, 0.8f, 1.0f, 0.9f, GoodShooter
+    Champion18, u8"½ğ¿ËË¿", "../Resources/Champions/Champion18.png", 6, 2, 1080, 0, 98, 200, 5, 0.8f, 1.0f, 0.9f, GoodShooter
 };
 const ChampionAttributes CHAMPION_19_ATTR = { // ËşÄ·£¨Ò»ĞÇ£©
-    Champion19, "ËşÄ·", "../Resources/Champions/Champion19.png", 3, 1, 700, 0, 55, 200, 1, 0.6f, 1.0f, 1.6f, NoBond
+    Champion19, u8"ËşÄ·", "../Resources/Champions/Champion19.png", 3, 1, 700, 0, 55, 200, 1, 0.6f, 1.0f, 1.6f, NoBond
 };
 const ChampionAttributes CHAMPION_20_ATTR = { // ËşÄ·£¨¶şĞÇ£©
-    Champion20, "ËşÄ·", "../Resources/Champions/Champion20.png", 9, 2, 1260, 0, 83, 200, 1, 0.6f, 1.0f, 1.6f, NoBond
+    Champion20, u8"ËşÄ·", "../Resources/Champions/Champion20.png", 9, 2, 1260, 0, 83, 200, 1, 0.6f, 1.0f, 1.6f, NoBond
 };
 const ChampionAttributes CHAMPION_21_ATTR = { // Îµ£¨Ò»ĞÇ£©
-    Champion21, "Îµ", "../Resources/Champions/Champion21.png", 3, 1, 800, 0, 60, 200, 1, 0.65f, 1.0f, 1.55f, NoBond
+    Champion21, u8"Îµ", "../Resources/Champions/Champion21.png", 3, 1, 800, 0, 60, 200, 1, 0.65f, 1.0f, 1.55f, NoBond
 };
 const ChampionAttributes CHAMPION_22_ATTR = { // Îµ£¨¶şĞÇ£©
-    Champion22, "Îµ", "../Resources/Champions/Champion22.png", 9, 2, 1440, 0, 90, 200, 1, 0.65f, 1.0f, 1.55f, NoBond
+    Champion22, u8"Îµ", "../Resources/Champions/Champion22.png", 9, 2, 1440, 0, 90, 200, 1, 0.65f, 1.0f, 1.55f, NoBond
 };
 const ChampionAttributes CHAMPION_23_ATTR = { // °¢Ä¾Ä¾£¨Ò»ĞÇ£©
-    Champion23, "°¢Ä¾Ä¾", "../Resources/Champions/Champion23.png", 3, 1, 800, 0, 60, 200, 1, 0.7f, 1.0f, 1.5f, DarkSide
+    Champion23, u8"°¢Ä¾Ä¾", "../Resources/Champions/Champion23.png", 3, 1, 800, 0, 60, 200, 1, 0.7f, 1.0f, 1.5f, DarkSide
 };
 const ChampionAttributes CHAMPION_24_ATTR = { // °¢Ä¾Ä¾£¨¶şĞÇ£©
-    Champion24, "°¢Ä¾Ä¾", "../Resources/Champions/Champion24.png", 9, 2, 1440, 0, 90, 200, 1, 0.7f, 1.0f, 1.5f, DarkSide
+    Champion24, u8"°¢Ä¾Ä¾", "../Resources/Champions/Champion24.png", 9, 2, 1440, 0, 90, 200, 1, 0.7f, 1.0f, 1.5f, DarkSide
 };
 const ChampionAttributes CHAMPION_25_ATTR = { // ¿üÉ£Ìá£¨Ò»ĞÇ£©
-    Champion25, "¿üÉ£Ìá", "../Resources/Champions/Champion25.png", 4, 1, 950, 0, 80, 200, 1, 0.85f, 1.0f, 1.5f, NoBond
+    Champion25, u8"¿üÉ£Ìá", "../Resources/Champions/Champion25.png", 4, 1, 950, 0, 80, 200, 1, 0.85f, 1.0f, 1.5f, NoBond
 };
 const ChampionAttributes CHAMPION_26_ATTR = { // ¿üÉ£Ìá£¨¶şĞÇ£©
-    Champion26, "¿üÉ£Ìá", "../Resources/Champions/Champion26.png", 12, 2, 1710, 0, 120, 200, 1, 0.85f, 1.0f, 1.5f, NoBond
+    Champion26, u8"¿üÉ£Ìá", "../Resources/Champions/Champion26.png", 12, 2, 1710, 0, 120, 200, 1, 0.85f, 1.0f, 1.5f, NoBond
 };
 const ChampionAttributes CHAMPION_27_ATTR = { // ¿¨¶ûÈøË¹£¨Ò»ĞÇ£©
-    Champion27, "¿¨¶ûÈøË¹", "../Resources/Champions/Champion27.png", 4, 1, 600, 0, 100, 200, 5, 0.85f, 1.0f, 0.9f, DarkSide
+    Champion27, u8"¿¨¶ûÈøË¹", "../Resources/Champions/Champion27.png", 4, 1, 600, 0, 100, 200, 5, 0.85f, 1.0f, 0.9f, DarkSide
 };
 const ChampionAttributes CHAMPION_28_ATTR = { // ¿¨¶ûÈøË¹£¨¶şĞÇ£©
-    Champion28, "¿¨¶ûÈøË¹", "../Resources/Champions/Champion28.png", 12, 2, 1080, 0, 140, 200, 5, 0.9f, 1.0f, 0.9f, DarkSide
+    Champion28, u8"¿¨¶ûÈøË¹", "../Resources/Champions/Champion28.png", 12, 2, 1080, 0, 140, 200, 5, 0.9f, 1.0f, 0.9f, DarkSide
 };
 const ChampionAttributes CHAMPION_29_ATTR = { // ¿¨É¯£¨Ò»ĞÇ£©
-    Champion29, "¿¨É¯", "../Resources/Champions/Champion29.png", 5, 1, 800, 0, 100, 200, 5, 0.9f, 1.0f, 0.9f, PopStar
+    Champion29, u8"¿¨É¯", "../Resources/Champions/Champion29.png", 5, 1, 800, 0, 100, 200, 5, 0.9f, 1.0f, 0.9f, PopStar
 };
 const ChampionAttributes CHAMPION_30_ATTR = { // ¿¨É¯£¨¶şĞÇ£©
-    Champion30, "¿¨É¯", "../Resources/Champions/Champion30.png", 15, 2, 1440, 0, 140, 200, 5, 0.9f, 1.0f, 0.9f, PopStar
+    Champion30, u8"¿¨É¯", "../Resources/Champions/Champion30.png", 15, 2, 1440, 0, 140, 200, 5, 0.9f, 1.0f, 0.9f, PopStar
 };
 
 // Õ½¶·Ó¢ĞÛ¼Û¸ñ·ÖÀà¶¨Òå
@@ -565,54 +565,54 @@ const std::map<ChampionCategory, ChampionAttributes> CHAMPION_ATTR_MAP = {
 
 // ĞòºÅÓë»¶Ó­ÌáÊ¾Óï¼üÖµ¶Ô
 const std::map<int, std::string> WELCOME_PROMPT = {
-    {0,  "£¬Áè³¿ºÃ£¡ĞÇĞÇ»¹ÔÚ£¬ÄãÒ²ÔÚ£¬ÓÎÏ·Ö®ÂÃµÈ´ı×ÅÄã."},
-    {1,  "£¬Áè³¿ºÃ£¡Ò¹ÍíµÄÃØÃÜÕıÔÚÓÎÏ·ÊÀ½çÖĞÕ¹¿ª."},
-    {2,  "£¬Áè³¿ºÃ£¡ÔÚÕâ°²¾²Ê±¿Ì£¬ÎÒÃÇÒ»ÆğÌ½Ë÷ÃÎ»ÃÖ®µØ."},
-    {3,  "£¬Áè³¿ºÃ£¡ÓÎÏ·ÊÀ½çÔÚĞÇ¹âÏÂ¸ü¼ÓÃÔÈË."},
-    {4,  "£¬Áè³¿ºÃ£¡ĞÂµÄÒ»Ìì¼´½«¿ªÊ¼£¬ÈÃÎÒÃÇÒ»ÆğÓ­½Ó."},
-    {5,  "£¬Áè³¿ºÃ£¡ÈÃÓÎÏ·µãÁÁÄãµÄÈÕ³öÊ±·Ö."},
-    {6,  "£¬ÔçÉÏºÃ£¡ĞÂµÄÒ»Ìì£¬Ñô¹âÕıºÃ£¬ĞÂµÄÌôÕ½ÔÚµÈ´ı."},
-    {7,  "£¬ÔçÉÏºÃ£¡ÈÃÓÎÏ·µÄÉ«²Ê°éËæÄãµÄÇå³¿."},
-    {8,  "£¬ÔçÉÏºÃ£¡Ò»ÆğÔÚÓÎÏ·µÄº£ÑóÖĞº½ĞĞ°É."},
-    {9,  "£¬ÉÏÎçºÃ£¡ÎŞ¾¡µÄÆæÓöÔÚÕâ¹â»ÔÊ±¿ÌµÈ×ÅÄã."},
-    {10, "£¬ÉÏÎçºÃ£¡Õâ¸öÊ±¿Ì£¬Ã¿Ò»²½Æå¶¼¶¨¾ÖÊ¤¸º."},
-    {11, "£¬ÉÏÎçºÃ£¡ÔÚÎç²ÍÇ°£¬ÈÃÎÒÃÇÔÙÓ®µÃÒ»³¡Ê¤Àû."},
-    {12, "£¬ÖĞÎçºÃ£¡ÔÚĞİÏ¢Ê±¿Ì£¬·ÅËÉ²¢ÏíÊÜÓÎÏ·µÄÀÖÈ¤."},
-    {13, "£¬ÖĞÎçºÃ£¡°éËæÎç²ÍµÄÊ±¹â£¬Ì½Ë÷ÓÎÏ·µÄÆæÃîÊÀ½ç."},
-    {14, "£¬ÏÂÎçºÃ£¡Ñô¹âÏÂ£¬ÈÃÎÒÃÇ¹²Í¬Ì½Ë÷Î´Öª."},
-    {15, "£¬ÏÂÎçºÃ£¡ÕâÊÇÍêÃÀµÄÊ±¼ä£¬È¥ÌåÑéĞÂµÄÓÎÏ·ÊÀ½ç."},
-    {16, "£¬ÏÂÎçºÃ£¡ÔÚÈÕÂäÇ°£¬ÈÃÎÒÃÇ»ñµÃÈÙÒ«."},
-    {17, "£¬ÏÂÎçºÃ£¡ÏíÊÜÓÎÏ·£¬ÔÚÕâ×îÃÀµÄÊ±¹â."},
-    {18, "£¬ÍíÉÏºÃ£¡ÈÃÓÎÏ·Åã°éÄãµÄ»Æ»èÊ±·Ö."},
-    {19, "£¬ÍíÉÏºÃ£¡ÔÚĞÇ¹âÏÂ½Ò¿ªĞÂµÄÓÎÏ·ÆªÕÂ."},
-    {20, "£¬ÍíÉÏºÃ£¡ÈÃÄ§·¨µãÁÁÄãµÄÓÎÏ·ÊÀ½ç."},
-    {21, "£¬ÍíÉÏºÃ£¡ÔÚÕâÄş¾²µÄÒ¹Íí£¬Õ½¶·µ½µ×."},
-    {22, "£¬ÍíÉÏºÃ£¡ÔÚÕâÉñÃØµÄÊ±¿Ì£¬Õ÷·şÓÎÏ·ÊÀ½ç."},
-    {23, "£¬ÍíÉÏºÃ£¡Ò¹ÉîÁË£¬°éËæÔÂ¹â£¬¿ªÊ¼ÄãµÄÓÎÏ·Ö®ÂÃ."},
-    {24, "£¬ÈÃÖÇ»ÛµÄ»ğ»¨ÔÚ×Ô×ßÆåµÄÊÀ½çÖĞÉÁÒ«."},
-    {25, "£¬»¶Ó­»ØÀ´£¡Ææ»ÃÃ°ÏÕÎŞÊ±²»ÔÚ."},
-    {26, "£¬ÓÎÏ·ÊÀ½ç»¶Ó­Äã£¬ÃÎÏëÆğº½."},
-    {27, "£¬Ó¢ĞÛ£¬×¼±¸ºÃÄãµÄÆå×Ó£¬Ó®È¡½ñÈÕµÄÊ¤Àû!"},
-    {28, "£¬ÓëĞÇ³½Í¬ĞĞ£¬Ì½Ë÷ÎŞÏŞ¿ÉÄÜ."},
-    {29, "£¬Õ½¶·Î´Í££¬´«ÆæÓÉÄãĞøĞ´."},
-    {30, "£¬×Ô×ßÆåµÄÊÀ½çÀï£¬Ã¿Ò»³¡Õ½¶·¶¼³äÂú¾ªÏ²."},
-    {31, "£¬Ó¢ĞÛ¹éÀ´£¬Ã°ÏÕÔÙÆôº½."},
-    {32, "£¬ÓÎÏ·ÀïµÄÃ¿Ò»Ìì£¬¶¼ÊÇĞÂµÄ¹ÊÊÂ."},
-    {33, "£¬Ä§·¨ÊÀ½çµÈÄãÌ½Ë÷£¬Ææ¼£¼´½«·¢Éú."},
-    {34, "£¬ÃÎÓëÏÖÊµ½»»ã£¬ÓÎÏ·ÊÀ½çµÄ¹ÊÊÂ¿ªÊ¼."},
-    {35, "£¬Ã°ÏÕÎŞ½çÏŞ£¬Ã¿Ò»´ÎµÇÂ¼¶¼ÊÇĞÂ¿ªÊ¼."},
-    {36, "£¬ÓÂ¸ÒµÄÌ½ÏÕÕß£¬ĞÂµÄÆæ¼£µÈÄã·¢ÏÖ."},
-    {37, "£¬Ã¿Ò»´ÎÓÎÏ·£¬¶¼ÊÇ¶ÔÎ´ÖªµÄÕ÷·ş."},
-    {38, "£¬³¬Ô½¼«ÏŞ£¬ÈÃÃ¿Ò»´Î³¢ÊÔ¶¼ÉÁÒ«."},
-    {39, "£¬ÎÕ½ô½£±ú£¬Ã°ÏÕµÄÂ·ÉÏÄã²»¹Âµ¥."},
-    {40, "£¬ÔÚĞÇ»ÔÏÂ£¬ĞøĞ´ÄãµÄÓ¢ĞÛ´«Ëµ."},
-    {41, "£¬ÓÂ´³ÌìÑÄ£¬Ã¿Ò»¸öÊÀ½ç¶¼ÓĞÄãµÄ´«Ëµ."},
-    {42, "£¬Õü¾ÈÊÀ½çÈÎÎñÔİÍ££¬½ñÌìÖ»×ö¿ìÀÖµÄÊÂÇé."},
-    {43, "£¬´©ÉÏĞéÄâÅû·ç£¬½ñÌìÄãÊÇ³¬¼¶Ó¢ĞÛ."},
-    {44, "£¬µ÷Æ¤µÄ¾«ÁéÒÑ¾­Íµ×ßÁËÓÎÏ·ÃØÃÜ£¬×·!"},
-    {45, "£¬×¼±¸ºÃÁËÂğ£¿ÆåÅÌÉÏµÄÓ¢ĞÛÃÇÕıµÈ×ÅÄãµÄÕÙ»½."},
-    {46, "£¬ÔÚ×Ô×ßÆåµÄÕ½³¡ÉÏ£¬Ã¿Ò»²½¶¼ÊÇ²ßÂÔµÄ¿¼Ñé."},
-    {47, "£¬²ßÂÔ´óÊ¦£¬½ñÈÕÄã½«ÈçºÎµß¸²Æå¾Ö?"}
+    {0,  u8"£¬Áè³¿ºÃ£¡ĞÇĞÇ»¹ÔÚ£¬ÄãÒ²ÔÚ£¬ÓÎÏ·Ö®ÂÃµÈ´ı×ÅÄã."},
+    {1,  u8"£¬Áè³¿ºÃ£¡Ò¹ÍíµÄÃØÃÜÕıÔÚÓÎÏ·ÊÀ½çÖĞÕ¹¿ª."},
+    {2,  u8"£¬Áè³¿ºÃ£¡ÔÚÕâ°²¾²Ê±¿Ì£¬ÎÒÃÇÒ»ÆğÌ½Ë÷ÃÎ»ÃÖ®µØ."},
+    {3,  u8"£¬Áè³¿ºÃ£¡ÓÎÏ·ÊÀ½çÔÚĞÇ¹âÏÂ¸ü¼ÓÃÔÈË."},
+    {4,  u8"£¬Áè³¿ºÃ£¡ĞÂµÄÒ»Ìì¼´½«¿ªÊ¼£¬ÈÃÎÒÃÇÒ»ÆğÓ­½Ó."},
+    {5,  u8"£¬Áè³¿ºÃ£¡ÈÃÓÎÏ·µãÁÁÄãµÄÈÕ³öÊ±·Ö."},
+    {6,  u8"£¬ÔçÉÏºÃ£¡ĞÂµÄÒ»Ìì£¬Ñô¹âÕıºÃ£¬ĞÂµÄÌôÕ½ÔÚµÈ´ı."},
+    {7,  u8"£¬ÔçÉÏºÃ£¡ÈÃÓÎÏ·µÄÉ«²Ê°éËæÄãµÄÇå³¿."},
+    {8,  u8"£¬ÔçÉÏºÃ£¡Ò»ÆğÔÚÓÎÏ·µÄº£ÑóÖĞº½ĞĞ°É."},
+    {9,  u8"£¬ÉÏÎçºÃ£¡ÎŞ¾¡µÄÆæÓöÔÚÕâ¹â»ÔÊ±¿ÌµÈ×ÅÄã."},
+    {10, u8"£¬ÉÏÎçºÃ£¡Õâ¸öÊ±¿Ì£¬Ã¿Ò»²½Æå¶¼¶¨¾ÖÊ¤¸º."},
+    {11, u8"£¬ÉÏÎçºÃ£¡ÔÚÎç²ÍÇ°£¬ÈÃÎÒÃÇÔÙÓ®µÃÒ»³¡Ê¤Àû."},
+    {12, u8"£¬ÖĞÎçºÃ£¡ÔÚĞİÏ¢Ê±¿Ì£¬·ÅËÉ²¢ÏíÊÜÓÎÏ·µÄÀÖÈ¤."},
+    {13, u8"£¬ÖĞÎçºÃ£¡°éËæÎç²ÍµÄÊ±¹â£¬Ì½Ë÷ÓÎÏ·µÄÆæÃîÊÀ½ç."},
+    {14, u8"£¬ÏÂÎçºÃ£¡Ñô¹âÏÂ£¬ÈÃÎÒÃÇ¹²Í¬Ì½Ë÷Î´Öª."},
+    {15, u8"£¬ÏÂÎçºÃ£¡ÕâÊÇÍêÃÀµÄÊ±¼ä£¬È¥ÌåÑéĞÂµÄÓÎÏ·ÊÀ½ç."},
+    {16, u8"£¬ÏÂÎçºÃ£¡ÔÚÈÕÂäÇ°£¬ÈÃÎÒÃÇ»ñµÃÈÙÒ«."},
+    {17, u8"£¬ÏÂÎçºÃ£¡ÏíÊÜÓÎÏ·£¬ÔÚÕâ×îÃÀµÄÊ±¹â."},
+    {18, u8"£¬ÍíÉÏºÃ£¡ÈÃÓÎÏ·Åã°éÄãµÄ»Æ»èÊ±·Ö."},
+    {19, u8"£¬ÍíÉÏºÃ£¡ÔÚĞÇ¹âÏÂ½Ò¿ªĞÂµÄÓÎÏ·ÆªÕÂ."},
+    {20, u8"£¬ÍíÉÏºÃ£¡ÈÃÄ§·¨µãÁÁÄãµÄÓÎÏ·ÊÀ½ç."},
+    {21, u8"£¬ÍíÉÏºÃ£¡ÔÚÕâÄş¾²µÄÒ¹Íí£¬Õ½¶·µ½µ×."},
+    {22, u8"£¬ÍíÉÏºÃ£¡ÔÚÕâÉñÃØµÄÊ±¿Ì£¬Õ÷·şÓÎÏ·ÊÀ½ç."},
+    {23, u8"£¬ÍíÉÏºÃ£¡Ò¹ÉîÁË£¬°éËæÔÂ¹â£¬¿ªÊ¼ÄãµÄÓÎÏ·Ö®ÂÃ."},
+    {24, u8"£¬ÈÃÖÇ»ÛµÄ»ğ»¨ÔÚ×Ô×ßÆåµÄÊÀ½çÖĞÉÁÒ«."},
+    {25, u8"£¬»¶Ó­»ØÀ´£¡Ææ»ÃÃ°ÏÕÎŞÊ±²»ÔÚ."},
+    {26, u8"£¬ÓÎÏ·ÊÀ½ç»¶Ó­Äã£¬ÃÎÏëÆğº½."},
+    {27, u8"£¬Ó¢ĞÛ£¬×¼±¸ºÃÄãµÄÆå×Ó£¬Ó®È¡½ñÈÕµÄÊ¤Àû!"},
+    {28, u8"£¬ÓëĞÇ³½Í¬ĞĞ£¬Ì½Ë÷ÎŞÏŞ¿ÉÄÜ."},
+    {29, u8"£¬Õ½¶·Î´Í££¬´«ÆæÓÉÄãĞøĞ´."},
+    {30, u8"£¬×Ô×ßÆåµÄÊÀ½çÀï£¬Ã¿Ò»³¡Õ½¶·¶¼³äÂú¾ªÏ²."},
+    {31, u8"£¬Ó¢ĞÛ¹éÀ´£¬Ã°ÏÕÔÙÆôº½."},
+    {32, u8"£¬ÓÎÏ·ÀïµÄÃ¿Ò»Ìì£¬¶¼ÊÇĞÂµÄ¹ÊÊÂ."},
+    {33, u8"£¬Ä§·¨ÊÀ½çµÈÄãÌ½Ë÷£¬Ææ¼£¼´½«·¢Éú."},
+    {34, u8"£¬ÃÎÓëÏÖÊµ½»»ã£¬ÓÎÏ·ÊÀ½çµÄ¹ÊÊÂ¿ªÊ¼."},
+    {35, u8"£¬Ã°ÏÕÎŞ½çÏŞ£¬Ã¿Ò»´ÎµÇÂ¼¶¼ÊÇĞÂ¿ªÊ¼."},
+    {36, u8"£¬ÓÂ¸ÒµÄÌ½ÏÕÕß£¬ĞÂµÄÆæ¼£µÈÄã·¢ÏÖ."},
+    {37, u8"£¬Ã¿Ò»´ÎÓÎÏ·£¬¶¼ÊÇ¶ÔÎ´ÖªµÄÕ÷·ş."},
+    {38, u8"£¬³¬Ô½¼«ÏŞ£¬ÈÃÃ¿Ò»´Î³¢ÊÔ¶¼ÉÁÒ«."},
+    {39, u8"£¬ÎÕ½ô½£±ú£¬Ã°ÏÕµÄÂ·ÉÏÄã²»¹Âµ¥."},
+    {40, u8"£¬ÔÚĞÇ»ÔÏÂ£¬ĞøĞ´ÄãµÄÓ¢ĞÛ´«Ëµ."},
+    {41, u8"£¬ÓÂ´³ÌìÑÄ£¬Ã¿Ò»¸öÊÀ½ç¶¼ÓĞÄãµÄ´«Ëµ."},
+    {42, u8"£¬Õü¾ÈÊÀ½çÈÎÎñÔİÍ££¬½ñÌìÖ»×ö¿ìÀÖµÄÊÂÇé."},
+    {43, u8"£¬´©ÉÏĞéÄâÅû·ç£¬½ñÌìÄãÊÇ³¬¼¶Ó¢ĞÛ."},
+    {44, u8"£¬µ÷Æ¤µÄ¾«ÁéÒÑ¾­Íµ×ßÁËÓÎÏ·ÃØÃÜ£¬×·!"},
+    {45, u8"£¬×¼±¸ºÃÁËÂğ£¿ÆåÅÌÉÏµÄÓ¢ĞÛÃÇÕıµÈ×ÅÄãµÄÕÙ»½."},
+    {46, u8"£¬ÔÚ×Ô×ßÆåµÄÕ½³¡ÉÏ£¬Ã¿Ò»²½¶¼ÊÇ²ßÂÔµÄ¿¼Ñé."},
+    {47, u8"£¬²ßÂÔ´óÊ¦£¬½ñÈÕÄã½«ÈçºÎµß¸²Æå¾Ö?"}
 };
 
 #endif // !_CONSTANT_H_

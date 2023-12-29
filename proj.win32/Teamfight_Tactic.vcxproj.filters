@@ -31,9 +31,6 @@
     <Filter Include="Classes\LocationMap">
       <UniqueIdentifier>{85cff736-ddc5-45ca-a7b0-fda94795b4a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\GBKToUTF8">
-      <UniqueIdentifier>{c4acd934-8caa-4fdb-ab6d-dec6f6f6f2ca}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Layer">
       <UniqueIdentifier>{b9edde47-baa8-485f-a380-db5c5ce18252}</UniqueIdentifier>
     </Filter>
@@ -86,9 +83,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Scene\StartupScene.cpp">
       <Filter>Classes\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GBKToUTF8\GBKToUTF8.cpp">
-      <Filter>Classes\GBKToUTF8</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\LocationMap\LocationMap.cpp">
       <Filter>Classes\LocationMap</Filter>
@@ -169,9 +163,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Scene\StartupScene.h">
       <Filter>Classes\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GBKToUTF8\GBKToUTF8.h">
-      <Filter>Classes\GBKToUTF8</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\LocationMap\LocationMap.h">
       <Filter>Classes\LocationMap</Filter>

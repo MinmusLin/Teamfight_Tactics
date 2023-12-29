@@ -3,14 +3,13 @@
  * File Name:     ChampionAttributesLayer.cpp
  * File Function: ChampionAttributesLayer类的实现
  * Author:        刘淑仪、林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
 #include <sstream>
 #include <iomanip>
 #include "ChampionAttributesLayer.h"
-#include "GBKToUTF8/GBKToUTF8.h"
 
 // 命名空间
 using cocos2d::Sprite;
@@ -48,7 +47,7 @@ void ChampionAttributesLayer::showAttributes(const ChampionCategory championCate
     this->addChild(championImage);
 
     // 创建战斗英雄标签
-    createLabel(GBKToUTF8::getString(championAttributes.championName), CHAMPION_NAME_LABEL_START_X, CHAMPION_NAME_LABEL_START_Y, CHAMPION_NAME_LABEL_FONT_SIZE, championAttributes.championCategory % 2 == 1 ? cocos2d::Color4B::WHITE : cocos2d::Color4B({ GOLDEN_R, GOLDEN_G, GOLDEN_B }));
+    createLabel(championAttributes.championName, CHAMPION_NAME_LABEL_START_X, CHAMPION_NAME_LABEL_START_Y, CHAMPION_NAME_LABEL_FONT_SIZE, championAttributes.championCategory % 2 == 1 ? cocos2d::Color4B::WHITE : cocos2d::Color4B({ GOLDEN_R, GOLDEN_G, GOLDEN_B }));
     createLabel(std::to_string(championAttributes.level), LEVEL_LABEL_START_X, LEVEL_LABEL_START_Y);
     createLabel(std::to_string(championAttributes.healthPoints), FIRST_COLUMN_START_X, HEALTH_POINTS_LEBEL_START_Y);
     createLabel(std::to_string(championAttributes.attackDamage), FIRST_COLUMN_START_X, ATTACK_DAMAGE_LABEL_START_Y);

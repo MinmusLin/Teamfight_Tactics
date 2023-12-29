@@ -3,7 +3,7 @@
  * File Name:     HumanPlayer.cpp
  * File Function: HumanPlayer类的实现
  * Author:        林继申
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
@@ -11,7 +11,6 @@
 #include <algorithm>
 #include "HumanPlayer.h"
 #include "LocationMap/LocationMap.h"
-#include "GBKToUTF8/GBKToUTF8.h"
 
 // 命名空间
 using cocos2d::Scene;
@@ -133,10 +132,10 @@ void HumanPlayer::addBattleChampionCount(const int num)
         maxBattleChampionCount += num;
         auto levelLabel = dynamic_cast<Label*>(currentScene->getChildByName("LevelLabel"));
         if (maxBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT) {
-            levelLabel->setString(GBKToUTF8::getString("最高等级"));
+            levelLabel->setString(u8"最高等级");
         }
         else {
-            levelLabel->setString(GBKToUTF8::getString("等级：") + std::to_string(maxBattleChampionCount - BATTLE_AREA_MIN_CHAMPION_COUNT + 1));
+            levelLabel->setString(u8"等级：" + std::to_string(maxBattleChampionCount - BATTLE_AREA_MIN_CHAMPION_COUNT + 1));
         }
     }
 }

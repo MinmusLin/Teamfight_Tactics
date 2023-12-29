@@ -9,7 +9,6 @@
 #include "SelectionScene.h"
 #include "MenuScene.h"
 #include "Button/HoverButton.h"
-#include "GBKToUTF8/GBKToUTF8.h"
 #include "proj.win32/Constant.h"
 
 // 命名空间
@@ -45,7 +44,7 @@ bool SelectionScene::init()
     this->addChild(background);
 
     // 创建标签
-    auto promptLabel = Label::createWithTTF(g_PlayerName + GBKToUTF8::getString("，请选择你的小小英雄!"), "../Resources/Fonts/DingDingJinBuTi.ttf", SELECTION_SCENE_LABEL_FONT_SIZE);
+    auto promptLabel = Label::createWithTTF(g_PlayerName + u8"，请选择你的小小英雄!", "../Resources/Fonts/DingDingJinBuTi.ttf", SELECTION_SCENE_LABEL_FONT_SIZE);
     promptLabel->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + SELECTION_SCENE_LABEL_OFFSET_Y));
     promptLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(promptLabel);

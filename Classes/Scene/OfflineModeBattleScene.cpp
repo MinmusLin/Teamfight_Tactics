@@ -11,7 +11,6 @@
 #include "Control/OfflineModeControl.h"
 #include "LocationMap/LocationMap.h"
 #include "Layer/ScoreBoardLayer.h"
-#include "GBKToUTF8/GBKToUTF8.h"
 #include "MenuScene.h"
 
 // 命名空间
@@ -168,7 +167,7 @@ bool OfflineModeBattleScene::init()
 
     // 创建小小英雄登场标签
     auto winSize = cocos2d::Director::getInstance()->getWinSize();
-    auto littleChampionLabel = Label::createWithTTF(GBKToUTF8::getString("小小英雄登场!"), "../Resources/Fonts/DingDingJinBuTi.ttf", LITTLE_CHAMPION_LABEL_FONT_SIZE);
+    auto littleChampionLabel = Label::createWithTTF(u8"小小英雄登场!", "../Resources/Fonts/DingDingJinBuTi.ttf", LITTLE_CHAMPION_LABEL_FONT_SIZE);
     littleChampionLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     littleChampionLabel->setPosition(winSize.width / 2, winSize.height / 2 + LITTLE_CHAMPION_LABEL_OFFSET_Y);
     this->addChild(littleChampionLabel);
@@ -264,24 +263,24 @@ void OfflineModeBattleScene::update(float delta)
         const int humanPlayerHealth = g_offlineModeControl->getHumanPlayer()->getHealthPoints();
         const int enemyPlayerHealth = g_offlineModeControl->getAIPlayer()->getHealthPoints();
         bool isEnd = false;
-        std::string winningPrompt = "";
+        std::string winningPrompt = u8"";
         cocos2d::Color4B outlineColor = cocos2d::Color4B::ORANGE;
         if (humanPlayerHealth == 0 && enemyPlayerHealth == 0) {
             isEnd = true;
-            winningPrompt = "平局";
+            winningPrompt = u8"平局";
         }
         else if (enemyPlayerHealth == 0) {
             isEnd = true;
-            winningPrompt = "胜利";
+            winningPrompt = u8"胜利";
             outlineColor = cocos2d::Color4B::RED;
         }
         else if (humanPlayerHealth == 0) {
             isEnd = true;
-            winningPrompt = "失败";
+            winningPrompt = u8"失败";
             outlineColor = cocos2d::Color4B::BLUE;
         }
         if (isEnd) {
-            auto winningLabel = Label::createWithTTF(GBKToUTF8::getString(winningPrompt), "../Resources/Fonts/DingDingJinBuTi.ttf", BATTLE_END_LABEL_FONT_SIZE);
+            auto winningLabel = Label::createWithTTF(winningPrompt, "../Resources/Fonts/DingDingJinBuTi.ttf", BATTLE_END_LABEL_FONT_SIZE);
             const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
             winningLabel->enableOutline(outlineColor, BATTLE_END_LABEL_OUTLINE_WIDTH);
             cocos2d::Size shadowOffset(BATTLE_END_LABEL_SHADOW_OFFSET_X, BATTLE_END_LABEL_SHADOW_OFFSET_Y);

@@ -3,7 +3,7 @@
  * File Name:     OnlineModeMenuScene.cpp
  * File Function: OnlineModeMenuScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
@@ -15,7 +15,6 @@
 #include "Button/HoverButton.h"
 #include "MenuScene.h"
 #include "proj.win32/Constant.h"
-#include "GBKToUTF8/GBKToUTF8.h"
 
 // 命名空间
 using cocos2d::Scene;
@@ -69,7 +68,7 @@ bool OnlineModeMenuScene::init()
     startGameButton->setPosition(Vec2(screenSize.width / 2 - ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_X, screenSize.height / 2 + ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_Y));
 
     // 创建 IPv4 文本框
-    auto ipv4TextField = cocos2d::ui::TextField::create(GBKToUTF8::getString("请输入服务器 IPv4 地址"), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", ONLINE_MODE_MENU_SCENE_FONT_SIZE);
+    auto ipv4TextField = cocos2d::ui::TextField::create(u8"请输入服务器 IPv4 地址", "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", ONLINE_MODE_MENU_SCENE_FONT_SIZE);
     ipv4TextField->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + ONLINE_MODE_MENU_SCENE_IPV4_TEXTFIELD_OFFSET_Y));
     ipv4TextField->setMaxLength(IPV4_ADDRESS_MAX_LENGTH);
     ipv4TextField->setMaxLengthEnabled(true);
@@ -77,7 +76,7 @@ bool OnlineModeMenuScene::init()
     this->addChild(ipv4TextField);
 
     // 创建端口文本框
-    auto portTextField = cocos2d::ui::TextField::create(GBKToUTF8::getString("请输入服务器端口"), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", ONLINE_MODE_MENU_SCENE_FONT_SIZE);
+    auto portTextField = cocos2d::ui::TextField::create(u8"请输入服务器端口", "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", ONLINE_MODE_MENU_SCENE_FONT_SIZE);
     portTextField->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + ONLINE_MODE_MENU_SCENE_PORT_TEXTFIELD_OFFSET_Y));
     portTextField->setMaxLength(PORT_MAX_LENGTH);
     portTextField->setMaxLengthEnabled(true);
@@ -90,7 +89,7 @@ bool OnlineModeMenuScene::init()
     promptLabel->setVisible(false);
     promptLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(promptLabel);
-    auto waitingLabel = Label::createWithTTF(GBKToUTF8::getString("成功与服务器建立连接"), "../Resources/Fonts/DingDingJinBuTi.ttf", ONLINE_MODE_MENU_SCENE_FONT_SIZE);
+    auto waitingLabel = Label::createWithTTF(u8"成功与服务器建立连接", "../Resources/Fonts/DingDingJinBuTi.ttf", ONLINE_MODE_MENU_SCENE_FONT_SIZE);
     waitingLabel->setPosition(Vec2(screenSize.width / 2 - ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_X, screenSize.height / 2 + ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_Y));
     waitingLabel->setVisible(false);
     this->addChild(waitingLabel);
@@ -107,21 +106,21 @@ bool OnlineModeMenuScene::init()
             std::string ipv4 = ipv4TextField->getString();
             std::string port = portTextField->getString();
             if (ipv4.empty() && port.empty()) { // 服务器 IPv4 地址和端口为空
-                promptLabel->setString(GBKToUTF8::getString("服务器 IPv4 地址和端口不能为空"));
+                promptLabel->setString(u8"服务器 IPv4 地址和端口不能为空");
                 promptLabel->setVisible(true);
                 this->scheduleOnce([promptLabel](float dt) {
                     promptLabel->setVisible(false);
                     }, PROMPT_MESSAGE_DURATION, "IPv4AndPortHidePromptLabel");
             }
             else if (ipv4.empty() && !port.empty()) { // 服务器 IPv4 地址为空
-                promptLabel->setString(GBKToUTF8::getString("服务器 IPv4 地址不能为空"));
+                promptLabel->setString(u8"服务器 IPv4 地址不能为空");
                 promptLabel->setVisible(true);
                 this->scheduleOnce([promptLabel](float dt) {
                     promptLabel->setVisible(false);
                     }, PROMPT_MESSAGE_DURATION, "IPv4HidePromptLabel");
             }
             else if (!ipv4.empty() && port.empty()) { // 服务器端口为空
-                promptLabel->setString(GBKToUTF8::getString("服务器端口不能为空"));
+                promptLabel->setString(u8"服务器端口不能为空");
                 promptLabel->setVisible(true);
                 this->scheduleOnce([promptLabel](float dt) {
                     promptLabel->setVisible(false);
@@ -148,7 +147,7 @@ bool OnlineModeMenuScene::init()
                     g_onlineModeControl = nullptr;
                 }
                 else if (connectionStatus == ConnectionRefused) { // 服务器达到最大连接数量
-                    promptLabel->setString(GBKToUTF8::getString("服务器达到最大连接数量"));
+                    promptLabel->setString(u8"服务器达到最大连接数量");
                     promptLabel->setVisible(true);
                     this->scheduleOnce([promptLabel](float dt) {
                         promptLabel->setVisible(false);
@@ -188,7 +187,7 @@ bool OnlineModeMenuScene::init()
                             if (!strncmp(buffer, CURRENT_CONNECTIONS_IDENTIFIER, MESSAGE_IDENTIFIER_LENGTH)) {
                                 int currentConnections;
                                 sscanf(buffer, CURRENT_CONNECTIONS_FORMAT, &currentConnections);
-                                promptLabel->setString(GBKToUTF8::getString("已建立连接 (服务器当前连接数量：") + std::to_string(currentConnections) + GBKToUTF8::getString(")"));
+                                promptLabel->setString(u8"已建立连接 (服务器当前连接数量：" + std::to_string(currentConnections) + u8")");
                                 promptLabel->setVisible(true);
                                 g_onlineModeControl->setCurrentConnections(currentConnections);
                             }
@@ -218,7 +217,7 @@ bool OnlineModeMenuScene::init()
             sprintf(buffer, PLAYER_NAME_FORMAT, g_PlayerName.c_str());
             g_onlineModeControl->sendMessage(buffer, strlen(buffer));
             startGameButton->removeFromParent();
-            waitingLabel->setString(GBKToUTF8::getString("请等待其他玩家开始游戏"));
+            waitingLabel->setString(u8"请等待其他玩家开始游戏");
             waitingLabel->setVisible(true);
         }
         });

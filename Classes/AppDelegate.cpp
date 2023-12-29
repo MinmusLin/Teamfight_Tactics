@@ -3,13 +3,12 @@
  * File Name:     AppDelegate.cpp
  * File Function: AppDelegate类的实现
  * Author:        林继申、刘淑仪
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
 #include "AppDelegate.h"
 #include "Scene/StartupScene.h"
-#include "GBKToUTF8/GBKToUTF8.h"
 #include "proj.win32/Constant.h"
 #include "audio/include/AudioEngine.h"
 
@@ -48,10 +47,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     if (!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
         // 在 Windows、Mac、Linux 平台上创建 OpenGL 视图
-        glview = cocos2d::GLViewImpl::createWithRect(GBKToUTF8::getString(APPLICATION_TITLE), cocos2d::Rect(0, 0, s_designResolutionSize.width, s_designResolutionSize.height));
+        glview = cocos2d::GLViewImpl::createWithRect(APPLICATION_TITLE, cocos2d::Rect(0, 0, s_designResolutionSize.width, s_designResolutionSize.height));
 #else
         // 在其他平台上创建 OpenGL 视图
-        glview = cocos2d::GLViewImpl::create(GBKToUTF8::getString(APPLICATION_TITLE));
+        glview = cocos2d::GLViewImpl::create(APPLICATION_TITLE);
 #endif
         // 设置 OpenGL 视图
         director->setOpenGLView(glview);

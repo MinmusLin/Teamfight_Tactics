@@ -12,7 +12,6 @@
 #include "InitialScene.h"
 #include "SelectionScene.h"
 #include "Button/HoverButton.h"
-#include "GBKToUTF8/GBKToUTF8.h"
 #include "proj.win32/Constant.h"
 
 // 命名空间
@@ -48,7 +47,7 @@ bool InitialScene::init()
     this->addChild(background);
 
     // 创建文本框
-    auto textField = cocos2d::ui::TextField::create(GBKToUTF8::getString("请输入您的游戏昵称"), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", INITIAL_SCENE_FONT_SIZE);
+    auto textField = cocos2d::ui::TextField::create(u8"请输入您的游戏昵称", "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", INITIAL_SCENE_FONT_SIZE);
     textField->setPosition(Vec2(screenSize.width / 2 + INITIAL_SCENE_LABELS_OFFSET_X, screenSize.height / 2 + INITIAL_SCENE_TEXTFIELD_OFFSET_Y));
     textField->setMaxLength(NICKNAME_MAX_LENGTH);
     textField->setMaxLengthEnabled(true);
@@ -66,7 +65,7 @@ bool InitialScene::init()
         if (type == cocos2d::ui::TextField::EventType::INSERT_TEXT || type == cocos2d::ui::TextField::EventType::DELETE_BACKWARD) {
             auto textField = dynamic_cast<cocos2d::ui::TextField*>(sender);
             std::string nickname = textField->getString();
-            std::string text = GBKToUTF8::getString("欢迎你！") + nickname;
+            std::string text = u8"欢迎你！" + nickname;
             promptLabel->setString(text);
         }
         });
@@ -91,21 +90,21 @@ bool InitialScene::init()
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
             std::string nickname = textField->getString();
             if (nickname.empty()) {
-                nameLabel->setString(GBKToUTF8::getString("游戏昵称不能为空"));
+                nameLabel->setString(u8"游戏昵称不能为空");
                 nameLabel->setVisible(true);
                 this->scheduleOnce([nameLabel](float dt) {
                     nameLabel->setVisible(false);
                     }, PROMPT_MESSAGE_DURATION, "HideEmptyPromptLabel");
             }
             else if (!isValidString(nickname)) {
-                nameLabel->setString(GBKToUTF8::getString("游戏昵称存在非法字符"));
+                nameLabel->setString(u8"游戏昵称存在非法字符");
                 nameLabel->setVisible(true);
                 this->scheduleOnce([nameLabel](float dt) {
                     nameLabel->setVisible(false);
                     }, PROMPT_MESSAGE_DURATION, "HideInvalidPromptLabel");
             }
             else {
-                g_PlayerName = nickname; // g_PlayerName 内部存储编码为 UTF-8，无需调用 GBKToUTF8 单例方法
+                g_PlayerName = nickname; // g_PlayerName 内部存储编码为 UTF-8
                 cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, SelectionScene::createScene(), cocos2d::Color3B::WHITE));
             }
         }

@@ -3,13 +3,12 @@
  * File Name:     OfflineModeControl.cpp
  * File Function: OfflineModeControl类的实现
  * Author:        杨宇琨、林继申
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/29
  * License:       MIT License
  ****************************************************************/
 
 #include <iostream>
 #include "OfflineModeControl.h"
-#include "GBKToUTF8/GBKToUTF8.h"
 
 // 玩家昵称
 extern std::string g_PlayerName;
@@ -23,7 +22,7 @@ OfflineModeControl::OfflineModeControl() :
 {
     try {
         humanPlayer = new HumanPlayer(g_PlayerName);
-        enemyPlayer = new AIPlayer(GBKToUTF8::getString("AI玩家"), g_difficulty);
+        enemyPlayer = new AIPlayer(u8"AI玩家", g_difficulty);
     }
     catch (const std::bad_alloc& e) {
         std::cerr << "Memory allocation failed: " << e.what() << std::endl;
