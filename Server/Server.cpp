@@ -65,12 +65,19 @@ void clientHandler(const SOCKET clientSocket, Server& server)
             }
         }
 
+        // 接受玩家生命值信息
+        if (!strncmp(buffer, HEALTH_POINTS_IDENTIFIER, MESSAGE_IDENTIFIER_LENGTH)) {
+            for (const SOCKET& sock : server.clients) {
+                send(sock, buffer, strlen(buffer), 0);
+            }
+        }
+
         // 检测是否开始游戏
         if (server.areAllReady(server.playerNames)) {
             strcpy(buffer, server.serializePlayerNames().c_str());
             std::cout << "Broadcast: " << buffer << std::endl;
             for (const SOCKET& sock : server.clients) {
-                send(sock, buffer, static_cast<int>(strlen(buffer)), 0);
+                send(sock, buffer, strlen(buffer), 0);
             }
         }
 
@@ -101,7 +108,7 @@ void clientHandler(const SOCKET clientSocket, Server& server)
     sprintf(buffer, CURRENT_CONNECTIONS_FORMAT, server.currentConnections);
     std::cout << "Broadcast: " << buffer << std::endl;
     for (const SOCKET& sock : server.clients) {
-        send(sock, buffer, static_cast<int>(strlen(buffer)), 0);
+        send(sock, buffer, strlen(buffer), 0);
     }
 
     // 设置延迟确保消息传递至客户端
@@ -112,7 +119,7 @@ void clientHandler(const SOCKET clientSocket, Server& server)
         strcpy(buffer, server.serializePlayerNames().c_str());
         std::cout << "Broadcast: " << buffer << std::endl;
         for (const SOCKET& sock : server.clients) {
-            send(sock, buffer, static_cast<int>(strlen(buffer)), 0);
+            send(sock, buffer, strlen(buffer), 0);
         }
     }
 }
