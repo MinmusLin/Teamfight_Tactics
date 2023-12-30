@@ -11,6 +11,9 @@
 #ifndef _ONLINE_MODE_CONTROL_H_
 #define _ONLINE_MODE_CONTROL_H_
 
+#include <thread>
+#include <atomic>
+#include <mutex>
 #include <vector>
 #include "Control.h"
 
@@ -31,6 +34,9 @@ public:
 
     // 获取客户端的 socket
     SOCKET getSocket() const;
+
+    // 客户端在服务器的 socket
+    SOCKET getMySocket() const;
 
     // 向服务器发送信息
     int sendMessage(const char* str, const int len);
@@ -70,13 +76,23 @@ private:
     int port;                                               // 端口
     WSADATA wsaData;                                        // Windows Sockets API
     SOCKET s;                                               // 客户端的 socket
+    SOCKET mySocket;                                        // 客户端在服务器的 socket
     struct sockaddr_in server;                              // 服务器地址信息
     char message[BUFFER_SIZE];                              // 数据缓冲区
     int recvSize;                                           // 接收数据大小
     int currentConnections;                                 // 服务器当前连接数量
     HumanPlayer* enemyPlayer;                               // 敌人玩家
     std::vector<std::map<SOCKET, std::string>> playerNames; // 所有连接到服务器的客户端玩家昵称
-    std::vector<std::map<SOCKET, int>> playerHealthPoints;  // 所有连接到服务器的客户端玩家分数
+    std::vector<std::map<SOCKET, int>> playerHealthPoints;  // 所有连接到服务器的客户端玩家生命值
+    std::thread listeningThread;                            // 监听服务器消息线程
+    std::atomic<bool> keepListening;                        // 监听服务器消息线程控制标志
+    mutable std::mutex healthPointsMutex;                   // 用于保护 playerHealthPoints 的互斥量（确保线程安全性）
+
+    // 监听服务器消息线程
+    void listenForServerMessages();
+
+    // 更新玩家生命值
+    void updatePlayerHealthPoints(const int healthPoint, const SOCKET socket);
 };
 
 #endif // !_ONLINE_MODE_CONTROL_H_

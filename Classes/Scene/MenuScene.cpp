@@ -3,7 +3,7 @@
  * File Name:     MenuScene.cpp
  * File Function: MenuScene类的实现
  * Author:        林继申、刘淑仪
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -41,6 +41,9 @@ bool MenuScene::init()
     if (!Scene::init()) {
         return false;
     }
+
+    // 设置默认天赋符文
+    cocos2d::UserDefault::getInstance()->setIntegerForKey("TalentRune", static_cast<int>(NoTalentRune));
 
     // 加载音乐
     audioPlayer("../Resources/Music/BackgroundMusic/MenuScene_DarkSideOfPower.mp3", true);
@@ -112,7 +115,7 @@ bool MenuScene::init()
     this->addChild(exitGameButton);
 
     // 创建一个欢迎提示
-    std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    const std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     const int number = (rand() % 100 < RANDOM_WELCOME_PROMPT_PROBABILITY * 100) ? std::localtime(&now)->tm_hour : rand() % RANDOM_PROMPT_COUNT + 24;
     auto welcomeLabel = Label::createWithTTF(g_PlayerName + WELCOME_PROMPT.at(number), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", MENU_SCENE_FONT_SIZE);
     welcomeLabel->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_BUTTONS_OFFSET_X, screenSize.height / 2 + MENU_SCENE_WELCOME_LABEL_OFFSET_Y));

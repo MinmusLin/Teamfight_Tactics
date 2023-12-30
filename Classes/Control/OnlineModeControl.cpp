@@ -21,7 +21,8 @@ OnlineModeControl::OnlineModeControl(std::string ipv4, std::string portStr) :
     port(std::stoi(portStr)),
     recvSize(0),
     currentConnections(0),
-    Control(0) // TODO: Control(0) 初始化
+    keepListening(true),
+    Control(MAX_CONNECTIONS)
 {
     strcpy(this->message, "");
     strcpy(this->ipv4, ipv4.c_str());
@@ -39,11 +40,16 @@ OnlineModeControl::OnlineModeControl(std::string ipv4, std::string portStr) :
         }
         throw;
     }
+    listeningThread = std::thread(&OnlineModeControl::listenForServerMessages, this);
 }
 
 // 析构函数
 OnlineModeControl::~OnlineModeControl()
 {
+    keepListening = false;
+    if (listeningThread.joinable()) {
+        listeningThread.join();
+    }
     closesocket(s);
     WSACleanup();
     delete humanPlayer;
@@ -165,6 +171,12 @@ SOCKET OnlineModeControl::getSocket() const
     return s;
 }
 
+// 客户端在服务器的 socket
+SOCKET OnlineModeControl::getMySocket() const
+{
+    return mySocket;
+}
+
 // 向服务器发送信息
 int OnlineModeControl::sendMessage(const char* str, const int len)
 {
@@ -238,6 +250,9 @@ void OnlineModeControl::deserializePlayerNames(const std::string& data)
                 if (!map.empty()) {
                     playerNames.push_back(map);
                     playerHealthPoints.push_back({ { key, INITIAL_HEALTH_POINTS } });
+                    if (map[key] == g_PlayerName) {
+                        mySocket = key; // TODO: 处理玩家姓名不唯一问题
+                    }
                 }
             }
         }
@@ -287,6 +302,36 @@ void OnlineModeControl::deserializeBattleMap(const std::string battleMapData, Ch
             }
             else {
                 battleMap[row][col] = static_cast<ChampionCategory>(ch - 'A' + 1);
+            }
+        }
+    }
+}
+
+// 监听服务器消息线程
+void OnlineModeControl::listenForServerMessages()
+{
+    while (keepListening) {
+        char buffer[BUFFER_SIZE];
+        recv(s, buffer, BUFFER_SIZE, 0);
+        if (!strncmp(buffer, HEALTH_POINTS_IDENTIFIER, MESSAGE_IDENTIFIER_LENGTH)) {
+            int healthPoints;
+            SOCKET socket;
+            sscanf(buffer, HEALTH_POINTS_FORMAT, &healthPoints, &socket);
+            updatePlayerHealthPoints(healthPoints, socket);
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(THREAD_SLEEP_DURATION_MILLISECONDS));
+    }
+}
+
+// 更新玩家生命值
+void OnlineModeControl::updatePlayerHealthPoints(const int healthPoint, const SOCKET socket)
+{
+    std::lock_guard<std::mutex> lock(healthPointsMutex); // 锁定互斥量确保线程安全性
+    for (auto& playerMap : playerHealthPoints) {
+        for (auto& pair : playerMap) {
+            if (pair.first == socket) {
+                pair.second = healthPoint;
+                return;
             }
         }
     }
