@@ -3,7 +3,7 @@
  * File Name:     Champion.cpp
  * File Function: ChampionÀàµÄÊµÏÖ
  * Author:        ÑîÓîçû¡¢ÁõÊçÒÇ¡¢ÁÖ¼ÌÉê
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -468,7 +468,7 @@ BattleLocation Champion::moveTowards(Champion* nearestEnemy)
                 bestMove.x = currentLocation.x + 1;
                 bestMove.y = currentLocation.y + (currentLocation.x % 2 ? 0 : 1);
             } // ÍùÓÒÉÏ×ß
-            else  if (isInMap(currentLocation.x + 1, currentLocation.y - (currentLocation.x % 2 ? 1 : 0))
+            else if (isInMap(currentLocation.x + 1, currentLocation.y - (currentLocation.x % 2 ? 1 : 0))
                 && currentBattle->championMap[currentLocation.x + 1][currentLocation.y - (currentLocation.x % 2 ? 1 : 0)] == nullptr) {
                 bestMove.x = currentLocation.x + 1;
                 bestMove.y = currentLocation.y - (currentLocation.x % 2 ? 1 : 0);
@@ -480,7 +480,6 @@ BattleLocation Champion::moveTowards(Champion* nearestEnemy)
         }
     }
 }
-
 
 // ¹¥»÷
 void Champion::attack()
