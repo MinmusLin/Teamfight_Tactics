@@ -2,7 +2,7 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     OfflineModeRuneScene.h
  * File Function: OfflineModeRuneScene类的实现
- * Author:        林继申
+ * Author:        刘淑仪、林继申
  * Update Date:   2023/12/30
  ****************************************************************/
 
@@ -40,19 +40,22 @@ bool OfflineModeRuneScene::init()
 
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
-    const auto background = Sprite::create("../Resources/Scenes/OfflineModeBattleScene.png");
+    const auto background = Sprite::create("../Resources/Scenes/OfflineModeRuneScene.png");
     background->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2));
     this->addChild(background);
 
-    // 创建强化符文按钮
-    for (int i = 0; i < 1; i++) {
-        auto littleChampion = HoverButton::create(static_cast<std::string>("../Resources/Buttons/SelectionSceneButtons/LittleChampion") + std::to_string(i + 1) + static_cast<std::string>("DefaultButton.png"),
-            static_cast<std::string>("../Resources/Buttons/SelectionSceneButtons/LittleChampion") + std::to_string(i + 1) + static_cast<std::string>("HoverButton.png"),
-            static_cast<std::string>("../Resources/Buttons/SelectionSceneButtons/LittleChampion") + std::to_string(i + 1) + static_cast<std::string>("ActiveButton.png"));
-        littleChampion->setPosition(Vec2(screenSize.width / 2 + SELECTION_SCENE_BUTTON_OFFSET_X + (i % (MAX_LITTLE_CHAMPION_COUNT / 2)) * SELECTION_SCENE_BUTTON_HORIZONTAL_INTERVAL,
-            screenSize.height / 2 + SELECTION_SCENE_BUTTON_OFFSET_Y + (i / (MAX_LITTLE_CHAMPION_COUNT / 2)) * SELECTION_SCENE_BUTTON_VERTICAL_INTERVAL));
-        littleChampion->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+    // 创建天赋符文按钮
+    const std::string talentRune[] = { "Pirate", "General", "Warriors" };
+    const int offsetX[] = { -TALENT_RUNE_BUTTON_OFFSET_X, 0, TALENT_RUNE_BUTTON_OFFSET_X };
+    HoverButton* talentRuneButton[TALENT_RUNE_COUNT] = { nullptr };
+    for (int i = 0; i < TALENT_RUNE_COUNT; i++) {
+        talentRuneButton[i] = HoverButton::create(static_cast<std::string>("../Resources/Buttons/OfflineModeRuneSceneButtons/") + talentRune[i] + static_cast<std::string>("RuneDefaultButton.png"),
+            static_cast<std::string>("../Resources/Buttons/OfflineModeRuneSceneButtons/") + talentRune[i] + static_cast<std::string>("RuneHoverButton.png"),
+            static_cast<std::string>("../Resources/Buttons/OfflineModeRuneSceneButtons/") + talentRune[i] + static_cast<std::string>("RuneActiveButton.png"));
+        talentRuneButton[i]->setPosition(Vec2(screenSize.width / 2 + offsetX[i], screenSize.height / 2));
+        talentRuneButton[i]->addTouchEventListener([i](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
             if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+                cocos2d::UserDefault::getInstance()->setIntegerForKey("TalentRune", i);
                 try {
                     g_offlineModeControl = new OfflineModeControl;
                 }
@@ -63,7 +66,7 @@ bool OfflineModeRuneScene::init()
                 cocos2d::Director::getInstance()->replaceScene(OfflineModePreparationScene::createScene());
             }
             });
-        this->addChild(littleChampion);
+        this->addChild(talentRuneButton[i]);
     }
 
     return true;
