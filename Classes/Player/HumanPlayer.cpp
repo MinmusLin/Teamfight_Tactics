@@ -136,6 +136,9 @@ void HumanPlayer::addBattleChampionCount(const int num)
 {
     TalentRune talentRune = static_cast<TalentRune>(cocos2d::UserDefault::getInstance()->getIntegerForKey("TalentRune"));
     if (maxBattleChampionCount < (talentRune == General ? BATTLE_AREA_MAX_CHAMPION_COUNT : BATTLE_AREA_MAX_CHAMPION_COUNT - 1) && goldCoin >= UPLEVEL_PRICE.at(maxBattleChampionCount)) {
+        // º”‘ÿµ„ª˜“Ù–ß
+        audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
         refreshCoinLabel(-UPLEVEL_PRICE.at(maxBattleChampionCount));
         maxBattleChampionCount += num;
         auto levelLabel = dynamic_cast<Label*>(currentScene->getChildByName("LevelLabel"));

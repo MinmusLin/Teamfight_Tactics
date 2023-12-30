@@ -120,9 +120,6 @@ bool OfflineModePreparationScene::init()
     // 为按钮添加事件处理器
     uplevelButton->addTouchEventListener([this, uplevelCoinLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
-            // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
-
             g_offlineModeControl->getHumanPlayer()->addBattleChampionCount();
             const int maxBattleChampionCount = g_offlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
             uplevelCoinLabel->setString(maxBattleChampionCount >= (static_cast<TalentRune>(cocos2d::UserDefault::getInstance()->getIntegerForKey("TalentRune") == General ? BATTLE_AREA_MAX_CHAMPION_COUNT : BATTLE_AREA_MAX_CHAMPION_COUNT - 1)) ? "" : std::to_string(UPLEVEL_PRICE.at(maxBattleChampionCount)));
