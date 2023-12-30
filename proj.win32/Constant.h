@@ -46,8 +46,8 @@ constexpr char CURRENT_CONNECTIONS_IDENTIFIER[] = "Connection";             // ·
 constexpr char CURRENT_CONNECTIONS_FORMAT[] = "Connection=%d";              // ·þÎñÆ÷µ±Ç°Á¬½ÓÊýÁ¿¸ñÊ½×Ö·û´®
 constexpr char PLAYER_NAME_IDENTIFIER[] = "PlayerName";                     // Íæ¼ÒÐÕÃû±êÊ¶·û
 constexpr char PLAYER_NAME_FORMAT[] = "PlayerName=%s";                      // Íæ¼ÒÐÕÃû¸ñÊ½×Ö·û´®
-constexpr char BATTLE_MAP_IDENTIFIER[] = "BattleMap_";                      // Íæ¼ÒÕ½¶·ÇøµØÍ¼±êÊ¶·û
-constexpr char BATTLE_MAP_FORMAT[] = "BattleMap_=%s";                       // Íæ¼ÒÕ½¶·ÇøµØÍ¼¸ñÊ½×Ö·û´®
+constexpr char BATTLE_MAP_IDENTIFIER[] = "BattleMaps";                      // Íæ¼ÒÕ½¶·ÇøµØÍ¼±êÊ¶·û
+constexpr char BATTLE_MAP_FORMAT[] = "BattleMaps=%s";                       // Íæ¼ÒÕ½¶·ÇøµØÍ¼¸ñÊ½×Ö·û´®
 
 // ÑÕÉ«ÉèÖÃ
 constexpr int DARK_BLUE_R = 0;                                              // ÉîÀ¶É« R Í¨µÀ

@@ -77,7 +77,7 @@ void clientHandler(const SOCKET clientSocket, Server& server)
         // 检测是否开始战斗
         if (server.areAllReady(server.battleMaps)) {
             for (size_t i = 0; i < server.clients.size(); i++) {
-                strcpy(buffer, server.getPairedData(server.battleMaps, i).c_str());
+                sprintf(buffer, BATTLE_MAP_FORMAT, server.getPairedData(server.battleMaps, i).c_str());
                 std::cout << "Send Client " << server.clients[i ^ 1] << "[" << (i ^ 1) << "]'s BattleMap to Client " << server.clients[i] << "[" << i << "]: " << buffer << std::endl;
                 send(server.clients[i], buffer, strlen(buffer), 0);
             }

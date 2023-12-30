@@ -3,7 +3,7 @@
  * File Name:     OnlineModeControl.h
  * File Function: OnlineModeControl类的定义
  * Author:        林继申
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -44,6 +44,9 @@ public:
     // 获取敌人玩家指针
     HumanPlayer* getEnemyPlayer() const;
 
+    // 设置敌人玩家战斗区地图
+    void setEnemyBattleMap(const ChampionCategory battleMap[][BATTLE_MAP_COLUMNS]);
+
     // 初始化对战类
     void initializeBattle();
 
@@ -58,6 +61,9 @@ public:
 
     // 序列化玩家战斗区地图
     std::string serializePlayerMap();
+
+    // 反序列化玩家战斗区地图
+    void deserializeBattleMap(const std::string battleMapData, ChampionCategory battleMap[][BATTLE_MAP_COLUMNS]);
 
 private:
     char ipv4[IPV4_ADDRESS_MAX_LENGTH + 1];                 // IPv4 地址

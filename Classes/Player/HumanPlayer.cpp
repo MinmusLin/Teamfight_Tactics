@@ -3,7 +3,7 @@
  * File Name:     HumanPlayer.cpp
  * File Function: HumanPlayer类的实现
  * Author:        林继申、杨宇琨
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -175,6 +175,16 @@ void HumanPlayer::initializeDeleteChampionButton()
     deleteChampionButton->setVisible(false);
     deleteChampionButton->setEnabled(false);
     currentScene->addChild(deleteChampionButton);
+}
+
+// 设置战斗区地图
+void HumanPlayer::setBattleMap(const ChampionCategory battleMap[][BATTLE_MAP_COLUMNS])
+{
+    for (int i = 0; i < PLACE_MAP_ROWS; i++) {
+        for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+            this->battleMap[i][j] = battleMap[i][j];
+        }
+    }
 }
 
 // 添加战斗英雄

@@ -3,10 +3,11 @@
  * File Name:     OnlineModeBattleScene.cpp
  * File Function: OnlineModeBattleScene类的实现
  * Author:        杨宇琨、刘淑仪、林继申
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
+#include <thread>
 #include "OnlineModeBattleScene.h"
 #include "Control/OnlineModeControl.h"
 #include "LocationMap/LocationMap.h"
@@ -34,6 +35,13 @@ Scene* OnlineModeBattleScene::createScene()
 // 初始化场景
 bool OnlineModeBattleScene::init()
 {
+    // 启动一个线程监听服务器消息
+    std::thread listenerThread(&OnlineModeBattleScene::serverMessageListener, this);
+    listenerThread.detach(); // 设置该线程在后台运行
+    while (!isServerMessageProcessed) { // 等待消息处理完成
+        continue;
+    }
+
     // 创建场景
     if (!Scene::init()) {
         return false;
@@ -399,6 +407,27 @@ void OnlineModeBattleScene::update(float delta)
                 battleChampion[i]->setSwordVisible(false);
                 battleChampion[i]->die();
                 battleChampion[i] = nullptr;
+            }
+        }
+    }
+}
+
+// 服务器消息监听
+void OnlineModeBattleScene::serverMessageListener()
+{
+    while (!isServerMessageProcessed) {
+        char buffer[BUFFER_SIZE];
+        memset(buffer, 0, sizeof(buffer));
+        int recvSize = recv(g_onlineModeControl->getSocket(), buffer, BUFFER_SIZE, 0);
+        if (recvSize > 0) {
+            buffer[recvSize] = '\0';
+            if (!strncmp(buffer, BATTLE_MAP_IDENTIFIER, MESSAGE_IDENTIFIER_LENGTH)) {
+                char battleMapBuffer[BUFFER_SIZE];
+                sscanf(buffer, BATTLE_MAP_FORMAT, battleMapBuffer);
+                ChampionCategory battleMap[PLACE_MAP_ROWS][BATTLE_MAP_COLUMNS];
+                g_onlineModeControl->deserializeBattleMap(static_cast<std::string>(battleMapBuffer), battleMap);
+                g_onlineModeControl->setEnemyBattleMap(battleMap);
+                isServerMessageProcessed = true;
             }
         }
     }

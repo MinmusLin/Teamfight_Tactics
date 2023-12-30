@@ -3,7 +3,7 @@
  * File Name:     OnlineModePreparationScene.cpp
  * File Function: OnlineModePreparationScene类的实现
  * Author:        林继申、刘淑仪
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -214,7 +214,7 @@ void OnlineModePreparationScene::setScheduleOnce(cocos2d::ui::LoadingBar* progre
 
         // 运行练习模式对战场景
         char buffer[BUFFER_SIZE];
-        strcat(strcat(strcpy(buffer, BATTLE_MAP_IDENTIFIER), "="), g_onlineModeControl->serializePlayerMap().c_str());
+        sprintf(buffer, BATTLE_MAP_FORMAT, g_onlineModeControl->serializePlayerMap().c_str());
         g_onlineModeControl->sendMessage(buffer, strlen(buffer));
         cocos2d::Director::getInstance()->pushScene(OnlineModeBattleScene::create());
         }, BATTLE_SCENE_LOADINGBAR_DURATION + SCENE_TRANSITION_DURATION, "IsAlreadyPrepared");

@@ -3,7 +3,7 @@
  * File Name:     OnlineModeControl.cpp
  * File Function: OnlineModeControl类的实现
  * Author:        林继申
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -189,6 +189,12 @@ HumanPlayer* OnlineModeControl::getEnemyPlayer() const
     return enemyPlayer;
 }
 
+// 设置敌人玩家战斗区地图
+void OnlineModeControl::setEnemyBattleMap(const ChampionCategory battleMap[][BATTLE_MAP_COLUMNS])
+{
+    enemyPlayer->setBattleMap(battleMap);
+}
+
 // 初始化对战类
 void OnlineModeControl::initializeBattle()
 {
@@ -267,4 +273,21 @@ std::string OnlineModeControl::serializePlayerMap()
         }
     }
     return serializedMap;
+}
+
+// 反序列化玩家战斗区地图
+void OnlineModeControl::deserializeBattleMap(const std::string battleMapData, ChampionCategory battleMap[][BATTLE_MAP_COLUMNS])
+{
+    int index = 0;
+    for (int row = 0; row < PLACE_MAP_ROWS; ++row) {
+        for (int col = 0; col < BATTLE_MAP_COLUMNS; ++col) {
+            char ch = battleMapData[index++];
+            if (ch == '0') {
+                battleMap[row][col] = NoChampion;
+            }
+            else {
+                battleMap[row][col] = static_cast<ChampionCategory>(ch - 'A' + 1);
+            }
+        }
+    }
 }

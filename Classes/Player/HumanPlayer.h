@@ -3,7 +3,7 @@
  * File Name:     HumanPlayer.h
  * File Function: HumanPlayer类的定义
  * Author:        林继申、杨宇琨
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -52,6 +52,9 @@ public:
 
     // 初始化战斗英雄删除按钮
     void initializeDeleteChampionButton();
+
+    // 设置战斗区地图
+    void setBattleMap(const ChampionCategory battleMap[][BATTLE_MAP_COLUMNS]);
 
 private:
     cocos2d::Scene* currentScene;                                         // 当前场景指针
