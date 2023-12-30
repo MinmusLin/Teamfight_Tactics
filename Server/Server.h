@@ -33,6 +33,9 @@ public:
     // 获取所有连接到服务器的客户端玩家昵称
     std::vector<std::map<SOCKET, std::string>> getPlayerNames() const;
 
+    // 获取所有连接到服务器的客户端玩家战斗区地图
+    std::vector<std::map<SOCKET, std::string>> getBattleMaps() const;
+
     // 友元函数声明
     friend void clientHandler(const SOCKET clientSocket, Server& server);
 

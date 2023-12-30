@@ -154,6 +154,12 @@ std::vector<std::map<SOCKET, std::string>> Server::getPlayerNames() const
     return playerNames;
 }
 
+// 获取所有连接到服务器的客户端玩家战斗区地图
+std::vector<std::map<SOCKET, std::string>> Server::getBattleMaps() const
+{
+    return battleMaps;
+}
+
 // 创建和尝试绑定套接字
 void Server::createAndBindSocket()
 {
