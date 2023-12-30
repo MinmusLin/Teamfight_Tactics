@@ -52,7 +52,7 @@ bool OfflineModeRuneScene::init()
         talentRuneButton[i] = HoverButton::create(static_cast<std::string>("../Resources/Buttons/OfflineModeRuneSceneButtons/") + talentRune[i] + static_cast<std::string>("RuneDefaultButton.png"),
             static_cast<std::string>("../Resources/Buttons/OfflineModeRuneSceneButtons/") + talentRune[i] + static_cast<std::string>("RuneHoverButton.png"),
             static_cast<std::string>("../Resources/Buttons/OfflineModeRuneSceneButtons/") + talentRune[i] + static_cast<std::string>("RuneActiveButton.png"));
-        talentRuneButton[i]->setPosition(Vec2(screenSize.width / 2 + offsetX[i], screenSize.height / 2));
+        talentRuneButton[i]->setPosition(Vec2(screenSize.width / 2 + offsetX[i], screenSize.height / 2 + TALENT_RUNE_BUTTON_OFFSET_Y));
         talentRuneButton[i]->addTouchEventListener([i](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
             if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
                 cocos2d::UserDefault::getInstance()->setIntegerForKey("TalentRune", i);

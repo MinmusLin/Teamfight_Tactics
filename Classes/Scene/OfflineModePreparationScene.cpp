@@ -127,9 +127,6 @@ bool OfflineModePreparationScene::init()
         });
     refreshButton->addTouchEventListener([this](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
-            // ¼ÓÔØµã»÷ÒôÐ§
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
-
             g_offlineModeControl->getHumanPlayer()->refreshShop();
         }
         });

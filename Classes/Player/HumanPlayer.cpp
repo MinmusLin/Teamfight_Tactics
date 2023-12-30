@@ -75,6 +75,9 @@ void HumanPlayer::refreshShop()
         return;
     }
 
+    // 加载点击音效
+    audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
     // 销毁已存在按钮
     for (int i = 0; i < MAX_SELECTABLE_CHAMPION_COUNT; i++) {
         if (shopChampionButton[i] != nullptr) {
@@ -99,9 +102,6 @@ void HumanPlayer::refreshShop()
         // 为按钮添加事件处理器
         shopChampionButton[i]->addTouchEventListener([this, i](cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
             if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-                // 加载点击音效
-                audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
-
                 addChampion(i);
             }
             });
@@ -186,6 +186,9 @@ void HumanPlayer::addChampion(const int index)
             if (goldCoin < CHAMPION_ATTR_MAP.at(shopChampionCategory[index]).price) {
                 return;
             }
+
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
 
             // 从商店中移除战斗英雄
             refreshCoinLabel(-CHAMPION_ATTR_MAP.at(shopChampionCategory[index]).price);

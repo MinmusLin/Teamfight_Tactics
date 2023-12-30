@@ -136,6 +136,7 @@ constexpr int CHAMPION_HEALTHBAR_VERTICAL_INTERVAL = 29;                    // ¶
 constexpr int CHAMPION_MANABAR_VERTICAL_INTERVAL = 22;                      // ¶ÔÕ½³¡¾°¾­ÑéÌõ´¹Ö±¼ä¾à
 constexpr int TALENT_RUNE_COUNT = 3;                                        // Ìì¸³·ûÎÄÊýÁ¿
 constexpr int TALENT_RUNE_BUTTON_OFFSET_X = 390;                            // Ìì¸³·ûÎÄ°´Å¥Î»ÖÃ X Æ«ÒÆÁ¿
+constexpr int TALENT_RUNE_BUTTON_OFFSET_Y = -55;                            // Ìì¸³·ûÎÄ°´Å¥Î»ÖÃ X Æ«ÒÆÁ¿
 constexpr int BOND_EFFECT_START_X = -2;                                     // î¿°íÐ§¹ûÎ»ÖÃ X ×ø±ê
 constexpr int BOND_EFFECT_HORIZONTAL_INTERVAL = 65;                         // î¿°íÐ§¹ûË®Æ½¼ä¾à
 constexpr int MY_BOND_EFFECT_START_Y = 194;                                 // ÎÒ·½î¿°íÐ§¹ûÎ»ÖÃ Y ×ø±ê
