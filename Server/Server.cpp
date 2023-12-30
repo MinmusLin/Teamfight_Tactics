@@ -73,11 +73,13 @@ void clientHandler(const SOCKET clientSocket, Server& server)
         }
 
         // 检测是否开始游戏
-        if (server.areAllReady(server.playerNames)) {
-            strcpy(buffer, server.serializePlayerNames().c_str());
-            std::cout << "Broadcast: " << buffer << std::endl;
-            for (const SOCKET& sock : server.clients) {
-                send(sock, buffer, strlen(buffer), 0);
+        if (server.currentConnections % 2 == 0) {
+            if (server.areAllReady(server.playerNames)) {
+                strcpy(buffer, server.serializePlayerNames().c_str());
+                std::cout << "Broadcast: " << buffer << std::endl;
+                for (const SOCKET& sock : server.clients) {
+                    send(sock, buffer, strlen(buffer), 0);
+                }
             }
         }
 
@@ -115,11 +117,13 @@ void clientHandler(const SOCKET clientSocket, Server& server)
     std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(1000 * SERVER_REFRESH_INTERVAL_MAGNIFICATION * SERVER_REFRESH_INTERVAL)));
 
     // 检测是否开始游戏
-    if (server.areAllReady(server.playerNames)) {
-        strcpy(buffer, server.serializePlayerNames().c_str());
-        std::cout << "Broadcast: " << buffer << std::endl;
-        for (const SOCKET& sock : server.clients) {
-            send(sock, buffer, strlen(buffer), 0);
+    if (server.currentConnections % 2 == 0) {
+        if (server.areAllReady(server.playerNames)) {
+            strcpy(buffer, server.serializePlayerNames().c_str());
+            std::cout << "Broadcast: " << buffer << std::endl;
+            for (const SOCKET& sock : server.clients) {
+                send(sock, buffer, strlen(buffer), 0);
+            }
         }
     }
 }
