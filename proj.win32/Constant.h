@@ -34,9 +34,10 @@ constexpr int MIN_PORT_ADDRESS = 49152;                                     // ×
 constexpr int MAX_PORT_ADDRESS = 65535;                                     // ×î´ó¶Ë¿ÚµØÖ·
 constexpr int MAX_CONNECTIONS = 8;                                          // ×î´óÁ¬½ÓÊıÁ¿
 constexpr int BUFFER_SIZE = 256;                                            // »º³åÇø´óĞ¡
+constexpr int THREAD_SLEEP_DURATION_MILLISECONDS = 100;                     // ¼àÌı·şÎñÆ÷ÏûÏ¢Ïß³ÌĞİÃßºÁÃëÊı
 constexpr int CONNECTION_TIMEOUT_DURATION = 2;                              // ·şÎñÆ÷Á¬½Ó³¬Ê±Ê±¼ä
 constexpr int MESSAGE_IDENTIFIER_LENGTH = 10;                               // ·şÎñÆ÷ÏûÏ¢±êÊ¶·û³¤¶È
-constexpr int SERVER_REFRESH_INTERVAL_MAGNIFICATION = 5;                    // ¼àÌı·şÎñÆ÷Ë¢ĞÂÊ±¼ä¼ä¸ô±¶ÂÊ
+constexpr int SERVER_REFRESH_INTERVAL_MAGNIFICATION = 3;                    // ¼àÌı·şÎñÆ÷Ë¢ĞÂÊ±¼ä¼ä¸ô±¶ÂÊ
 constexpr float SERVER_REFRESH_INTERVAL = 0.02f;                            // ¼àÌı·şÎñÆ÷Ë¢ĞÂÊ±¼ä¼ä¸ô
 constexpr char CONNECTION_REFUSED_MSG[] = "Connection refused.";            // ¾Ü¾øÁ¬½ÓÌáÊ¾ĞÅÏ¢
 constexpr char CONNECTION_ACCEPTED_MSG[] = "Connection accepted.";          // ½ÓÊÜÁ¬½ÓÌáÊ¾ĞÅÏ¢
@@ -48,6 +49,8 @@ constexpr char PLAYER_NAME_IDENTIFIER[] = "PlayerName";                     // Í
 constexpr char PLAYER_NAME_FORMAT[] = "PlayerName=%s";                      // Íæ¼ÒĞÕÃû¸ñÊ½×Ö·û´®
 constexpr char BATTLE_MAP_IDENTIFIER[] = "BattleMaps";                      // Íæ¼ÒÕ½¶·ÇøµØÍ¼±êÊ¶·û
 constexpr char BATTLE_MAP_FORMAT[] = "BattleMaps=%s";                       // Íæ¼ÒÕ½¶·ÇøµØÍ¼¸ñÊ½×Ö·û´®
+constexpr char HEALTH_POINTS_IDENTIFIER[] = "HealthPoin";                   // Íæ¼ÒÉúÃüÖµ±êÊ¶·û
+constexpr char HEALTH_POINTS_FORMAT[] = "HealthPoint=%d£¬Socket=%d";        // Íæ¼ÒÉúÃüÖµ¸ñÊ½×Ö·û´®
 
 // ÑÕÉ«ÉèÖÃ
 constexpr int DARK_BLUE_R = 0;                                              // ÉîÀ¶É« R Í¨µÀ
@@ -331,7 +334,8 @@ enum Bond {
 enum TalentRune {
     Pirate,             // º£µÁ£¨Ôö¼Ó½ğ±ÒÊıÁ¿£©
     General,            // ½«¾ü£¨Ôö¼ÓÓ¢ĞÛÎ»£©
-    Warriors            // ¶·Ê¿£¨Ôö¼ÓÉúÃüÖµ£©
+    Warriors,           // ¶·Ê¿£¨Ôö¼ÓÉúÃüÖµ£©
+    NoTalentRune        // ÎŞÌì¸³·ûÎÄ
 };
 
 // Õ½¶·Ó¢ĞÛÖÖÀà¶¨Òå
