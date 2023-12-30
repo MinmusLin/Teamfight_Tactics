@@ -3,7 +3,7 @@
  * File Name:     Constant.h
  * File Function: ≥£±‰¡øµƒ∂®“Â
  * Author:        ¡÷ºÃ…Í°¢—Ó”ÓÁ˚°¢¡ı Á“«°¢—Ó’◊’Ú
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -155,7 +155,7 @@ constexpr float LITTLE_CHAMPION_PARTICLE_SCALE = 0.75f;                     // –
 constexpr float LITTLE_CHAMPION_PARTICLE_LIFE = 1.0f;                       // –°–°”¢–€¡£◊”–ßπ˚…˙√¸÷‹∆⁄
 constexpr float LITTLE_CHAMPION_ROTATE_DURATION = 0.5f;                     // –°–°”¢–€–˝◊™∂Øª≠ ±º‰
 constexpr float WEAPON_ANIMATION_ROTATION_DURATION = 0.15f;                 // ∂‘’Ω≥°æ∞Œ‰∆˜∂Øª≠–˝◊™ ±º‰
-constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 10.0f;                   // ∂‘’Ω≥°æ∞◊º±∏ ±º‰£®TODO£©
+constexpr float BATTLE_SCENE_LOADINGBAR_DURATION = 30.0f;                   // ∂‘’Ω≥°æ∞◊º±∏ ±º‰
 constexpr float BATTLE_END_DURATION = 2.0f;                                 // ∂‘’ΩΩ· ¯Õ£¡Ù ±º‰
 
 // …Ë÷√≥°æ∞…Ë÷√

@@ -3,7 +3,7 @@
  * File Name:     Server.cpp
  * File Function: Server类的实现
  * Author:        林继申
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -38,8 +38,8 @@ void clientHandler(const SOCKET clientSocket, Server& server)
         std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
         std::cout << std::put_time(std::localtime(&now), "[%H:%M:%S]");
 
-        // 输出客户端 ID 和接收到的消息
-        std::cout << " [Client ID: " << clientSocket << "] Message: " << buffer << std::endl;
+        // 输出客户端和接收到的消息
+        std::cout << " [Client: " << clientSocket << "] Message: " << buffer << std::endl;
 
         // 接受玩家姓名信息
         if (!strncmp(buffer, BATTLE_MAP_IDENTIFIER, MESSAGE_IDENTIFIER_LENGTH)) {
@@ -66,12 +66,22 @@ void clientHandler(const SOCKET clientSocket, Server& server)
         }
 
         // 检测是否开始游戏
-        if (server.areAllReady(server.getPlayerNames())) {
+        if (server.areAllReady(server.playerNames)) {
             strcpy(buffer, server.serializePlayerNames().c_str());
             std::cout << "Broadcast: " << buffer << std::endl;
             for (const SOCKET& sock : server.clients) {
                 send(sock, buffer, static_cast<int>(strlen(buffer)), 0);
             }
+        }
+
+        // 检测是否开始战斗
+        if (server.areAllReady(server.battleMaps)) {
+            for (size_t i = 0; i < server.clients.size(); i++) {
+                strcpy(buffer, server.getPairedData(server.battleMaps, i).c_str());
+                std::cout << "Send Client " << server.clients[i ^ 1] << "[" << (i ^ 1) << "]'s BattleMap to Client " << server.clients[i] << "[" << i << "]: " << buffer << std::endl;
+                send(server.clients[i], buffer, strlen(buffer), 0);
+            }
+            server.clearStrings(server.battleMaps);
         }
     }
 
@@ -98,7 +108,7 @@ void clientHandler(const SOCKET clientSocket, Server& server)
     std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(1000 * SERVER_REFRESH_INTERVAL_MAGNIFICATION * SERVER_REFRESH_INTERVAL)));
 
     // 检测是否开始游戏
-    if (server.areAllReady(server.getPlayerNames())) {
+    if (server.areAllReady(server.playerNames)) {
         strcpy(buffer, server.serializePlayerNames().c_str());
         std::cout << "Broadcast: " << buffer << std::endl;
         for (const SOCKET& sock : server.clients) {
@@ -146,18 +156,6 @@ void Server::run()
 {
     createAndBindSocket();
     handleConnections();
-}
-
-// 获取所有连接到服务器的客户端玩家昵称
-std::vector<std::map<SOCKET, std::string>> Server::getPlayerNames() const
-{
-    return playerNames;
-}
-
-// 获取所有连接到服务器的客户端玩家战斗区地图
-std::vector<std::map<SOCKET, std::string>> Server::getBattleMaps() const
-{
-    return battleMaps;
 }
 
 // 创建和尝试绑定套接字
@@ -301,4 +299,42 @@ std::string Server::serializePlayerNames()
         ss << ";";
     }
     return ss.str();
+}
+
+// 获取键值对数据
+std::string Server::getPairedData(const std::vector<std::map<SOCKET, std::string>>& data, size_t index)
+{
+    if (index % 2 == 0) { // 对于偶数索引，返回其下一个奇数索引的字符串数据
+        if (index + 1 < clients.size()) {
+            SOCKET pairedSocket = clients[index + 1];
+            for (const auto& map : data) {
+                auto it = map.find(pairedSocket);
+                if (it != map.end()) {
+                    return it->second;
+                }
+            }
+        }
+    }
+    else { // 对于奇数索引，返回其前一个偶数索引的字符串数据
+        if (index >= 1) {
+            SOCKET pairedSocket = clients[index - 1];
+            for (const auto& map : data) {
+                auto it = map.find(pairedSocket);
+                if (it != map.end()) {
+                    return it->second;
+                }
+            }
+        }
+    }
+    return "";
+}
+
+// 清空所有连接到服务器的客户端玩家字符串数据
+void Server::clearStrings(std::vector<std::map<SOCKET, std::string>>& data)
+{
+    for (auto& map : data) {
+        for (auto& pair : map) {
+            pair.second = "";
+        }
+    }
 }

@@ -3,7 +3,7 @@
  * File Name:     Server.h
  * File Function: Server类的定义
  * Author:        林继申
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -29,12 +29,6 @@ public:
 
     // 运行服务器
     void run();
-
-    // 获取所有连接到服务器的客户端玩家昵称
-    std::vector<std::map<SOCKET, std::string>> getPlayerNames() const;
-
-    // 获取所有连接到服务器的客户端玩家战斗区地图
-    std::vector<std::map<SOCKET, std::string>> getBattleMaps() const;
 
     // 友元函数声明
     friend void clientHandler(const SOCKET clientSocket, Server& server);
@@ -65,6 +59,12 @@ private:
 
     // 序列化所有连接到服务器的客户端玩家昵称
     std::string serializePlayerNames();
+
+    // 获取键值对数据
+    std::string getPairedData(const std::vector<std::map<SOCKET, std::string>>& data, size_t index);
+
+    // 清空所有连接到服务器的客户端玩家字符串数据
+    void clearStrings(std::vector<std::map<SOCKET, std::string>>& data);
 };
 
 #endif // !_SERVER_H_
