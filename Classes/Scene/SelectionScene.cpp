@@ -61,6 +61,7 @@ bool SelectionScene::init()
             if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
                 // ¼ÓÔØµã»÷ÒôÐ§
                 audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
                 cocos2d::UserDefault::getInstance()->setStringForKey("LittleChampionCategory", std::to_string(i + 1));
                 cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
             }

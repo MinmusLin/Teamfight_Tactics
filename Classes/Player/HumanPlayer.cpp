@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     HumanPlayer.cpp
  * File Function: HumanPlayer类的实现
- * Author:        林继申
- * Update Date:   2023/12/29
+ * Author:        林继申、杨宇琨
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 
@@ -21,9 +21,6 @@ using cocos2d::Event;
 using cocos2d::EventMouse;
 using cocos2d::Vec2;
 
-// 天赋
-extern int g_rune ;
-
 // 构造函数
 HumanPlayer::HumanPlayer(const std::string nickname) :
     Player(nickname),
@@ -33,9 +30,12 @@ HumanPlayer::HumanPlayer(const std::string nickname) :
     placementMarkerLayer(nullptr),
     nearestPlacementMarker(nullptr),
     startLocation({ WaitingArea, -1 }),
-    maxBattleChampionCount( BATTLE_AREA_MIN_CHAMPION_COUNT),
+    maxBattleChampionCount(BATTLE_AREA_MIN_CHAMPION_COUNT),
     goldCoin(INITIAL_GOLD_COIN)
 {
+    healthPoints = (static_cast<TalentRune>(cocos2d::UserDefault::getInstance()->getIntegerForKey("TalentRune")) == Warriors)
+        ? INITIAL_HEALTH_POINTS + RUNE_WARRIOR_HEALTH_POINTS_BUFF
+        : INITIAL_HEALTH_POINTS;
     std::fill_n(shopChampionCategory, MAX_SELECTABLE_CHAMPION_COUNT, NoChampion);
     std::fill_n(shopChampionButton, MAX_SELECTABLE_CHAMPION_COUNT, nullptr);
     for (int i = 0; i < PLACE_MAP_ROWS; i++) {
@@ -134,11 +134,12 @@ int HumanPlayer::getCurrentBattleChampionCount() const
 // 增加战斗区英雄数量
 void HumanPlayer::addBattleChampionCount(const int num)
 {
-    if (maxBattleChampionCount < (g_rune == General ? BATTLE_AREA_MAX_CHAMPION_COUNT : BATTLE_AREA_MAX_CHAMPION_COUNT - 1) && goldCoin >= UPLEVEL_PRICE.at(maxBattleChampionCount)) {
+    TalentRune talentRune = static_cast<TalentRune>(cocos2d::UserDefault::getInstance()->getIntegerForKey("TalentRune"));
+    if (maxBattleChampionCount < (talentRune == General ? BATTLE_AREA_MAX_CHAMPION_COUNT : BATTLE_AREA_MAX_CHAMPION_COUNT - 1) && goldCoin >= UPLEVEL_PRICE.at(maxBattleChampionCount)) {
         refreshCoinLabel(-UPLEVEL_PRICE.at(maxBattleChampionCount));
         maxBattleChampionCount += num;
         auto levelLabel = dynamic_cast<Label*>(currentScene->getChildByName("LevelLabel"));
-        if (maxBattleChampionCount >= (g_rune == General ? BATTLE_AREA_MAX_CHAMPION_COUNT : BATTLE_AREA_MAX_CHAMPION_COUNT - 1)) {
+        if (maxBattleChampionCount >= (talentRune == General ? BATTLE_AREA_MAX_CHAMPION_COUNT : BATTLE_AREA_MAX_CHAMPION_COUNT - 1)) {
             levelLabel->setString(u8"最高等级");
         }
         else {
@@ -157,8 +158,8 @@ int HumanPlayer::getGoldCoin() const
 void HumanPlayer::addGoldCoin(const int num)
 {
     goldCoin += num;
-    if (g_rune == static_cast<int>(Pirate))
-        goldCoin += 10;
+    if (static_cast<TalentRune>(cocos2d::UserDefault::getInstance()->getIntegerForKey("TalentRune")) == Pirate)
+        goldCoin += RUNE_PIRATE_GOLD_COINS_BUFF;
 }
 
 // 初始化战斗英雄删除按钮

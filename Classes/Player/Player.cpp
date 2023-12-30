@@ -3,20 +3,16 @@
  * File Name:     Player.cpp
  * File Function: Player类的实现
  * Author:        林继申、杨兆镇
- * Update Date:   2023/12/27
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 
 #include <algorithm>
 #include "Player.h"
 
- // 天赋
-extern int g_rune = 1;
-
 // 构造函数
 Player::Player(const std::string nickname) :
-    name(nickname),
-    healthPoints((g_rune == Warriors ? INITIAL_HEALTH_POINTS + RUNE_WARRIOR_HEALTH_BUFF : INITIAL_HEALTH_POINTS))
+    name(nickname)
 {
     for (int i = 0; i < PLACE_MAP_ROWS; i++) {
         std::fill_n(battleMap[i], BATTLE_MAP_COLUMNS, NoChampion);

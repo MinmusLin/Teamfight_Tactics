@@ -3,7 +3,7 @@
  * File Name:     Constant.h
  * File Function: ³£±äÁ¿µÄ¶¨Òå
  * Author:        ÁÖ¼ÌÉê¡¢ÁõÊçÒÇ¡¢ÑîÕ×Õò¡¢ÑîÓîçû
- * Update Date:   2023/12/29
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 
@@ -232,7 +232,8 @@ constexpr int CHAMPION_VERTICAL_INTERVAL = 45;                              // Õ
 constexpr int CHAMPION_CATEGORY_NUMBERS = 15;                               // Õ½¶·Ó¢ĞÛÖÖÀàÊıÁ¿
 constexpr int BATTLE_STAGE_NUMBERS = 3;                                     // Õ½¶·½×¶Î×´Ì¬ÊıÁ¿
 constexpr int INITIAL_HEALTH_POINTS = 100;                                  // Íæ¼Ò³õÊ¼ÉúÃüÖµ
-constexpr int RUNE_WARRIOR_HEALTH_BUFF = 20;                                // ¶·Ê¿·ûÎÄ³õÊ¼ÉúÃü¼Ó³É
+constexpr int RUNE_WARRIOR_HEALTH_POINTS_BUFF = 20;                         // ¶·Ê¿·ûÎÄ³õÊ¼ÉúÃüÖµ¼Ó³É
+constexpr int RUNE_PIRATE_GOLD_COINS_BUFF = 10;                             // º£µÁ·ûÎÄ³õÊ¼½ğ±ÒÊıÁ¿¼Ó³É
 constexpr int INCREASED_MAGIC_POINTS = 20;                                  // ¹¥»÷¶ÔÓ¦Ôö¼ÓÄ§·¨Öµ
 constexpr int DECREASED_HEALTH_POINTS = 5;                                  // ´æ»îÕ½¶·Ó¢ĞÛ¶ÔÓ¦¼õÉÙÉúÃüÖµ
 constexpr int INCREASED_GOLD_COINS = 5;                                     // ´æ»îÕ½¶·Ó¢ĞÛ¶ÔÓ¦Ôö¼Ó½ğ±ÒÊıÁ¿
@@ -321,10 +322,10 @@ enum Bond {
 };
 
 // Õ½¶·Ó¢ĞÛÌì¸³·ûÎÄ¶¨Òå
-enum Talent {
-    Pirate,             // º£µÁ£¨Ôö¼Ó³õÊ¼½ğ±Ò£©
+enum TalentRune {
+    Pirate,             // º£µÁ£¨Ôö¼Ó½ğ±ÒÊıÁ¿£©
     General,            // ½«¾ü£¨Ôö¼ÓÓ¢ĞÛÎ»£©
-    Warriors            // ¶·Ê¿£¨Ôö¼ÓÑªÁ¿£©
+    Warriors            // ¶·Ê¿£¨Ôö¼ÓÉúÃüÖµ£©
 };
 
 // Õ½¶·Ó¢ĞÛÖÖÀà¶¨Òå

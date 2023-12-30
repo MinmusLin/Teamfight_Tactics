@@ -3,7 +3,7 @@
  * File Name:     AIPlayer.cpp
  * File Function: AIPlayer类的实现
  * Author:        杨兆镇、林继申
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 
@@ -16,9 +16,9 @@
 // 构造函数
 AIPlayer::AIPlayer(const std::string nickname, const Difficulty difficulty_) :
     Player(nickname),
-    difficulty(difficulty_) 
+    difficulty(difficulty_)
 {
-    resetHealth();
+    healthPoints = INITIAL_HEALTH_POINTS;
 }
 
 // AI 落棋算法
@@ -272,10 +272,4 @@ void AIPlayer::deployChampions()
         selectedChampions = deployChampionsByOrder(maxChampions);
     }
     deployChampionPositions(selectedChampions);
-}
-
-// 重置生命值
-void AIPlayer::resetHealth()
-{
-    healthPoints = 100;
 }

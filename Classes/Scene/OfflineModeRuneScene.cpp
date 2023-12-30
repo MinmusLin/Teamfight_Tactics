@@ -3,10 +3,12 @@
  * File Name:     OfflineModeRuneScene.h
  * File Function: OfflineModeRuneScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/29
+ * Update Date:   2023/12/30
  ****************************************************************/
 
+#include <iostream>
 #include "OfflineModeRuneScene.h"
+#include "Control/OfflineModeControl.h"
 #include "OfflineModePreparationScene.h"
 #include "Button/HoverButton.h"
 #include "proj.win32/Constant.h"
@@ -15,6 +17,9 @@
 using cocos2d::Scene;
 using cocos2d::Sprite;
 using cocos2d::Vec2;
+
+// 练习模式游戏控制类
+OfflineModeControl* g_offlineModeControl = nullptr;
 
 // 创建场景
 Scene* OfflineModeRuneScene::createScene()
@@ -46,8 +51,15 @@ bool OfflineModeRuneScene::init()
             static_cast<std::string>("../Resources/Buttons/SelectionSceneButtons/LittleChampion") + std::to_string(i + 1) + static_cast<std::string>("ActiveButton.png"));
         littleChampion->setPosition(Vec2(screenSize.width / 2 + SELECTION_SCENE_BUTTON_OFFSET_X + (i % (MAX_LITTLE_CHAMPION_COUNT / 2)) * SELECTION_SCENE_BUTTON_HORIZONTAL_INTERVAL,
             screenSize.height / 2 + SELECTION_SCENE_BUTTON_OFFSET_Y + (i / (MAX_LITTLE_CHAMPION_COUNT / 2)) * SELECTION_SCENE_BUTTON_VERTICAL_INTERVAL));
-        littleChampion->addTouchEventListener([i](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        littleChampion->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
             if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+                try {
+                    g_offlineModeControl = new OfflineModeControl;
+                }
+                catch (const std::bad_alloc& e) {
+                    std::cerr << "Memory allocation failed: " << e.what() << std::endl;
+                    throw;
+                }
                 cocos2d::Director::getInstance()->replaceScene(OfflineModePreparationScene::createScene());
             }
             });

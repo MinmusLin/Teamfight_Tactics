@@ -3,7 +3,7 @@
  * File Name:     AIPlayer.h
  * File Function: AIPlayer类的定义
  * Author:        杨兆镇、林继申
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 
@@ -26,11 +26,8 @@ public:
     // AI 落棋算法
     void makeMoves();
 
-    // 重置生命值
-    void resetHealth();
-
 private:
-    Difficulty difficulty;                     // 游戏难度
+    Difficulty difficulty; // 游戏难度
 
     // 确定当前战斗阶段状态
     BattleStage determineCurrentBattleStage() const;

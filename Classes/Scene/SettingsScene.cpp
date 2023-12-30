@@ -12,7 +12,6 @@
 #include "AudioEngine.h"
 #include "proj.win32/Constant.h"
 
-
 // ÃüÃû¿Õ¼ä
 using cocos2d::Scene;
 using cocos2d::Sprite;

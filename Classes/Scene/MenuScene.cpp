@@ -3,17 +3,15 @@
  * File Name:     MenuScene.cpp
  * File Function: MenuScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/29
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 
-#include <iostream>
 #include <chrono>
 #include "MenuScene.h"
 #include "Button/HoverButton.h"
 #include "OnlineModeMenuScene.h"
 #include "OfflineModeRuneScene.h"
-#include "Control/OfflineModeControl.h"
 #include "proj.win32/Constant.h"
 #include "SettingsScene.h"
 #include "proj.win32/AudioPlayer.h"
@@ -23,9 +21,6 @@ using cocos2d::Scene;
 using cocos2d::Sprite;
 using cocos2d::Label;
 using cocos2d::Vec2;
-
-// 练习模式游戏控制类
-OfflineModeControl* g_offlineModeControl = nullptr;
 
 // 玩家昵称
 extern std::string g_PlayerName;
@@ -75,13 +70,6 @@ bool MenuScene::init()
     // 为按钮添加事件处理器
     offlineModeButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
-            try {
-                g_offlineModeControl = new OfflineModeControl;
-            }
-            catch (const std::bad_alloc& e) {
-                std::cerr << "Memory allocation failed: " << e.what() << std::endl;
-                throw;
-            }
             // 加载点击音效
             audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
 
