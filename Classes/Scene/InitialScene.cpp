@@ -13,6 +13,7 @@
 #include "SelectionScene.h"
 #include "Button/HoverButton.h"
 #include "proj.win32/Constant.h"
+#include "proj.win32/AudioPlayer.h"
 
 // 命名空间
 using cocos2d::Scene;
@@ -104,6 +105,9 @@ bool InitialScene::init()
                     }, PROMPT_MESSAGE_DURATION, "HideInvalidPromptLabel");
             }
             else {
+                // 加载点击音效
+                audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
                 g_PlayerName = nickname; // g_PlayerName 内部存储编码为 UTF-8
                 cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, SelectionScene::createScene(), cocos2d::Color3B::WHITE));
             }

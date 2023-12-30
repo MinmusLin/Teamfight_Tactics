@@ -12,6 +12,7 @@
 #include "LocationMap/LocationMap.h"
 #include "Layer/ScoreBoardLayer.h"
 #include "MenuScene.h"
+#include "proj.win32/AudioPlayer.h"
 
 // 命名空间
 using cocos2d::Scene;
@@ -270,11 +271,23 @@ void OfflineModeBattleScene::update(float delta)
             winningPrompt = u8"平局";
         }
         else if (enemyPlayerHealth == 0) {
+            // 加载胜利音乐
+            audioPlayer("../Resources/Music/BackgroundMusic/Victory_ElectricRomeo.mp3", true);
+
+            // 加载胜利音效
+            audioPlayer("../Resources/Music/SoundEffect/Victory.mp3", false);
+
             isEnd = true;
             winningPrompt = u8"胜利";
             outlineColor = cocos2d::Color4B::RED;
         }
         else if (humanPlayerHealth == 0) {
+            // 加载失败音乐
+            audioPlayer("../Resources/Music/BackgroundMusic/Defeat_TheDeadlySword.mp3", true);
+
+            // 加载失败音效
+            audioPlayer("../Resources/Music/SoundEffect/Defeat.mp3", false);
+
             isEnd = true;
             winningPrompt = u8"失败";
             outlineColor = cocos2d::Color4B::BLUE;

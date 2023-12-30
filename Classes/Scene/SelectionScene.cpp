@@ -10,6 +10,7 @@
 #include "MenuScene.h"
 #include "Button/HoverButton.h"
 #include "proj.win32/Constant.h"
+#include "proj.win32/AudioPlayer.h"
 
 // 命名空间
 using cocos2d::Scene;
@@ -58,6 +59,8 @@ bool SelectionScene::init()
             screenSize.height / 2 + SELECTION_SCENE_BUTTON_OFFSET_Y + (i / (MAX_LITTLE_CHAMPION_COUNT / 2)) * SELECTION_SCENE_BUTTON_VERTICAL_INTERVAL));
         littleChampion->addTouchEventListener([i](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
             if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+                // 加载点击音效
+                audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
                 cocos2d::UserDefault::getInstance()->setStringForKey("LittleChampionCategory", std::to_string(i + 1));
                 cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
             }

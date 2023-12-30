@@ -13,6 +13,7 @@
 #include "Button/HoverButton.h"
 #include "Layer/ScoreBoardLayer.h"
 #include "MenuScene.h"
+#include "proj.win32/AudioPlayer.h"
 
 // 命名空间
 using cocos2d::Scene;
@@ -42,6 +43,9 @@ bool OnlineModePreparationScene::init()
 
     // 设置 HumanPlayer 类的当前场景指针
     g_onlineModeControl->getHumanPlayer()->setCurrentScene(this);
+
+    // 加载音乐
+    audioPlayer("../Resources/Music/BackgroundMusic/PreparationScene_RagsToRings.mp3", true);
 
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -116,6 +120,9 @@ bool OnlineModePreparationScene::init()
     // 为按钮添加事件处理器
     uplevelButton->addTouchEventListener([this, uplevelCoinLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
             g_onlineModeControl->getHumanPlayer()->addBattleChampionCount();
             const int maxBattleChampionCount = g_onlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
             uplevelCoinLabel->setString(maxBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT ? "" : std::to_string(UPLEVEL_PRICE.at(maxBattleChampionCount)));
@@ -123,11 +130,17 @@ bool OnlineModePreparationScene::init()
         });
     refreshButton->addTouchEventListener([this](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
             g_onlineModeControl->getHumanPlayer()->refreshShop();
         }
         });
     returnMenuButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
             delete g_onlineModeControl;
             g_onlineModeControl = nullptr;
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));

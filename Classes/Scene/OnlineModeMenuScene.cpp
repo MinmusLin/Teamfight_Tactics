@@ -15,6 +15,7 @@
 #include "Button/HoverButton.h"
 #include "MenuScene.h"
 #include "proj.win32/Constant.h"
+#include "proj.win32/AudioPlayer.h"
 
 // 命名空间
 using cocos2d::Scene;
@@ -45,6 +46,9 @@ bool OnlineModeMenuScene::init()
         return false;
     }
     
+    // 加载音乐
+    audioPlayer("../Resources/Music/BackgroundMusic/OnlineModeMenuScene_SilverScrapes.mp3", true);
+
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
     const auto background = Sprite::create("../Resources/Scenes/OnlineModeMenuScene.png");
@@ -103,6 +107,9 @@ bool OnlineModeMenuScene::init()
     // 为按钮添加事件处理器
     joinRoomButton->addTouchEventListener([this, ipv4TextField, portTextField, promptLabel, connectionFailedPrompt, joinRoomButton, screenSize, startGameButton, waitingLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
             std::string ipv4 = ipv4TextField->getString();
             std::string port = portTextField->getString();
             if (ipv4.empty() && port.empty()) { // 服务器 IPv4 地址和端口为空
@@ -205,6 +212,9 @@ bool OnlineModeMenuScene::init()
         });
     returnMenuButton->addTouchEventListener([this](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
             this->unschedule("ServerMessageListener"); // 关闭服务器消息监听
             delete g_onlineModeControl;
             g_onlineModeControl = nullptr;
@@ -213,6 +223,9 @@ bool OnlineModeMenuScene::init()
         });
     startGameButton->addTouchEventListener([startGameButton, waitingLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
             char buffer[BUFFER_SIZE];
             sprintf(buffer, PLAYER_NAME_FORMAT, g_PlayerName.c_str());
             g_onlineModeControl->sendMessage(buffer, strlen(buffer));

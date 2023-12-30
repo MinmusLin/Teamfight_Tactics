@@ -15,8 +15,8 @@
 #include "OfflineModeRuneScene.h"
 #include "Control/OfflineModeControl.h"
 #include "proj.win32/Constant.h"
-#include "AudioEngine.h"
 #include "SettingsScene.h"
+#include "proj.win32/AudioPlayer.h"
 
 // 命名空间
 using cocos2d::Scene;
@@ -46,6 +46,9 @@ bool MenuScene::init()
     if (!Scene::init()) {
         return false;
     }
+
+    // 加载音乐
+    audioPlayer("../Resources/Music/BackgroundMusic/MenuScene_DarkSideOfPower.mp3", true);
 
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -79,16 +82,25 @@ bool MenuScene::init()
                 std::cerr << "Memory allocation failed: " << e.what() << std::endl;
                 throw;
             }
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, OfflineModeRuneScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });
     onlineModeButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, OnlineModeMenuScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });
     settingsButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, SettingsScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });

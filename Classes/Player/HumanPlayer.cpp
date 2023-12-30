@@ -11,6 +11,7 @@
 #include <algorithm>
 #include "HumanPlayer.h"
 #include "LocationMap/LocationMap.h"
+#include "proj.win32/AudioPlayer.h"
 
 // 命名空间
 using cocos2d::Scene;
@@ -98,6 +99,9 @@ void HumanPlayer::refreshShop()
         // 为按钮添加事件处理器
         shopChampionButton[i]->addTouchEventListener([this, i](cocos2d::Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
             if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+                // 加载点击音效
+                audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
                 addChampion(i);
             }
             });

@@ -12,6 +12,7 @@
 #include "AudioEngine.h"
 #include "proj.win32/Constant.h"
 
+
 // ÃüÃû¿Õ¼ä
 using cocos2d::Scene;
 using cocos2d::Sprite;
@@ -59,6 +60,9 @@ bool SettingsScene::init()
     if (!Scene::init()) {
         return false;
     }
+
+    // ¼ÓÔØÒôÀÖ
+    audioPlayer("../Resources/Music/BackgroundMusic/SettingsScene_Starlight.mp3", true);
 
     // ¼ÓÔØ±³¾°
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -113,6 +117,9 @@ bool SettingsScene::init()
     returnMenuButton->setPosition(Vec2(screenSize.width / 2 + SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_X, screenSize.height / 2 + SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_Y));
     returnMenuButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+            // ¼ÓÔØµã»÷ÒôÐ§
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });

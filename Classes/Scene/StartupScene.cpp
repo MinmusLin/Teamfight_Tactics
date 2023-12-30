@@ -11,7 +11,7 @@
 #include "InitialScene.h"
 #include "ui/CocosGUI.h"
 #include "proj.win32/Constant.h"
-#include "AudioEngine.h"
+#include "proj.win32/AudioPlayer.h"
 
 // ÃüÃû¿Õ¼ä
 using cocos2d::Scene;
@@ -35,6 +35,9 @@ bool StartupScene::init()
     if (!Scene::init()) {
         return false;
     }
+    
+    // ¼ÓÔØÒôÀÖ
+    audioPlayer("../Resources/Music/BackgroundMusic/StartupScene_BreathAndLife.mp3", true);
 
     // ¼ÓÔØ±³¾°
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
