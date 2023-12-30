@@ -105,7 +105,7 @@ constexpr int BATTLE_MAP_ROWS = 8;                                          // Õ
 constexpr int BATTLE_MAP_COLUMNS = 9;                                       // Õ½¶·ÇøµØÍ¼ÁÐÊý
 constexpr int PLACE_MAP_ROWS = BATTLE_MAP_ROWS / 2;                         // ·ÅÖÃÇøµØÍ¼ÐÐÊý
 constexpr int BATTLE_AREA_MIN_CHAMPION_COUNT = 3;                           // ×îµÍµÈ¼¶Õ½¶·Çø×î´óÓ¢ÐÛÊýÁ¿
-constexpr int BATTLE_AREA_MAX_CHAMPION_COUNT = 8;                           // ×î¸ßµÈ¼¶Õ½¶·Çø×î´óÓ¢ÐÛÊýÁ¿
+constexpr int BATTLE_AREA_MAX_CHAMPION_COUNT = 9;                           // ×î¸ßµÈ¼¶Õ½¶·Çø×î´óÓ¢ÐÛÊýÁ¿
 constexpr int BATTLE_SCENE_LOADINGBAR_X = 213;                              // ¶ÔÕ½³¡¾°×¼±¸½ø¶ÈÌõÎ»ÖÃ X ×ø±ê
 constexpr int BATTLE_SCENE_LOADINGBAR_Y = 669;                              // ¶ÔÕ½³¡¾°×¼±¸½ø¶ÈÌõÎ»ÖÃ Y ×ø±ê
 constexpr int BATTLE_SCENE_LOADINGBAR_LABEL_FONT_SIZE = 20;                 // ¶ÔÕ½³¡¾°×¼±¸½ø¶ÈÌõ±êÇ©×ÖÌå´óÐ¡
@@ -193,7 +193,8 @@ const std::map<int, int> UPLEVEL_PRICE = {                                  // É
     {BATTLE_AREA_MIN_CHAMPION_COUNT + 1, 16},                               // µÈ¼¶ 2 Éý¼¶ÖÁµÈ¼¶ 3 ËùÐè½ð±ÒÊýÁ¿
     {BATTLE_AREA_MIN_CHAMPION_COUNT + 2, 20},                               // µÈ¼¶ 3 Éý¼¶ÖÁµÈ¼¶ 4 ËùÐè½ð±ÒÊýÁ¿
     {BATTLE_AREA_MIN_CHAMPION_COUNT + 3, 28},                               // µÈ¼¶ 4 Éý¼¶ÖÁµÈ¼¶ 5 ËùÐè½ð±ÒÊýÁ¿
-    {BATTLE_AREA_MIN_CHAMPION_COUNT + 4, 36}                                // µÈ¼¶ 5 Éý¼¶ÖÁµÈ¼¶ MAX ËùÐè½ð±ÒÊýÁ¿
+    {BATTLE_AREA_MIN_CHAMPION_COUNT + 4, 36},                               // µÈ¼¶ 5 Éý¼¶ÖÁµÈ¼¶ 6 ËùÐè½ð±ÒÊýÁ¿
+    {BATTLE_AREA_MIN_CHAMPION_COUNT + 5, 52},                               // µÈ¼¶ 6 Éý¼¶ÖÁµÈ¼¶ 7 ËùÐè½ð±ÒÊýÁ¿
 };
 
 // Õ½¶·Ó¢ÐÛÊôÐÔ²ãÉèÖÃ
@@ -231,6 +232,7 @@ constexpr int CHAMPION_VERTICAL_INTERVAL = 45;                              // Õ
 constexpr int CHAMPION_CATEGORY_NUMBERS = 15;                               // Õ½¶·Ó¢ÐÛÖÖÀàÊýÁ¿
 constexpr int BATTLE_STAGE_NUMBERS = 3;                                     // Õ½¶·½×¶Î×´Ì¬ÊýÁ¿
 constexpr int INITIAL_HEALTH_POINTS = 100;                                  // Íæ¼Ò³õÊ¼ÉúÃüÖµ
+constexpr int RUNE_WARRIOR_HEALTH_BUFF = 20;                                // ¶·Ê¿·ûÎÄ³õÊ¼ÉúÃü¼Ó³É
 constexpr int INCREASED_MAGIC_POINTS = 20;                                  // ¹¥»÷¶ÔÓ¦Ôö¼ÓÄ§·¨Öµ
 constexpr int DECREASED_HEALTH_POINTS = 5;                                  // ´æ»îÕ½¶·Ó¢ÐÛ¶ÔÓ¦¼õÉÙÉúÃüÖµ
 constexpr int INCREASED_GOLD_COINS = 5;                                     // ´æ»îÕ½¶·Ó¢ÐÛ¶ÔÓ¦Ôö¼Ó½ð±ÒÊýÁ¿
@@ -321,7 +323,8 @@ enum Bond {
 // Õ½¶·Ó¢ÐÛÌì¸³·ûÎÄ¶¨Òå
 enum Talent {
     Pirate,             // º£µÁ£¨Ôö¼Ó³õÊ¼½ð±Ò£©
-    General,            // ÐÖµÜ£¨Ôö¼ÓÓ¢ÐÛÎ»£©
+    General,            // ½«¾ü£¨Ôö¼ÓÓ¢ÐÛÎ»£©
+    Warriors            // ¶·Ê¿£¨Ôö¼ÓÑªÁ¿£©
 };
 
 // Õ½¶·Ó¢ÐÛÖÖÀà¶¨Òå

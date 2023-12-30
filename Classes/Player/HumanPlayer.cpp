@@ -20,6 +20,9 @@ using cocos2d::Event;
 using cocos2d::EventMouse;
 using cocos2d::Vec2;
 
+// 天赋
+extern int g_rune ;
+
 // 构造函数
 HumanPlayer::HumanPlayer(const std::string nickname) :
     Player(nickname),
@@ -29,7 +32,7 @@ HumanPlayer::HumanPlayer(const std::string nickname) :
     placementMarkerLayer(nullptr),
     nearestPlacementMarker(nullptr),
     startLocation({ WaitingArea, -1 }),
-    maxBattleChampionCount(BATTLE_AREA_MIN_CHAMPION_COUNT),
+    maxBattleChampionCount( BATTLE_AREA_MIN_CHAMPION_COUNT),
     goldCoin(INITIAL_GOLD_COIN)
 {
     std::fill_n(shopChampionCategory, MAX_SELECTABLE_CHAMPION_COUNT, NoChampion);
@@ -127,11 +130,11 @@ int HumanPlayer::getCurrentBattleChampionCount() const
 // 增加战斗区英雄数量
 void HumanPlayer::addBattleChampionCount(const int num)
 {
-    if (maxBattleChampionCount < BATTLE_AREA_MAX_CHAMPION_COUNT && goldCoin >= UPLEVEL_PRICE.at(maxBattleChampionCount)) {
+    if (maxBattleChampionCount < (g_rune == General ? BATTLE_AREA_MAX_CHAMPION_COUNT : BATTLE_AREA_MAX_CHAMPION_COUNT - 1) && goldCoin >= UPLEVEL_PRICE.at(maxBattleChampionCount)) {
         refreshCoinLabel(-UPLEVEL_PRICE.at(maxBattleChampionCount));
         maxBattleChampionCount += num;
         auto levelLabel = dynamic_cast<Label*>(currentScene->getChildByName("LevelLabel"));
-        if (maxBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT) {
+        if (maxBattleChampionCount >= (g_rune == General ? BATTLE_AREA_MAX_CHAMPION_COUNT : BATTLE_AREA_MAX_CHAMPION_COUNT - 1)) {
             levelLabel->setString(u8"最高等级");
         }
         else {
@@ -150,6 +153,8 @@ int HumanPlayer::getGoldCoin() const
 void HumanPlayer::addGoldCoin(const int num)
 {
     goldCoin += num;
+    if (g_rune == static_cast<int>(Pirate))
+        goldCoin += 10;
 }
 
 // 初始化战斗英雄删除按钮

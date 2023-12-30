@@ -16,7 +16,10 @@
 // 构造函数
 AIPlayer::AIPlayer(const std::string nickname, const Difficulty difficulty_) :
     Player(nickname),
-    difficulty(difficulty_) {}
+    difficulty(difficulty_) 
+{
+    resetHealth();
+}
 
 // AI 落棋算法
 void AIPlayer::makeMoves()
@@ -269,4 +272,10 @@ void AIPlayer::deployChampions()
         selectedChampions = deployChampionsByOrder(maxChampions);
     }
     deployChampionPositions(selectedChampions);
+}
+
+// 重置生命值
+void AIPlayer::resetHealth()
+{
+    healthPoints = 100;
 }

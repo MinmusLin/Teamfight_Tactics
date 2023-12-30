@@ -26,6 +26,9 @@ public:
     // AI 落棋算法
     void makeMoves();
 
+    // 重置生命值
+    void resetHealth();
+
 private:
     Difficulty difficulty;                     // 游戏难度
 
