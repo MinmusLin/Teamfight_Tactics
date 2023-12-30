@@ -3,7 +3,7 @@
  * File Name:     SettingsScene.cpp
  * File Function: SettingsScene类的实现
  * Author:        刘淑仪、林继申
- * Update Date:   2023/12/29
+ * Update Date:   2023/12/30
  ****************************************************************/
 
 #include "SettingsScene.h"
@@ -28,7 +28,7 @@ float g_soundEffectVolumn = DEFAULT_MUSIC_VOLUMN;
 Difficulty g_difficulty = Normal;
 
 // 音频引擎方法
-void audioPlayer(const std::string& audioPath, bool isLoop = false)
+void audioPlayer(const std::string& audioPath, bool isLoop)
 {
     if (isLoop) {
         if (g_backgroundMusicSign != DEFAULT_MUSIC_SIGN) {
