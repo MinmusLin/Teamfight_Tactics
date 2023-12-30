@@ -3,7 +3,7 @@
  * File Name:     ScoreBoardLayer.cpp
  * File Function: ScoreBoardLayer类的实现
  * Author:        林继申、刘淑仪
- * Update Date:   2023/12/29
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 

@@ -3,7 +3,7 @@
  * File Name:     Battle.h
  * File Function: Battle类的定义
  * Author:        杨宇琨、林继申
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 

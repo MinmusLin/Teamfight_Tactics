@@ -2,7 +2,7 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     Constant.h
  * File Function: 常变量的定义
- * Author:        林继申、刘淑仪、杨兆镇、杨宇琨
+ * Author:        林继申、杨宇琨、刘淑仪、杨兆镇
  * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/

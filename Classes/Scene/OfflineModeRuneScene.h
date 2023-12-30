@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     OfflineModeRuneScene.h
  * File Function: OfflineModeRuneScene类的定义
- * Author:        林继申
- * Update Date:   2023/12/29
+ * Author:        刘淑仪、林继申
+ * Update Date:   2023/12/30
  ****************************************************************/
 
 #pragma once

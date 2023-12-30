@@ -89,16 +89,24 @@ bool SettingsScene::init()
 
     // 为滑动条添加事件处理器
     backgroundMusicVolumnSlider->addEventListener([=](Ref* sender, cocos2d::ui::Slider::EventType type) {
+        if (type == cocos2d::ui::Slider::EventType::ON_SLIDEBALL_DOWN) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+        }
         if (type == cocos2d::ui::Slider::EventType::ON_PERCENTAGE_CHANGED) {
-            cocos2d::ui::Slider* backgroundMusicVolumnSlider = dynamic_cast<cocos2d::ui::Slider*>(sender);
+            const cocos2d::ui::Slider* backgroundMusicVolumnSlider = dynamic_cast<cocos2d::ui::Slider*>(sender);
             const float percent = backgroundMusicVolumnSlider->getPercent();
             g_backgroundMusicVolumn = percent / 100.0f;
             cocos2d::experimental::AudioEngine::setVolume(g_backgroundMusicSign, g_backgroundMusicVolumn);
         }
         });
     effectVolumnslider->addEventListener([=](Ref* sender, cocos2d::ui::Slider::EventType type) {
+        if (type == cocos2d::ui::Slider::EventType::ON_SLIDEBALL_DOWN) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+        }
         if (type == cocos2d::ui::Slider::EventType::ON_PERCENTAGE_CHANGED) {
-            cocos2d::ui::Slider* effectVolumnslider = dynamic_cast<cocos2d::ui::Slider*>(sender);
+            const cocos2d::ui::Slider* effectVolumnslider = dynamic_cast<cocos2d::ui::Slider*>(sender);
             const float percent = effectVolumnslider->getPercent();
             g_soundEffectVolumn = percent / 100.0f;
             cocos2d::experimental::AudioEngine::setVolume(g_soundEffectSign, g_soundEffectVolumn);
@@ -147,32 +155,51 @@ bool SettingsScene::init()
     // 为复选框添加事件处理器
     easyCheckBox->addEventListener([=](Ref* sender, cocos2d::ui::CheckBox::EventType type) {
         if (type == cocos2d::ui::CheckBox::EventType::SELECTED) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
             g_difficulty = Easy;
             normalCheckBox->setSelected(false);
             difficultCheckBox->setSelected(false);
         }
         else if (type == cocos2d::ui::CheckBox::EventType::UNSELECTED) {
-            g_difficulty = Normal;
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
+            easyCheckBox->setSelected(true);
         }
         });
     normalCheckBox->addEventListener([=](Ref* sender, cocos2d::ui::CheckBox::EventType type) {
         if (type == cocos2d::ui::CheckBox::EventType::SELECTED) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
             g_difficulty = Normal;
             easyCheckBox->setSelected(false);
             difficultCheckBox->setSelected(false);
         }
         else if (type == cocos2d::ui::CheckBox::EventType::UNSELECTED) {
-            g_difficulty = Normal;
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
+            normalCheckBox->setSelected(true);
         }
         });
     difficultCheckBox->addEventListener([=](Ref* sender, cocos2d::ui::CheckBox::EventType type) {
+        CCLOG("%d", g_difficulty);
         if (type == cocos2d::ui::CheckBox::EventType::SELECTED) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
             g_difficulty = Hard;
             normalCheckBox->setSelected(false);
             easyCheckBox->setSelected(false);
         }
         else if (type == cocos2d::ui::CheckBox::EventType::UNSELECTED) {
-            g_difficulty = Normal;
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
+            difficultCheckBox->setSelected(true);
         }
         });
 

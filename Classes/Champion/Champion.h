@@ -3,7 +3,7 @@
  * File Name:     Champion.h
  * File Function: Champion类的定义
  * Author:        杨宇琨、刘淑仪、林继申
- * Update Date:   2023/12/28
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 

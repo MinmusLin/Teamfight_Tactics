@@ -3,7 +3,7 @@
  * File Name:     Champion.cpp
  * File Function: Champion类的实现
  * Author:        杨宇琨、刘淑仪、林继申
- * Update Date:   2023/12/29
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 

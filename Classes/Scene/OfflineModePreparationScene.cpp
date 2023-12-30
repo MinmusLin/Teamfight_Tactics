@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     OfflineModePreparationScene.cpp
  * File Function: OfflineModePreparationScene类的实现
- * Author:        林继申
- * Update Date:   2023/12/29
+ * Author:        林继申、刘淑仪
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 
@@ -56,7 +56,7 @@ bool OfflineModePreparationScene::init()
     // 创建等级标签
     Label* levelLabel;
     const int currentBattleChampionCount = g_offlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
-    if (currentBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT) {
+    if (currentBattleChampionCount >= (static_cast<TalentRune>(cocos2d::UserDefault::getInstance()->getIntegerForKey("TalentRune") == General ? BATTLE_AREA_MAX_CHAMPION_COUNT : BATTLE_AREA_MAX_CHAMPION_COUNT - 1))) {
         levelLabel = Label::createWithTTF(u8"最高等级", "../Resources/Fonts/DingDingJinBuTi.ttf", SHOP_LEVEL_LABEL_FONT_SIZE);
     }
     else {
@@ -125,7 +125,7 @@ bool OfflineModePreparationScene::init()
 
             g_offlineModeControl->getHumanPlayer()->addBattleChampionCount();
             const int maxBattleChampionCount = g_offlineModeControl->getHumanPlayer()->getMaxBattleChampionCount();
-            uplevelCoinLabel->setString(maxBattleChampionCount >= BATTLE_AREA_MAX_CHAMPION_COUNT ? "" : std::to_string(UPLEVEL_PRICE.at(maxBattleChampionCount)));
+            uplevelCoinLabel->setString(maxBattleChampionCount >= (static_cast<TalentRune>(cocos2d::UserDefault::getInstance()->getIntegerForKey("TalentRune") == General ? BATTLE_AREA_MAX_CHAMPION_COUNT : BATTLE_AREA_MAX_CHAMPION_COUNT - 1)) ? "" : std::to_string(UPLEVEL_PRICE.at(maxBattleChampionCount)));
         }
         });
     refreshButton->addTouchEventListener([this](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {

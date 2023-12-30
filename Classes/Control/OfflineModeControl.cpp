@@ -3,7 +3,7 @@
  * File Name:     OfflineModeControl.cpp
  * File Function: OfflineModeControl类的实现
  * Author:        杨宇琨、林继申
- * Update Date:   2023/12/29
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 

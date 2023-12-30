@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     HumanPlayer.h
  * File Function: HumanPlayer类的定义
- * Author:        林继申
- * Update Date:   2023/12/28
+ * Author:        林继申、杨宇琨
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 

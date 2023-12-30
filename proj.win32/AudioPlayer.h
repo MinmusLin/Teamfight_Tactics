@@ -3,7 +3,7 @@
  * File Name:     AudioPlayer.h
  * File Function: 音频引擎方法的定义
  * Author:        林继申
- * Update Date:   2023/12/29
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 

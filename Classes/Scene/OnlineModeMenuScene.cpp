@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     OnlineModeMenuScene.cpp
  * File Function: OnlineModeMenuScene类的实现
- * Author:        林继申
- * Update Date:   2023/12/29
+ * Author:        林继申、刘淑仪
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 

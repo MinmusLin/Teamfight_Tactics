@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     OnlineModeBattleScene.h
  * File Function: OnlineModeBattleScene类的定义
- * Author:        杨宇琨、林继申
- * Update Date:   2023/12/28
+ * Author:        杨宇琨、刘淑仪、林继申
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 

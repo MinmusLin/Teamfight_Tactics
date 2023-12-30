@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     InitialScene.cpp
  * File Function: InitialScene类的实现
- * Author:        林继申
- * Update Date:   2023/12/29
+ * Author:        林继申、刘淑仪
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 
@@ -89,6 +89,9 @@ bool InitialScene::init()
     // 为按钮添加事件处理器
     startButton->addTouchEventListener([this, textField, nameLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+
             std::string nickname = textField->getString();
             if (nickname.empty()) {
                 nameLabel->setString(u8"游戏昵称不能为空");
@@ -105,9 +108,6 @@ bool InitialScene::init()
                     }, PROMPT_MESSAGE_DURATION, "HideInvalidPromptLabel");
             }
             else {
-                // 加载点击音效
-                audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
-
                 g_PlayerName = nickname; // g_PlayerName 内部存储编码为 UTF-8
                 cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, SelectionScene::createScene(), cocos2d::Color3B::WHITE));
             }

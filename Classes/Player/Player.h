@@ -2,8 +2,8 @@
  * Project Name:  Teamfight_Tactic
  * File Name:     Player.h
  * File Function: Player类的定义
- * Author:        林继申
- * Update Date:   2023/12/27
+ * Author:        林继申、杨兆镇
+ * Update Date:   2023/12/30
  * License:       MIT License
  ****************************************************************/
 
