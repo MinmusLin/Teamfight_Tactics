@@ -294,6 +294,8 @@ void OnlineModeBattleScene::update(float delta)
             cocos2d::Director::getInstance()->getRunningScene()->unscheduleUpdate();
             cocos2d::Director::getInstance()->popScene();
             if (isEnd) {
+                delete g_onlineModeControl;
+                g_onlineModeControl = nullptr;
                 cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
             }
             };

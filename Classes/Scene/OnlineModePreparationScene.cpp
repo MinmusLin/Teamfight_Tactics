@@ -214,7 +214,8 @@ void OnlineModePreparationScene::setScheduleOnce(cocos2d::ui::LoadingBar* progre
 
         // 运行练习模式对战场景
         char buffer[BUFFER_SIZE];
-        strcpy(buffer, g_onlineModeControl->serializePlayerMap().c_str());
+        strcat(strcpy(buffer, BATTLE_MAP_IDENTIFIER), "=");
+        strcat(buffer, g_onlineModeControl->serializePlayerMap().c_str());
         g_onlineModeControl->sendMessage(buffer, strlen(buffer));
         cocos2d::Director::getInstance()->pushScene(OnlineModeBattleScene::create());
         }, BATTLE_SCENE_LOADINGBAR_DURATION + SCENE_TRANSITION_DURATION, "IsAlreadyPrepared");
