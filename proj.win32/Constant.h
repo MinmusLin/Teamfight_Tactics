@@ -89,6 +89,7 @@ constexpr int MENU_SCENE_OFFLINE_MODE_BUTTON_OFFSET_Y = -30;                // ²
 constexpr int MENU_SCENE_ONLINE_MODE_BUTTON_OFFSET_Y = -150;                // ²Ëµ¥³¡¾°Áª»úÄ£Ê½°´Å¥Î»ÖÃ Y Æ«ÒÆÁ¿
 constexpr int MENU_SCENE_SETTINGS_BUTTON_OFFSET_Y = -270;                   // ²Ëµ¥³¡¾°ÉèÖÃ°´Å¥Î»ÖÃ Y Æ«ÒÆÁ¿
 constexpr int MENU_SCENE_WELCOME_LABEL_OFFSET_Y = 240;                      // ²Ëµ¥³¡¾°»¶Ó­±êÇ©Î»ÖÃ Y Æ«ÒÆÁ¿
+constexpr int MENU_SCENE_EXIT_GAME_BUTTON_OFFSET = 55;                      // ²Ëµ¥³¡¾°ÍË³öÓÎÏ·°´Å¥Î»ÖÃ X Æ«ÒÆÁ¿
 constexpr int ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_X = 415;                 // Áª»úÄ£Ê½²Ëµ¥³¡¾°°´Å¥Î»ÖÃ X Æ«ÒÆÁ¿
 constexpr int ONLINE_MODE_MENU_SCENE_BUTTON_OFFSET_Y = -220;                // Áª»úÄ£Ê½²Ëµ¥³¡¾°°´Å¥Î»ÖÃ Y Æ«ÒÆÁ¿
 constexpr int ONLINE_MODE_MENU_SCENE_FONT_SIZE = 30;                        // Áª»úÄ£Ê½²Ëµ¥³¡¾°×ÖÌå´óÐ¡
