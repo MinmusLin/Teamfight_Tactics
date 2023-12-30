@@ -254,13 +254,15 @@ void OnlineModeBattleScene::update(float delta)
         }
         else if (enemyCount == 0) { // 胜利
             g_onlineModeControl->getBattle()->setBattleSituation(Win);
-            g_onlineModeControl->getEnemyPlayer()->decreaseHealthPoints(myCount * DECREASED_HEALTH_POINTS);
             g_onlineModeControl->getHumanPlayer()->addGoldCoin(myCount * INCREASED_GOLD_COINS + REFRESH_SHOP_PRICE + NEW_BATTLE_INCREASED_GOLD_COINS);
         }
         else { // 失败
             g_onlineModeControl->getBattle()->setBattleSituation(Lose);
             g_onlineModeControl->getHumanPlayer()->decreaseHealthPoints(enemyCount * DECREASED_HEALTH_POINTS);
             g_onlineModeControl->getHumanPlayer()->addGoldCoin(REFRESH_SHOP_PRICE + NEW_BATTLE_INCREASED_GOLD_COINS);
+            char buffer[BUFFER_SIZE];
+            sprintf(buffer, HEALTH_POINTS_FORMAT, g_onlineModeControl->getHumanPlayer()->getHealthPoints(), static_cast<int>(g_onlineModeControl->getMySocket()));
+            g_onlineModeControl->sendMessage(buffer, strlen(buffer));
         }
 
         // 重置分数表层
