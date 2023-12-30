@@ -30,6 +30,9 @@ public:
     // 运行服务器
     void run();
 
+    // 获取所有连接到服务器的客户端玩家昵称
+    std::vector<std::map<SOCKET, std::string>> getPlayerNames() const;
+
     // 友元函数声明
     friend void clientHandler(const SOCKET clientSocket, Server& server);
 
@@ -43,6 +46,7 @@ private:
     int currentConnections;                                 // 服务器当前连接数量
     std::vector<SOCKET> clients;                            // 所有连接到服务器的客户端套接字
     std::vector<std::map<SOCKET, std::string>> playerNames; // 所有连接到服务器的客户端玩家昵称
+    std::vector<std::map<SOCKET, std::string>> battleMaps;  // 所有连接到服务器的客户端玩家战斗区地图
 
     // 创建和尝试绑定套接字
     void createAndBindSocket();
@@ -50,8 +54,8 @@ private:
     // 监听和接受客户端的连接请求并进行处理
     void handleConnections();
 
-    // 检查所有玩家是否加入游戏
-    bool areAllReady();
+    // 检查所有连接到服务器的客户端信息均已发送
+    bool areAllReady(const std::vector<std::map<SOCKET, std::string>>& data);
 
     // 关闭客户端套接字
     void closeClientSocket(const SOCKET clientSocket);

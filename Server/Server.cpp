@@ -42,6 +42,18 @@ void clientHandler(const SOCKET clientSocket, Server& server)
         std::cout << " [Client ID: " << clientSocket << "] Message: " << buffer << std::endl;
 
         // 接受玩家姓名信息
+        if (!strncmp(buffer, BATTLE_MAP_IDENTIFIER, MESSAGE_IDENTIFIER_LENGTH)) {
+            char battleMap[BUFFER_SIZE];
+            sscanf(buffer, BATTLE_MAP_FORMAT, battleMap);
+            for (auto& map : server.battleMaps) {
+                if (map.find(clientSocket) != map.end()) {
+                    map[clientSocket] = static_cast<std::string>(battleMap);
+                    break;
+                }
+            }
+        }
+
+        // 接受玩家战斗区地图信息
         if (!strncmp(buffer, PLAYER_NAME_IDENTIFIER, MESSAGE_IDENTIFIER_LENGTH)) {
             char playerName[BUFFER_SIZE];
             sscanf(buffer, PLAYER_NAME_FORMAT, playerName);
@@ -54,7 +66,7 @@ void clientHandler(const SOCKET clientSocket, Server& server)
         }
 
         // 检测是否开始游戏
-        if (server.areAllReady()) {
+        if (server.areAllReady(server.getPlayerNames())) {
             strcpy(buffer, server.serializePlayerNames().c_str());
             std::cout << "Broadcast: " << buffer << std::endl;
             for (const SOCKET& sock : server.clients) {
@@ -86,7 +98,7 @@ void clientHandler(const SOCKET clientSocket, Server& server)
     std::this_thread::sleep_for(std::chrono::milliseconds(static_cast<int>(1000 * SERVER_REFRESH_INTERVAL_MAGNIFICATION * SERVER_REFRESH_INTERVAL)));
 
     // 检测是否开始游戏
-    if (server.areAllReady()) {
+    if (server.areAllReady(server.getPlayerNames())) {
         strcpy(buffer, server.serializePlayerNames().c_str());
         std::cout << "Broadcast: " << buffer << std::endl;
         for (const SOCKET& sock : server.clients) {
@@ -134,6 +146,12 @@ void Server::run()
 {
     createAndBindSocket();
     handleConnections();
+}
+
+// 获取所有连接到服务器的客户端玩家昵称
+std::vector<std::map<SOCKET, std::string>> Server::getPlayerNames() const
+{
+    return playerNames;
 }
 
 // 创建和尝试绑定套接字
@@ -186,6 +204,7 @@ void Server::handleConnections()
                 send(clientSocket, CONNECTION_ACCEPTED_MSG, static_cast<int>(strlen(CONNECTION_ACCEPTED_MSG)), 0);
                 clients.push_back(clientSocket);
                 playerNames.push_back({ {clientSocket, ""} });
+                battleMaps.push_back({ {clientSocket, ""} });
                 std::thread clientThread(clientHandler, clientSocket, std::ref(*this));
                 clientThread.detach();
                 std::cout << "Current connections: " << ++currentConnections << std::endl;
@@ -212,12 +231,12 @@ void Server::handleConnections()
     }
 }
 
-// 检查所有玩家是否加入游戏
-bool Server::areAllReady()
+// 检查所有连接到服务器的客户端信息均已发送
+bool Server::areAllReady(const std::vector<std::map<SOCKET, std::string>>& data)
 {
     for (const SOCKET& clientSocket : clients) {
         bool nameFound = false;
-        for (const auto& map : playerNames) {
+        for (const auto& map : data) {
             auto it = map.find(clientSocket);
             if (it != map.end()) {
                 nameFound = true;
@@ -252,6 +271,14 @@ void Server::closeClientSocket(const SOCKET clientSocket)
         });
     if (clientSocketIndex != playerNames.end()) {
         playerNames.erase(clientSocketIndex);
+    }
+
+    // 移除客户端玩家战斗区地图
+    clientSocketIndex = std::find_if(battleMaps.begin(), battleMaps.end(), [clientSocket](const std::map<SOCKET, std::string>& m) {
+        return m.find(clientSocket) != m.end();
+        });
+    if (clientSocketIndex != battleMaps.end()) {
+        battleMaps.erase(clientSocketIndex);
     }
 }
 
