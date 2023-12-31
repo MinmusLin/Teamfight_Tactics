@@ -3,7 +3,7 @@
  * File Name:     StartupScene.cpp
  * File Function: StartupScene类的实现
  * Author:        林继申
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -37,7 +37,7 @@ bool StartupScene::init()
     }
     
     // 加载音乐
-    audioPlayer("../Resources/Music/BackgroundMusic/StartupScene_BreathAndLife.mp3", true);
+    audioPlayer("../Resources/Music/StartupScene_BreathAndLife.mp3", true);
 
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();

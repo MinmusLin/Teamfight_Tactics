@@ -3,7 +3,7 @@
  * File Name:     OfflineModePreparationScene.cpp
  * File Function: OfflineModePreparationScene类的实现
  * Author:        林继申、刘淑仪
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -45,7 +45,7 @@ bool OfflineModePreparationScene::init()
     g_offlineModeControl->getHumanPlayer()->setCurrentScene(this);
 
     // 加载音乐
-    audioPlayer("../Resources/Music/BackgroundMusic/PreparationScene_RagsToRings.mp3", true);
+    audioPlayer("../Resources/Music/PreparationScene_RagsToRings.mp3", true);
 
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -82,7 +82,7 @@ bool OfflineModePreparationScene::init()
     this->addChild(progressBar);
 
     // 创建标签以显示进度
-    auto progressLabel = Label::createWithTTF("", "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", BATTLE_SCENE_LOADINGBAR_LABEL_FONT_SIZE);
+    auto progressLabel = Label::createWithTTF("", "../Resources/Fonts/DingDingJinBuTi.ttf", BATTLE_SCENE_LOADINGBAR_LABEL_FONT_SIZE);
     progressLabel->setPosition(Vec2(progressBar->getPosition().x - progressBar->getContentSize().width / 2 + BATTLE_SCENE_LOADINGBAR_LABEL_OFFSET_X, progressBar->getPosition().y));
     progressLabel->setVisible(false);
     progressLabel->setName("CountdownLoadingBarLabel");
@@ -133,7 +133,7 @@ bool OfflineModePreparationScene::init()
     returnMenuButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             delete g_offlineModeControl;
             g_offlineModeControl = nullptr;

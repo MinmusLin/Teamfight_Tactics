@@ -3,7 +3,7 @@
  * File Name:     SelectionScene.h
  * File Function: SelectionScene类的实现
  * Author:        刘淑仪、林继申
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  ****************************************************************/
 
 #include "SelectionScene.h"
@@ -17,6 +17,9 @@ using cocos2d::Scene;
 using cocos2d::Sprite;
 using cocos2d::Label;
 using cocos2d::Vec2;
+
+// 小小英雄种类
+int g_littleChampionCategory = DEFAULT_LITTLE_CHAMPION_CATEGORY;
 
 // 玩家昵称
 extern std::string g_PlayerName;
@@ -60,9 +63,9 @@ bool SelectionScene::init()
         littleChampion->addTouchEventListener([i](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
             if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
                 // 加载点击音效
-                audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+                audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
-                cocos2d::UserDefault::getInstance()->setStringForKey("LittleChampionCategory", std::to_string(i + 1));
+                g_littleChampionCategory = i + 1;
                 cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
             }
             });

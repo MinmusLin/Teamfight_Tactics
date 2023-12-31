@@ -46,7 +46,7 @@ bool MenuScene::init()
     cocos2d::UserDefault::getInstance()->setIntegerForKey("TalentRune", static_cast<int>(NoTalentRune));
 
     // 加载音乐
-    audioPlayer("../Resources/Music/BackgroundMusic/MenuScene_DarkSideOfPower.mp3", true);
+    audioPlayer("../Resources/Music/MenuScene_DarkSideOfPower.mp3", true);
 
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -78,7 +78,7 @@ bool MenuScene::init()
     offlineModeButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, OfflineModeRuneScene::createScene(), cocos2d::Color3B::WHITE));
         }
@@ -86,7 +86,7 @@ bool MenuScene::init()
     onlineModeButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, OnlineModeMenuScene::createScene(), cocos2d::Color3B::WHITE));
         }
@@ -94,7 +94,7 @@ bool MenuScene::init()
     settingsButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, SettingsScene::createScene(), cocos2d::Color3B::WHITE));
         }
@@ -102,7 +102,7 @@ bool MenuScene::init()
     exitGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             cocos2d::Director::getInstance()->end();
         }
@@ -117,7 +117,7 @@ bool MenuScene::init()
     // 创建一个欢迎提示
     const std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     const int number = (rand() % 100 < RANDOM_WELCOME_PROMPT_PROBABILITY * 100) ? std::localtime(&now)->tm_hour : rand() % RANDOM_PROMPT_COUNT + 24;
-    auto welcomeLabel = Label::createWithTTF(g_PlayerName + WELCOME_PROMPT.at(number), "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", MENU_SCENE_FONT_SIZE);
+    auto welcomeLabel = Label::createWithTTF(g_PlayerName + WELCOME_PROMPT.at(number), "../Resources/Fonts/DingDingJinBuTi.ttf", MENU_SCENE_FONT_SIZE);
     welcomeLabel->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_BUTTONS_OFFSET_X, screenSize.height / 2 + MENU_SCENE_WELCOME_LABEL_OFFSET_Y));
     welcomeLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(welcomeLabel);

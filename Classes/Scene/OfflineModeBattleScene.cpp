@@ -3,7 +3,7 @@
  * File Name:     OfflineModeBattleScene.cpp
  * File Function: OfflineModeBattleScene类的实现
  * Author:        杨宇琨、刘淑仪、林继申
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -22,6 +22,9 @@ using cocos2d::Vec2;
 
 // 练习模式游戏控制类
 extern OfflineModeControl* g_offlineModeControl;
+
+// 小小英雄种类
+extern int g_littleChampionCategory;
 
 // 创建场景
 Scene* OfflineModeBattleScene::createScene()
@@ -178,7 +181,7 @@ bool OfflineModeBattleScene::init()
 
     // 创建小小英雄
     auto littleChampion = Sprite::create(static_cast<std::string>("../Resources/Champions/LittleChampion")
-        + cocos2d::UserDefault::getInstance()->getStringForKey("LittleChampionCategory")
+        + std::to_string(g_littleChampionCategory)
         + static_cast<std::string>(".png"));
     littleChampion->setPosition(winSize.width / 2, winSize.height / 2 + LITTLE_CHAMPION_OFFSET_Y);
     this->addChild(littleChampion, 2);
@@ -272,10 +275,10 @@ void OfflineModeBattleScene::update(float delta)
         }
         else if (enemyPlayerHealth == 0) {
             // 加载胜利音乐
-            audioPlayer("../Resources/Music/BackgroundMusic/Victory_ElectricRomeo.mp3", true);
+            audioPlayer("../Resources/Music/Victory_ElectricRomeo.mp3", true);
 
             // 加载胜利音效
-            audioPlayer("../Resources/Music/SoundEffect/Victory.mp3", false);
+            audioPlayer("../Resources/Music/VictorySoundEffect.mp3", false);
 
             isEnd = true;
             winningPrompt = u8"胜利";
@@ -283,10 +286,10 @@ void OfflineModeBattleScene::update(float delta)
         }
         else if (humanPlayerHealth == 0) {
             // 加载失败音乐
-            audioPlayer("../Resources/Music/BackgroundMusic/Defeat_TheDeadlySword.mp3", true);
+            audioPlayer("../Resources/Music/Defeat_TheDeadlySword.mp3", true);
 
             // 加载失败音效
-            audioPlayer("../Resources/Music/SoundEffect/Defeat.mp3", false);
+            audioPlayer("../Resources/Music/DefeatSoundEffect.mp3", false);
 
             isEnd = true;
             winningPrompt = u8"失败";

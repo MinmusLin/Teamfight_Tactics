@@ -76,7 +76,7 @@ void HumanPlayer::refreshShop()
     }
 
     // 加载点击音效
-    audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+    audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
     // 销毁已存在按钮
     for (int i = 0; i < MAX_SELECTABLE_CHAMPION_COUNT; i++) {
@@ -137,7 +137,7 @@ void HumanPlayer::addBattleChampionCount(const int num)
     TalentRune talentRune = static_cast<TalentRune>(cocos2d::UserDefault::getInstance()->getIntegerForKey("TalentRune"));
     if (maxBattleChampionCount < (talentRune == General ? BATTLE_AREA_MAX_CHAMPION_COUNT : BATTLE_AREA_MAX_CHAMPION_COUNT - 1) && goldCoin >= UPLEVEL_PRICE.at(maxBattleChampionCount)) {
         // 加载点击音效
-        audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+        audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
         refreshCoinLabel(-UPLEVEL_PRICE.at(maxBattleChampionCount));
         maxBattleChampionCount += num;
@@ -198,7 +198,7 @@ void HumanPlayer::addChampion(const int index)
             }
 
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             // 从商店中移除战斗英雄
             refreshCoinLabel(-CHAMPION_ATTR_MAP.at(shopChampionCategory[index]).price);

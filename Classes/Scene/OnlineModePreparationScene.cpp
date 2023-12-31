@@ -45,7 +45,7 @@ bool OnlineModePreparationScene::init()
     g_onlineModeControl->getHumanPlayer()->setCurrentScene(this);
 
     // º”‘ÿ“Ù¿÷
-    audioPlayer("../Resources/Music/BackgroundMusic/PreparationScene_RagsToRings.mp3", true);
+    audioPlayer("../Resources/Music/PreparationScene_RagsToRings.mp3", true);
 
     // º”‘ÿ±≥æ∞
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -133,7 +133,7 @@ bool OnlineModePreparationScene::init()
     returnMenuButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             // º”‘ÿµ„ª˜“Ù–ß
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             delete g_onlineModeControl;
             g_onlineModeControl = nullptr;

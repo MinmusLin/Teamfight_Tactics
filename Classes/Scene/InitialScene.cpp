@@ -3,7 +3,7 @@
  * File Name:     InitialScene.cpp
  * File Function: InitialScene类的实现
  * Author:        林继申、刘淑仪
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -48,7 +48,7 @@ bool InitialScene::init()
     this->addChild(background);
 
     // 创建文本框
-    auto textField = cocos2d::ui::TextField::create(u8"请输入您的游戏昵称", "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", INITIAL_SCENE_FONT_SIZE);
+    auto textField = cocos2d::ui::TextField::create(u8"请输入您的游戏昵称", "../Resources/Fonts/DingDingJinBuTi.ttf", INITIAL_SCENE_FONT_SIZE);
     textField->setPosition(Vec2(screenSize.width / 2 + INITIAL_SCENE_LABELS_OFFSET_X, screenSize.height / 2 + INITIAL_SCENE_TEXTFIELD_OFFSET_Y));
     textField->setMaxLength(NICKNAME_MAX_LENGTH);
     textField->setMaxLengthEnabled(true);
@@ -56,7 +56,7 @@ bool InitialScene::init()
     this->addChild(textField);
 
     // 创建标签
-    auto promptLabel = Label::createWithTTF("", "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", INITIAL_SCENE_FONT_SIZE);
+    auto promptLabel = Label::createWithTTF("", "../Resources/Fonts/DingDingJinBuTi.ttf", INITIAL_SCENE_FONT_SIZE);
     promptLabel->setPosition(Vec2(screenSize.width / 2 + INITIAL_SCENE_LABELS_OFFSET_X, screenSize.height / 2 + INITIAL_SCENE_PROMPT_LABEL_OFFSET_Y));
     promptLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
     this->addChild(promptLabel);
@@ -80,7 +80,7 @@ bool InitialScene::init()
     startButton->setPosition(Vec2(screenSize.width / 2, screenSize.height / 2 + INITIAL_SCENE_BUTTON_OFFSET_Y));
 
     // 创建一个提示
-    auto nameLabel = Label::createWithTTF("", "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", INITIAL_SCENE_FONT_SIZE);
+    auto nameLabel = Label::createWithTTF("", "../Resources/Fonts/DingDingJinBuTi.ttf", INITIAL_SCENE_FONT_SIZE);
     nameLabel->setPosition(Vec2(screenSize.width / 2 + INITIAL_SCENE_LABELS_OFFSET_X, screenSize.height / 2 + INITIAL_SCENE_NAME_LABEL_OFFSET_Y));
     nameLabel->setVisible(false);
     nameLabel->setTextColor(cocos2d::Color4B(DARK_BLUE_R, DARK_BLUE_G, DARK_BLUE_B, 255));
@@ -90,7 +90,7 @@ bool InitialScene::init()
     startButton->addTouchEventListener([this, textField, nameLabel](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::ENDED) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             std::string nickname = textField->getString();
             if (nickname.empty()) {

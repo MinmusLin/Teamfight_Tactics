@@ -3,7 +3,7 @@
  * File Name:     OnlineModeMenuScene.h
  * File Function: OnlineModeMenuScene类的定义
  * Author:        林继申
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -27,6 +27,13 @@ public:
 
     // 实现 OnlineModeMenuScene 类的 create 方法
     CREATE_FUNC(OnlineModeMenuScene);
+
+private:
+    // 服务器 IPv4 地址合法性检验
+    bool isValidIPv4(const std::string& str);
+
+    // 服务器端口合法性检验
+    bool isValidPort(const std::string& str);
 };
 
 #endif // !_ONLINE_MODE_MENU_SCENE_H_

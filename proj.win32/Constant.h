@@ -79,6 +79,7 @@ constexpr float PROMPT_MESSAGE_DURATION = 1.5f;                             // Ã
 
 // —°‘Ò≥°æ∞…Ë÷√
 constexpr int MAX_LITTLE_CHAMPION_COUNT = 8;                                // –°–°”¢–€÷÷¿‡◊Ó¥Û ˝¡ø
+constexpr int DEFAULT_LITTLE_CHAMPION_CATEGORY = 0;                         // »± °–°–°”¢–€÷÷¿‡
 constexpr int SELECTION_SCENE_BUTTON_OFFSET_X = -450;                       // —°‘Ò≥°æ∞–°–°”¢–€∞¥≈•Œª÷√ X ∆´“∆¡ø
 constexpr int SELECTION_SCENE_BUTTON_OFFSET_Y = -200;                       // —°‘Ò≥°æ∞–°–°”¢–€∞¥≈•Œª÷√ Y ∆´“∆¡ø
 constexpr int SELECTION_SCENE_BUTTON_HORIZONTAL_INTERVAL = 300;             // —°‘Ò≥°æ∞–°–°”¢–€∞¥≈•Œª÷√ÀÆ∆Ωº‰æ‡
@@ -171,8 +172,8 @@ constexpr int SETTINGS_SCENE_NORMAL_CHECKBOX_OFFSET_X = -166;               // …
 constexpr int SETTINGS_SCENE_DIFFICULT_CHECKBOX_OFFSET_X = -25;             // …Ë÷√≥°æ∞¿ßƒ—ƒ—∂»∏¥—°øÚ”Î±Í«©Œª÷√ X ∆´“∆¡ø
 constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_X = 529;             // …Ë÷√≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ X ∆´“∆¡ø
 constexpr int SETTINGS_SCENE_RETURN_MENU_BUTTON_OFFSET_Y = -300;            // …Ë÷√≥°æ∞∑µªÿ≤Àµ•∞¥≈•Œª÷√ Y ∆´“∆¡ø
-constexpr int DEFAULT_MUSIC_SIGN = -1;                                      // ƒ¨»œ“Ù¿÷±Í ∂
-constexpr float DEFAULT_MUSIC_VOLUMN = 0.5f;                                // ƒ¨»œ“Ù¡ø¥Û–°
+constexpr int DEFAULT_MUSIC_SIGN = -1;                                      // »± °“Ù¿÷±Í ∂
+constexpr float DEFAULT_MUSIC_VOLUMN = 0.5f;                                // »± °“Ù¡ø¥Û–°
 
 // …ÃµÍ…Ë÷√
 constexpr int MAX_SELECTABLE_CHAMPION_COUNT = 5;                            // ◊Ó¥Ûø…—°‘Ò’Ω∂∑”¢–€ ˝¡ø

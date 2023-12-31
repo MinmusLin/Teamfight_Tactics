@@ -3,7 +3,7 @@
  * File Name:     SettingsScene.cpp
  * File Function: SettingsScene类的实现
  * Author:        刘淑仪、林继申
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  ****************************************************************/
 
 #include "SettingsScene.h"
@@ -61,7 +61,7 @@ bool SettingsScene::init()
     }
 
     // 加载音乐
-    audioPlayer("../Resources/Music/BackgroundMusic/SettingsScene_Starlight.mp3", true);
+    audioPlayer("../Resources/Music/SettingsScene_Starlight.mp3", true);
 
     // 加载背景
     const auto screenSize = cocos2d::Director::getInstance()->getVisibleSize();
@@ -91,7 +91,7 @@ bool SettingsScene::init()
     backgroundMusicVolumnSlider->addEventListener([=](Ref* sender, cocos2d::ui::Slider::EventType type) {
         if (type == cocos2d::ui::Slider::EventType::ON_SLIDEBALL_DOWN) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
         }
         if (type == cocos2d::ui::Slider::EventType::ON_PERCENTAGE_CHANGED) {
             const cocos2d::ui::Slider* backgroundMusicVolumnSlider = dynamic_cast<cocos2d::ui::Slider*>(sender);
@@ -103,7 +103,7 @@ bool SettingsScene::init()
     effectVolumnslider->addEventListener([=](Ref* sender, cocos2d::ui::Slider::EventType type) {
         if (type == cocos2d::ui::Slider::EventType::ON_SLIDEBALL_DOWN) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
         }
         if (type == cocos2d::ui::Slider::EventType::ON_PERCENTAGE_CHANGED) {
             const cocos2d::ui::Slider* effectVolumnslider = dynamic_cast<cocos2d::ui::Slider*>(sender);
@@ -125,7 +125,7 @@ bool SettingsScene::init()
     returnMenuButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, MenuScene::createScene(), cocos2d::Color3B::WHITE));
         }
@@ -156,7 +156,7 @@ bool SettingsScene::init()
     easyCheckBox->addEventListener([=](Ref* sender, cocos2d::ui::CheckBox::EventType type) {
         if (type == cocos2d::ui::CheckBox::EventType::SELECTED) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             g_difficulty = Easy;
             normalCheckBox->setSelected(false);
@@ -164,7 +164,7 @@ bool SettingsScene::init()
         }
         else if (type == cocos2d::ui::CheckBox::EventType::UNSELECTED) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             easyCheckBox->setSelected(true);
         }
@@ -172,7 +172,7 @@ bool SettingsScene::init()
     normalCheckBox->addEventListener([=](Ref* sender, cocos2d::ui::CheckBox::EventType type) {
         if (type == cocos2d::ui::CheckBox::EventType::SELECTED) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             g_difficulty = Normal;
             easyCheckBox->setSelected(false);
@@ -180,7 +180,7 @@ bool SettingsScene::init()
         }
         else if (type == cocos2d::ui::CheckBox::EventType::UNSELECTED) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             normalCheckBox->setSelected(true);
         }
@@ -189,7 +189,7 @@ bool SettingsScene::init()
         CCLOG("%d", g_difficulty);
         if (type == cocos2d::ui::CheckBox::EventType::SELECTED) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             g_difficulty = Hard;
             normalCheckBox->setSelected(false);
@@ -197,7 +197,7 @@ bool SettingsScene::init()
         }
         else if (type == cocos2d::ui::CheckBox::EventType::UNSELECTED) {
             // 加载点击音效
-            audioPlayer("../Resources/Music/SoundEffect/Click.mp3", false);
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
 
             difficultCheckBox->setSelected(true);
         }

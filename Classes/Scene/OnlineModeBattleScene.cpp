@@ -23,6 +23,9 @@ using cocos2d::Vec2;
 // 练习模式游戏控制类
 extern OnlineModeControl* g_onlineModeControl;
 
+// 小小英雄种类
+extern int g_littleChampionCategory;
+
 // 创建场景
 Scene* OnlineModeBattleScene::createScene()
 {
@@ -185,7 +188,7 @@ bool OnlineModeBattleScene::init()
 
     // 创建小小英雄
     auto littleChampion = Sprite::create(static_cast<std::string>("../Resources/Champions/LittleChampion")
-        + cocos2d::UserDefault::getInstance()->getStringForKey("LittleChampionCategory")
+        + std::to_string(g_littleChampionCategory)
         + static_cast<std::string>(".png"));
     littleChampion->setPosition(winSize.width / 2, winSize.height / 2 + LITTLE_CHAMPION_OFFSET_Y);
     this->addChild(littleChampion, 2);
