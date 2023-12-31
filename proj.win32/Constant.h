@@ -335,9 +335,9 @@ enum Bond {
 
 // 战斗英雄天赋符文定义
 enum TalentRune {
-    Pirate,             // 海盗（增加金币数量）
+    Pirate,             // 海盗（增加每回合金币数量）
     General,            // 将军（增加英雄位）
-    Warriors,           // 斗士（增加生命值）
+    Warriors,           // 斗士（增加初始生命值）
     NoTalentRune        // 无天赋符文
 };
 
