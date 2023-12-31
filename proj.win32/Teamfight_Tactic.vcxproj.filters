@@ -117,6 +117,9 @@
     <ClCompile Include="..\Classes\AppDelegate\AppDelegate.cpp">
       <Filter>Classes\AppDelegate</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Scene\ReferenceScene.cpp">
+      <Filter>Classes\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constant.h">
@@ -199,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="AudioPlayer.h">
       <Filter>Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scene\ReferenceScene.h">
+      <Filter>Classes\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

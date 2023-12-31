@@ -9,6 +9,7 @@
 
 #include <chrono>
 #include "MenuScene.h"
+#include "ReferenceScene.h"
 #include "Button/HoverButton.h"
 #include "OnlineModeMenuScene.h"
 #include "OfflineModeRuneScene.h"
@@ -64,6 +65,9 @@ bool MenuScene::init()
     auto settingsButton = HoverButton::create("../Resources/Buttons/MenuSceneButtons/SettingsDefaultButton.png",
         "../Resources/Buttons/MenuSceneButtons/SettingsHoverButton.png",
         "../Resources/Buttons/MenuSceneButtons/SettingsActiveButton.png");
+    auto referenceButton = HoverButton::create("../Resources/Buttons/MenuSceneButtons/ReferenceDefaultButton.png",
+        "../Resources/Buttons/MenuSceneButtons/ReferenceHoverButton.png",
+        "../Resources/Buttons/MenuSceneButtons/ReferenceActiveButton.png");
     auto exitGameButton = HoverButton::create("../Resources/Buttons/MenuSceneButtons/ExitGameDefaultButton.png",
         "../Resources/Buttons/MenuSceneButtons/ExitGameHoverButton.png",
         "../Resources/Buttons/MenuSceneButtons/ExitGameActiveButton.png");
@@ -72,7 +76,8 @@ bool MenuScene::init()
     offlineModeButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_BUTTONS_OFFSET_X, screenSize.height / 2 + MENU_SCENE_OFFLINE_MODE_BUTTON_OFFSET_Y));
     onlineModeButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_BUTTONS_OFFSET_X, screenSize.height / 2 + MENU_SCENE_ONLINE_MODE_BUTTON_OFFSET_Y));
     settingsButton->setPosition(Vec2(screenSize.width / 2 + MENU_SCENE_BUTTONS_OFFSET_X, screenSize.height / 2 + MENU_SCENE_SETTINGS_BUTTON_OFFSET_Y));
-    exitGameButton->setPosition(Vec2(screenSize.width - MENU_SCENE_EXIT_GAME_BUTTON_OFFSET, MENU_SCENE_EXIT_GAME_BUTTON_OFFSET));
+    referenceButton->setPosition(Vec2(screenSize.width - MENU_SCENE_REFERENCE_BUTTON_OFFSET_X, MENU_SCENE_REFERENCE_BUTTON_OFFSET_Y));
+    exitGameButton->setPosition(Vec2(screenSize.width - MENU_SCENE_EXIT_GAME_BUTTON_OFFSET_X, MENU_SCENE_EXIT_GAME_BUTTON_OFFSET_Y));
 
     // 为按钮添加事件处理器
     offlineModeButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
@@ -99,6 +104,14 @@ bool MenuScene::init()
             cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, SettingsScene::createScene(), cocos2d::Color3B::WHITE));
         }
         });
+    referenceButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
+        if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
+            // 加载点击音效
+            audioPlayer("../Resources/Music/ClickSoundEffect.mp3", false);
+
+            cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(SCENE_TRANSITION_DURATION, ReferenceScene::createScene(), cocos2d::Color3B::WHITE));
+        }
+        });
     exitGameButton->addTouchEventListener([](Ref* sender, cocos2d::ui::Widget::TouchEventType type) {
         if (type == cocos2d::ui::Widget::TouchEventType::BEGAN) {
             // 加载点击音效
@@ -112,6 +125,7 @@ bool MenuScene::init()
     this->addChild(offlineModeButton);
     this->addChild(onlineModeButton);
     this->addChild(settingsButton);
+    this->addChild(referenceButton);
     this->addChild(exitGameButton);
 
     // 创建一个欢迎提示
