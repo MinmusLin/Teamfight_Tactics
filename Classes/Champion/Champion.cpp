@@ -9,6 +9,7 @@
 
 #include "Champion.h"
 #include "LocationMap/LocationMap.h"
+#include "proj.win32/AudioPlayer.h"
 
 // 构造函数
 Champion::Champion(const ChampionCategory championCategory) :
@@ -644,6 +645,9 @@ void Champion::triggerSkill(const int magnification, bool isCondition)
                 if (currentBattle->getChampion(i, j)->isMyFlag != isMyFlag
                     && (isCondition ? (distanceBetweenPoints(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }),
                         LocationMap::getInstance().getLocationMap().at({ BattleArea, currentLocation.x * BATTLE_MAP_COLUMNS + currentLocation.y })) <= attributes.attackRange * CHAMPION_HORIZONTAL_INTERVAL + 1) : true)) {
+                    // 加载技能音效
+                    audioPlayer("../Resources/Music/SkillSoundEffect.mp3", false);
+
                     currentBattle->getChampion(i, j)->beingAttack(attributes.attackDamage * magnification);
                 }
                 else {
