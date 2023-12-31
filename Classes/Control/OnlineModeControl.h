@@ -71,6 +71,9 @@ public:
     // 反序列化玩家战斗区地图
     void deserializeBattleMap(const std::string battleMapData, ChampionCategory battleMap[][BATTLE_MAP_COLUMNS]);
 
+    // 获取客户端 socket 在服务器的索引
+    int getSocketIndex();
+
 private:
     char ipv4[IPV4_ADDRESS_MAX_LENGTH + 1];                 // IPv4 地址
     int port;                                               // 端口

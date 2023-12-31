@@ -196,7 +196,7 @@ Battle* Champion::getCurrentBattle() const
 }
 
 // 获取最近敌方战斗英雄
-void Champion::findNearestEnemy(bool isMy)
+void Champion::findNearestEnemy(const bool isMy)
 {
     Champion* nearestEnemy = nullptr;
     float nearestDistance = std::numeric_limits<float>::max();
@@ -246,8 +246,7 @@ void Champion::findNearestEnemy(bool isMy)
             }
         }
     }
-   
-   
+
     currentEnemy = nearestEnemy;
 }
 
@@ -516,7 +515,6 @@ BattleLocation Champion::moveTowards(Champion* nearestEnemy)
                 bestMove.x = currentLocation.x - 1;
                 bestMove.y = currentLocation.y - (currentLocation.x % 2 ? 1 : 0);
             } // 往左下走
-
             else if (isInMap(currentLocation.x, currentLocation.y + 1)
                 && currentBattle->championMap[currentLocation.x][currentLocation.y + 1] == nullptr) {
                 bestMove.x = currentLocation.x;
@@ -527,7 +525,6 @@ BattleLocation Champion::moveTowards(Champion* nearestEnemy)
                 bestMove.x = currentLocation.x;
                 bestMove.y = currentLocation.y - 1;
             } // 往左走
-
             else if (isInMap(currentLocation.x + 1, currentLocation.y + (currentLocation.x % 2 ? 0 : 1))
                 && currentBattle->championMap[currentLocation.x + 1][currentLocation.y + (currentLocation.x % 2 ? 0 : 1)] == nullptr) {
                 bestMove.x = currentLocation.x + 1;
@@ -538,7 +535,6 @@ BattleLocation Champion::moveTowards(Champion* nearestEnemy)
                 bestMove.x = currentLocation.x + 1;
                 bestMove.y = currentLocation.y - (currentLocation.x % 2 ? 1 : 0);
             } // 往左上走
-
             else {
                 return currentLocation;
             }

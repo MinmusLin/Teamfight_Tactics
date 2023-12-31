@@ -3,7 +3,7 @@
  * File Name:     Champion.h
  * File Function: Champion类的定义
  * Author:        杨宇琨、刘淑仪、林继申
- * Update Date:   2023/12/30
+ * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
 
@@ -109,7 +109,7 @@ public:
     Battle* getCurrentBattle() const;
 
     // 获取最近敌方战斗英雄
-    void findNearestEnemy(bool isMy);
+    void findNearestEnemy(const bool isMy);
 
     // 判断攻击范围内是否存在敌人战斗英雄
     bool isInAttackRange();

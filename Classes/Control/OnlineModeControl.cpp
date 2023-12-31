@@ -307,6 +307,17 @@ void OnlineModeControl::deserializeBattleMap(const std::string battleMapData, Ch
     }
 }
 
+// 获取客户端 socket 在服务器的索引
+int OnlineModeControl::getSocketIndex()
+{
+    for (size_t i = 0; i < playerNames.size(); ++i) {
+        if (playerNames[i].find(mySocket) != playerNames[i].end()) {
+            return static_cast<int>(i);
+        }
+    }
+    return -1;
+}
+
 // 监听服务器消息线程
 void OnlineModeControl::listenForServerMessages()
 {

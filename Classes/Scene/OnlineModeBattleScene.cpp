@@ -22,7 +22,6 @@ using cocos2d::Vec2;
 
 // 联机模式游戏控制类
 extern OnlineModeControl* g_onlineModeControl;
-bool isMy = true;
 
 // 小小英雄种类
 extern int g_littleChampionCategory;
@@ -60,8 +59,8 @@ bool OnlineModeBattleScene::init()
     // 初始化对战类
     g_onlineModeControl->initializeBattle();
 
-    if (isMy) {
-        // 遍历战斗区地图
+    // 遍历战斗区地图
+    if (g_onlineModeControl->getSocketIndex() % 2 == 0) {
         for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
             for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
                 if (g_onlineModeControl->getBattle()->getChampion(i, j) != nullptr) {
@@ -109,7 +108,6 @@ bool OnlineModeBattleScene::init()
         }
     }
     else {
-        // 遍历战斗区地图
         for (int i = BATTLE_MAP_ROWS - 1; i >= 0; i--) {
             for (int j = BATTLE_MAP_COLUMNS - 1; j >= 0; j--) {
                 if (g_onlineModeControl->getBattle()->getChampion(i, j) != nullptr) {
@@ -156,8 +154,6 @@ bool OnlineModeBattleScene::init()
             }
         }
     }
-
- 
 
     // 显示羁绊效果
     for (int i = 1; i < MAX_BOND_COUNT; i++) {
@@ -406,7 +402,7 @@ void OnlineModeBattleScene::update(float delta)
                     }
 
                     // 获取最近敌方战斗英雄
-                    battleChampion[i]->findNearestEnemy(isMy);
+                    battleChampion[i]->findNearestEnemy(g_onlineModeControl->getSocketIndex() % 2 == 0);
 
                     if (battleChampion[i]->getCurrentEnemy()) { // 获取当前锁定敌人战斗英雄指针
                         if (battleChampion[i]->isInAttackRange()) { // 攻击范围内存在敌人战斗英雄
