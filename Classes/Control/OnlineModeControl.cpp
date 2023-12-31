@@ -251,7 +251,7 @@ void OnlineModeControl::deserializePlayerNames(const std::string& data)
                     playerNames.push_back(map);
                     playerHealthPoints.push_back({ { key, INITIAL_HEALTH_POINTS } });
                     if (map[key] == g_PlayerName) {
-                        mySocket = key; // TODO: 处理玩家姓名不唯一问题
+                        mySocket = key;
                     }
                 }
             }
