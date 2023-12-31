@@ -82,7 +82,7 @@ bool OfflineModePreparationScene::init()
     this->addChild(progressBar);
 
     // 创建标签以显示进度
-    auto progressLabel = Label::createWithTTF("", "../Resources/Fonts/DingDingJinBuTi.ttf", BATTLE_SCENE_LOADINGBAR_LABEL_FONT_SIZE);
+    auto progressLabel = Label::createWithTTF("", "../Resources/Fonts/FangZhengZhaoGeYuan.ttf", BATTLE_SCENE_LOADINGBAR_LABEL_FONT_SIZE);
     progressLabel->setPosition(Vec2(progressBar->getPosition().x - progressBar->getContentSize().width / 2 + BATTLE_SCENE_LOADINGBAR_LABEL_OFFSET_X, progressBar->getPosition().y));
     progressLabel->setVisible(false);
     progressLabel->setName("CountdownLoadingBarLabel");
