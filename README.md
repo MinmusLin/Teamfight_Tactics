@@ -10,17 +10,77 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 
 基于 [Cocos2d-x 3.17.2](https://docs.cocos.com/cocos2d-x/manual) 开发的金铲铲之战游戏项目。
 
+参考游戏：《Dota 自走棋》《云顶之弈》《金铲铲之战》
+
 > Relevant course
 > * Programing Paradigm (同济大学程序设计范式)
 
 ## 成员分工
 
-| 姓名 | 学号 | 分工 | 工作量 |
+| 姓名 | 学号 | 分工 |
+| :---: | :---: | :---: |
+| 林继申 (组长) | 2250758 | **项目后端工作统筹** <br> 项目任务分工 <br> 代码审查 <br> 项目框架搭建 <br> 网络环境搭建 <br> 练习模式与联机模式 <br> `AppDelegate` 类 <br> `Battle` 类 <br> `HoverButton` 类 <br> `Champion` 类 <br> `Control` 类及其派生类 <br> `ChampionAttributesLayer` 类 <br> `PlacementMarkerLayer` 类 <br> `ScoreBoardLayer` 类 <br> `LocationMap` 类 <br> `Player` 类及其派生类 <br> `Scene` 类及其派生类 <br> `Server` 类 |
+| 刘淑仪 | 2251730 | **项目前端工作统筹** <br> 练习模式与联机模式 <br> `Champion` 类 <br> `ChampionAttributesLayer` 类 <br> `PlacementMarkerLayer` 类 <br> `ScoreBoardLayer` 类 <br> `Scene` 类及其派生类 <br> 图标绘制 <br> 按钮绘制 <br> 战斗英雄与小小英雄绘制 <br> 图像元素绘制 <br> 场景绘制 <br> 音频引擎 <br> 背景音乐与音效 |
+| 杨兆镇 | 2252712 | **项目 AI 玩家算法统筹** <br> 练习模式 <br> `Player` 类及其派生的 `AIPlayer` 类 |
+| 杨宇琨 | 2252843 | **项目测试统筹** <br> 练习模式与联机模式 <br> `Battle` 类 <br> `Champion` 类 <br> `OfflineModeControl` 类 <br> `HumanPlayer` 类 <br> `OfflineModeBattleScene` 类 <br> `OnlineModeBattleScene` 类 <br> 战斗英雄绘制 |
+
+## 成员贡献
+
+| 姓名 | 学号 | 代码行数 | 工作量 |
 | :---: | :---: | :---: | :---: |
-| 林继申 (组长) | 2250758 | 项目后端工作统筹 <br> 项目任务分工 <br> 代码审查 <br> 项目框架搭建 <br> 网络环境搭建 <br> 练习模式与联机模式 <br> `AppDelegate` 类 <br> `Battle` 类 <br> `HoverButton` 类 <br> `Champion` 类 <br> `Control` 类及其派生类 <br> `ChampionAttributesLayer` 类 <br> `PlacementMarkerLayer` 类 <br> `ScoreBoardLayer` 类 <br> `Player` 类及其派生类 <br> `Scene` 类及其派生类 <br> `Server` 类 <br> `GBKtoUTF8` 单例 <br> `LocationMap` 单例 | 0% |
-| 刘淑仪 | 2251730 | 项目前端工作统筹 <br> 练习模式与联机模式 <br>  `Battle` 类 <br> `Champion` 类 <br> `ChampionAttributesLayer` 类 <br> `PlacementMarkerLayer` 类 <br> `ScoreBoardLayer` 类 <br> 图标绘制 <br> 按钮绘制 <br> 战斗英雄绘制 <br> 战斗英雄属性层绘制 <br> 放置标记层绘制 <br> 进度条绘制 <br> 场景绘制 <br> 音频引擎 | 0% |
-| 杨兆镇 | 2252712 | 练习模式 <br> `AIPlayer` 类 | 0% |
-| 杨宇琨 | 2252843 | 项目测试统筹 <br> 游戏功能性与平衡性统筹 <br> 练习模式与联机模式 <br> `Battle` 类 <br> `Champion` 类 <br> `OfflineModeControl` 类 <br> 战斗英雄绘制 | 0% |
+| 林继申 (组长) | 2250758 |  | 35% |
+| 刘淑仪 | 2251730 |  | 25% |
+| 杨兆镇 | 2252712 |  | 15% |
+| 杨宇琨 | 2252843 |  | 25% |
+
+```
+git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -; done
+```
+
+## 项目实现功能
+
+### 基础功能
+
+* [X] 有初始界面和设置界面
+* [X] 支持背景音效
+* [X] 支持多种类型的卡牌
+* [X] 支持卡牌升级功能
+* [X] 支持小小英雄的移动
+* [X] 场上卡牌支持红蓝血条，蓝条满时可以释放技能
+* [X] 支持创建房间和加入房间功能
+* [X] 支持练习模式，玩家可以和 N 个 AI 玩家对弈，**N ≥ 2**
+* [X] 支持联机模式，玩家可以和 N 个人类玩家联机对弈，**N ≥ 2**
+
+### 拓展功能
+
+* [x] 支持多种羁绊的加强功能
+* [X] 支持强化符文系统
+* [X] 支持战斗中的音效
+
+### 加分项
+
+* 版本控制和团队协作
+
+  * [x] 合理使用 Git 控制版本，将项目开源至 Github
+  * [x] 团队成员分工合理平等
+
+* 代码质量和安全
+
+  * [x] 使用单元测试保证代码质量
+  * [x] 合理地抛出异常和处理
+
+* 功能和架构
+
+  * [x] 界面精美
+  * [x] 项目目录结构清晰
+
+* 其他
+
+  * [x] 没有内存泄露
+  * [x] 程序运行过程不会发生崩溃情况
+  * [x] 尽可能多地使用了 C++11 特性
+  * [x] 优秀的商店推荐算法和 AI 落棋算法
+  * [x] 规范统一的代码风格
 
 ## 项目开发日志
 
@@ -98,10 +158,10 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 ### 2023/12/19
 
 * 完善项目框架
-  * 初步实现 `Champion` 类
-  * 初步实现 `OfflineModeControl` 类
-  * 初步实现 `Player` 类
-  * 初步实现 `HumanPlayer` 类
+* 初步实现 `Champion` 类
+* 初步实现 `OfflineModeControl` 类
+* 初步实现 `Player` 类
+* 初步实现 `HumanPlayer` 类
 * 实现 `InitialScene` 类与交互细节
 * 实现 `LocationMap` 单例
 
@@ -162,6 +222,46 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 * 工作对接与项目仓库整合
 * 实现练习模式
 
+### 2023/12/28
+
+* 完善商店推荐算法
+* 完善 AI 落子算法
+* 基本实现 `OnlineModeMenuScene` 类与交互细节
+
+### 2023/12/29
+
+* 初步实现 `OnlineModeControl` 类
+* 初步实现 `OnlineModePreparationScene` 类与交互细节
+* 初步实现 `OnlineModeBattleScene` 类与交互细节
+* 实现 `SelectionScene` 类与交互细节
+* 实现 `SettingsScene` 类与交互细节
+* 初步实现联机模式
+* 实现小小英雄移动功能
+* 实现羁绊系统
+
+### 2023/12/30
+
+* 基本实现 `OnlineModeControl` 类
+* 基本实现 `OnlineModePreparationScene` 类与交互细节
+* 基本实现 `OnlineModeBattleScene` 类与交互细节
+* 实现 `OfflineModeRuneScene` 类与交互细节
+* 基本实现联机模式
+* 实现音频引擎
+* 实现天赋符文系统
+
+### 2023/12/31
+
+* 调整 `Resources 文件夹`
+* 实现 `OnlineModeControl` 类
+* 实现 `OnlineModePreparationScene` 类与交互细节
+* 实现 `OnlineModeBattleScene` 类与交互细节
+* 实现 `OnlineModeMenuScene` 类与交互细节
+* 实现 `ReferenceScene` 类与交互细节
+* 实现 `Server` 类
+* 实现联机模式
+* 游戏功能性与平衡性测试
+* 项目收尾工作
+
 ## 集成开发环境
 
 * Microsoft Visual Studio 2022
@@ -172,4 +272,4 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 
 ## 文档更新日期
 
-2023年12月27日
+2023年12月31日
