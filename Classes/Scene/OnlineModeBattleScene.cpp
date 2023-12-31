@@ -20,7 +20,7 @@ using cocos2d::Sprite;
 using cocos2d::Label;
 using cocos2d::Vec2;
 
-// 练习模式游戏控制类
+// 联机模式游戏控制类
 extern OnlineModeControl* g_onlineModeControl;
 
 // 小小英雄种类
@@ -257,6 +257,7 @@ void OnlineModeBattleScene::update(float delta)
         }
         else if (enemyCount == 0) { // 胜利
             g_onlineModeControl->getBattle()->setBattleSituation(Win);
+            g_onlineModeControl->getEnemyPlayer()->decreaseHealthPoints(myCount * DECREASED_HEALTH_POINTS);
             g_onlineModeControl->getHumanPlayer()->addGoldCoin(myCount * INCREASED_GOLD_COINS + REFRESH_SHOP_PRICE + NEW_BATTLE_INCREASED_GOLD_COINS);
         }
         else { // 失败
@@ -272,7 +273,7 @@ void OnlineModeBattleScene::update(float delta)
         auto scoreBoardLayer = dynamic_cast<ScoreBoardLayer*>(this->getChildByName("ScoreBoardLayer"));
         scoreBoardLayer->showScoreBoard(g_onlineModeControl->getCurrentConnections(), g_onlineModeControl->getPlayerNames(), g_onlineModeControl->getPlayerHealthPoints());
 
-        // 检查练习模式是否结束
+        // 检查联机模式是否结束
         const int humanPlayerHealth = g_onlineModeControl->getHumanPlayer()->getHealthPoints();
         const int enemyPlayerHealth = g_onlineModeControl->getEnemyPlayer()->getHealthPoints();
         bool isEnd = false;
@@ -302,7 +303,7 @@ void OnlineModeBattleScene::update(float delta)
             this->addChild(winningLabel, 3);
         }
 
-        // 释放练习模式对战场景
+        // 释放联机模式对战场景
         auto switchScene = [isEnd](float dt) {
             cocos2d::Director::getInstance()->getRunningScene()->unscheduleUpdate();
             cocos2d::Director::getInstance()->popScene();
