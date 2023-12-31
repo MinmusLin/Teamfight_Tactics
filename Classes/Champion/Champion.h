@@ -109,7 +109,7 @@ public:
     Battle* getCurrentBattle() const;
 
     // 获取最近敌方战斗英雄
-    void findNearestEnemy();
+    void findNearestEnemy(bool isMy);
 
     // 判断攻击范围内是否存在敌人战斗英雄
     bool isInAttackRange();

@@ -353,7 +353,7 @@ void OfflineModeBattleScene::update(float delta)
                     }
 
                     // 获取最近敌方战斗英雄
-                    battleChampion[i]->findNearestEnemy();
+                    battleChampion[i]->findNearestEnemy(true);
 
                     if (battleChampion[i]->getCurrentEnemy()) { // 获取当前锁定敌人战斗英雄指针
                         if (battleChampion[i]->isInAttackRange()) { // 攻击范围内存在敌人战斗英雄

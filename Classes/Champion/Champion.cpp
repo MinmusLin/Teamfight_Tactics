@@ -195,32 +195,58 @@ Battle* Champion::getCurrentBattle() const
 }
 
 // 获取最近敌方战斗英雄
-void Champion::findNearestEnemy()
+void Champion::findNearestEnemy(bool isMy)
 {
     Champion* nearestEnemy = nullptr;
     float nearestDistance = std::numeric_limits<float>::max();
 
-    // 遍历敌方战斗英雄
-    for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
-        for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-            if (currentBattle->getChampion(i, j) != nullptr) {
-                if (currentBattle->getChampion(i, j)->isMyFlag != isMyFlag) {
-                    float distance = distanceBetweenPoints(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }),
-                        LocationMap::getInstance().getLocationMap().at({ BattleArea, currentLocation.x * BATTLE_MAP_COLUMNS + currentLocation.y }));
-                    if (distance < nearestDistance) {
-                        nearestDistance = distance;
-                        nearestEnemy = currentBattle->getChampion(i, j);
+    if (isMy) {
+        // 遍历敌方战斗英雄
+        for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
+            for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+                if (currentBattle->getChampion(i, j) != nullptr) {
+                    if (currentBattle->getChampion(i, j)->isMyFlag != isMyFlag) {
+                        float distance = distanceBetweenPoints(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }),
+                            LocationMap::getInstance().getLocationMap().at({ BattleArea, currentLocation.x * BATTLE_MAP_COLUMNS + currentLocation.y }));
+                        if (distance < nearestDistance) {
+                            nearestDistance = distance;
+                            nearestEnemy = currentBattle->getChampion(i, j);
+                        }
+                    }
+                    else {
+                        continue;
                     }
                 }
                 else {
                     continue;
                 }
             }
-            else {
-                continue;
+        }
+    }
+    else {
+        for (int i = BATTLE_MAP_ROWS - 1; i >= 0; i--) {
+            for (int j = BATTLE_MAP_COLUMNS - 1; j >= 0; j--) {
+                if (currentBattle->getChampion(i, j) != nullptr) {
+                    if (currentBattle->getChampion(i, j)->isMyFlag != isMyFlag) {
+                        float distance = distanceBetweenPoints(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }),
+                            LocationMap::getInstance().getLocationMap().at({ BattleArea, currentLocation.x * BATTLE_MAP_COLUMNS + currentLocation.y }));
+                        if (distance < nearestDistance) {
+                            nearestDistance = distance;
+                            nearestEnemy = currentBattle->getChampion(i, j);
+                        }
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                else {
+                    continue;
+                }
             }
         }
     }
+   
+   
     currentEnemy = nearestEnemy;
 }
 
@@ -258,7 +284,7 @@ BattleLocation Champion::moveTowards(Champion* nearestEnemy)
     BattleLocation enemyLocation = nearestEnemy->currentLocation;
     BattleLocation bestMove = currentLocation;
     if (nearestEnemy->currentLocation.x > currentLocation.x) {
-        if (nearestEnemy->currentLocation.y <= currentLocation.y) {
+        if (nearestEnemy->currentLocation.y < currentLocation.y) {
             if (isInMap(currentLocation.x + 1, currentLocation.y - (currentLocation.x % 2 ? 1 : 0))
                 && currentBattle->championMap[currentLocation.x + 1][currentLocation.y - (currentLocation.x % 2 ? 1 : 0)] == nullptr) {
                 bestMove.x = currentLocation.x + 1;
@@ -284,6 +310,42 @@ BattleLocation Champion::moveTowards(Champion* nearestEnemy)
                 bestMove.x = currentLocation.x;
                 bestMove.y = currentLocation.y + 1;
             } // 往右走
+            else if (isInMap(currentLocation.x - 1, currentLocation.y + (currentLocation.x % 2 ? 0 : 1))
+                && currentBattle->championMap[currentLocation.x - 1][currentLocation.y + (currentLocation.x % 2 ? 0 : 1)] == nullptr) {
+                bestMove.x = currentLocation.x - 1;
+                bestMove.y = currentLocation.y + (currentLocation.x % 2 ? 0 : 1);
+            } // 往右下走
+            else {
+                return currentLocation;
+            }
+            return bestMove;
+        }
+        else if (nearestEnemy->currentLocation.y == currentLocation.y) {
+            if (isInMap(currentLocation.x + 1, currentLocation.y - (currentLocation.x % 2 ? 1 : 0))
+                && currentBattle->championMap[currentLocation.x + 1][currentLocation.y - (currentLocation.x % 2 ? 1 : 0)] == nullptr) {
+                bestMove.x = currentLocation.x + 1;
+                bestMove.y = currentLocation.y - (currentLocation.x % 2 ? 1 : 0);
+            } // 往左上走
+            else if (isInMap(currentLocation.x + 1, currentLocation.y + (currentLocation.x % 2 ? 0 : 1))
+                && currentBattle->championMap[currentLocation.x + 1][currentLocation.y + (currentLocation.x % 2 ? 0 : 1)] == nullptr) {
+                bestMove.x = currentLocation.x + 1;
+                bestMove.y = currentLocation.y + (currentLocation.x % 2 ? 0 : 1);
+            } // 往右上走
+            else if (isInMap(currentLocation.x, currentLocation.y - 1)
+                && currentBattle->championMap[currentLocation.x][currentLocation.y - 1] == nullptr) {
+                bestMove.x = currentLocation.x;
+                bestMove.y = currentLocation.y - 1;
+            } // 往左走
+            else if (isInMap(currentLocation.x, currentLocation.y + 1)
+                && currentBattle->championMap[currentLocation.x][currentLocation.y + 1] == nullptr) {
+                bestMove.x = currentLocation.x;
+                bestMove.y = currentLocation.y + 1;
+            } // 往右走
+            else if (isInMap(currentLocation.x - 1, currentLocation.y - (currentLocation.x % 2 ? 1 : 0))
+                && currentBattle->championMap[currentLocation.x - 1][currentLocation.y - (currentLocation.x % 2 ? 1 : 0)] == nullptr) {
+                bestMove.x = currentLocation.x - 1;
+                bestMove.y = currentLocation.y - (currentLocation.x % 2 ? 1 : 0);
+            } // 往左下走
             else if (isInMap(currentLocation.x - 1, currentLocation.y + (currentLocation.x % 2 ? 0 : 1))
                 && currentBattle->championMap[currentLocation.x - 1][currentLocation.y + (currentLocation.x % 2 ? 0 : 1)] == nullptr) {
                 bestMove.x = currentLocation.x - 1;
@@ -348,16 +410,16 @@ BattleLocation Champion::moveTowards(Champion* nearestEnemy)
                 bestMove.x = currentLocation.x - 1;
                 bestMove.y = currentLocation.y - (currentLocation.x % 2 ? 1 : 0);
             } // 往左下走
-            else if (isInMap(currentLocation.x - 1, currentLocation.y + (currentLocation.x % 2 ? 0 : 1))
-                && currentBattle->championMap[currentLocation.x - 1][currentLocation.y + (currentLocation.x % 2 ? 0 : 1)] == nullptr) {
-                bestMove.x = currentLocation.x - 1;
-                bestMove.y = currentLocation.y + (currentLocation.x % 2 ? 0 : 1);
-            } // 往下上走
             else if (isInMap(currentLocation.x + 1, currentLocation.y + (currentLocation.x % 2 ? 0 : 1))
                 && currentBattle->championMap[currentLocation.x + 1][currentLocation.y + (currentLocation.x % 2 ? 0 : 1)] == nullptr) {
                 bestMove.x = currentLocation.x + 1;
                 bestMove.y = currentLocation.y + (currentLocation.x % 2 ? 0 : 1);
             } // 往右上走
+            else if (isInMap(currentLocation.x - 1, currentLocation.y + (currentLocation.x % 2 ? 0 : 1))
+                && currentBattle->championMap[currentLocation.x - 1][currentLocation.y + (currentLocation.x % 2 ? 0 : 1)] == nullptr) {
+                bestMove.x = currentLocation.x - 1;
+                bestMove.y = currentLocation.y + (currentLocation.x % 2 ? 0 : 1);
+            } // 往右下走
             else if (isInMap(currentLocation.x, currentLocation.y + 1)
                 && currentBattle->championMap[currentLocation.x][currentLocation.y + 1] == nullptr) {
                 bestMove.x = currentLocation.x;
@@ -374,26 +436,26 @@ BattleLocation Champion::moveTowards(Champion* nearestEnemy)
                 bestMove.x = currentLocation.x;
                 bestMove.y = currentLocation.y + 1;
             } // 往右走
+            else if (isInMap(currentLocation.x - 1, currentLocation.y + (currentLocation.x % 2 ? 0 : 1))
+                && currentBattle->championMap[currentLocation.x - 1][currentLocation.y + (currentLocation.x % 2 ? 0 : 1)] == nullptr) {
+                bestMove.x = currentLocation.x - 1;
+                bestMove.y = currentLocation.y + (currentLocation.x % 2 ? 0 : 1);
+            } // 往右下走
             else if (isInMap(currentLocation.x + 1, currentLocation.y + (currentLocation.x % 2 ? 0 : 1))
                 && currentBattle->championMap[currentLocation.x + 1][currentLocation.y + (currentLocation.x % 2 ? 0 : 1)] == nullptr) {
                 bestMove.x = currentLocation.x + 1;
                 bestMove.y = currentLocation.y + (currentLocation.x % 2 ? 0 : 1);
             } // 往右上走
-            else if (isInMap(currentLocation.x - 1, currentLocation.y + (currentLocation.x % 2 ? 0 : 1))
-                && currentBattle->championMap[currentLocation.x - 1][currentLocation.y + (currentLocation.x % 2 ? 0 : 1)] == nullptr) {
+            else if (isInMap(currentLocation.x - 1, currentLocation.y - (currentLocation.x % 2 ? 1 : 0))
+                && currentBattle->championMap[currentLocation.x - 1][currentLocation.y - (currentLocation.x % 2 ? 1 : 0)] == nullptr) {
                 bestMove.x = currentLocation.x - 1;
-                bestMove.y = currentLocation.y + (currentLocation.x % 2 ? 0 : 1);
+                bestMove.y = currentLocation.y - (currentLocation.x % 2 ? 1 : 0);
             } // 往右下走
             else if (isInMap(currentLocation.x + 1, currentLocation.y - (currentLocation.x % 2 ? 1 : 0))
                 && currentBattle->championMap[currentLocation.x + 1][currentLocation.y - (currentLocation.x % 2 ? 1 : 0)] == nullptr) {
                 bestMove.x = currentLocation.x + 1;
                 bestMove.y = currentLocation.y - (currentLocation.x % 2 ? 1 : 0);
             } // 往左上走
-            else if (isInMap(currentLocation.x - 1, currentLocation.y - (currentLocation.x % 2 ? 1 : 0))
-                && currentBattle->championMap[currentLocation.x - 1][currentLocation.y - (currentLocation.x % 2 ? 1 : 0)] == nullptr) {
-                bestMove.x = currentLocation.x - 1;
-                bestMove.y = currentLocation.y - (currentLocation.x % 2 ? 1 : 0);
-            } // 往左下走
             else if (isInMap(currentLocation.x, currentLocation.y - 1)
                 && currentBattle->championMap[currentLocation.x][currentLocation.y - 1] == nullptr) {
                 bestMove.x = currentLocation.x;
@@ -406,22 +468,22 @@ BattleLocation Champion::moveTowards(Champion* nearestEnemy)
         }
     }
     else {
-        if (nearestEnemy->currentLocation.y <= currentLocation.y) {
+        if (nearestEnemy->currentLocation.y < currentLocation.y) {
             if (isInMap(currentLocation.x - 1, currentLocation.y - (currentLocation.x % 2 ? 1 : 0))
                 && currentBattle->championMap[currentLocation.x - 1][currentLocation.y - (currentLocation.x % 2 ? 1 : 0)] == nullptr) {
                 bestMove.x = currentLocation.x - 1;
                 bestMove.y = currentLocation.y - (currentLocation.x % 2 ? 1 : 0);
             } // 往左下走
-            else if (isInMap(currentLocation.x, currentLocation.y - 1)
-                && currentBattle->championMap[currentLocation.x][currentLocation.y - 1] == nullptr) {
-                bestMove.x = currentLocation.x;
-                bestMove.y = currentLocation.y - 1;
-            } // 往左走
             else if (isInMap(currentLocation.x - 1, currentLocation.y + (currentLocation.x % 2 ? 0 : 1))
                 && currentBattle->championMap[currentLocation.x - 1][currentLocation.y + (currentLocation.x % 2 ? 0 : 1)] == nullptr) {
                 bestMove.x = currentLocation.x - 1;
                 bestMove.y = currentLocation.y + (currentLocation.x % 2 ? 0 : 1);
             } // 往右下走
+            else if (isInMap(currentLocation.x, currentLocation.y - 1)
+                && currentBattle->championMap[currentLocation.x][currentLocation.y - 1] == nullptr) {
+                bestMove.x = currentLocation.x;
+                bestMove.y = currentLocation.y - 1;
+            } // 往左走
             else if (isInMap(currentLocation.x, currentLocation.y + 1)
                 && currentBattle->championMap[currentLocation.x][currentLocation.y + 1] == nullptr) {
                 bestMove.x = currentLocation.x;
@@ -437,6 +499,45 @@ BattleLocation Champion::moveTowards(Champion* nearestEnemy)
                 bestMove.x = currentLocation.x + 1;
                 bestMove.y = currentLocation.y + (currentLocation.x % 2 ? 0 : 1);
             } // 往右上走
+            else {
+                return currentLocation;
+            }
+            return bestMove;
+        }
+        else if (nearestEnemy->currentLocation.y == currentLocation.y) {
+            if (isInMap(currentLocation.x - 1, currentLocation.y + (currentLocation.x % 2 ? 0 : 1))
+                && currentBattle->championMap[currentLocation.x - 1][currentLocation.y + (currentLocation.x % 2 ? 0 : 1)] == nullptr) {
+                bestMove.x = currentLocation.x - 1;
+                bestMove.y = currentLocation.y + (currentLocation.x % 2 ? 0 : 1);
+            } // 往右下走
+            else if (isInMap(currentLocation.x - 1, currentLocation.y - (currentLocation.x % 2 ? 1 : 0))
+                && currentBattle->championMap[currentLocation.x - 1][currentLocation.y - (currentLocation.x % 2 ? 1 : 0)] == nullptr) {
+                bestMove.x = currentLocation.x - 1;
+                bestMove.y = currentLocation.y - (currentLocation.x % 2 ? 1 : 0);
+            } // 往左下走
+
+            else if (isInMap(currentLocation.x, currentLocation.y + 1)
+                && currentBattle->championMap[currentLocation.x][currentLocation.y + 1] == nullptr) {
+                bestMove.x = currentLocation.x;
+                bestMove.y = currentLocation.y + 1;
+            } // 往右走
+            else if (isInMap(currentLocation.x, currentLocation.y - 1)
+                && currentBattle->championMap[currentLocation.x][currentLocation.y - 1] == nullptr) {
+                bestMove.x = currentLocation.x;
+                bestMove.y = currentLocation.y - 1;
+            } // 往左走
+
+            else if (isInMap(currentLocation.x + 1, currentLocation.y + (currentLocation.x % 2 ? 0 : 1))
+                && currentBattle->championMap[currentLocation.x + 1][currentLocation.y + (currentLocation.x % 2 ? 0 : 1)] == nullptr) {
+                bestMove.x = currentLocation.x + 1;
+                bestMove.y = currentLocation.y + (currentLocation.x % 2 ? 0 : 1);
+            } // 往右上走
+            else if (isInMap(currentLocation.x + 1, currentLocation.y - (currentLocation.x % 2 ? 1 : 0))
+                && currentBattle->championMap[currentLocation.x + 1][currentLocation.y - (currentLocation.x % 2 ? 1 : 0)] == nullptr) {
+                bestMove.x = currentLocation.x + 1;
+                bestMove.y = currentLocation.y - (currentLocation.x % 2 ? 1 : 0);
+            } // 往左上走
+
             else {
                 return currentLocation;
             }
@@ -458,16 +559,16 @@ BattleLocation Champion::moveTowards(Champion* nearestEnemy)
                 bestMove.x = currentLocation.x - 1;
                 bestMove.y = currentLocation.y - (currentLocation.x % 2 ? 1 : 0);
             } // 往左下走
-            else if (isInMap(currentLocation.x, currentLocation.y - 1)
-                && currentBattle->championMap[currentLocation.x][currentLocation.y - 1] == nullptr) {
-                bestMove.x = currentLocation.x;
-                bestMove.y = currentLocation.y - 1;
-            } // 往左走
             else if (isInMap(currentLocation.x + 1, currentLocation.y + (currentLocation.x % 2 ? 0 : 1))
                 && currentBattle->championMap[currentLocation.x + 1][currentLocation.y + (currentLocation.x % 2 ? 0 : 1)] == nullptr) {
                 bestMove.x = currentLocation.x + 1;
                 bestMove.y = currentLocation.y + (currentLocation.x % 2 ? 0 : 1);
             } // 往右上走
+            else if (isInMap(currentLocation.x, currentLocation.y - 1)
+                && currentBattle->championMap[currentLocation.x][currentLocation.y - 1] == nullptr) {
+                bestMove.x = currentLocation.x;
+                bestMove.y = currentLocation.y - 1;
+            } // 往左走
             else if (isInMap(currentLocation.x + 1, currentLocation.y - (currentLocation.x % 2 ? 1 : 0))
                 && currentBattle->championMap[currentLocation.x + 1][currentLocation.y - (currentLocation.x % 2 ? 1 : 0)] == nullptr) {
                 bestMove.x = currentLocation.x + 1;

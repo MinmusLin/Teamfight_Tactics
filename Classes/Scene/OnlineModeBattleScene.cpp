@@ -22,6 +22,7 @@ using cocos2d::Vec2;
 
 // 练习模式游戏控制类
 extern OnlineModeControl* g_onlineModeControl;
+bool isMy = true;
 
 // 小小英雄种类
 extern int g_littleChampionCategory;
@@ -59,52 +60,104 @@ bool OnlineModeBattleScene::init()
     // 初始化对战类
     g_onlineModeControl->initializeBattle();
 
-    // 遍历战斗区地图
-    for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
-        for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
-            if (g_onlineModeControl->getBattle()->getChampion(i, j) != nullptr) {
-                // 显示所有战斗英雄
-                Champion* currentChampion = g_onlineModeControl->getBattle()->getChampion(i, j);
-                currentChampion->getSprite()->setPosition(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }));
-                this->addChild(g_onlineModeControl->getBattle()->getChampion(i, j)->getSprite());
+    if (isMy) {
+        // 遍历战斗区地图
+        for (int i = 0; i < BATTLE_MAP_ROWS; i++) {
+            for (int j = 0; j < BATTLE_MAP_COLUMNS; j++) {
+                if (g_onlineModeControl->getBattle()->getChampion(i, j) != nullptr) {
+                    // 显示所有战斗英雄
+                    Champion* currentChampion = g_onlineModeControl->getBattle()->getChampion(i, j);
+                    currentChampion->getSprite()->setPosition(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }));
+                    this->addChild(g_onlineModeControl->getBattle()->getChampion(i, j)->getSprite());
 
-                // 显示战斗英雄对应武器
-                Vec2 currentChampionLocation = LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j });
-                currentChampion->initializeSword(currentChampionLocation + Vec2(INTERVAL_BETWEEN_WEAPON_AND_CHAMPION, 0));
-                this->addChild(currentChampion->getSword());
-                currentChampion->setSwordVisible(true);
+                    // 显示战斗英雄对应武器
+                    Vec2 currentChampionLocation = LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j });
+                    currentChampion->initializeSword(currentChampionLocation + Vec2(INTERVAL_BETWEEN_WEAPON_AND_CHAMPION, 0));
+                    this->addChild(currentChampion->getSword());
+                    currentChampion->setSwordVisible(true);
 
-                // 创建生命条和经验条
-                if (currentChampion->getCamp()) {
-                    currentChampion->setHealthBar(Sprite::create("../Resources/ImageElements/MyCampHealthBar.png"));
+                    // 创建生命条和经验条
+                    if (currentChampion->getCamp()) {
+                        currentChampion->setHealthBar(Sprite::create("../Resources/ImageElements/MyCampHealthBar.png"));
+                    }
+                    else {
+                        currentChampion->setHealthBar(Sprite::create("../Resources/ImageElements/EnemyCampHealthBar.png"));
+                    }
+                    currentChampion->setManaBar(Sprite::create("../Resources/ImageElements/ManaBar.png"));
+                    currentChampion->getHealthBar()->setPosition(currentChampionLocation + Vec2(0, CHAMPION_HEALTHBAR_VERTICAL_INTERVAL));
+                    currentChampion->getManaBar()->setPosition(currentChampionLocation + Vec2(0, CHAMPION_MANABAR_VERTICAL_INTERVAL));
+                    this->addChild(currentChampion->getHealthBar(), 1);
+                    this->addChild(currentChampion->getManaBar(), 1);
+
+                    // 计算初始战斗英雄个数
+                    if (i < PLACE_MAP_ROWS) {
+                        g_onlineModeControl->getBattle()->addMyCount();
+                    }
+                    else {
+                        g_onlineModeControl->getBattle()->addEnemyCount();
+                    }
+
+                    // 绑定战斗类
+                    currentChampion->setBattle(g_onlineModeControl->getBattle());
+                    currentChampion->setCurrentPosition(i, j);
+                    battleChampion[battleChampionCount++] = currentChampion;
                 }
                 else {
-                    currentChampion->setHealthBar(Sprite::create("../Resources/ImageElements/EnemyCampHealthBar.png"));
+                    continue;
                 }
-                currentChampion->setManaBar(Sprite::create("../Resources/ImageElements/ManaBar.png"));
-                currentChampion->getHealthBar()->setPosition(currentChampionLocation + Vec2(0, CHAMPION_HEALTHBAR_VERTICAL_INTERVAL));
-                currentChampion->getManaBar()->setPosition(currentChampionLocation + Vec2(0, CHAMPION_MANABAR_VERTICAL_INTERVAL)); 
-                this->addChild(currentChampion->getHealthBar(), 1);
-                this->addChild(currentChampion->getManaBar(), 1);
-
-                // 计算初始战斗英雄个数
-                if (i < PLACE_MAP_ROWS) {
-                    g_onlineModeControl->getBattle()->addMyCount();
-                }
-                else {
-                    g_onlineModeControl->getBattle()->addEnemyCount();
-                }
-
-                // 绑定战斗类
-                currentChampion->setBattle(g_onlineModeControl->getBattle());
-                currentChampion->setCurrentPosition(i, j);
-                battleChampion[battleChampionCount++] = currentChampion;
-            }
-            else {
-                continue;
             }
         }
     }
+    else {
+        // 遍历战斗区地图
+        for (int i = BATTLE_MAP_ROWS - 1; i >= 0; i--) {
+            for (int j = BATTLE_MAP_COLUMNS - 1; j >= 0; j--) {
+                if (g_onlineModeControl->getBattle()->getChampion(i, j) != nullptr) {
+                    // 显示所有战斗英雄
+                    Champion* currentChampion = g_onlineModeControl->getBattle()->getChampion(i, j);
+                    currentChampion->getSprite()->setPosition(LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j }));
+                    this->addChild(g_onlineModeControl->getBattle()->getChampion(i, j)->getSprite());
+
+                    // 显示战斗英雄对应武器
+                    Vec2 currentChampionLocation = LocationMap::getInstance().getLocationMap().at({ BattleArea, i * BATTLE_MAP_COLUMNS + j });
+                    currentChampion->initializeSword(currentChampionLocation + Vec2(INTERVAL_BETWEEN_WEAPON_AND_CHAMPION, 0));
+                    this->addChild(currentChampion->getSword());
+                    currentChampion->setSwordVisible(true);
+
+                    // 创建生命条和经验条
+                    if (currentChampion->getCamp()) {
+                        currentChampion->setHealthBar(Sprite::create("../Resources/ImageElements/MyCampHealthBar.png"));
+                    }
+                    else {
+                        currentChampion->setHealthBar(Sprite::create("../Resources/ImageElements/EnemyCampHealthBar.png"));
+                    }
+                    currentChampion->setManaBar(Sprite::create("../Resources/ImageElements/ManaBar.png"));
+                    currentChampion->getHealthBar()->setPosition(currentChampionLocation + Vec2(0, CHAMPION_HEALTHBAR_VERTICAL_INTERVAL));
+                    currentChampion->getManaBar()->setPosition(currentChampionLocation + Vec2(0, CHAMPION_MANABAR_VERTICAL_INTERVAL));
+                    this->addChild(currentChampion->getHealthBar(), 1);
+                    this->addChild(currentChampion->getManaBar(), 1);
+
+                    // 计算初始战斗英雄个数
+                    if (i < PLACE_MAP_ROWS) {
+                        g_onlineModeControl->getBattle()->addMyCount();
+                    }
+                    else {
+                        g_onlineModeControl->getBattle()->addEnemyCount();
+                    }
+
+                    // 绑定战斗类
+                    currentChampion->setBattle(g_onlineModeControl->getBattle());
+                    currentChampion->setCurrentPosition(i, j);
+                    battleChampion[battleChampionCount++] = currentChampion;
+                }
+                else {
+                    continue;
+                }
+            }
+        }
+    }
+
+ 
 
     // 显示羁绊效果
     for (int i = 1; i < MAX_BOND_COUNT; i++) {
@@ -352,7 +405,7 @@ void OnlineModeBattleScene::update(float delta)
                     }
 
                     // 获取最近敌方战斗英雄
-                    battleChampion[i]->findNearestEnemy();
+                    battleChampion[i]->findNearestEnemy(isMy);
 
                     if (battleChampion[i]->getCurrentEnemy()) { // 获取当前锁定敌人战斗英雄指针
                         if (battleChampion[i]->isInAttackRange()) { // 攻击范围内存在敌人战斗英雄
