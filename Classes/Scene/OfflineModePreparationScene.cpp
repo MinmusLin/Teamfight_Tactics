@@ -199,8 +199,8 @@ void OfflineModePreparationScene::setScheduleOnce(cocos2d::ui::LoadingBar* progr
             progressLabel->setVisible(sceond <= BATTLE_SCENE_LOADINGBAR_LABEL_THRESHOLD);
             progressBar->setPercent(i / 10.0);
             progressLabel->setString((sceond >= 10 ? "" : " ") + std::to_string(sceond) + "s");
-            float percentage = progressBar->getPercent() / 100.0f;
-            float xPosition = progressBar->getPosition().x - progressBar->getContentSize().width / 2 + progressBar->getContentSize().width * percentage + BATTLE_SCENE_LOADINGBAR_LABEL_OFFSET_X;
+            const float percentage = progressBar->getPercent() / 100.0f;
+            const float xPosition = progressBar->getPosition().x - progressBar->getContentSize().width / 2 + progressBar->getContentSize().width * percentage + BATTLE_SCENE_LOADINGBAR_LABEL_OFFSET_X;
             progressLabel->setPosition(Vec2(xPosition, progressBar->getPosition().y));
             }, interval * i, "CountdownLoadingBar" + std::to_string(i));
     }

@@ -21,7 +21,7 @@ using cocos2d::Sprite;
 using cocos2d::Label;
 using cocos2d::Vec2;
 
-// 练习模式游戏控制类
+// 联机模式游戏控制类
 extern OnlineModeControl* g_onlineModeControl;
 
 // 创建场景
@@ -199,8 +199,8 @@ void OnlineModePreparationScene::setScheduleOnce(cocos2d::ui::LoadingBar* progre
             progressLabel->setVisible(sceond <= BATTLE_SCENE_LOADINGBAR_LABEL_THRESHOLD);
             progressBar->setPercent(i / 10.0);
             progressLabel->setString((sceond >= 10 ? "" : " ") + std::to_string(sceond) + "s");
-            float percentage = progressBar->getPercent() / 100.0f;
-            float xPosition = progressBar->getPosition().x - progressBar->getContentSize().width / 2 + progressBar->getContentSize().width * percentage + BATTLE_SCENE_LOADINGBAR_LABEL_OFFSET_X;
+            const float percentage = progressBar->getPercent() / 100.0f;
+            const float xPosition = progressBar->getPosition().x - progressBar->getContentSize().width / 2 + progressBar->getContentSize().width * percentage + BATTLE_SCENE_LOADINGBAR_LABEL_OFFSET_X;
             progressLabel->setPosition(Vec2(xPosition, progressBar->getPosition().y));
             }, interval * i, "CountdownLoadingBar" + std::to_string(i));
     }
@@ -212,7 +212,7 @@ void OnlineModePreparationScene::setScheduleOnce(cocos2d::ui::LoadingBar* progre
         event.setMouseButton(cocos2d::EventMouse::MouseButton::BUTTON_LEFT);
         _eventDispatcher->dispatchEvent(&event);
 
-        // 运行练习模式对战场景
+        // 运行联机模式对战场景
         char buffer[BUFFER_SIZE];
         sprintf(buffer, BATTLE_MAP_FORMAT, g_onlineModeControl->serializePlayerMap().c_str());
         g_onlineModeControl->sendMessage(buffer, strlen(buffer));
