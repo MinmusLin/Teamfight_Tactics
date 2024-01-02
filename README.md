@@ -1,5 +1,10 @@
 # Teamfight Tactics
 
+> 抵制不良游戏 拒绝盗版游戏
+> 注意自我保护 谨防受骗上当
+> 适度游戏益脑 沉迷游戏伤身
+> 合理安排时间 享受健康生活
+
 ## 项目名称
 
 Teamfight_Tactics
@@ -636,6 +641,10 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 ## 编译运行环境
 
 * 本项目仅适用于x86架构
+
+## 联系我们
+
+Email：minmuslin@outlook.com
 
 ## 文档更新日期
 
