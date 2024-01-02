@@ -628,7 +628,7 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 ### 2024/1/1
 
 * 完善项目自述文档 `README.md`
-* 答辩 PPT 制作
+* [答辩 PPT](Defense_Presentation.pptx) 制作
 
 ### 2024/1/2
 
