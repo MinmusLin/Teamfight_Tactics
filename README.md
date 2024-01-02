@@ -16,7 +16,7 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 
 参考游戏：《Dota 自走棋》《云顶之弈》《金铲铲之战》
 
-工具软件：Adobe Photoshop 2022、Adobe Illustrator 2022
+工具软件：Adobe Photoshop 2022、Adobe Illustrator 2022、Microsoft PowerPoint 2021、Draw.io v22.0.2
 
 > Relevant course
 > * Programing Paradigm (同济大学程序设计范式)
@@ -28,7 +28,7 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 | 林继申 (组长) | 2250758 | **项目后端工作统筹** <br> 项目任务分工 <br> 代码审查 <br> 项目框架搭建 <br> 网络环境搭建 <br> 练习模式与联机模式 <br> `AppDelegate` 类 <br> `Battle` 类 <br> `HoverButton` 类 <br> `Champion` 类 <br> `Control` 类及其派生类 <br> `ChampionAttributesLayer` 类 <br> `PlacementMarkerLayer` 类 <br> `ScoreBoardLayer` 类 <br> `LocationMap` 类 <br> `Player` 类及其派生类 <br> `Scene` 类及其派生类 <br> `Server` 类 |
 | 刘淑仪 | 2251730 | **项目前端工作统筹** <br> 练习模式与联机模式 <br> `Champion` 类 <br> `ChampionAttributesLayer` 类 <br> `PlacementMarkerLayer` 类 <br> `ScoreBoardLayer` 类 <br> `Scene` 类及其派生类 <br> 图标绘制 <br> 按钮绘制 <br> 战斗英雄与小小英雄绘制 <br> 图像元素绘制 <br> 场景绘制 <br> 音频引擎 <br> 背景音乐与音效 |
 | 杨兆镇 | 2252712 | **项目 AI 玩家算法统筹** <br> 练习模式 <br> `Player` 类及其派生的 `AIPlayer` 类 |
-| 杨宇琨 | 2252843 | **项目测试统筹** <br> 练习模式与联机模式 <br> `Battle` 类 <br> `Champion` 类 <br> `OfflineModeControl` 类 <br> `HumanPlayer` 类 <br> `OfflineModeBattleScene` 类 <br> `OnlineModeBattleScene` 类 <br> 战斗英雄绘制 |
+| 杨宇琨 | 2252843 | **项目测试统筹** <br> 练习模式与联机模式 <br> `Battle` 类 <br> `Champion` 类 <br> `OfflineModeControl` 类 <br> `HumanPlayer` 类 <br> `OfflineModeBattleScene` 类 <br> `OnlineModeBattleScene` 类 <br> 战斗英雄绘制 <br> 答辩 PPT 制作 |
 
 ## 成员贡献
 
@@ -54,8 +54,8 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 * [X] 支持小小英雄的移动
 * [X] 场上卡牌支持红蓝血条，蓝条满时可以释放技能
 * [X] 支持创建房间和加入房间功能
-* [X] 支持练习模式，玩家可以和 N 个 AI 玩家对弈，**N ≥ 2**
-* [X] 支持联机模式，玩家可以和 N 个人类玩家联机对弈，**N ≥ 2**
+* [X] 支持练习模式，玩家可以和 N 个 AI 玩家对弈，N ≥ 2
+* [X] 支持联机模式，玩家可以和 N 个人类玩家联机对弈，N ≥ 2
 
 ### 拓展功能
 
@@ -628,6 +628,7 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 ### 2024/1/1
 
 * 完善项目自述文档 `README.md`
+* 答辩 PPT 制作
 
 ### 2024/1/2
 
