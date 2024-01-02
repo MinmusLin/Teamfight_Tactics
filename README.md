@@ -140,7 +140,7 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 * 基本确定团队成员分工
 * 基本搭建项目框架
 * 实现 `HoverButton` 类
-* 实现 `GBKToUTF8` 单例
+* 实现 `GBKToUTF8` 类
 
 ### 2023/12/16
 
@@ -163,13 +163,13 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 * 初步实现 `Player` 类
 * 初步实现 `HumanPlayer` 类
 * 实现 `InitialScene` 类与交互细节
-* 实现 `LocationMap` 单例
+* 实现 `LocationMap` 类
 
 ### 2023/12/20
 
 * 调整 `Resources 文件夹`
-* 调整 `GBKToUTF8` 单例
-* 调整 `LocationMap` 单例
+* 调整 `GBKToUTF8` 类
+* 调整 `LocationMap` 类
 * 实现 `StartupScene` 类与交互细节
 * 实现 `MenuScene` 类与交互细节
 * 初步实现 `OfflineModePreparationScene` 类与交互细节
@@ -241,6 +241,7 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 
 ### 2023/12/30
 
+* 弃用 `GBKToUTF8` 类
 * 基本实现 `OnlineModeControl` 类
 * 基本实现 `OnlineModePreparationScene` 类与交互细节
 * 基本实现 `OnlineModeBattleScene` 类与交互细节
@@ -272,4 +273,4 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 
 ## 文档更新日期
 
-2023年12月31日
+2023年1月2日
