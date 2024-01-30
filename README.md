@@ -644,8 +644,8 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 
 ## 联系我们
 
-Email：minmuslin@outlook.com
+Email: minmuslin@outlook.com
 
 ## 文档更新日期
 
-2024年1月13日
+2024年1月30日
