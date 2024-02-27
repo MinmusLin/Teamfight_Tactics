@@ -628,7 +628,7 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 ### 2024/1/1
 
 * 完善项目自述文档 `README.md`
-* [Project Defense Slides](Defense_Presentation.pptx) 制作
+* [Project Defense Slides](Project_Defense.pptx) 制作
 
 ### 2024/1/2
 
@@ -648,4 +648,4 @@ Email: minmuslin@outlook.com
 
 ## 文档更新日期
 
-2024年2月23日
+2024年2月27日
