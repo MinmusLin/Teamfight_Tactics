@@ -18,7 +18,7 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 
 工具软件：Adobe Photoshop 2022、Adobe Illustrator 2022、Microsoft PowerPoint 2021、Draw.io v22.0.2
 
-> Relevant course
+> ***Relevant course***
 > * Programing Paradigm 2023 (2023年同济大学程序设计范式)
 
 ## 成员分工
@@ -648,4 +648,4 @@ Email: minmuslin@outlook.com
 
 ## 文档更新日期
 
-2024年2月27日
+2024年3月10日
