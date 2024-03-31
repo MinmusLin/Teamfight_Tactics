@@ -1,5 +1,6 @@
 # Teamfight Tactics
 
+> [!TIP]
 > 抵制不良游戏 拒绝盗版游戏 注意自我保护 谨防受骗上当
 >
 > 适度游戏益脑 沉迷游戏伤身 合理安排时间 享受健康生活
@@ -14,12 +15,12 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 
 基于 [Cocos2d-x 3.17.2](https://docs.cocos.com/cocos2d-x/manual) 开发的金铲铲之战游戏项目。
 
-参考游戏：《Dota 自走棋》《云顶之弈》《金铲铲之战》
-
-工具软件：Adobe Photoshop 2022、Adobe Illustrator 2022、Microsoft PowerPoint 2021、Draw.io v22.0.2
-
 > ***Relevant course***
 > * Programing Paradigm 2023 (2023年同济大学程序设计范式)
+
+This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](https://docs.cocos.com/cocos2d-x/manual), inspired by games such as "Dota Auto Chess". It boasts a wealth of basic features, including captivating initial and settings interfaces, background music, a variety of cards and their upgrade systems, movement for tiny heroes, and in-game cards with red and blue health bars that can unleash abilities when the blue bar is full. Moreover, the game supports room creation and joining, offers practice mode and online gameplay, allowing players to compete against AI or other human players. The project also expands on multiple synergy enhancement functions and a strengthened rune system, along with sound effects during combat, providing a more rich and immersive gaming experience.
+
+该项目是一个基于 [Cocos2d-x 3.17.2](https://docs.cocos.com/cocos2d-x/manual) 开发的金铲铲之战游戏，灵感来自于《Dota 自走棋》《云顶之弈》《金铲铲之战》等游戏。游戏拥有丰富的基础功能，如具有引人入胜的初始和设置界面、背景音效、多种卡牌及其升级系统、小小英雄的移动以及带有红蓝血条的场上卡牌，卡牌蓝条满时还能释放技能。此外，游戏支持创建和加入房间，提供练习模式和联机对弈，允许玩家与AI或其他人类玩家进行游戏。项目还扩展了多种羁绊的加强功能和强化符文系统，以及战斗中的音效，为玩家带来更加丰富和沉浸式的游戏体验。
 
 ## 成员分工
 
@@ -648,4 +649,4 @@ Email: minmuslin@outlook.com
 
 ## 文档更新日期
 
-2024年3月10日
+2024年3月31日
