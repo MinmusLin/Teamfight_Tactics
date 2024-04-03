@@ -635,6 +635,10 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 
 * 答辩验收
 
+### 2024/4/3
+
+* [Business Plan](Business_Plan.pdf) 制作
+
 ## 集成开发环境
 
 * Microsoft Visual Studio 2022
@@ -649,4 +653,4 @@ Email: minmuslin@outlook.com
 
 ## 文档更新日期
 
-2024年3月31日
+2024年4月3日
