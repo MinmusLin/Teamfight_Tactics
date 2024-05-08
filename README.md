@@ -44,6 +44,29 @@ This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](h
 git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '{ add += $1; subs += $2; loc += $1 - $2 } END { printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc }' -; done
 ```
 
+## 项目组成
+
+* `/Classes`
+类定义与类实现
+
+* `/Resources`
+资源文件
+
+* `/Server`
+服务器程序
+
+* `/cocos2d`
+依赖文件
+
+* `/proj.win32`
+游戏程序
+
+* `Bussiness_Plan.pdf`
+商业策划书
+
+* `Project_Defense.pptx`
+项目答辩PPT
+
 ## 项目实现功能与项目技术细节
 
 ### 基础功能
@@ -653,4 +676,4 @@ Email: minmuslin@outlook.com
 
 ## 文档更新日期
 
-2024年4月3日
+2024年5月8日
