@@ -61,9 +61,6 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 * `/proj.win32`
 游戏程序
 
-* `Bussiness_Plan.pdf`
-商业策划书
-
 * `Project_Defense.pptx`
 项目答辩PPT
 
@@ -658,10 +655,6 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 
 * 答辩验收
 
-### 2024/4/3
-
-* [Business Plan](Business_Plan.pdf) 制作
-
 ## 集成开发环境
 
 * Microsoft Visual Studio 2022
@@ -678,4 +671,4 @@ The code and materials contained in this repository are intended for personal le
 
 ## 文档更新日期
 
-2024年6月12日
+2024年9月2日
