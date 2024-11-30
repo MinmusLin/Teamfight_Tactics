@@ -46,20 +46,26 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
 
 ## 项目组成
 
-* `/Classes`
-类定义与类实现
+* `/Cocos2dx_Guide_LaTeX`
+从零开始的 Cocos2d-x 开发指南 $\LaTeX$ 源代码
 
-* `/Resources`
-资源文件
+* `/src`
+项目源代码
 
-* `/Server`
-服务器程序
+  * `/Classes`
+  类定义与类实现
 
-* `/cocos2d`
-依赖文件
+  * `/Resources`
+  资源文件
 
-* `/proj.win32`
-游戏程序
+  * `/Server`
+  服务器程序
+
+  * `/cocos2d`
+  依赖文件
+
+  * `/proj.win32`
+  游戏程序
 
 * `Documentation.md`
 项目实现功能与项目技术细节文档
