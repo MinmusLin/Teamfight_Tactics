@@ -161,7 +161,7 @@ Cocos2d-x提供了许多易于使用的组件，有着更好的性能，还同�
 
 \vspace{1em}
 
-更重要的是Cocos2d-x是一个完全开源的游戏引擎，这就允许您在游戏开发过程中根据实际需要，定制化引擎的功能。（\hrefcol{https://github.com/MinmusLin/Teamfight_Tactics/blob/main/Classes/Button}{HoverButton类}）
+更重要的是Cocos2d-x是一个完全开源的游戏引擎，这就允许您在游戏开发过程中根据实际需要，定制化引擎的功能。（\hrefcol{https://github.com/MinmusLin/Teamfight_Tactics/blob/main/src/Classes/Button}{HoverButton类}）
 \end{frame}
 
 % Page 12
@@ -193,7 +193,7 @@ Cocos2d-x使用导演的概念。在使用Cocos2d-x开发游戏的过程中，�
 % Page 14
 
 \begin{frame}[fragile]{单例模式（Singleton Pattern）}
-单例模式（Singleton Pattern）是一种设计模式，它的主要目的是确保一个类只有一个实例，并提供一个全局访问点来获取该实例。这样可以保证在整个程序运行期间，某个类的实例不会被多次创建，从而节省系统资源并确保一致性。（\hrefcol{https://github.com/MinmusLin/Teamfight_Tactics/tree/main/Classes/LocationMap}{LocationMap类}）
+单例模式（Singleton Pattern）是一种设计模式，它的主要目的是确保一个类只有一个实例，并提供一个全局访问点来获取该实例。这样可以保证在整个程序运行期间，某个类的实例不会被多次创建，从而节省系统资源并确保一致性。（\hrefcol{https://github.com/MinmusLin/Teamfight_Tactics/tree/main/src/Classes/LocationMap}{LocationMap类}）
 
 \vspace{1em}
 
@@ -208,7 +208,7 @@ Cocos2d-x使用导演的概念。在使用Cocos2d-x开发游戏的过程中，�
 % Page 15
 
 \begin{frame}[fragile]{场景（Scene）}
-在游戏开发过程中，你可能需要一个主菜单，几个关卡和一个结束场景。如何组织所有这些分开的部分？使用场景（Scene）！（\hrefcol{https://github.com/MinmusLin/Teamfight_Tactics/tree/main/Classes/Scene}{Scene类}）
+在游戏开发过程中，你可能需要一个主菜单，几个关卡和一个结束场景。如何组织所有这些分开的部分？使用场景（Scene）！（\hrefcol{https://github.com/MinmusLin/Teamfight_Tactics/tree/main/src/Classes/Scene}{Scene类}）
 
 \vspace{1em}
 
@@ -1245,7 +1245,7 @@ this->addChild(menu, 1);
 % Page 69
 
 \begin{frame}[fragile]{按钮（Button）}
-按钮会拦截点击事件，事件触发时调用事先定义好的回调函数。按钮有一个正常状态，一个选择状态，还有一个不可点击状态，按钮的外观可以根据这三个状态而改变。（\hrefcol{https://github.com/MinmusLin/Teamfight_Tactics/blob/main/Classes/Button}{HoverButton类}）
+按钮会拦截点击事件，事件触发时调用事先定义好的回调函数。按钮有一个正常状态，一个选择状态，还有一个不可点击状态，按钮的外观可以根据这三个状态而改变。（\hrefcol{https://github.com/MinmusLin/Teamfight_Tactics/blob/main/src/Classes/Button}{HoverButton类}）
 
 \vspace{1em}
 
@@ -1385,27 +1385,298 @@ slider->addTouchEventListener([&](Ref* sender,
 % Page 76
 
 \begin{frame}[fragile]{文本框（TextField）}
-\begin{block}{创建滑动条}
+Cocos2d-x提供TextField满足文本输入需求。它支持触摸事件，焦点，定位内容百分比等。
+
+\vspace{1em}
+
+提供的文本框对象是多功能的，能满足所有的输入需求，比如用户密码的输入，限制用户可以输入的字符数等等。
+
+\begin{block}{创建文本框}
 \begin{verbatim}
-auto slider = Slider::create();
-slider->loadBarTexture("Slider_Back.png");
-slider->loadSlidBallTextures("Normal.png","Press.png","Disable.png");
-slider->loadProgressBarTexture("Slider_PressBar.png");
-slider->addTouchEventListener([&](Ref* sender,
-                                    Widget::TouchEventType type) {
-    switch (type) {
-        case ui::Widget::TouchEventType::BEGAN: ...
-        case ui::Widget::TouchEventType::ENDED: ...
-        default: ...
-    }
+auto textField = TextField::create("", "Arial", 30);
+textField->setPasswordEnabled(true);
+textField->setMaxLength(10);
+textField->addTouchEventListener([&](Ref* sender,
+                                     Widget::TouchEventType type) {
+    std::cout << "Editing a TextField" << std::endl;
 });
 \end{verbatim}
 \end{block}
 \end{frame}
 
+% Page 77
 
+\section{Cocos2d-x进阶内容}
 
+% Page 78
 
+\begin{chapter}[figures/background_negative]{}{Cocos2d-x进阶内容}
+\framesubtitle{The Advanced Content of Cocos2d-x}
+\begin{itemize}
+\item 瓦片地图
+\item 粒子系统
+\item 视差滚动
+\item 事件分发机制
+\end{itemize}
+\end{chapter}
+
+% Page 79
+
+\begin{frame}[fragile]{瓦片地图}
+在游戏开发过程中，我们会遇到超过屏幕大小的地图，例如在即时战略游戏中，它使得玩家可以在地图中滚动游戏画面。这类游戏通常会有丰富的背景元素，如果直接使用背景图切换的方式，需要为每个不同的场景准备一张背景图，而且每个背景图都不小，这样会造成资源浪费。
+
+\vspace{1em}
+
+瓦片地图就是为了解决这问题而产生的。一张大的世界地图或者背景图可以由几种地形来表示，每种地形对应一张小的的图片，我们称这些小的地形图片为瓦片。把这些瓦片拼接在一起，一个完整的地图就组合出来了，这就是瓦片地图的原理。
+\end{frame}
+
+% Page 80
+
+\begin{frame}[fragile]{瓦片地图}
+在Cocos2d-x中，瓦片地图实现的是TileMap方案，TileMap要求每个瓦片占据地图上一个四边形或六边形的区域。把不同的瓦片拼接在一起，就可以组成完整的地图。TileMap使用一种基于XML的TMX格式文件。
+
+\vspace{1em}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\includegraphics[width=\textwidth]
+{figures/tile_map_1}
+\end{column}
+\begin{column}{0.5\textwidth}
+\includegraphics[width=\textwidth]
+{figures/tile_map_2}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Page 81
+
+\begin{frame}[fragile]{粒子系统}
+粒子系统是指计算机图形学中模拟特定现象的技术，它在模仿自然现象、物理现象及空间扭曲上具备得天独厚的优势，能为我们实现一些真实自然而又带有随机性的效果（如爆炸、烟花、水流）提供了方便。Cocos2d-x引擎中就为我们提供了强大的粒子系统。
+\end{frame}
+
+% Page 82
+
+\begin{frame}[fragile]{视差滚动}
+视差滚动是指让多层背景以不同的速度移动，从而形成的立体运动效果。比如超级马里奥游戏中，角色所在地面的移动与背景天空的移动，就是一个视差滚动。Cocos2d-x通过ParallaxNode对象模拟视差滚动。可以通过序列控制移动，也可以通过监听鼠标，触摸，加速度计，键盘等事件控制移动。ParallaxNode对象比常规节点对象复杂一些，因为为了呈现不同的移动速度，需要多个子节点。它类似Menu像一个容器，本身不移动，移动的是被添加进入其中的不同子节点。
+\end{frame}
+
+% Page 83
+
+\begin{frame}[fragile]{事件分发机制}
+Cocos2d-x通过事件分发机制响应用户事件，已内置支持常见的事件如触摸事件，键盘事件等。同时提供了创建自定义事件的方法，满足我们在游戏的开发过程中，特殊的事件响应需求。
+
+\vspace{1em}
+
+基本元素：
+\begin{itemize}
+\item \textbf{事件监听器}：负责接收事件，并执行预定义的事件处理函数
+\item \textbf{事件分发器}：负责发起通知
+\item \textbf{事件对象}：记录事件的相关信息
+\end{itemize}
+\end{frame}
+
+% Page 84
+
+\section{Cocos2d-x项目：Teamfight Tactics}
+
+% Page 85
+
+\begin{chapter}[figures/background_negative]{}{Cocos2d-x项目：Teamfight Tactics}
+\framesubtitle{Cocos2d-x Project: Teamfight Tactics}
+基于Cocos2d-x 3.17.2开发的金铲铲之战游戏项目（2023年同济大学程序设计范式课程项目）
+\end{chapter}
+
+% Page 86
+
+\begin{frame}[fragile]{Teamfight Tactics}
+基于Cocos2d-x 3.17.2开发的金铲铲之战游戏项目。
+
+\vspace{1em}
+
+\hrefcol{https://github.com/MinmusLin/Teamfight_Tactics}{GitHub仓库}
+
+\vspace{1em}
+
+该项目是一个基于Cocos2d-x 3.17.2开发的金铲铲之战游戏，灵感来自于《Dota 自走棋》《云顶之弈》《金铲铲之战》等游戏。游戏拥有丰富的基础功能，如具有引人入胜的初始和设置界面、背景音效、多种卡牌及其升级系统、小小英雄的移动以及带有红蓝血条的场上卡牌，卡牌蓝条满时还能释放技能。此外，游戏支持创建和加入房间，提供练习模式和联机对弈，允许玩家与AI或其他人类玩家进行游戏。项目还扩展了多种羁绊的加强功能和强化符文系统，以及战斗中的音效，为玩家带来更加丰富和沉浸式的游戏体验。
+\end{frame}
+
+% Page 87
+
+\begin{frame}[fragile]{Teamfight Tactics}
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\includegraphics[width=\textwidth]
+{figures/teamfight_tactics_1}
+\includegraphics[width=\textwidth]
+{figures/teamfight_tactics_2}
+\end{column}
+\begin{column}{0.4\textwidth}
+\includegraphics[width=\textwidth]
+{figures/teamfight_tactics_3}
+\includegraphics[width=\textwidth]
+{figures/teamfight_tactics_4}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Page 88
+
+\begin{frame}[fragile]{Teamfight Tactics}
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\includegraphics[width=\textwidth]
+{figures/teamfight_tactics_5}
+\includegraphics[width=\textwidth]
+{figures/teamfight_tactics_6}
+\end{column}
+\begin{column}{0.4\textwidth}
+\includegraphics[width=\textwidth]
+{figures/teamfight_tactics_7}
+\includegraphics[width=\textwidth]
+{figures/teamfight_tactics_8}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Page 89
+
+\begin{frame}[fragile]{Teamfight Tactics}
+\includegraphics[width=0.6\textwidth]
+{figures/email_1}
+\end{frame}
+
+% Page 90
+
+\begin{frame}[fragile]{Teamfight Tactics}
+\includegraphics[width=0.6\textwidth]
+{figures/email_2}
+\end{frame}
+
+% Page 91
+
+\begin{frame}[fragile]{Teamfight Tactics}
+\includegraphics[width=0.6\textwidth]
+{figures/email_3}
+\end{frame}
+
+% Page 92
+
+\section{网络游戏状态同步}
+
+% Page 93
+
+\begin{chapter}[figures/background_negative]{}{网络游戏状态同步}
+\framesubtitle{Online Game State Synchronization}
+\begin{itemize}
+\item 状态同步（State Synchronization）
+\item 帧同步（Frame Synchronization）
+\end{itemize}
+\end{chapter}
+
+% Page 94
+
+\begin{frame}[fragile]{状态同步（State Synchronization）}
+状态同步是指服务器定期向所有客户端发送游戏状态的完整数据，客户端通过接收这些数据来更新本地游戏的状态。每个客户端都保持独立的本地游戏状态，但定期与服务器同步，确保与其他客户端的状态一致。
+
+\vspace{1em}
+
+工作原理：
+\begin{itemize}
+\item 服务器定期（例如每秒多次）将游戏的“全局状态”发送给所有连接的客户端。这个状态可以包括角色的位置、血量、战斗数据、技能冷却时间等信息。
+\item 客户端接收服务器的数据后，更新本地状态，避免因为网络延迟或丢包导致的状态不同步问题。
+\item 如果客户端在本地做了某些操作（如攻击），它会将这些操作发送给服务器，服务器会验证并处理这些操作，然后再将更新后的状态广播给所有客户端。
+\end{itemize}
+\end{frame}
+
+% Page 95
+
+\begin{frame}[fragile]{状态同步（State Synchronization）}
+优势：
+\begin{itemize}
+\item 由于每次都同步完整的游戏状态，避免了较为复杂的逻辑处理。
+\item 客户端实现较为简单，不需要承担过多的计算和同步逻辑，减少了对客户端硬件的依赖。
+\end{itemize}
+
+\vspace{1em}
+
+缺点：
+\begin{itemize}
+\item 网络延迟和带宽占用较高，因为需要频繁传输大量的状态数据。
+\item 在快节奏的游戏（如战斗类游戏）中，延迟可能导致明显的卡顿或状态不一致。
+\end{itemize}
+\end{frame}
+
+% Page 96
+
+\begin{frame}[fragile]{状态同步（State Synchronization）}
+战斗逻辑通常在服务器端实现。服务器会处理玩家的攻击、伤害判定、技能效果、玩家状态变化等逻辑，确保所有玩家看到的结果一致。客户端仅仅是负责显示战斗结果和响应用户的输入。
+\end{frame}
+
+% Page 97
+
+\begin{frame}[fragile]{帧同步（Frame Synchronization）}
+帧同步是一种基于时间帧的同步方式。游戏中的每个帧代表一个单位时间，所有玩家的客户端和服务器必须在相同的时间步（即“帧”）上进行同步，确保所有玩家在相同的时间点上进行相同的计算。
+
+\vspace{1em}
+
+工作原理：
+\begin{itemize}
+\item 游戏会将每个游戏的“计算单位”分成多个“帧”（例如每秒60帧），每帧都包含一些计算逻辑（如玩家动作、战斗结果等）。
+\item 每个玩家的客户端和服务器都保持一个时间同步的机制，所有客户端都按照帧的顺序执行逻辑，并且在每一帧的结束时同步彼此的游戏状态。
+\item 当玩家发起某个动作（如移动或攻击），这个动作会被客户端发送到服务器，服务器再根据该动作计算更新，并广播给所有玩家。
+\item 所有玩家的客户端都按照相同的时间步（帧）进行模拟，从而实现帧之间的一致性。
+\end{itemize}
+\end{frame}
+
+% Page 98
+
+\begin{frame}[fragile]{帧同步（Frame Synchronization）}
+优势：
+\begin{itemize}
+\item 帧同步的游戏体验较为流畅，特别适合实时动作类游戏，因为它保证了每一帧的数据一致性。
+\item 适合低延迟环境，玩家之间的操作能够快速反应，减少卡顿感。
+\end{itemize}
+
+\vspace{1em}
+
+缺点：
+\begin{itemize}
+\item 帧同步对网络延迟非常敏感，任何一方的延迟都会影响到游戏体验。
+\item 游戏逻辑实现较复杂，客户端和服务器都需要严格同步帧数据。
+\end{itemize}
+\end{frame}
+
+% Page 99
+
+\begin{frame}[fragile]{帧同步（Frame Synchronization）}
+帧同步中的战斗逻辑通常也在客户端和服务器端共同执行。客户端执行本地模拟，用户输入（如攻击）会根据时间步来传输给服务器，服务器对这些输入进行验证并决定战斗结果，然后再将结果同步给所有客户端。客户端按相同帧进行显示，确保所有玩家看到的战斗过程一致。
+\end{frame}
+
+% Page 100
+
+\begin{frame}[fragile]{联系方式}
+\framesubtitle{Contact Me}
+\begin{columns}
+\begin{column}{0.6\textwidth}
+My WeChat: MinmusLin
+
+\vspace{1em}
+
+My GitHub: \hrefcol{https://github.com/MinmusLin}{MinmusLin}
+
+\vspace{1em}
+
+My Homepage: \hrefcol{https://minmuslin.github.io}{minmuslin.github.io}
+\end{column}
+\begin{column}{0.4\textwidth}
+\includegraphics[width=\textwidth]
+{figures/wechat}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Page 101
 
 \backmatter
 \end{document}
