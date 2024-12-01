@@ -67,6 +67,9 @@ git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git l
   * `/proj.win32`
   游戏程序
 
+* `Cocos2dx_Guide.pdf`
+从零开始的 Cocos2d-x 开发指南
+
 * `Documentation.md`
 项目实现功能与项目技术细节文档
 
