@@ -1,8 +1,8 @@
 /****************************************************************
  * Project Name:  Server
  * File Name:     Server.h
- * File Function: ServerÀàµÄ¶¨Òå
- * Author:        ÁÖ¼ÌÉê
+ * File Function: Serverç±»çš„å®šä¹‰
+ * Author:        æ—ç»§ç”³
  * Update Date:   2023/12/31
  * License:       MIT License
  ****************************************************************/
@@ -13,57 +13,57 @@
 
 #include <WinSock2.h>
 #include <vector>
-#include "..\proj.win32\Constant.h"
+#include "../proj.win32/Constant.h"
 
 /*
  * Class Name:     Server
- * Class Function: ·şÎñÆ÷Àà
+ * Class Function: æœåŠ¡å™¨ç±»
  */
 class Server {
 public:
-    // ¹¹Ôìº¯Êı
+    // æ„é€ å‡½æ•°
     Server();
 
-    // Îö¹¹º¯Êı
+    // ææ„å‡½æ•°
     ~Server();
 
-    // ÔËĞĞ·şÎñÆ÷
+    // è¿è¡ŒæœåŠ¡å™¨
     void run();
 
-    // ÓÑÔªº¯ÊıÉùÃ÷
+    // å‹å…ƒå‡½æ•°å£°æ˜
     friend void clientHandler(const SOCKET clientSocket, Server& server);
 
 private:
     WSADATA wsaData;                                        // Windows Sockets API
-    SOCKET serverSocket, clientSocket;                      // ·şÎñÆ÷ºÍ¿Í»§¶ËµÄ socket
-    struct sockaddr_in server, client;                      // ·şÎñÆ÷ºÍ¿Í»§¶ËµÄµØÖ·ĞÅÏ¢
-    char hostname[HOSTNAME_MAX_LENGHT];                     // Ö÷»úÃû
-    struct hostent* host;                                   // Ö÷»úµØÖ·
-    int port;                                               // ¶Ë¿Ú
-    int currentConnections;                                 // ·şÎñÆ÷µ±Ç°Á¬½ÓÊıÁ¿
-    std::vector<SOCKET> clients;                            // ËùÓĞÁ¬½Óµ½·şÎñÆ÷µÄ¿Í»§¶ËÌ×½Ó×Ö
-    std::vector<std::map<SOCKET, std::string>> playerNames; // ËùÓĞÁ¬½Óµ½·şÎñÆ÷µÄ¿Í»§¶ËÍæ¼ÒêÇ³Æ
-    std::vector<std::map<SOCKET, std::string>> battleMaps;  // ËùÓĞÁ¬½Óµ½·şÎñÆ÷µÄ¿Í»§¶ËÍæ¼ÒÕ½¶·ÇøµØÍ¼
+    SOCKET serverSocket, clientSocket;                      // æœåŠ¡å™¨å’Œå®¢æˆ·ç«¯çš„ socket
+    struct sockaddr_in server, client;                      // æœåŠ¡å™¨å’Œå®¢æˆ·ç«¯çš„åœ°å€ä¿¡æ¯
+    char hostname[HOSTNAME_MAX_LENGHT];                     // ä¸»æœºå
+    struct hostent* host;                                   // ä¸»æœºåœ°å€
+    int port;                                               // ç«¯å£
+    int currentConnections;                                 // æœåŠ¡å™¨å½“å‰è¿æ¥æ•°é‡
+    std::vector<SOCKET> clients;                            // æ‰€æœ‰è¿æ¥åˆ°æœåŠ¡å™¨çš„å®¢æˆ·ç«¯å¥—æ¥å­—
+    std::vector<std::map<SOCKET, std::string>> playerNames; // æ‰€æœ‰è¿æ¥åˆ°æœåŠ¡å™¨çš„å®¢æˆ·ç«¯ç©å®¶æ˜µç§°
+    std::vector<std::map<SOCKET, std::string>> battleMaps;  // æ‰€æœ‰è¿æ¥åˆ°æœåŠ¡å™¨çš„å®¢æˆ·ç«¯ç©å®¶æˆ˜æ–—åŒºåœ°å›¾
 
-    // ´´½¨ºÍ³¢ÊÔ°ó¶¨Ì×½Ó×Ö
+    // åˆ›å»ºå’Œå°è¯•ç»‘å®šå¥—æ¥å­—
     void createAndBindSocket();
 
-    // ¼àÌıºÍ½ÓÊÜ¿Í»§¶ËµÄÁ¬½ÓÇëÇó²¢½øĞĞ´¦Àí
+    // ç›‘å¬å’Œæ¥å—å®¢æˆ·ç«¯çš„è¿æ¥è¯·æ±‚å¹¶è¿›è¡Œå¤„ç†
     void handleConnections();
 
-    // ¼ì²éËùÓĞÁ¬½Óµ½·şÎñÆ÷µÄ¿Í»§¶ËĞÅÏ¢¾ùÒÑ·¢ËÍ
+    // æ£€æŸ¥æ‰€æœ‰è¿æ¥åˆ°æœåŠ¡å™¨çš„å®¢æˆ·ç«¯ä¿¡æ¯å‡å·²å‘é€
     bool areAllReady(const std::vector<std::map<SOCKET, std::string>>& data);
 
-    // ¹Ø±Õ¿Í»§¶ËÌ×½Ó×Ö
+    // å…³é—­å®¢æˆ·ç«¯å¥—æ¥å­—
     void closeClientSocket(const SOCKET clientSocket);
 
-    // ĞòÁĞ»¯ËùÓĞÁ¬½Óµ½·şÎñÆ÷µÄ¿Í»§¶ËÍæ¼ÒêÇ³Æ
+    // åºåˆ—åŒ–æ‰€æœ‰è¿æ¥åˆ°æœåŠ¡å™¨çš„å®¢æˆ·ç«¯ç©å®¶æ˜µç§°
     std::string serializePlayerNames();
 
-    // »ñÈ¡¼üÖµ¶ÔÊı¾İ
+    // è·å–é”®å€¼å¯¹æ•°æ®
     std::string getPairedData(const std::vector<std::map<SOCKET, std::string>>& data, size_t index);
 
-    // Çå¿ÕËùÓĞÁ¬½Óµ½·şÎñÆ÷µÄ¿Í»§¶ËÍæ¼Ò×Ö·û´®Êı¾İ
+    // æ¸…ç©ºæ‰€æœ‰è¿æ¥åˆ°æœåŠ¡å™¨çš„å®¢æˆ·ç«¯ç©å®¶å­—ç¬¦ä¸²æ•°æ®
     void clearStrings(std::vector<std::map<SOCKET, std::string>>& data);
 };
 
