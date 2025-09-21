@@ -37,26 +37,26 @@ This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](h
 
 ## 项目开发日志
 
-### 2023/11/22
+### 2023-11-22
 
 * Python 2.7.10 环境配置
 * CMake 3.28.0 环境配置
 * Cocos2d-x 4.0 环境配置
 
-### 2023/11/23
+### 2023-11-23
 
 * 明确团队项目代码规范
 * Markdown 语言掌握
 
-### 2023/11/24
+### 2023-11-24
 
 * 学习 Cocos2d-x
 
-### 2023/11/29
+### 2023-11-29
 
 * 项目托管 GitHub [仓库](https://github.com/MinmusLin/Teamfight_Tactics)
 
-### 2023/12/3
+### 2023-12-03
 
 * git 工具掌握
 * GitHub Desktop 工具掌握
@@ -64,51 +64,51 @@ This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](h
 * 放弃 Cocos2d-x 4.0 环境，配置 Cocos2d-x 3.17.2 环境
 * 编译 Cocos2d-x 3.17.2 测试项目
 
-### 2023/12/4
+### 2023-12-04
 
 * 明确项目仓库组成
 * Boost 网络环境配置
 
-### 2023/12/8
+### 2023-12-08
 
 * 初步确定团队成员分工
 
-### 2023/12/9
+### 2023-12-09
 
 * 放弃 Boost 网络环境，配置 socket 网络环境
 * 初步搭建项目框架
 * 实现 `AppDelegate` 类
 
-### 2023/12/10
+### 2023-12-10
 
 * 初步搭建 socket 网络环境
 
-### 2023/12/11
+### 2023-12-11
 
 * 基本搭建 socket 网络环境
 * 基本实现 `Server` 类
 
-### 2023/12/12
+### 2023-12-12
 
 * 基本确定团队成员分工
 * 基本搭建项目框架
 * 实现 `HoverButton` 类
 * 实现 `GBKToUTF8` 类
 
-### 2023/12/16
+### 2023-12-16
 
 * 绘制图标
 
-### 2023/12/17
+### 2023-12-17
 
 * 初步实现商店功能
 
-### 2023/12/18
+### 2023-12-18
 
 * 完善初始场景背景图与细节
 * 实现 `Champion` 类的鼠标事件监听功能
 
-### 2023/12/19
+### 2023-12-19
 
 * 完善项目框架
 * 初步实现 `Champion` 类
@@ -118,7 +118,7 @@ This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](h
 * 实现 `InitialScene` 类与交互细节
 * 实现 `LocationMap` 类
 
-### 2023/12/20
+### 2023-12-20
 
 * 调整 `Resources 文件夹`
 * 调整 `GBKToUTF8` 类
@@ -130,11 +130,11 @@ This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](h
 * 确定战斗英雄属性参数
 * 完成战斗英雄绘制
 
-### 2023/12/22
+### 2023-12-22
 
 * 初步实现 `ChampionAttributesLayer` 类
 
-### 2023/12/23
+### 2023-12-23
 
 * 实现 `ChampionAttributesLayer` 类
 * 实现 `PlacementMarkerLayer` 类
@@ -142,13 +142,13 @@ This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](h
 * 基本实现 `HumanPlayer` 类
 * 基本实现 `OfflineModePreparationScene` 类与交互细节
 
-### 2023/12/24
+### 2023-12-24
 
 * 实现金币系统
 * 调整命名空间
 * 实现 `OfflineModePreparationScene` 类与交互细节
 
-### 2023/12/25
+### 2023-12-25
 
 * 实现 `Battle` 类
 * 实现 `Champion` 类
@@ -158,13 +158,13 @@ This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](h
 * 工作对接与项目仓库整合
 * 基本实现练习模式
 
-### 2023/12/26
+### 2023-12-26
 
 * 实现 `Control` 类
 * 实现生命条与经验条效果
 * 实现武器动画效果
 
-### 2023/12/27
+### 2023-12-27
 
 * 完善游戏功能性与平衡性
 * 实现商店推荐算法
@@ -175,13 +175,13 @@ This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](h
 * 工作对接与项目仓库整合
 * 实现练习模式
 
-### 2023/12/28
+### 2023-12-28
 
 * 完善商店推荐算法
 * 完善 AI 落子算法
 * 基本实现 `OnlineModeMenuScene` 类与交互细节
 
-### 2023/12/29
+### 2023-12-29
 
 * 初步实现 `OnlineModeControl` 类
 * 初步实现 `OnlineModePreparationScene` 类与交互细节
@@ -192,7 +192,7 @@ This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](h
 * 实现小小英雄移动功能
 * 实现羁绊系统
 
-### 2023/12/30
+### 2023-12-30
 
 * 弃用 `GBKToUTF8` 类
 * 基本实现 `OnlineModeControl` 类
@@ -203,7 +203,7 @@ This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](h
 * 实现音频引擎
 * 实现天赋符文系统
 
-### 2023/12/31
+### 2023-12-31
 
 * 调整 `Resources 文件夹`
 * 实现 `OnlineModeControl` 类
@@ -216,11 +216,11 @@ This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](h
 * 游戏功能性与平衡性测试
 * 项目收尾工作
 
-### 2024/1/1
+### 2024-01-01
 
 * 完善项目自述文档 `README.md`
 * [项目答辩汇报 PPT](Project_Defense.pptx) 制作
 
-### 2024/1/2
+### 2024-01-02
 
 * 答辩验收
