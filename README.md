@@ -18,7 +18,7 @@ This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](h
 
 该项目是一个基于 [Cocos2d-x 3.17.2](https://docs.cocos.com/cocos2d-x/manual) 开发的金铲铲之战游戏，灵感来自于《Dota 自走棋》《云顶之弈》《金铲铲之战》等游戏。游戏拥有丰富的基础功能，如具有引人入胜的初始和设置界面、背景音效、多种卡牌及其升级系统、小小英雄的移动以及带有红蓝血条的场上卡牌，卡牌蓝条满时还能释放技能。此外，游戏支持创建和加入房间，提供练习模式和联机对弈，允许玩家与 AI 或其他人类玩家进行游戏。项目还扩展了多种羁绊的加强功能和强化符文系统，以及战斗中的音效，为玩家带来更加丰富和沉浸式的游戏体验。
 
-## 项目组成
+## 仓库组成
 
 * [Cocos2dx Guide LaTeX](Cocos2dx_Guide_LaTeX)
 从零开始的 Cocos2d-x 开发指南 $\LaTeX$ 源代码
