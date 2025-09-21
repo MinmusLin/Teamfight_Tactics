@@ -32,7 +32,7 @@ This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](h
 * [Documentation](Documentation.md)
 项目实现功能与项目技术细节文档
 
-* [Project_Defense](Project_Defense.pptx)
+* [Project Defense](Project_Defense.pptx)
 项目答辩汇报
 
 ## 项目开发日志
@@ -219,7 +219,7 @@ This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](h
 ### 2024/1/1
 
 * 完善项目自述文档 `README.md`
-* [Project Defense Slides](Project_Defense.pptx) 制作
+* [项目答辩汇报 PPT](Project_Defense.pptx) 制作
 
 ### 2024/1/2
 
