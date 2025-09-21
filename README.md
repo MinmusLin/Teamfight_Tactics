@@ -12,7 +12,7 @@ A project of Teamfight Tactics based on [Cocos2d-x 3.17.2](https://docs.cocos.co
 基于 [Cocos2d-x 3.17.2](https://docs.cocos.com/cocos2d-x/manual) 开发的金铲铲之战游戏项目。
 
 > ***Relevant course***
-> * Programing Paradigm 2023 (2023年同济大学程序设计范式)
+> * Programing Paradigm 2023 (2023 年同济大学程序设计范式)
 
 This project is a Teamfight Tactics game developed based on [Cocos2d-x 3.17.2](https://docs.cocos.com/cocos2d-x/manual), inspired by games such as "Dota Auto Chess". It boasts a wealth of basic features, including captivating initial and settings interfaces, background music, a variety of cards and their upgrade systems, movement for tiny heroes, and in-game cards with red and blue health bars that can unleash abilities when the blue bar is full. Moreover, the game supports room creation and joining, offers practice mode and online gameplay, allowing players to compete against AI or other human players. The project also expands on multiple synergy enhancement functions and a strengthened rune system, along with sound effects during combat, providing a more rich and immersive gaming experience.
 
